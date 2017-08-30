@@ -42,7 +42,7 @@ public class StalkerService {
                 User user = getUser(object);
                 user.setSite(site);
                 LOGGER.info("New user detected : {} - {}.", user.getDisplayName(), user.getLink());
-                String tag = "[ [User Stalker](https://www.youtube.com/watch?v=dQw4w9WgXcQ) ]";
+                String tag = "[ [User Stalker](https://git.io/v5CGT) ]";
                 String reason = getReason(user);
                 if(!reason.equals(""))
                     sendUser(room, user, tag, reason);
@@ -63,9 +63,6 @@ public class StalkerService {
         }
         if (user.getTimedPenaltyDate()!=null) {
             reason += " Suspended user; ";
-        }
-        if (user.getDisplayName().matches(".*Tango|Uniform|Victor|Whiskey|X-ray|Yankee.*")){
-            reason += " Blacklisted SVN Username; ";
         }
         if (blacklisted_usernames_regex.stream().anyMatch(e -> user.getDisplayName().matches(e))){
             reason += " Blacklisted Smokey Username; ";

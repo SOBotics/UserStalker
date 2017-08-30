@@ -48,10 +48,7 @@ public class BotService {
 
     public void stalk(Room room) {
 
-        String desc = "[ [User Stalker](https://www.youtube.com/watch?v=dQw4w9WgXcQ) ]";
-
         LOGGER.info("Initializing");
-
         LOGGER.info("Gathering smokey data");
 
         String smokey_data = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_usernames.txt";
@@ -63,7 +60,7 @@ public class BotService {
         String heat_data_3 = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/a0582982f61644ec2d9e29ead440f0bbfd32d219/SOCVDBService/ini/regex_low_score.txt";
 
         LOGGER.info("Started");
-        room.send(desc+" started");
+        room.send("[User Stalker](https://git.io/v5CGT) started");
 
         List<String> bur = getData(smokey_data, new ArrayList<>(), false);
 
