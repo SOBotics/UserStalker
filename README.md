@@ -2,7 +2,7 @@
 
 ## What exactly is this?
 
-Certain times, it's useful to check if a particular user would soon do some illegal activity so that we can store some data about them. 
+We are scanning every user account upon creation (on a few SE sites) and report those users who fail a few checks in a chat room. 
 
 ## What data are we using?
 
@@ -27,5 +27,20 @@ We don't do anything when a user is detected. We are just stalkers. The Stack Ex
 ## Whom would it help?
 
 Mostly the diamond moderators.
+
+## How do I track a site? 
+
+Use the `add` command and pass the site name and the frequency of tracking needed as parameters. Frequency can be `fast` or `slow`. `fast` calls the API every  minute, `slow` calls it every 5 minutes. 
+
+For example, if you need to track on site Drupal Answers, every 5 minutes, use: 
+
+    add drupal slow
+
+## What other commands are there? 
+
+ - `quota` - Returns the API quota available.
+ - `alive` - Returns a test message if the bot is responding to commands. 
+ - `tracked` - Returns the list of sites which are being tracked. 
+ 
 
 # Join us in [MOBotics](https://chat.stackexchange.com/rooms/59667/mobotics) 
