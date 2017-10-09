@@ -35,6 +35,7 @@ public class BotService {
         slowSites.add("puzzling");
         slowSites.add("travel");
         slowSites.add("drupal");
+        slowSites.add("ru.stackoverflow");
         executorService = Executors.newSingleThreadScheduledExecutor();
         addListeners = true;
     }
