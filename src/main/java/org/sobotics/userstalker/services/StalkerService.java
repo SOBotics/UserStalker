@@ -1,18 +1,16 @@
 package org.sobotics.userstalker.services;
 
-import java.io.IOException;
-import java.time.Instant;
-import java.util.List;
-
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import fr.tunaki.stackoverflow.chat.Room;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import org.sobotics.userstalker.utils.JsonUtils;
 import org.sobotics.userstalker.entities.User;
+import org.sobotics.userstalker.utils.JsonUtils;
+
+import java.io.IOException;
+import java.time.Instant;
+import java.util.List;
 
 public class StalkerService {
     private static final Logger LOGGER = LoggerFactory.getLogger(StalkerService.class);
@@ -21,6 +19,10 @@ public class StalkerService {
     private List<String> offensive_regex;
     private int quota;
 
+    private String url = "https://api.stackexchange.com/2.2/users";
+    private String apiKey = "kmtAuIIqwIrwkXm1*p3qqA((";
+    private String filter = "!Ln3l_2int_VA.0Iu5wL3aW";
+
     StalkerService(List<String> bur, List<String> or) {
         previousTime = Instant.now().minusSeconds(60);
         blacklisted_usernames_regex = bur;
@@ -28,7 +30,7 @@ public class StalkerService {
         quota = 10000;
     }
 
-    public void stalkOnce(Room room, List<String> sites) {
+    void stalkOnce(Room room, List<String> sites) {
         LOGGER.info("Stalking "+sites+" at "+Instant.now());
         for (String site: sites) detectBadGuys(room, site);
         previousTime = Instant.now();
@@ -48,6 +50,31 @@ public class StalkerService {
                     sendUser(room, user, tag, reason);
             }
         }
+    }
+
+    private String checkUser(int userId, String site){
+        JsonObject json = null;
+        try {
+            json = JsonUtils.get(url+"/"+userId,
+                    "sort","creation",
+                    "site", site,
+                    "pagesize","100",
+                    "page","1",
+                    "filter",filter,
+                    "order","desc",
+                    "key",apiKey);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JsonUtils.handleBackoff(json);
+        if (json != null) {
+            quota = json.get("quota_remaining").getAsInt();
+        }
+        User user = getUser(json);
+        String reasons = getReason(user);
+        if(!reasons.equals(""))
+            return "The user would not be caught.";
+        return "The user would be caught for: ";
     }
 
     private String getReason(User user) {
@@ -75,14 +102,11 @@ public class StalkerService {
         room.send(tag + reason + "["+user.getDisplayName()+"]("+ user.getLink()+"?tab=profile) on "+user.getSite());
     }
 
-    public int getQuota(){
+    int getQuota(){
         return quota;
     }
 
     private JsonObject callAPI(String site) {
-        String url = "https://api.stackexchange.com/2.2/users";
-        String apiKey = "kmtAuIIqwIrwkXm1*p3qqA((";
-        String filter = "!Ln3l_2int_VA.0Iu5wL3aW";
 
         JsonObject json = null;
         try {
@@ -99,11 +123,13 @@ public class StalkerService {
             e.printStackTrace();
         }
         JsonUtils.handleBackoff(json);
-        quota = json.get("quota_remaining").getAsInt();
+        if (json != null) {
+            quota = json.get("quota_remaining").getAsInt();
+        }
         return json;
     }
 
-    public User getUser(JsonObject object){
+    private User getUser(JsonObject object){
         User user = new User();
         if(object.has("account_id")) user.setAccountId(object.get("account_id").getAsInt());
         if(object.has("is_employee")) user.setIsEmployee(object.get("is_employee").getAsBoolean());
