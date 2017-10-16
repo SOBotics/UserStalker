@@ -22,7 +22,20 @@ We are scanning every user account upon creation (on a few SE sites) and report 
 
 ***Nothing***
 
-We don't do anything when a user is detected. We are just stalkers. The Stack Exchange policy clearly indicates that [**we should not be deleting users preemptively because of a spammy user profile**](https://meta.stackexchange.com/questions/297993/what-is-the-policy-on-destroying-users-with-very-spammy-profiles-but-have-not-po).
+We don't do anything when a user is detected. We are just stalkers. 
+
+According to the [Stack Exchange policy](https://meta.stackexchange.com/questions/297993/what-is-the-policy-on-destroying-users-with-very-spammy-profiles-but-have-not-po):
+
+> We actually don't encourage moderators to seek out these kinds of users and destroy them because it's usually a waste of time. There are lots of spam users that just create profiles and then never do anything, and actively seeking them out to destroy them rarely achieves anything. 
+
+and 
+
+> So if you really feel like spending your time hunting these down, go for it, but by all means you should be absolutely certain it's an attempt at spam
+
+Moderators can destroy these accounts, if and only if they are completely sure that the profile is created only for spam. 
+
+When we detect trends like the [Super User spam wave](https://chat.stackexchange.com/transcript/59667/2017/10/16) on 16th October 2017, we usually try to figure out what is happening and destroy the spam profiles. (But it is left to the site moderators discretion. We just alert the mods, if the need be.) 
+
 
 ## Whom would it help?
 
