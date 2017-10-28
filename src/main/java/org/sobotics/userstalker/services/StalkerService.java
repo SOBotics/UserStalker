@@ -91,7 +91,7 @@ public class StalkerService {
         if (user.getTimedPenaltyDate()!=null) {
             reason += " Suspended user; ";
         }
-        if (blacklisted_usernames_regex.stream().anyMatch(e -> user.getDisplayName().matches(e))){
+        if (blacklisted_usernames_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(e))){
             reason += " Blacklisted Smokey Username; ";
         }
         return reason;
