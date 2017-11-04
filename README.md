@@ -47,7 +47,7 @@ Use the `add` command and pass the site name and the frequency of tracking neede
 
 For example, if you need to track on site Drupal Answers, every 5 minutes, use: 
 
-    add drupal slow
+    @Jam add drupal slow
 
 ## What other commands are there? 
 
