@@ -34,7 +34,7 @@ and
 
 Moderators can destroy these accounts, if and only if they are completely sure that the profile is created only for spam. 
 
-When we detect trends like the [Super User spam wave](https://chat.stackexchange.com/transcript/59667/2017/10/16) on 16th October 2017, we usually try to figure out what is happening and destroy the spam profiles. (But it is left to the site moderators discretion. We just alert the mods, if the need be.) 
+When we detect trends like the ["The Great Super User Spam Invasion of 2017"](https://meta.stackexchange.com/a/238975) on [16th October 2017](https://chat.stackexchange.com/transcript/59667/2017/10/16), we usually try to figure out what is happening and destroy the spam profiles. (But it is left to the site moderators discretion. We just alert the mods, if the need be. In that particular case, Community Managers were informed as the number of accounts involved was very high.) 
 
 
 ## Whom would it help?
