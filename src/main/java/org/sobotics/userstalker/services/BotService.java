@@ -30,12 +30,13 @@ public class BotService {
         fastSites = new ArrayList<>();
         fastSites.add("stackoverflow");
         slowSites = new ArrayList<>();
-        slowSites.add("superuser");
         slowSites.add("askubuntu");
         slowSites.add("puzzling");
         slowSites.add("travel");
         slowSites.add("drupal");
         slowSites.add("ru.stackoverflow");
+        slowSites.add("christianity");
+        slowSites.add("literature");
         executorService = Executors.newSingleThreadScheduledExecutor();
         addListeners = true;
     }

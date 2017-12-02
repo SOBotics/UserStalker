@@ -32,7 +32,14 @@ public class StalkerService {
 
     void stalkOnce(Room room, List<String> sites) {
         LOGGER.info("Stalking "+sites+" at "+Instant.now());
-        for (String site: sites) detectBadGuys(room, site);
+        for (String site: sites) {
+            detectBadGuys(room, site);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         previousTime = Instant.now();
     }
 
@@ -79,6 +86,7 @@ public class StalkerService {
 
     private String getReason(User user) {
         String reason = "";
+        String phoneNumberRegex = ".*1-844-909-0831.*"; // TODO: Make a proper RegEx
         if ((user.getAboutMe()!=null && !user.getAboutMe().equals("") && user.getAboutMe().contains("</a>"))) {
             reason += " Contains link in About Me; ";
         }
@@ -87,6 +95,12 @@ public class StalkerService {
         }
         if (user.getAboutMe()!=null && offensive_regex.stream().anyMatch(e -> user.getAboutMe().matches(e))) {
             reason += " Offensive user profile; ";
+        }
+        if (user.getAboutMe()!=null && user.getAboutMe().matches(phoneNumberRegex)) {
+            reason += " Phone number in user profile; ";
+        }
+        if (user.getAboutMe()!=null && user.getAboutMe().toLowerCase().contains("insurance")) {
+            reason += " Insurance Spammer; ";
         }
         if (user.getTimedPenaltyDate()!=null) {
             reason += " Suspended user; ";
