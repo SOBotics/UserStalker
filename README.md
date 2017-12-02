@@ -14,9 +14,11 @@ We are scanning every user account upon creation (on a few SE sites) and report 
 
 1. If there is a link in their about me text. 
 2. If the website link is similar to their display name. 
-3. If the username or profile text fails the Heat Detector Offensive Regex. 
-4. If the username is blacklisted on the SmokeDetector username blacklist. 
-5. If the user is suspended on the site upon creation. 
+3. If the username or profile text fails the Heat Detector Offensive Regex.
+4. If the user profile text contains a phone number.
+5. If the user profile text contains the word "Insurance".
+6. If the username is blacklisted on the SmokeDetector username blacklist.
+7. If the user is suspended on the site upon creation.
 
 ## What do we do when a user is detected as a bad user? 
 
@@ -36,6 +38,7 @@ Moderators can destroy these accounts, if and only if they are completely sure t
 
 When we detect trends like the ["The Great Super User Spam Invasion of 2017"](https://meta.stackexchange.com/a/238975) on [16th October 2017](https://chat.stackexchange.com/transcript/59667/2017/10/16), we usually try to figure out what is happening and destroy the spam profiles. (But it is left to the site moderators discretion. We just alert the mods, if the need be. In that particular case, Community Managers were informed as the number of accounts involved was very high.) 
 
+(Another recent occurrence is [the insurance spam](https://meta.stackexchange.com/questions/303746/), which lead to the two new checks.)
 
 ## Whom would it help?
 
