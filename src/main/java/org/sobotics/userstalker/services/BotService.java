@@ -28,8 +28,9 @@ public class BotService {
 
     public BotService(){
         fastSites = new ArrayList<>();
-        fastSites.add("stackoverflow");
         slowSites = new ArrayList<>();
+        slowSites.add("stackoverflow");
+        slowSites.add("superuser");
         slowSites.add("askubuntu");
         slowSites.add("puzzling");
         slowSites.add("travel");
@@ -85,7 +86,7 @@ public class BotService {
             room.addEventListener(EventType.USER_MENTIONED, event -> mention(room, event, false));
         }
 
-        executorService.scheduleAtFixedRate(stalker1, 0, 2, TimeUnit.MINUTES);
+        //executorService.scheduleAtFixedRate(stalker1, 0, 2, TimeUnit.MINUTES);
         executorService.scheduleAtFixedRate(stalker2, 0, 5, TimeUnit.MINUTES);
 
     }
