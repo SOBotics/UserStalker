@@ -18,7 +18,9 @@ We are scanning every user account upon creation (on a few SE sites) and report 
 4. If the user profile text contains a phone number.
 5. If the user profile text contains the word "Insurance".
 6. If the username is blacklisted on the SmokeDetector username blacklist.
-7. If the user is suspended on the site upon creation.
+7. If the username contains the current year or the next year.
+8. If the user is suspended on the site upon creation.
+
 
 ## What do we do when a user is detected as a bad user? 
 
