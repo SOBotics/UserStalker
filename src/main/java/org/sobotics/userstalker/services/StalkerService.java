@@ -9,7 +9,9 @@ import org.sobotics.userstalker.entities.User;
 import org.sobotics.userstalker.utils.JsonUtils;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.time.Instant;
+import java.time.Year;
 import java.util.List;
 
 public class StalkerService {
@@ -45,7 +47,7 @@ public class StalkerService {
 
     private void detectBadGuys(Room room, String site) {
         JsonObject json = callAPI(site);
-        if (json.has("items")){
+        if (json!=null && json.has("items")){
             for (JsonElement element: json.get("items").getAsJsonArray()){
                 JsonObject object = element.getAsJsonObject();
                 User user = getUser(object);
@@ -105,6 +107,12 @@ public class StalkerService {
         if (user.getTimedPenaltyDate()!=null) {
             reason += " Suspended user; ";
         }
+        if (user.getDisplayName().toLowerCase().contains(Integer.toString(Year.now().getValue()))){
+            reason += " Username contains current year; ";
+        }
+        if (user.getDisplayName().toLowerCase().contains(Integer.toString(Year.now().getValue()+1))){
+            reason += " Username contains next year; ";
+        }
         if (blacklisted_usernames_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(e))){
             reason += " Blacklisted Smokey Username; ";
         }
@@ -133,9 +141,19 @@ public class StalkerService {
                     "order","desc",
                     "fromdate",String.valueOf(previousTime.minusSeconds(1).getEpochSecond()),
                     "key",apiKey);
+        } catch (SocketTimeoutException e) {
+            e.printStackTrace();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
+
         JsonUtils.handleBackoff(json);
         if (json != null) {
             quota = json.get("quota_remaining").getAsInt();
