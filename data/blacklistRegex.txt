@@ -1,1 +1,15 @@
-^world|wrestle|series|live\s*stream|\binsur|ufc|n[hf]l|nba|ncaa|\b(australian|british|french|italian|texas|us)[_ ]*open|super\s*bowl|\bkentucky\s*derb|march\s*madness|\bgrammy|\s+vs\s+
+(?i)^world
+(?i)wrestl(e|ing)
+(?i)series
+(?i)live\s*stream
+(?i)\binsur
+(?i)ufc
+(?i)n[hf]l
+(?i)nba
+(?i)ncaa
+(?i)\b(australian|british|french|italian|texas|us)[_ ]*open
+(?i)super\s*bowl
+(?i)\bkentucky\s*derb
+(?i)march\s*madness
+(?i)\bgrammy
+(?i)\s+vs\s+
