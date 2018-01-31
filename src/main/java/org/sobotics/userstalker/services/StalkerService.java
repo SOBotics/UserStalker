@@ -113,6 +113,9 @@ public class StalkerService {
         if (user.getDisplayName().toLowerCase().contains(Integer.toString(Year.now().getValue()+1))){
             reason += " Username contains next year; ";
         }
+        if (user.getDisplayName().toLowerCase().contains("cum juice")){
+            reason += " Manually Blacklisted username; ";
+        }
         if (blacklisted_usernames_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(e))){
             reason += " Blacklisted Smokey Username; ";
         }
