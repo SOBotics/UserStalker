@@ -62,10 +62,16 @@ public class BotService {
         String heat_data_2 = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/a0582982f61644ec2d9e29ead440f0bbfd32d219/SOCVDBService/ini/regex_medium_score.txt";
         String heat_data_3 = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/a0582982f61644ec2d9e29ead440f0bbfd32d219/SOCVDBService/ini/regex_low_score.txt";
 
+        LOGGER.info("Gathering Stalker data");
+
+        String stalker_data = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/data/blacklistRegex.txt";
+
         LOGGER.info("Started");
         room.send("[User Stalker](https://git.io/v5CGT) started");
 
         List<String> bur = getData(smokey_data, new ArrayList<>(), false);
+
+        List<String> blr = getData(stalker_data, new ArrayList<>(), false);
 
         List<String> ofr = new ArrayList<>();
 
@@ -75,7 +81,7 @@ public class BotService {
 
         List<String> finalOfr = ofr;
 
-        stalker = new StalkerService(bur, finalOfr);
+        stalker = new StalkerService(bur, blr, finalOfr);
 
         Runnable stalker1 = () -> stalker.stalkOnce(room, fastSites);
         Runnable stalker2 = () -> stalker.stalkOnce(room, slowSites);

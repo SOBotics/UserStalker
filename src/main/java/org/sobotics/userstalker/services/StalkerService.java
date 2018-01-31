@@ -17,17 +17,19 @@ import java.util.List;
 public class StalkerService {
     private static final Logger LOGGER = LoggerFactory.getLogger(StalkerService.class);
     private Instant previousTime;
-    private List<String> blacklisted_usernames_regex;
+    private List<String> smokey_blacklist_regex;
     private List<String> offensive_regex;
+    private List<String> blacklisted_username_regex;
     private int quota;
 
     private String url = "https://api.stackexchange.com/2.2/users";
     private String apiKey = "kmtAuIIqwIrwkXm1*p3qqA((";
     private String filter = "!Ln3l_2int_VA.0Iu5wL3aW";
 
-    StalkerService(List<String> bur, List<String> or) {
+    StalkerService(List<String> bur, List<String> blr, List<String> or) {
         previousTime = Instant.now().minusSeconds(60);
-        blacklisted_usernames_regex = bur;
+        smokey_blacklist_regex = bur;
+        blacklisted_username_regex = blr;
         offensive_regex = or;
         quota = 10000;
     }
@@ -114,9 +116,12 @@ public class StalkerService {
             reason += " Username contains next year; ";
         }
         if (user.getDisplayName().toLowerCase().contains("cum juice")){
-            reason += " Manually Blacklisted username; ";
+            reason += " Manually Blacklisted Username; ";
         }
-        if (blacklisted_usernames_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(e))){
+        if (blacklisted_username_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(e))){
+            reason += " Blacklisted Username; ";
+        }
+        if (smokey_blacklist_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(e))){
             reason += " Blacklisted Smokey Username; ";
         }
         return reason;

@@ -9,6 +9,7 @@ We are scanning every user account upon creation (on a few SE sites) and report 
 1. [The Stack Exchange API](http://api.stackexchange.com).
 2. Blacklisted usernames from the [SmokeDetector project](https://charcoal-se.org/#whats-smokey). 
 3. Offensive Regular Expressions from the [Heat Detector project](https://stackapps.com/questions/7001/heat-detector-analysing-comments-to-find-heat). 
+4. Blacklisted username regex [created](https://github.com/SOBotics/UserStalker/issues/1) using data from [Rubio](https://puzzling.stackexchange.com/users/30633/rubio)
 
 ## What all are we checking?
 
@@ -18,8 +19,9 @@ We are scanning every user account upon creation (on a few SE sites) and report 
 4. If the user profile text contains a phone number.
 5. If the user profile text contains the word "Insurance".
 6. If the username is blacklisted on the SmokeDetector username blacklist.
-7. If the username contains the current year or the next year.
-8. If the user is suspended on the site upon creation.
+7. If the username fails the username blacklist regex.
+8. If the username contains the current year or the next year.
+9. If the user is suspended on the site upon creation.
 
 
 ## What do we do when a user is detected as a bad user? 
