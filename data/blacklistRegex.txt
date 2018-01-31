@@ -1,1 +1,1 @@
-
+^world|wrestle|series|live\s*stream|\binsur|ufc|n[hf]l|nba|ncaa|\b(australian|british|french|italian|texas|us)[_ ]*open|super\s*bowl|\bkentucky\s*derb|march\s*madness|\bgrammy|\s+vs\s+
