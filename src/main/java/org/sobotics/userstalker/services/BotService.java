@@ -76,8 +76,8 @@ public class BotService {
         List<String> ofr = new ArrayList<>();
 
         ofr = getData(heat_data_1, ofr, true);
-        ofr = getData(heat_data_2, ofr, true);
-        ofr = getData(heat_data_3, ofr, true);
+        //ofr = getData(heat_data_2, ofr, true);
+        //ofr = getData(heat_data_3, ofr, true);
 
         List<String> finalOfr = ofr;
 
