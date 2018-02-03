@@ -21,7 +21,7 @@
 (?i)champ
 (?i)awards
 (?i)(?:classic|games)[a-z0-9 ]*?[0-9]{4}
-(?i)(?:[0-9]{4}|live|online|tv|stream(?:ing)?|movie|games|film|free|cup)[a-z0-9]?$
+(?i)(?:\D[0-9]{4}|live|online|tv|stream(?:ing)?|movie|games|film|free|cup)[a-z0-9]?
 (?i)the ?[0-9]{4}
 (?i)packers
 (?i)watch
