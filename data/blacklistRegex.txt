@@ -27,3 +27,4 @@
 (?i)finals
 (?i)playoff
 (?i)^(?:masters|wrestlemania|c(?:owboys|rack)|el ?clasico|[0-9]{4})
+(?i)[a-z]*19
