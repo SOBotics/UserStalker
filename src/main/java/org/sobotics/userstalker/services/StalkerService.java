@@ -118,12 +118,13 @@ public class StalkerService {
         if (user.getDisplayName().toLowerCase().contains("cum juice")){
             reason += " Manually Blacklisted Username; ";
         }
-        if (blacklisted_username_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(e))){
+        if (blacklisted_username_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(".*"+e+".*"))){
             reason += " Blacklisted Username; ";
         }
-        if (smokey_blacklist_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(e))){
+        if (smokey_blacklist_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(".*"+e+".*"))){
             reason += " Blacklisted Smokey Username; ";
         }
+        // TODO: Fix the .* stuff by using a Pattern
         return reason;
     }
 
