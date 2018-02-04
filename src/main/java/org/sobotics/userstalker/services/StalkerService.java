@@ -1,5 +1,6 @@
 package org.sobotics.userstalker.services;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fr.tunaki.stackoverflow.chat.Room;
@@ -63,7 +64,7 @@ public class StalkerService {
         }
     }
 
-    private String checkUser(int userId, String site){
+    public String checkUser(int userId, String site){
         JsonObject json = null;
         try {
             json = JsonUtils.get(url+"/"+userId,
@@ -71,7 +72,7 @@ public class StalkerService {
                     "site", site,
                     "pagesize","100",
                     "page","1",
-                    "filter",filter,
+                    "filter","!-*jbN*IioeFP",
                     "order","desc",
                     "key",apiKey);
         } catch (IOException e) {
@@ -81,11 +82,18 @@ public class StalkerService {
         if (json != null) {
             quota = json.get("quota_remaining").getAsInt();
         }
-        User user = getUser(json);
-        String reasons = getReason(user);
-        if(!reasons.equals(""))
-            return "The user would not be caught.";
-        return "The user would be caught for: ";
+        if(json.has("items")) {
+            JsonArray array = json.get("items").getAsJsonArray();
+            if(array.size()==0){
+                return "No such user found";
+            }
+            User user = getUser(array.get(0).getAsJsonObject());
+            String reasons = getReason(user);
+            if (reasons.equals(""))
+                return "The user would not be caught.";
+            return "The user would be caught for: " + reasons;
+        }
+        return "No such user found";
     }
 
     private String getReason(User user) {

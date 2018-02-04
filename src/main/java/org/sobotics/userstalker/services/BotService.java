@@ -120,6 +120,16 @@ public class BotService {
         if(message.toLowerCase().contains("reboot")){
             reboot(room);
         }
+        if(!isReply && parts[1].equals("check") && parts.length==3) {
+            String url_parts[] = parts[2].split("/");
+            if(!(url_parts[3].equals("users")||url_parts[2].equals("u"))){
+                room.send("Wrong url pattern provided");
+            }
+            else {
+                room.send(stalker.checkUser(Integer.parseInt(url_parts[4]), url_parts[2]));
+            }
+
+        }
         if(!isReply && parts[1].equals("add") && parts.length==4){
             String sitename = parts[2];
             String speed = parts[3];
