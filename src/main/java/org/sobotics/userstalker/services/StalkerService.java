@@ -90,7 +90,7 @@ public class StalkerService {
 
     private String getReason(User user) {
         String reason = "";
-        String phoneNumberRegex = ".*1-844-909-0831.*"; // TODO: Make a proper RegEx
+        String phoneNumberRegex = ".*\\d{10}.*|.*(?:\\d{3}-){2}\\d{4}.*|.*\\(\\d{3}\\)\\d{3}-?\\d{4}.*"; // https://stackoverflow.com/questions/42104546
         if ((user.getAboutMe()!=null && !user.getAboutMe().equals("") && user.getAboutMe().contains("</a>"))) {
             reason += " Contains link in About Me; ";
         }
