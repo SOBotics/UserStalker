@@ -56,6 +56,7 @@ public class StalkerService {
                 User user = getUser(object);
                 user.setSite(site);
                 LOGGER.info("New user detected : {} - {}.", user.getDisplayName(), user.getLink());
+                LOGGER.debug(user.toString());
                 String tag = "[ [User Stalker](https://git.io/v5CGT) ]";
                 String reason = getReason(user);
                 if(!reason.equals(""))
@@ -123,10 +124,10 @@ public class StalkerService {
         if (user.getDisplayName().toLowerCase().contains(Integer.toString(Year.now().getValue()+1))){
             reason += " Username contains next year; ";
         }
-        if (user.getDisplayName().toLowerCase().contains("cum juice")){
+        if (user.getDisplayName().toLowerCase().matches("cum\\s*juice|donald\\s*trump|.*trump.*")){
             reason += " Manually Blacklisted Username; ";
         }
-        if (blacklisted_username_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(".*"+e+".*"))){
+        if (blacklisted_username_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(e))){
             reason += " Blacklisted Username; ";
         }
         if (smokey_blacklist_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(".*"+e+".*"))){
