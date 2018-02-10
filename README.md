@@ -61,6 +61,6 @@ For example, if you need to track on site Drupal Answers, every 5 minutes, use:
  - `quota` - Returns the API quota available.
  - `alive` - Returns a test message if the bot is responding to commands. 
  - `tracked` - Returns the list of sites which are being tracked. 
- 
+ - `check` - Returns a list of reasons for which a user can be caught. 
 
 # Join us in [MOBotics](https://chat.stackexchange.com/rooms/59667/mobotics) 
