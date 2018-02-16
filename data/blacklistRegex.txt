@@ -1,6 +1,7 @@
 (?i)(card?|van|truck)\s?(insur?a?n?c?e?|repair|reimb(ursement)?|rent(al)?|accident|hire|tax|park(ed)?|finance|quotes?)
 (?i)(insur?a?n?c?e?|repair|reimb(ursement)?|rent(al)?|accident|hire|tax|rent\s?a|park(ed)?|finance|quotes?)\s?(card?|van|truck)
 (?i)^(?:masters|wrestlemania|c(?:owboys|rack)|el ?clasico|[0-9]{4})
+(?i)[a-z]*19
 (?i)awards
 (?i)bank\W?of\W?america
 (?i)(lean|flat)\s?belly
