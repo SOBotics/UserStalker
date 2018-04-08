@@ -38,6 +38,10 @@ public class BotService {
         slowSites.add("ru.stackoverflow");
         slowSites.add("christianity");
         slowSites.add("literature");
+        slowSites.add("arduino");
+        slowSites.add("english");
+        slowSites.add("ell");
+        slowSites.add("judaism");
         executorService = Executors.newSingleThreadScheduledExecutor();
         addListeners = true;
     }
