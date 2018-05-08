@@ -24,7 +24,7 @@ public class StalkerService {
     private int quota;
 
     private String url = "https://api.stackexchange.com/2.2/users";
-    private String apiKey = "kmtAuIIqwIrwkXm1*p3qqA((";
+    private String apiKey = "XKgBTF5nztGvMnDoI8gPgA((";
     private String filter = "!Ln3l_2int_VA.0Iu5wL3aW";
 
     StalkerService(List<String> bur, List<String> blr, List<String> or) {
