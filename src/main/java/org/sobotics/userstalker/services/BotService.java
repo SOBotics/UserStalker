@@ -29,19 +29,34 @@ public class BotService {
     public BotService(){
         fastSites = new ArrayList<>();
         slowSites = new ArrayList<>();
+
+        // Tech Sites
+
         slowSites.add("stackoverflow");
         slowSites.add("superuser");
         slowSites.add("askubuntu");
-        slowSites.add("puzzling");
-        slowSites.add("travel");
         slowSites.add("drupal");
         slowSites.add("ru.stackoverflow");
-        slowSites.add("christianity");
-        slowSites.add("literature");
         slowSites.add("arduino");
+
+        // other sites
+
+        slowSites.add("puzzling");
+        slowSites.add("travel");
+
+        // english sites
+
+        slowSites.add("literature");
         slowSites.add("english");
         slowSites.add("ell");
+
+        // religion sites
+
+        slowSites.add("christianity");
         slowSites.add("judaism");
+        slowSites.add("hinduism");
+        slowSites.add("islam");
+
         executorService = Executors.newSingleThreadScheduledExecutor();
         addListeners = true;
     }
