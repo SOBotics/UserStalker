@@ -79,3 +79,4 @@
 (?i)wrestl(e|ing)
 (?i)wwe
 (?i)xfinity
+(?i)^.{1,7}dl?san$
