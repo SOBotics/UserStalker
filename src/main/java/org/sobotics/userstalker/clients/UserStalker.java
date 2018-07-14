@@ -1,8 +1,8 @@
 package org.sobotics.userstalker.clients;
 
-import fr.tunaki.stackoverflow.chat.ChatHost;
-import fr.tunaki.stackoverflow.chat.Room;
-import fr.tunaki.stackoverflow.chat.StackExchangeClient;
+import org.sobotics.chatexchange.chat.ChatHost;
+import org.sobotics.chatexchange.chat.Room;
+import org.sobotics.chatexchange.chat.StackExchangeClient;
 import org.sobotics.userstalker.services.BotService;
 
 import java.io.FileInputStream;

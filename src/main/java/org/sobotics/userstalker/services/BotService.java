@@ -1,12 +1,12 @@
 package org.sobotics.userstalker.services;
 
 
-import fr.tunaki.stackoverflow.chat.Room;
-import fr.tunaki.stackoverflow.chat.event.EventType;
-import fr.tunaki.stackoverflow.chat.event.PingMessageEvent;
-import fr.tunaki.stackoverflow.chat.event.UserEnteredEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sobotics.chatexchange.chat.Room;
+import org.sobotics.chatexchange.chat.event.EventType;
+import org.sobotics.chatexchange.chat.event.PingMessageEvent;
+import org.sobotics.chatexchange.chat.event.UserEnteredEvent;
 
 import java.io.BufferedReader;
 import java.io.IOException;
