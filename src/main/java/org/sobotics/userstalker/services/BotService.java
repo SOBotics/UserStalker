@@ -195,7 +195,9 @@ public class BotService {
                 LOGGER.debug("Ignoring the header: "+word);
             }
             while ((word = in.readLine())!=null){
-                string_list.add(word.trim());
+                if (!word.contains("#")) {
+                    string_list.add(word.trim());
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
