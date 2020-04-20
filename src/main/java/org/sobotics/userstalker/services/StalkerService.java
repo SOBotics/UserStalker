@@ -14,6 +14,7 @@ import java.net.SocketTimeoutException;
 import java.time.Instant;
 import java.time.Year;
 import java.util.List;
+import java.util.regex.PatternSyntaxException;
 
 public class StalkerService {
     private static final Logger LOGGER = LoggerFactory.getLogger(StalkerService.class);
@@ -51,6 +52,7 @@ public class StalkerService {
     private void detectBadGuys(Room room, String site) {
         JsonObject json = callAPI(site);
         if (json!=null && json.has("items")){
+            LOGGER.info("Input json: {}", json.toString());
             for (JsonElement element: json.get("items").getAsJsonArray()){
                 JsonObject object = element.getAsJsonObject();
                 User user = getUser(object);
@@ -106,10 +108,10 @@ public class StalkerService {
         if ((user.getWebsiteUrl()!=null && !user.getWebsiteUrl().equals("") && user.getWebsiteUrl().toLowerCase().contains(user.getDisplayName().toLowerCase().replaceAll("[^a-zA-Z ]", "")))) {
             reason += " URL similar to username; ";
         }
-        if (user.getAboutMe()!=null && offensive_regex.stream().anyMatch(e -> user.getAboutMe().matches(e))) {
+        if (user.getAboutMe()!=null && offensive_regex.stream().anyMatch(e -> regexMatch(e, user.getAboutMe()))) {
             reason += " Offensive user profile; ";
         }
-        if (user.getAboutMe()!=null && user.getAboutMe().matches(phoneNumberRegex)) {
+        if (user.getAboutMe()!=null && regexMatch(phoneNumberRegex, user.getAboutMe())) {
             reason += " Phone number in user profile; ";
         }
         if (user.getAboutMe()!=null && user.getAboutMe().toLowerCase().contains("insurance")) {
@@ -124,17 +126,27 @@ public class StalkerService {
         if (user.getDisplayName().toLowerCase().contains(Integer.toString(Year.now().getValue()+1))){
             reason += " Username contains next year; ";
         }
-        if (user.getDisplayName().toLowerCase().matches("cum\\s*juice|donald\\s*trump|.*trump.*")){
+        if (regexMatch("cum\\s*juice|donald\\s*trump|.*trump.*", user.getDisplayName().toLowerCase())){
             reason += " Manually Blacklisted Username; ";
         }
-        if (blacklisted_username_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(e))){
+        if (blacklisted_username_regex.stream().anyMatch(e -> regexMatch(e, user.getDisplayName().toLowerCase()))){
             reason += " Blacklisted Username; ";
         }
-        if (smokey_blacklist_regex.stream().anyMatch(e -> user.getDisplayName().toLowerCase().matches(".*"+e+".*"))){
+        if (smokey_blacklist_regex.stream().anyMatch(e -> regexMatch(".*"+e+".*", user.getDisplayName().toLowerCase()))){
             reason += " Blacklisted Smokey Username; ";
         }
         // TODO: Fix the .* stuff by using a Pattern
         return reason;
+    }
+
+    private boolean regexMatch(String regex, String input) {
+        try {
+            return input.matches(regex);
+        }
+        catch (PatternSyntaxException e) {
+            LOGGER.debug("Invalid Pattern: {}", regex);
+            return false;
+        }
     }
 
     private void sendUser(Room room, User user, String tag, String reason) {
