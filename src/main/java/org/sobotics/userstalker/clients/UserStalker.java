@@ -1,13 +1,13 @@
 package org.sobotics.userstalker.clients;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.sobotics.chatexchange.chat.ChatHost;
 import org.sobotics.chatexchange.chat.Room;
 import org.sobotics.chatexchange.chat.StackExchangeClient;
 import org.sobotics.userstalker.services.BotService;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
 
 public class UserStalker {
 

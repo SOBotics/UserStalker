@@ -1,7 +1,6 @@
 package org.sobotics.userstalker.entities;
 
-public class User
-{
+public class User {
     private Integer accountId;
     private Boolean isEmployee;
     private Integer creationDate;
@@ -116,16 +115,24 @@ public class User
 
     @Override
     public String toString() {
-        String returnText = "User{" +
-                " link='" + link + '\'' +
-                ", displayName='" + displayName + '\'';
+        String returnText = "User{"
+              + " link='" + link + '\''
+              + ", displayName='" + displayName + '\'';
 
-        if (aboutMe!=null) returnText+= ", aboutMe='" + aboutMe + '\'';
-        if (location!=null) returnText+= ", location='" + location + '\'' ;
-        if (websiteUrl!=null) returnText+= ", websiteUrl='" + websiteUrl + '\'' ;
-        if (timedPenaltyDate!=null) returnText+= ", timedPenaltyDate=" + timedPenaltyDate ;
+        if (aboutMe != null) {
+            returnText += ", aboutMe='" + aboutMe + '\'';
+        }
+        if (location != null) {
+            returnText += ", location='" + location + '\'';
+        }
+        if (websiteUrl != null) {
+            returnText += ", websiteUrl='" + websiteUrl + '\'';
+        }
+        if (timedPenaltyDate != null) {
+            returnText += ", timedPenaltyDate=" + timedPenaltyDate;
+        }
 
-        returnText+=  '}';
+        returnText += '}';
         return returnText;
     }
 }
