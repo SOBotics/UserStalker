@@ -3,10 +3,12 @@ package org.sobotics.userstalker.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sobotics.chatexchange.chat.Message;
 import org.sobotics.chatexchange.chat.Room;
 import org.sobotics.chatexchange.chat.event.EventType;
 import org.sobotics.chatexchange.chat.event.PingMessageEvent;
 import org.sobotics.chatexchange.chat.event.UserEnteredEvent;
+import org.sobotics.userstalker.clients.UserStalker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,189 +21,217 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class BotService {
+
+    private static final int    FAST_TIME_MINUTES          = 2;
+    private static final int    SLOW_TIME_MINUTES          = 5;
+    private static final String OFFENSIVE_BLACKLIST_HI_URL = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_high_score.txt";
+    private static final String OFFENSIVE_BLACKLIST_MD_URL = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_medium_score.txt";
+    private static final String OFFENSIVE_BLACKLIST_LO_URL = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_low_score.txt";
+    private static final String USER_BLACKLIST_URL         = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/data/blacklistRegex.txt";
+    private static final String SMOKEY_USER_BLACKLIST_URL  = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_usernames.txt";
+    private static final String HELP_MSG                   =
+"I'm User Stalker (" + UserStalker.BOT_URL + "), a bot that periodically queries " +
+"the Stack Exchange /users API (https://api.stackexchange.com/docs/users) " +
+"to track all newly-created user accounts. If a suspicious pattern is detected " +
+"in a newly-created user account, the bot will post a message in this room so that " +
+"the account can be manually reviewed by a moderator. If you confirm that the user " +
+"account merits any further action, such as removal, you can do so." +
+"\n" +
+"In addition to \"help\", I recognize some additional commands:\n" +
+"  \u25CF \"alive\": Replies in the affirmative if the bot is up and running.\n" +
+"  \u25CF \"reboot\": Stops the tracking service, and then recreates and restarts it with the same settings.\n" +
+"  \u25CF \"restart\": Same as \"reboot\".\n" +
+"  \u25CF \"stop\": Stops the tracking service, and causes the bot to leave the room.\n" +
+"  \u25CF \"quota\": Replies with the currently remaining size of the API quota for the tracking service.\n" +
+"  \u25CF \"track*\": Replies with the list of Stack Exchange sites that are currently being tracking.\n" +
+"  \u25CF \"check <user URL>\": Runs the pattern-detection checks on the specified user account and replies with the results.\n" +
+"  \u25CF \"test <user URL>\": Same as \"check\".\n" +
+"  \u25CF \"add <sitename> <fast/slow>\": Temporarily adds the specified SE site (short name) to the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n" +
+"  \u25CF \"remove <sitename> <fast/slow>\": Temporarily removes the specified SE site (short name) from the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n" +
+"If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!).";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(BotService.class);
-    private List<String> fastSites;
-    private  List<String> slowSites;
-    private StalkerService stalker;
+
+    private List<String>             fastSites;
+    private List<String>             slowSites;
     private ScheduledExecutorService executorService;
-    private boolean addListeners;
+    private StalkerService           stalkerService;
 
-    public BotService(){
-        fastSites = new ArrayList<>();
-        slowSites = new ArrayList<>();
 
-        // Tech Sites
-
-        slowSites.add("stackoverflow");
-        slowSites.add("superuser");
-        slowSites.add("askubuntu");
-        slowSites.add("drupal");
-        slowSites.add("ru.stackoverflow");
-        slowSites.add("arduino");
-
-        // other sites
-
-        slowSites.add("puzzling");
-        slowSites.add("travel");
-
-        // english sites
-
-        slowSites.add("literature");
-        slowSites.add("english");
-        slowSites.add("ell");
-
-        // religion sites
-
-        slowSites.add("christianity");
-        slowSites.add("judaism");
-        slowSites.add("hinduism");
-        slowSites.add("islam");
-
-        executorService = Executors.newSingleThreadScheduledExecutor();
-        addListeners = true;
+    public BotService(List<String> fastSites, List<String> slowSites) {
+        this.fastSites       = fastSites;
+        this.slowSites       = slowSites;
+        this.executorService = Executors.newSingleThreadScheduledExecutor();
     }
 
-    private BotService(List<String> fastSites, List<String> slowSites){
-        this.fastSites = fastSites;
-        this.slowSites = slowSites;
-        executorService = Executors.newSingleThreadScheduledExecutor();
-        addListeners = false;
-    }
 
-    public void stalk(Room room) {
+    public void stalk(Room room) { this.stalk(room, true); }
 
-        LOGGER.info("Initializing");
-        LOGGER.info("Gathering smokey data");
+    private void stalk(Room room, boolean addListeners) {
+        LOGGER.info("Starting");
 
-        String smokey_data = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_usernames.txt";
+        boolean multipleSites = ((this.fastSites.size() + this.slowSites.size()) > 1);
+        this.stalkerService   = new StalkerService(multipleSites,
+                                                   getData(OFFENSIVE_BLACKLIST_HI_URL, new ArrayList<>(), true),
+                                                   getData(USER_BLACKLIST_URL        , new ArrayList<>(), false),
+                                                   getData(SMOKEY_USER_BLACKLIST_URL , new ArrayList<>(), false));
 
-        LOGGER.info("Gathering HD data");
+        if (addListeners) {
+            room.addEventListener(EventType.USER_ENTERED  , event -> userEntered(room, event));
+            room.addEventListener(EventType.USER_MENTIONED, event -> mention    (room, event, false));
+          //room.addEventListener(EventType.MESSAGE_REPLY , event -> mention    (room, event, true));
+        }
 
-        String heat_data_1 = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/a0582982f61644ec2d9e29ead440f0bbfd32d219/SOCVDBService/ini/regex_high_score.txt";
-        String heat_data_2 = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/a0582982f61644ec2d9e29ead440f0bbfd32d219/SOCVDBService/ini/regex_medium_score.txt";
-        String heat_data_3 = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/a0582982f61644ec2d9e29ead440f0bbfd32d219/SOCVDBService/ini/regex_low_score.txt";
-
-        LOGGER.info("Gathering Stalker data");
-
-        String stalker_data = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/data/blacklistRegex.txt";
+        if (!this.fastSites.isEmpty()) {
+            this.executorService.scheduleAtFixedRate(() -> this.stalkerService.stalkOnce(room,
+                                                                                         this.fastSites),
+                                                     0,
+                                                     FAST_TIME_MINUTES,
+                                                     TimeUnit.MINUTES);
+        }
+        if (!this.slowSites.isEmpty()) {
+            this.executorService.scheduleAtFixedRate(() -> this.stalkerService.stalkOnce(room,
+                                                                                         this.slowSites),
+                                                     0,
+                                                     SLOW_TIME_MINUTES,
+                                                     TimeUnit.MINUTES);
+        }
 
         LOGGER.info("Started");
-        room.send("[User Stalker](https://git.io/v5CGT) started");
-
-        List<String> bur = getData(smokey_data, new ArrayList<>(), false);
-
-        List<String> blr = getData(stalker_data, new ArrayList<>(), false);
-
-        List<String> ofr = new ArrayList<>();
-
-        ofr = getData(heat_data_1, ofr, true);
-        //ofr = getData(heat_data_2, ofr, true);
-        //ofr = getData(heat_data_3, ofr, true);
-
-        List<String> finalOfr = ofr;
-
-        stalker = new StalkerService(bur, blr, finalOfr);
-
-        Runnable stalker1 = () -> stalker.stalkOnce(room, fastSites);
-        Runnable stalker2 = () -> stalker.stalkOnce(room, slowSites);
-
-        if(addListeners) {
-            room.addEventListener(EventType.USER_ENTERED, event -> userEntered(room, event));
-            room.addEventListener(EventType.MESSAGE_REPLY, event -> mention(room, event, true));
-            room.addEventListener(EventType.USER_MENTIONED, event -> mention(room, event, false));
-        }
-
-        //executorService.scheduleAtFixedRate(stalker1, 0, 2, TimeUnit.MINUTES);
-        executorService.scheduleAtFixedRate(stalker2, 0, 5, TimeUnit.MINUTES);
-
+        room.send(UserStalker.CHAT_MSG_PREFIX + " Started...");
     }
+
 
     private void mention(Room room, PingMessageEvent event, boolean isReply) {
-        String message = event.getMessage().getPlainContent();
-        LOGGER.info("New mention: "+message);
-        LOGGER.debug("Content: ["+event.getMessage().getContent()+"]");
-        String[] parts = message.toLowerCase().split(" ");
+        Message  message       = event.getMessage();
+        long     replyID       = message.getId();
+        String   messageString = message.getPlainContent();
+        String[] messageParts  = messageString.trim().toLowerCase().split(" ");
 
-        if(message.toLowerCase().contains("alive")){
-            room.send("Yep");
+        LOGGER.info("New mention: " + messageString);
+        LOGGER.debug("Content: [" + message.getContent() + "]");
+
+        if (messageParts.length == 2) {
+            if (messageParts[1].equals("help")) {
+                room.replyTo(replyID, HELP_MSG);
+                return;
+            }
+            if (messageParts[1].equals("reboot") ||
+                messageParts[1].equals("restart")) {
+                reboot(room);
+                return;
+            }
+            else if (messageParts[1].equals("stop")) {
+                stop(room);
+                return;
+            }
+            else if (messageParts[1].equals("alive")) {
+                room.replyTo(replyID, "Yep, I'm alive!");
+                return;
+            }
+            else if (messageParts[1].equals("quota")) {
+                room.replyTo(replyID, "The remaining quota is " + stalkerService.getQuota() + ".");
+                return;
+            }
+            else if (messageParts[1].contains("track")) {
+                room.replyTo(replyID, "\nSites tracked (fast): " + String.join(", ", fastSites) +
+                                      "\nSites tracked (slow): " + String.join(", ", slowSites));
+                return;
+            }
         }
-        if(message.toLowerCase().contains("tracked")){
-            String returnString = "";
-            for (String site: fastSites)
-                returnString+="    "+site+" (every 2 minutes)\n";
-            for (String site: slowSites)
-                returnString+="    "+site+" (every 5 minutes)\n";
-            room.send(returnString);
+        else if (messageParts.length == 3) {
+            if (messageParts[1].equals("check") || messageParts[1].equals("test")) {
+                String response = "The specified URL was not recognized as a user profile.";
+
+                String urlParts[] = messageParts[2].split("/");
+                if ((urlParts[3].equals("u") || urlParts[3].equals("users"))) {
+                    response = stalkerService.checkUser(Integer.parseInt(urlParts[4]), urlParts[2]);
+                }
+
+                room.replyTo(replyID, response);
+                return;
+            }
         }
-        if(message.toLowerCase().contains("quota")){
-            room.send("The remaining quota is "+stalker.getQuota());
-        }
-        if(message.toLowerCase().contains("reboot")){
-            reboot(room);
-        }
-        if(!isReply && parts[1].equals("check") && parts.length==3) {
-            String url_parts[] = parts[2].split("/");
-            if(!(url_parts[3].equals("users")||url_parts[2].equals("u"))){
-                room.send("Wrong url pattern provided");
+        else if (messageParts.length == 4) {
+            String command  = messageParts[1];
+            String sitename = messageParts[2];
+            String speed    = messageParts[3];
+
+            boolean isFast;
+            if      (speed.equals("fast"))  { isFast = true;  }
+            else if (speed.equals("slow"))  { isFast = false; }
+            else {
+                room.replyTo(replyID,
+                             "The specified speed (\"" + speed + "\") was not recognized (must be either \"fast\" or \"slow\").");
+                return;
+            }
+
+            String reply = UserStalker.CHAT_MSG_PREFIX;
+            if (command.equals("add")) {
+                if (isFast)  { fastSites.add(sitename); }
+                else         { slowSites.add(sitename); }
+                reply += " Temporarily adding `" + sitename + "` to the list of \"" + speed + "\" sites.";
+            }
+            else if (command.equals("remove")) {
+                if (isFast)  { fastSites.remove(sitename); }
+                else         { slowSites.remove(sitename); }
+                reply += " Temporarily removing `" + sitename + "` from the list of \"" + speed + "\" sites.";
             }
             else {
-                room.send(stalker.checkUser(Integer.parseInt(url_parts[4]), url_parts[2]));
+                room.replyTo(replyID,
+                             "The specified command (\"" + command + "\") was not recognized (must be either \"add\" or \"remove\".)");
+                return;
             }
+            room.send(reply).thenRun(() -> reboot(room));
+            return;
+        }
 
-        }
-        if(!isReply && parts[1].equals("add") && parts.length==4){
-            String sitename = parts[2];
-            String speed = parts[3];
-            switch (speed){
-                case "fast": fastSites.add(sitename); break;
-                case "slow": slowSites.add(sitename); break;
-            }
-            room.send("Temporarily adding "+sitename+" to the list of "+speed+" sites. (cc @BhargavRao)");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            stop(room);
-            new BotService(fastSites,slowSites).stalk(room);
-        }
+        room.replyTo(replyID,
+                     "You talkin' to me? Psst\u2026ping me and say \"help\".");
     }
 
-    private void stop(Room room){
-        executorService.shutdown();
-        room.send("stopping...");
+    private void stop(Room room, boolean leave) {
+        this.executorService.shutdown();
         LOGGER.info("Stopping the bot");
-        stalker = null;
-        //room.leave();
+        room.send(UserStalker.CHAT_MSG_PREFIX + " Stopping...").thenRun(() ->
+                                                                        {
+                                                                            this.stalkerService = null;
+                                                                            if (leave) { room.leave(); }
+                                                                        });
     }
 
-    private void reboot(Room room){
-        stop(room);
+    private void stop(Room room) { this.stop(room, true); }
+
+    private void reboot(Room room) {
+        stop(room, false);
+
         LOGGER.info("Rebooting");
-        stalk(room);
+
+        new BotService(this.fastSites, this.slowSites).stalk(room, false);
     }
 
     private void userEntered(Room room, UserEnteredEvent event) {
-        LOGGER.info("Welcome " + event.getUserName() + " to room " + room.getRoomId());
+        LOGGER.info("User " + event.getUserName() + " entered room " + room.getRoomId() + ".");
     }
 
-    private List<String> getData(String url, List<String> string_list, boolean header){
+    private List<String> getData(String url, List<String> stringList, boolean header) {
         try {
-            URL data = new URL(url);
-            BufferedReader in = new BufferedReader(new InputStreamReader(data.openStream()));
-            String word;
-            if(header) {
+            URL            data = new URL(url);
+            BufferedReader in   = new BufferedReader(new InputStreamReader(data.openStream()));
+            String         word;
+            if (header) {
                 word = in.readLine();
-                LOGGER.debug("Ignoring the header: "+word);
+                LOGGER.debug("Ignoring the header: " + word);
             }
-            while ((word = in.readLine())!=null){
+            while ((word = in.readLine()) != null) {
                 if (!word.contains("#")) {
-                    string_list.add(word.trim());
+                    stringList.add(word.trim());
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        return string_list;
+        return stringList;
     }
+
 }

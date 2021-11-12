@@ -15,8 +15,9 @@ public class User
     private Integer timedPenaltyDate;
     private String site;
 
-    public User() {
-    }
+
+    public User() { }
+
 
     public Integer getAccountId() {
         return accountId;
@@ -114,18 +115,20 @@ public class User
         this.site = site;
     }
 
+
     @Override
     public String toString() {
         String returnText = "User{" +
-                " link='" + link + '\'' +
-                ", displayName='" + displayName + '\'';
+                            " link='" + link + '\'' +
+                            ", displayName='" + displayName + '\'';
 
-        if (aboutMe!=null) returnText+= ", aboutMe='" + aboutMe + '\'';
-        if (location!=null) returnText+= ", location='" + location + '\'' ;
-        if (websiteUrl!=null) returnText+= ", websiteUrl='" + websiteUrl + '\'' ;
-        if (timedPenaltyDate!=null) returnText+= ", timedPenaltyDate=" + timedPenaltyDate ;
+        if (aboutMe          != null)  { returnText += ", aboutMe='" + aboutMe + '\''; }
+        if (location         != null)  { returnText += ", location='" + location + '\''; }
+        if (websiteUrl       != null)  { returnText += ", websiteUrl='" + websiteUrl + '\''; }
+        if (timedPenaltyDate != null)  { returnText += ", timedPenaltyDate=" + timedPenaltyDate; }
 
-        returnText+=  '}';
+        returnText += '}';
         return returnText;
     }
+
 }
