@@ -1,10 +1,11 @@
 package org.sobotics.userstalker.services;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sobotics.chatexchange.chat.Room;
 import org.sobotics.userstalker.entities.User;
 import org.sobotics.userstalker.utils.JsonUtils;
@@ -14,11 +15,13 @@ import java.lang.String;
 import java.lang.StringBuilder;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
-import java.time.Instant;
-import java.time.Year;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.regex.PatternSyntaxException;
+import java.time.*;
+import java.time.temporal.*;
+import java.time.format.*;
+
 
 public class StalkerService {
 
@@ -82,7 +85,7 @@ public class StalkerService {
         if (json.has("items")) {
             JsonArray array = json.get("items").getAsJsonArray();
             if (array.size() > 0) {
-               User   user    = getUser(array.get(0).getAsJsonObject());
+               User   user    = new User(array.get(0).getAsJsonObject());
                String reasons = getReason(user);
                String result  = " [" + user.getDisplayName() + "](" + user.getLink() + "?tab=profile)";
                if (!reasons.isBlank()) {
@@ -95,7 +98,7 @@ public class StalkerService {
                return result;
             }
         }
-        return "No such user found";
+        return "No such user found.";
     }
 
 
@@ -105,7 +108,7 @@ public class StalkerService {
             LOGGER.info("Input JSON: {}", json.toString());
             for (JsonElement element: json.get("items").getAsJsonArray()) {
                 JsonObject object = element.getAsJsonObject();
-                User       user   = getUser(object);
+                User       user   = new User(object);
                 user.setSite(site);
                 LOGGER.info("New user detected : {} - {}.", user.getDisplayName(), user.getLink());
                 LOGGER.debug(user.toString());
@@ -117,11 +120,27 @@ public class StalkerService {
         }
     }
 
+    private static String getDateTimeStampToNearestMinuteFromApiDateTime(long apiDateTime) {
+        // SE API date-time fields are Unix epochs in UTC format.
+        ZonedDateTime dateTime = Instant.ofEpochSecond(apiDateTime).atZone(ZoneOffset.UTC);
+
+        // Round to the nearest whole minute.
+        if (dateTime.getSecond() >= 30)
+        {
+            dateTime = dateTime.truncatedTo(ChronoUnit.MINUTES).plus(1, ChronoUnit.MINUTES);
+        }
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM d yyyy 'at' HH:mm");
+        return dateTime.format(fmt);
+    }
+
     private String getReason(User user) {
         ArrayList<String> reasons = new ArrayList<String>(20);
 
         if (user.getTimedPenaltyDate() != null) {
-            reasons.add("suspended user");
+
+            reasons.add("suspended until "
+                        + getDateTimeStampToNearestMinuteFromApiDateTime(user.getTimedPenaltyDate()));
         }
 
         if ((user.getDisplayName() != null) && !user.getDisplayName().isBlank()) {
@@ -181,10 +200,18 @@ public class StalkerService {
     private void sendUser(Room room, User user, String reason) {
         LOGGER.info("Detected user "+ user);
 
+        boolean isSuspended = (user.getTimedPenaltyDate() != null);
+
         StringBuilder builder = new StringBuilder();
         builder.append(UserStalker.CHAT_MSG_PREFIX);
         builder.append(" [");
+        if (isSuspended) {
+            builder.append("*");
+        }
         builder.append(user.getDisplayName());
+        if (isSuspended) {
+            builder.append("*");
+        }
         builder.append("](");
         builder.append(user.getLink());
         builder.append("?tab=profile) ");
@@ -230,23 +257,6 @@ public class StalkerService {
             quota = json.get("quota_remaining").getAsInt();
         }
         return json;
-    }
-
-    private User getUser(JsonObject object) {
-        User user = new User();
-        if (object.has("account_id"))          { user.setAccountId       (object.get("account_id"        ).getAsInt());     }
-        if (object.has("is_employee"))         { user.setIsEmployee      (object.get("is_employee"       ).getAsBoolean()); }
-        if (object.has("creation_date"))       { user.setCreationDate    (object.get("creation_date"     ).getAsInt());     }
-        if (object.has("user_id"))             { user.setUserId          (object.get("user_id"           ).getAsInt());     }
-        if (object.has("accountId"))           { user.setAccountId       (object.get("accountId"         ).getAsInt());     }
-        if (object.has("link"))                { user.setLink            (object.get("link"              ).getAsString());  }
-        if (object.has("profile_image"))       { user.setProfileImage    (object.get("profile_image"     ).getAsString());  }
-        if (object.has("display_name"))        { user.setDisplayName     (object.get("display_name"      ).getAsString());  }
-        if (object.has("about_me"))            { user.setAboutMe         (object.get("about_me"          ).getAsString());  }
-        if (object.has("location"))            { user.setLocation        (object.get("location"          ).getAsString());  }
-        if (object.has("website_url"))         { user.setWebsiteUrl      (object.get("website_url"       ).getAsString());  }
-        if (object.has("timed_penalty_date"))  { user.setTimedPenaltyDate(object.get("timed_penalty_date").getAsInt());     }
-        return user;
     }
 
 }

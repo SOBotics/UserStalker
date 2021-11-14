@@ -1,5 +1,6 @@
 package org.sobotics.userstalker.clients;
 
+
 import org.sobotics.chatexchange.chat.ChatHost;
 import org.sobotics.chatexchange.chat.Room;
 import org.sobotics.chatexchange.chat.StackExchangeClient;
