@@ -208,13 +208,15 @@ public class StalkerService {
         if (isSuspended) {
             builder.append("*");
         }
-        builder.append(user.getDisplayName());
+        builder.append(user.getDisplayName().trim());
         if (isSuspended) {
             builder.append("*");
         }
         builder.append("](");
         builder.append(user.getLink());
-        builder.append("?tab=profile) ");
+        builder.append("?tab=profile \"");
+        builder.append(user.getDisplayName());
+        builder.append("\") ");
         if (showSite) {
             builder.append("on **`");
             builder.append(user.getSite());
