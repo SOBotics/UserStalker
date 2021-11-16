@@ -1,26 +1,28 @@
 package org.sobotics.userstalker.services;
 
 
+import java.io.IOException;
+import java.net.SocketTimeoutException;
+import java.time.Instant;
+import java.time.Year;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.PatternSyntaxException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sobotics.chatexchange.chat.Room;
+import org.sobotics.userstalker.clients.UserStalker;
+import org.sobotics.userstalker.entities.User;
+import org.sobotics.userstalker.utils.JsonUtils;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import org.sobotics.chatexchange.chat.Room;
-import org.sobotics.userstalker.entities.User;
-import org.sobotics.userstalker.utils.JsonUtils;
-import org.sobotics.userstalker.clients.UserStalker;
-
-import java.lang.String;
-import java.lang.StringBuilder;
-import java.io.IOException;
-import java.net.SocketTimeoutException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.regex.PatternSyntaxException;
-import java.time.*;
-import java.time.temporal.*;
-import java.time.format.*;
 
 
 public class StalkerService {

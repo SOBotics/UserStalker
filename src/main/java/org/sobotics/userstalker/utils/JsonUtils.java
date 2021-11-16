@@ -1,16 +1,16 @@
 package org.sobotics.userstalker.utils;
 
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-
 import java.io.IOException;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 import org.jsoup.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 
 /**
