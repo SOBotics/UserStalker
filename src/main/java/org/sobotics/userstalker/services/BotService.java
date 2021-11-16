@@ -1,15 +1,6 @@
 package org.sobotics.userstalker.services;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sobotics.chatexchange.chat.Message;
-import org.sobotics.chatexchange.chat.Room;
-import org.sobotics.chatexchange.chat.event.EventType;
-import org.sobotics.chatexchange.chat.event.PingMessageEvent;
-import org.sobotics.chatexchange.chat.event.UserEnteredEvent;
-import org.sobotics.userstalker.clients.UserStalker;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,6 +10,15 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sobotics.chatexchange.chat.Message;
+import org.sobotics.chatexchange.chat.Room;
+import org.sobotics.chatexchange.chat.event.EventType;
+import org.sobotics.chatexchange.chat.event.PingMessageEvent;
+import org.sobotics.chatexchange.chat.event.UserEnteredEvent;
+import org.sobotics.userstalker.clients.UserStalker;
 
 
 public class BotService {
