@@ -17,7 +17,7 @@ import java.util.Collections;
 
 public class UserStalker {
 
-    public  static final String BOT_URL               = "https://github.com/SOBotics/UserStalker";
+    public  static final String BOT_URL               = "https://git.io/v5CGT";
     public  static final String CHAT_MSG_PREFIX       = "[ [User Stalker](" + UserStalker.BOT_URL + ") ]";
     private static final String LOGIN_PROPERTIES_FILE = "./properties/login.properties";
     private static final String SO_PROPERTIES_FILE    = "./properties/StackOverflow.properties";
