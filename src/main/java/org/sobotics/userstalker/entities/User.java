@@ -6,6 +6,19 @@ import com.google.gson.JsonObject;
 
 public class User
 {
+    private Long    accountId;
+    private Boolean isEmployee;
+    private Long    creationDate;
+    private Long    userId;
+    private String  link;
+    private String  profileImage;
+    private String  displayName;
+    private String  aboutMe;
+    private String  location;
+    private String  websiteUrl;
+    private Long    timedPenaltyDate;
+    private String  site;
+
     public User(JsonObject object) {
         if (object.has("account_id"))          { this.setAccountId       (object.get("account_id"        ).getAsLong   ()); }
         if (object.has("is_employee"))         { this.setIsEmployee      (object.get("is_employee"       ).getAsBoolean()); }
@@ -133,19 +146,5 @@ public class User
         returnText += '}';
         return returnText;
     }
-
-
-    private Long    accountId;
-    private Boolean isEmployee;
-    private Long    creationDate;
-    private Long    userId;
-    private String  link;
-    private String  profileImage;
-    private String  displayName;
-    private String  aboutMe;
-    private String  location;
-    private String  websiteUrl;
-    private Long    timedPenaltyDate;
-    private String  site;
 
 }
