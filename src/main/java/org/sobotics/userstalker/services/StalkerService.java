@@ -87,17 +87,17 @@ public class StalkerService {
         if (json.has("items")) {
             JsonArray array = json.get("items").getAsJsonArray();
             if (array.size() > 0) {
-               User   user    = new User(array.get(0).getAsJsonObject());
-               String reasons = getReason(user);
-               String result  = " [" + user.getDisplayName() + "](" + user.getLink() + "?tab=profile)";
-               if (!reasons.isBlank()) {
-                   result += " would be caught for: ";
-                   result += reasons;
-               }
-               else {
-                   result += " would not be caught.";
-               }
-               return result;
+                User   user    = new User(array.get(0).getAsJsonObject());
+                String reasons = getReason(user);
+                String result  = " [" + user.getDisplayName() + "](" + user.getLink() + "?tab=profile)";
+                if (!reasons.isBlank()) {
+                    result += " would be caught for: ";
+                    result += reasons;
+                }
+                else {
+                    result += " would not be caught.";
+                }
+                return result;
             }
         }
         return "No such user found.";
@@ -106,7 +106,7 @@ public class StalkerService {
 
     private void detectBadGuys(Room room, String site) {
         JsonObject json = callAPI(site);
-        if ((json != null) && json.has("items")) {
+        if (json != null && json.has("items")) {
             LOGGER.info("Input JSON: {}", json.toString());
             for (JsonElement element: json.get("items").getAsJsonArray()) {
                 JsonObject object = element.getAsJsonObject();
@@ -145,10 +145,10 @@ public class StalkerService {
                         + getDateTimeStampToNearestMinuteFromApiDateTime(user.getTimedPenaltyDate()));
         }
 
-        if ((user.getDisplayName() != null) && !user.getDisplayName().isBlank()) {
+        if (user.getDisplayName() != null && !user.getDisplayName().isBlank()) {
             String displayNameLower = user.getDisplayName().toLowerCase();
 
-            if ((user.getWebsiteUrl() != null)  &&
+            if (user.getWebsiteUrl() != null  &&
                 !user.getWebsiteUrl().isBlank() &&
                 user.getWebsiteUrl().toLowerCase().contains(displayNameLower.replaceAll("[^a-zA-Z ]", ""))) {
                 reasons.add("URL similar to username");
@@ -168,7 +168,7 @@ public class StalkerService {
             }
         }
 
-        if ((user.getAboutMe() != null) && !user.getAboutMe().isBlank()) {
+        if (user.getAboutMe() != null && !user.getAboutMe().isBlank()) {
             String aboutMeActual = user.getAboutMe();
             String aboutMe       = aboutMeActual.toLowerCase();
             if (aboutMe.contains("insurance")) {
@@ -200,9 +200,9 @@ public class StalkerService {
     }
 
     private void sendUser(Room room, User user, String reason) {
-        LOGGER.info("Detected user "+ user);
+        LOGGER.info("Detected user " + user);
 
-        boolean isSuspended = (user.getTimedPenaltyDate() != null);
+        boolean isSuspended = user.getTimedPenaltyDate() != null;
 
         StringBuilder builder = new StringBuilder();
         builder.append(UserStalker.CHAT_MSG_PREFIX);

@@ -31,25 +31,25 @@ public class BotService {
     private static final String USER_BLACKLIST_URL         = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/data/blacklistRegex.txt";
     private static final String SMOKEY_USER_BLACKLIST_URL  = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_usernames.txt";
     private static final String HELP_MSG                   =
-"I'm User Stalker (" + UserStalker.BOT_URL + "), a bot that periodically queries " +
-"the Stack Exchange /users API (https://api.stackexchange.com/docs/users) " +
-"to track all newly-created user accounts. If a suspicious pattern is detected " +
-"in a newly-created user account, the bot will post a message in this room so that " +
-"the account can be manually reviewed by a moderator. If you confirm that the user " +
-"account merits any further action, such as removal, you can do so." +
-"\n" +
-"In addition to \"help\", I recognize some additional commands:\n" +
-"  \u25CF \"alive\": Replies in the affirmative if the bot is up and running.\n" +
-"  \u25CF \"reboot\": Stops the tracking service, and then recreates and restarts it with the same settings.\n" +
-"  \u25CF \"restart\": Same as \"reboot\".\n" +
-"  \u25CF \"stop\": Stops the tracking service, and causes the bot to leave the room.\n" +
-"  \u25CF \"quota\": Replies with the currently remaining size of the API quota for the tracking service.\n" +
-"  \u25CF \"track*\": Replies with the list of Stack Exchange sites that are currently being tracking.\n" +
-"  \u25CF \"check <user URL>\": Runs the pattern-detection checks on the specified user account and replies with the results.\n" +
-"  \u25CF \"test <user URL>\": Same as \"check\".\n" +
-"  \u25CF \"add <sitename> <fast/slow>\": Temporarily adds the specified SE site (short name) to the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n" +
-"  \u25CF \"remove <sitename> <fast/slow>\": Temporarily removes the specified SE site (short name) from the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n" +
-"If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!).";
+  "I'm User Stalker (" + UserStalker.BOT_URL + "), a bot that periodically queries "
++ "the Stack Exchange /users API (https://api.stackexchange.com/docs/users) "
++ "to track all newly-created user accounts. If a suspicious pattern is detected "
++ "in a newly-created user account, the bot will post a message in this room so that "
++ "the account can be manually reviewed by a moderator. If you confirm that the user "
++ "account merits any further action, such as removal, you can do so."
++ "\n"
++ "In addition to \"help\", I recognize some additional commands:\n"
++ "  \u25CF \"alive\": Replies in the affirmative if the bot is up and running.\n"
++ "  \u25CF \"reboot\": Stops the tracking service, and then recreates and restarts it with the same settings.\n"
++ "  \u25CF \"restart\": Same as \"reboot\".\n"
++ "  \u25CF \"stop\": Stops the tracking service, and causes the bot to leave the room.\n"
++ "  \u25CF \"quota\": Replies with the currently remaining size of the API quota for the tracking service.\n"
++ "  \u25CF \"track*\": Replies with the list of Stack Exchange sites that are currently being tracking.\n"
++ "  \u25CF \"check <user URL>\": Runs the pattern-detection checks on the specified user account and replies with the results.\n"
++ "  \u25CF \"test <user URL>\": Same as \"check\".\n"
++ "  \u25CF \"add <sitename> <fast/slow>\": Temporarily adds the specified SE site (short name) to the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n"
++ "  \u25CF \"remove <sitename> <fast/slow>\": Temporarily removes the specified SE site (short name) from the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n"
++ "If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!).";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BotService.class);
 
@@ -71,7 +71,7 @@ public class BotService {
     private void stalk(Room room, boolean addListeners) {
         LOGGER.info("Starting");
 
-        boolean multipleSites = ((this.fastSites.size() + this.slowSites.size()) > 1);
+        boolean multipleSites = (this.fastSites.size() + this.slowSites.size()) > 1;
         this.stalkerService   = new StalkerService(multipleSites,
                                                    getData(OFFENSIVE_BLACKLIST_HI_URL, new ArrayList<>(), true),
                                                    getData(USER_BLACKLIST_URL        , new ArrayList<>(), false),
@@ -135,8 +135,8 @@ public class BotService {
                 return;
             }
             else if (messageParts[1].contains("track")) {
-                room.replyTo(replyID, "\nSites tracked (fast): " + String.join(", ", fastSites) +
-                                      "\nSites tracked (slow): " + String.join(", ", slowSites));
+                room.replyTo(replyID, "\nSites tracked (fast): " + String.join(", ", fastSites)
+                                    + "\nSites tracked (slow): " + String.join(", ", slowSites));
                 return;
             }
         }
@@ -144,8 +144,8 @@ public class BotService {
             if (messageParts[1].equals("check") || messageParts[1].equals("test")) {
                 String response = "The specified URL was not recognized as a user profile.";
 
-                String urlParts[] = messageParts[2].split("/");
-                if ((urlParts[3].equals("u") || urlParts[3].equals("users"))) {
+                String[] urlParts = messageParts[2].split("/");
+                if (urlParts[3].equals("u") || urlParts[3].equals("users")) {
                     response = stalkerService.checkUser(Integer.parseInt(urlParts[4]), urlParts[2]);
                 }
 
@@ -194,11 +194,12 @@ public class BotService {
     private void stop(Room room, boolean leave) {
         this.executorService.shutdown();
         LOGGER.info("Stopping the bot");
-        room.send(UserStalker.CHAT_MSG_PREFIX + " Stopping...").thenRun(() ->
-                                                                        {
-                                                                            this.stalkerService = null;
-                                                                            if (leave) { room.leave(); }
-                                                                        });
+        room.send(UserStalker.CHAT_MSG_PREFIX + " Stopping...")
+            .thenRun(() ->
+                    {
+                        this.stalkerService = null;
+                        if (leave) { room.leave(); }
+                    });
     }
 
     private void stop(Room room) { this.stop(room, true); }
