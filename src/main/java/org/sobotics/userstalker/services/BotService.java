@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -23,6 +24,21 @@ import org.sobotics.userstalker.clients.UserStalker;
 
 public class BotService {
 
+    private static final Map<String, String> COMMANDS = Map.of(
+        "alive",                           "Replies in the affirmative if the bot is up and running",
+        "reboot",                          "Stops the tracking service, and then recreates and restarts it with the same settings",
+        "restart",                         "Same as \"reboot\"",
+        "stop",                            "Stops the tracking service, and causes the bot to leave the room",
+        "quota",                           "Replies with the currently remaining size of the API quota for the tracking service",
+        "track*",                          "Replies with the list of Stack Exchange sites that are currently being tracking",
+        "check <user URL>",                "Runs the pattern-detection checks on the specified user account and replies with the results",
+        "test <user URL>",                 "Same as \"check\"",
+        "add <sitename> <fast/slow>",      "Temporarily adds the specified SE site (short name) to the specified tracking list "
+                                         + "(changes will not persist across a reboot).",
+        "remove <sitename> <fast/slow>",   "Temporarily removes the specified SE site (short name) from the specified tracking list "
+                                         + "(changes will not persist across a reboot)."
+    );
+
     private static final int    FAST_TIME_MINUTES          = 2;
     private static final int    SLOW_TIME_MINUTES          = 5;
     private static final String OFFENSIVE_BLACKLIST_HI_URL = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_high_score.txt";
@@ -30,26 +46,6 @@ public class BotService {
   //private static final String OFFENSIVE_BLACKLIST_LO_URL = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_low_score.txt";
     private static final String USER_BLACKLIST_URL         = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/data/blacklistRegex.txt";
     private static final String SMOKEY_USER_BLACKLIST_URL  = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_usernames.txt";
-    private static final String HELP_MSG                   =
-  "I'm User Stalker (" + UserStalker.BOT_URL + "), a bot that periodically queries "
-+ "the Stack Exchange /users API (https://api.stackexchange.com/docs/users) "
-+ "to track all newly-created user accounts. If a suspicious pattern is detected "
-+ "in a newly-created user account, the bot will post a message in this room so that "
-+ "the account can be manually reviewed by a moderator. If you confirm that the user "
-+ "account merits any further action, such as removal, you can do so."
-+ "\n"
-+ "In addition to \"help\", I recognize some additional commands:\n"
-+ "  \u25CF \"alive\": Replies in the affirmative if the bot is up and running.\n"
-+ "  \u25CF \"reboot\": Stops the tracking service, and then recreates and restarts it with the same settings.\n"
-+ "  \u25CF \"restart\": Same as \"reboot\".\n"
-+ "  \u25CF \"stop\": Stops the tracking service, and causes the bot to leave the room.\n"
-+ "  \u25CF \"quota\": Replies with the currently remaining size of the API quota for the tracking service.\n"
-+ "  \u25CF \"track*\": Replies with the list of Stack Exchange sites that are currently being tracking.\n"
-+ "  \u25CF \"check <user URL>\": Runs the pattern-detection checks on the specified user account and replies with the results.\n"
-+ "  \u25CF \"test <user URL>\": Same as \"check\".\n"
-+ "  \u25CF \"add <sitename> <fast/slow>\": Temporarily adds the specified SE site (short name) to the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n"
-+ "  \u25CF \"remove <sitename> <fast/slow>\": Temporarily removes the specified SE site (short name) from the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n"
-+ "If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!).";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BotService.class);
 
@@ -65,6 +61,28 @@ public class BotService {
         this.executorService = Executors.newSingleThreadScheduledExecutor();
     }
 
+    public String getHelpMsg() {
+        StringBuilder message = new StringBuilder();
+
+        message.append("I'm User Stalker (" + UserStalker.BOT_URL + "), a bot that periodically queries "
+                     + "the Stack Exchange /users API (https://api.stackexchange.com/docs/users) "
+                     + "to track all newly-created user accounts. If a suspicious pattern is detected "
+                     + "in a newly-created user account, the bot will post a message in this room so that "
+                     + "the account can be manually reviewed by a moderator. If you confirm that the user "
+                     + "account merits any further action, such as removal, you can do so.\n"
+                     + "In addition to \"help\", I recognize some additional commands:\n");
+
+        for (Map.Entry<String, String> command : COMMANDS.entrySet()) {
+            String name = command.getKey();
+            String description = command.getValue();
+
+            message.append("  \u25CF \"" + name + "\": " + description + ".\n");
+        }
+
+        message.append("If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!).");
+
+        return message.toString();
+    }
 
     public void stalk(Room room) { this.stalk(room, true); }
 
@@ -114,7 +132,7 @@ public class BotService {
 
         if (messageParts.length == 2) {
             if (messageParts[1].equals("help")) {
-                room.replyTo(replyID, HELP_MSG);
+                room.replyTo(replyID, getHelpMsg());
                 return;
             }
             if (messageParts[1].equals("reboot") ||
@@ -196,10 +214,10 @@ public class BotService {
         LOGGER.info("Stopping the bot");
         room.send(UserStalker.CHAT_MSG_PREFIX + " Stopping...")
             .thenRun(() ->
-                    {
-                        this.stalkerService = null;
-                        if (leave) { room.leave(); }
-                    });
+            {
+                this.stalkerService = null;
+                if (leave) { room.leave(); }
+            });
     }
 
     private void stop(Room room) { this.stop(room, true); }
