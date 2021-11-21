@@ -121,9 +121,9 @@ public class User
 
     @Override
     public String toString() {
-        String returnText = "User{" +
-                            " link='" + link + '\'' +
-                            ", displayName='" + displayName + '\'';
+        String returnText = "User{"
+                          + " link='" + link + '\''
+                          + ", displayName='" + displayName + '\'';
 
         if (aboutMe          != null)  { returnText += ", aboutMe='" + aboutMe + '\''; }
         if (location         != null)  { returnText += ", location='" + location + '\''; }

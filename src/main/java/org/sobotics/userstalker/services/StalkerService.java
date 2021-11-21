@@ -89,17 +89,17 @@ public class StalkerService {
         if (json.has("items")) {
             JsonArray array = json.get("items").getAsJsonArray();
             if (array.size() > 0) {
-               User   user    = new User(array.get(0).getAsJsonObject());
-               String reasons = getReason(user);
-               String result  = " [" + user.getDisplayName() + "](" + user.getLink() + "?tab=profile)";
-               if (!reasons.isBlank()) {
-                   result += " would be caught for: ";
-                   result += reasons;
-               }
-               else {
-                   result += " would not be caught.";
-               }
-               return result;
+                User   user    = new User(array.get(0).getAsJsonObject());
+                String reasons = getReason(user);
+                String result  = " [" + user.getDisplayName() + "](" + user.getLink() + "?tab=profile)";
+                if (!reasons.isBlank()) {
+                    result += " would be caught for: ";
+                    result += reasons;
+                }
+                else {
+                    result += " would not be caught.";
+                }
+                return result;
             }
         }
         return "No such user found.";
@@ -202,7 +202,7 @@ public class StalkerService {
     }
 
     private void sendUser(Room room, User user, String reason) {
-        LOGGER.info("Detected user "+ user);
+        LOGGER.info("Detected user " + user);
 
         boolean isSuspended = (user.getTimedPenaltyDate() != null);
 

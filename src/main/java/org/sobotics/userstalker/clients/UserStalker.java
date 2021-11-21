@@ -39,8 +39,8 @@ public class UserStalker {
         // Log in to Stack Exchange with the specified credentials.
         StackExchangeClient client;
         try {
-           client = new StackExchangeClient(propLogin.getProperty("email"),
-                                            propLogin.getProperty("password"));
+            client = new StackExchangeClient(propLogin.getProperty("email"),
+                                             propLogin.getProperty("password"));
         } catch (Exception ex) {
             System.err.println("ERROR: Failed to initialize Stack Exchange chat client.");
             ex.printStackTrace();
