@@ -306,7 +306,7 @@ public class StalkerService {
 
 
     private static boolean anyRegexMatches(String string, List<Pattern> patternList) {
-        return patternList.parallelStream().anyMatch(pattern -> pattern.matcher(string).matches());
+        return patternList.parallelStream().anyMatch(pattern -> pattern.matcher(string).find());
     }
 
     private static String getDateTimeStampToNearestMinuteFromApiDateTime(long apiDateTime) {
