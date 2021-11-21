@@ -58,7 +58,7 @@ public class UserStalker {
             try {
                 propSO.load(new FileInputStream(SO_PROPERTIES_FILE));
             } catch (IOException ex) {
-                LOGGER.error("WARNING: Failed to open \"StackOverflow\" property file (" + SO_PROPERTIES_FILE + "); will not start for SO.");
+                LOGGER.warn("WARNING: Failed to open \"StackOverflow\" property file (" + SO_PROPERTIES_FILE + "); will not start for SO.");
                 throw ex;
             }
 
@@ -66,14 +66,14 @@ public class UserStalker {
             try {
                 roomID = Integer.parseInt(propSO.getProperty("roomID"));
             } catch (NumberFormatException ex) {
-                LOGGER.error("WARNING: Invalid value for \"roomID\" property in \"StackOverflow\" property file; will use default room " + roomID + ".");
+                LOGGER.warn("WARNING: Invalid value for \"roomID\" property in \"StackOverflow\" property file; will use default room " + roomID + ".");
             }
 
             Room       room       = client.joinRoom(ChatHost.STACK_OVERFLOW, roomID);
             BotService botService = new BotService(Collections.singletonList("stackoverflow"));
             botService.stalk(room);
         } catch (Exception ex) {
-            LOGGER.error("WARNING: Failed to start stalker service for Stack Overflow.");
+            LOGGER.warn("WARNING: Failed to start stalker service for Stack Overflow.");
             ex.printStackTrace();
         }
 
@@ -83,7 +83,7 @@ public class UserStalker {
             try {
                 propSE.load(new FileInputStream(SE_PROPERTIES_FILE));
             } catch (IOException ex) {
-                LOGGER.error("WARNING: Failed to open \"StackExchange\" property file (" + SE_PROPERTIES_FILE + "); will not start for SE.");
+                LOGGER.warn("WARNING: Failed to open \"StackExchange\" property file (" + SE_PROPERTIES_FILE + "); will not start for SE.");
                 throw ex;
             }
 
@@ -91,7 +91,7 @@ public class UserStalker {
             try {
                 roomID = Integer.parseInt(propSE.getProperty("roomID"));
             } catch (NumberFormatException ex) {
-                LOGGER.error("WARNING: Invalid value for \"roomID\" property in \"StackExchange\" property file; will use default room " + roomID + ".");
+                LOGGER.warn("WARNING: Invalid value for \"roomID\" property in \"StackExchange\" property file; will use default room " + roomID + ".");
             }
 
             List<String> sites;
@@ -109,7 +109,7 @@ public class UserStalker {
             BotService botService = new BotService(sites);
             botService.stalk(room);
         } catch (Exception ex) {
-            LOGGER.error("WARNING: Failed to start stalker service for Stack Exchange.");
+            LOGGER.warn("WARNING: Failed to start stalker service for Stack Exchange.");
             ex.printStackTrace();
         }
     }
