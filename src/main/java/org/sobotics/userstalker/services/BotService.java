@@ -13,11 +13,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.sobotics.chatexchange.chat.Message;
 import org.sobotics.chatexchange.chat.Room;
 import org.sobotics.chatexchange.chat.event.EventType;
 import org.sobotics.chatexchange.chat.event.PingMessageEvent;
 import org.sobotics.chatexchange.chat.event.UserEnteredEvent;
+
 import org.sobotics.userstalker.clients.UserStalker;
 
 

@@ -15,14 +15,16 @@ import java.util.regex.PatternSyntaxException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sobotics.chatexchange.chat.Room;
-import org.sobotics.userstalker.clients.UserStalker;
-import org.sobotics.userstalker.entities.User;
-import org.sobotics.userstalker.utils.JsonUtils;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import org.sobotics.chatexchange.chat.Room;
+
+import org.sobotics.userstalker.clients.UserStalker;
+import org.sobotics.userstalker.entities.User;
+import org.sobotics.userstalker.utils.JsonUtils;
 
 
 public class StalkerService {
