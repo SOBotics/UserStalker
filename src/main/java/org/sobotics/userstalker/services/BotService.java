@@ -25,14 +25,14 @@ import org.sobotics.userstalker.clients.UserStalker;
 
 public class BotService {
 
-    private static final int    FAST_TIME_MINUTES          = 2;
-    private static final int    SLOW_TIME_MINUTES          = 5;
-    private static final String OFFENSIVE_BLACKLIST_HI_URL = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_high_score.txt";
-    private static final String OFFENSIVE_BLACKLIST_MD_URL = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_medium_score.txt";
-    private static final String OFFENSIVE_BLACKLIST_LO_URL = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_low_score.txt";
-    private static final String USER_BLACKLIST_URL         = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/data/blacklistRegex.txt";
-    private static final String SMOKEY_USER_BLACKLIST_URL  = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_usernames.txt";
-    private static final String HELP_MSG                   =
+    private static final int    FAST_TIME_MINUTES           = 2;
+    private static final int    SLOW_TIME_MINUTES           = 5;
+    private static final String OFFENSIVE_BLACKLIST_HI_URL  = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_high_score.txt";
+    private static final String OFFENSIVE_BLACKLIST_MD_URL  = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_medium_score.txt";
+    private static final String OFFENSIVE_BLACKLIST_LO_URL  = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_low_score.txt";
+    private static final String INTERNAL_USER_BLACKLIST_URL = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/UsernameBlacklist.txt";
+    private static final String SMOKEY_USER_BLACKLIST_URL   = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_usernames.txt";
+    private static final String HELP_MSG                    =
   "I'm User Stalker (" + UserStalker.BOT_URL + "), a bot that periodically queries "
 + "the Stack Exchange /users API (https://api.stackexchange.com/docs/users) "
 + "to track all newly-created user accounts. If a suspicious pattern is detected "
@@ -75,9 +75,9 @@ public class BotService {
 
         boolean multipleSites = ((this.fastSites.size() + this.slowSites.size()) > 1);
         this.stalkerService   = new StalkerService(multipleSites,
-                                                   getData(OFFENSIVE_BLACKLIST_HI_URL, new ArrayList<>(), true),
-                                                   getData(USER_BLACKLIST_URL        , new ArrayList<>(), false),
-                                                   getData(SMOKEY_USER_BLACKLIST_URL , new ArrayList<>(), false));
+                                                   getData(OFFENSIVE_BLACKLIST_HI_URL , new ArrayList<>(), true),
+                                                   getData(INTERNAL_USER_BLACKLIST_URL, new ArrayList<>(), false),
+                                                   getData(SMOKEY_USER_BLACKLIST_URL  , new ArrayList<>(), false));
 
         if (addListeners) {
             room.addEventListener(EventType.USER_ENTERED  , event -> userEntered(room, event));
