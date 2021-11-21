@@ -30,8 +30,7 @@ import org.sobotics.userstalker.clients.UserStalker;
 public class BotService {
 
    //CSOFF: Indentation
-    private static final int     FAST_TIME_MINUTES              = 2;
-    private static final int     SLOW_TIME_MINUTES              = 5;
+    private static final int     POLL_TIME_MINUTES              = 3;
     private static final String  OFFENSIVE_REGEX_HI_URL         = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_high_score.txt";
     private static final String  OFFENSIVE_REGEX_MD_URL         = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_medium_score.txt";
   //private static final String  OFFENSIVE_REGEX_LO_URL         = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_low_score.txt";
@@ -52,26 +51,38 @@ public class BotService {
 + "can be manually reviewed by a moderator. If you confirm that the user account merits any "
 + "further action, such as removal, you can do so."
 + "\n\n"
-+ "In addition to \"help\", I recognize some additional commands:\n"
-+ "\u3000\u25CF \"alive\": Replies in the affirmative if the bot is up and running.\n"
-+ "\u3000\u25CF \"reboot\": Stops the tracking service, and then recreates and restarts it with the same settings. Any changes to blacklist pattern files will also be picked up at this time.\n"
-+ "\u3000\u25CF \"restart\": Same as \"reboot\".\n"
-+ "\u3000\u25CF \"stop\": Stops the tracking service, and causes the bot to leave the room.\n"
-+ "\u3000\u25CF \"quota\": Replies with the currently remaining size of the API quota for the tracking service.\n"
-+ "\u3000\u25CF \"track*\": Replies with the list of Stack Exchange sites that are currently being tracking.\n"
-+ "\u3000\u25CF \"check <user URL>\": Runs the pattern-detection checks on the specified user account and replies with the results.\n"
-+ "\u3000\u25CF \"test <user URL>\": Same as \"check\".\n"
-+ "\u3000\u25CF \"add <sitename> <fast/slow>\": Temporarily adds the specified SE site (short name) to the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n"
-+ "\u3000\u25CF \"remove <sitename> <fast/slow>\": Temporarily removes the specified SE site (short name) from the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n"
++ "In addition to \"help\", I recognize some additional commands:"
 + "\n"
++ "\u3000\u25CF \"alive\": Replies in the affirmative if the bot is up and running."
++ "\n"
++ "\u3000\u25CF \"reboot\": Stops the tracking service, and then recreates and restarts it."
++                         " (Any changes to blacklist pattern files will also be picked up at this time. The current list of tracked sites will be preserved.)"
++ "\n"
++ "\u3000\u25CF \"restart\": Same as \"reboot\"."
++ "\n"
++ "\u3000\u25CF \"stop\": Stops the tracking service, and causes the bot to leave the room."
++ "\n"
++ "\u3000\u25CF \"quota\": Replies with the currently remaining size of the API quota for the tracking service."
++ "\n"
++ "\u3000\u25CF \"track*\": Replies with the list of Stack Exchange sites that are currently being tracking."
++ "\n"
++ "\u3000\u25CF \"check <user URL>\": Runs the pattern-detection checks on the specified user account and replies with the results."
++ "\n"
++ "\u3000\u25CF \"test <user URL>\": Same as \"check\"."
++ "\n"
++ "\u3000\u25CF \"add <sitename>\": Temporarily adds the specified SE site (short name) to the tracking list."
++                                 " (This is temporary in the sense that it will not persist across an unexpected server reboot. However, it will be preserved if the \"reboot\"/\"restart\" command is given.)"
++ "\n"
++ "\u3000\u25CF \"remove <sitename>\": Temporarily removes the specified SE site (short name) from the tracking list."
++                                    " (This is temporary in the sense that it will not persist across an unexpected server reboot. However, it will be preserved if the \"reboot\"/\"restart\" command is given.)"
++ "\n\n"
 + "If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!)."
 ;
     //CSON: Indentation
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BotService.class);
 
-    private List<String>             fastSites;
-    private List<String>             slowSites;
+    private List<String>             sites;
     private List<Pattern>            regexOffensiveHi;
     private List<Pattern>            regexOffensiveMd;
     private List<Pattern>            regexNameSmokeyBlacklist;
@@ -84,10 +95,9 @@ public class BotService {
     private StalkerService           stalkerService;
 
 
-    public BotService(List<String> fastSites, List<String> slowSites) {
+    public BotService(List<String> sites) {
         LOGGER.info("Initializing and loading patterns...");
-        this.fastSites                = fastSites;
-        this.slowSites                = slowSites;
+        this.sites                    = sites;
         this.regexOffensiveHi         = compileRegexFromPatternList(loadPatternsFromUrl(OFFENSIVE_REGEX_HI_URL  ), ""  , ""  );
         this.regexOffensiveMd         = compileRegexFromPatternList(loadPatternsFromUrl(OFFENSIVE_REGEX_MD_URL  ), ""  , ""  );
         this.regexNameSmokeyBlacklist = compileRegexFromPatternList(loadPatternsFromUrl(SMOKEY_NAME_REGEX_URL   ), ".*", ".*");
@@ -105,7 +115,7 @@ public class BotService {
     private void stalk(Room room, boolean addListeners) {
         LOGGER.info("Starting the bot...");
 
-        boolean multipleSites = ((this.fastSites.size() + this.slowSites.size()) > 1);
+        boolean multipleSites = (this.sites.size() > 1);
         this.stalkerService   = new StalkerService(multipleSites,
                                                    regexOffensiveHi,
                                                    regexOffensiveMd,
@@ -122,18 +132,10 @@ public class BotService {
           //room.addEventListener(EventType.MESSAGE_REPLY , event -> onMentioned  (room, event, true));
         }
 
-        if (!this.fastSites.isEmpty()) {
-            this.executorService.scheduleAtFixedRate(() -> this.stalkerService.stalkOnce(room,
-                                                                                         this.fastSites),
+        if (!this.sites.isEmpty()) {
+            this.executorService.scheduleAtFixedRate(() -> this.stalkerService.stalkOnce(room, this.sites),
                                                      0,
-                                                     FAST_TIME_MINUTES,
-                                                     TimeUnit.MINUTES);
-        }
-        if (!this.slowSites.isEmpty()) {
-            this.executorService.scheduleAtFixedRate(() -> this.stalkerService.stalkOnce(room,
-                                                                                         this.slowSites),
-                                                     0,
-                                                     SLOW_TIME_MINUTES,
+                                                     POLL_TIME_MINUTES,
                                                      TimeUnit.MINUTES);
         }
 
@@ -178,8 +180,7 @@ public class BotService {
                 return;
             }
             else if (messageParts[1].contains("track")) {
-                room.replyTo(replyID, "\nSites tracked (fast): " + String.join(", ", fastSites)
-                                    + "\nSites tracked (slow): " + String.join(", ", slowSites));
+                room.replyTo(replyID, "Sites tracked: " + String.join(", ", sites));
                 return;
             }
         }
@@ -201,25 +202,14 @@ public class BotService {
             String sitename = messageParts[2];
             String speed    = messageParts[3];
 
-            boolean isFast;
-            if      (speed.equals("fast"))  { isFast = true;  }
-            else if (speed.equals("slow"))  { isFast = false; }
-            else {
-                room.replyTo(replyID,
-                             "The specified speed (\"" + speed + "\") was not recognized (must be either \"fast\" or \"slow\").");
-                return;
-            }
-
             String reply = UserStalker.CHAT_MSG_PREFIX;
             if (command.equals("add")) {
-                if (isFast)  { fastSites.add(sitename); }
-                else         { slowSites.add(sitename); }
-                reply += " Temporarily adding `" + sitename + "` to the list of \"" + speed + "\" sites.";
+                sites.add(sitename);
+                reply += " Temporarily adding `" + sitename + "` to the list of sites.";
             }
             else if (command.equals("remove")) {
-                if (isFast)  { fastSites.remove(sitename); }
-                else         { slowSites.remove(sitename); }
-                reply += " Temporarily removing `" + sitename + "` from the list of \"" + speed + "\" sites.";
+                sites.remove(sitename);
+                reply += " Temporarily removing `" + sitename + "` from the list of sites.";
             }
             else {
                 room.replyTo(replyID,
@@ -252,7 +242,7 @@ public class BotService {
 
         LOGGER.info("Rebooting the bot...");
 
-        new BotService(this.fastSites, this.slowSites).stalk(room, false);
+        new BotService(this.sites).stalk(room, false);
     }
 
 

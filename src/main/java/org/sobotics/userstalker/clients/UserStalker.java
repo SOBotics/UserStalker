@@ -70,8 +70,7 @@ public class UserStalker {
             }
 
             Room       room       = client.joinRoom(ChatHost.STACK_OVERFLOW, roomID);
-            BotService botService = new BotService(Collections.<String>emptyList(),
-                                                   Collections.singletonList("stackoverflow"));
+            BotService botService = new BotService(Collections.singletonList("stackoverflow"));
             botService.stalk(room);
         } catch (Exception ex) {
             LOGGER.error("WARNING: Failed to start stalker service for Stack Overflow.");
@@ -95,30 +94,19 @@ public class UserStalker {
                 LOGGER.error("WARNING: Invalid value for \"roomID\" property in \"StackExchange\" property file; will use default room " + roomID + ".");
             }
 
-            List<String> fastSites;
+            List<String> sites;
             try {
-                String str = propSE.getProperty("fastSites");
-                fastSites  = new ArrayList<String>(!str.isBlank()
+                String str = propSE.getProperty("sites");
+                sites      = new ArrayList<String>(!str.isBlank()
                                                      ? Arrays.asList(str.split("\\s*,\\s*"))
                                                      : Collections.emptyList());
             } catch (Exception ex) {
-                LOGGER.error("ERROR: Failed to parse \"fastSites\" property in \"StackExchange\" property file.");
-                throw ex;
-            }
-
-            List<String> slowSites;
-            try {
-                String str = propSE.getProperty("slowSites");
-                slowSites  = new ArrayList<String>(!str.isBlank()
-                                                     ? Arrays.asList(str.split("\\s*,\\s*"))
-                                                     : Collections.emptyList());
-            } catch (Exception ex) {
-                LOGGER.error("ERROR: Failed to parse \"slowSites\" property in \"StackExchange\" property file.");
+                LOGGER.error("ERROR: Failed to parse \"sites\" property in \"StackExchange\" property file.");
                 throw ex;
             }
 
             Room       room       = client.joinRoom(ChatHost.STACK_EXCHANGE, roomID);
-            BotService botService = new BotService(fastSites, slowSites);
+            BotService botService = new BotService(sites);
             botService.stalk(room);
         } catch (Exception ex) {
             LOGGER.error("WARNING: Failed to start stalker service for Stack Exchange.");
