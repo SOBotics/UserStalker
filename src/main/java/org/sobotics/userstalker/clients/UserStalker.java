@@ -9,6 +9,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.sobotics.chatexchange.chat.ChatHost;
 import org.sobotics.chatexchange.chat.Room;
 import org.sobotics.chatexchange.chat.StackExchangeClient;
@@ -24,6 +27,8 @@ public class UserStalker {
     private static final String SO_PROPERTIES_FILE    = "./properties/StackOverflow.properties";
     private static final String SE_PROPERTIES_FILE    = "./properties/StackExchange.properties";
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserStalker.class);
+
 
     public static void main(String[] args) throws IOException {
         // Load "login" properties file.
@@ -31,7 +36,7 @@ public class UserStalker {
         try {
             propLogin.load(new FileInputStream(LOGIN_PROPERTIES_FILE));
         } catch (IOException ex) {
-            System.err.println("ERROR: Failed to open \"login\" property file (" + LOGIN_PROPERTIES_FILE + ").");
+            LOGGER.error("ERROR: Failed to open \"login\" property file (" + LOGIN_PROPERTIES_FILE + ").");
             ex.printStackTrace();
             return;
         }
@@ -42,7 +47,7 @@ public class UserStalker {
             client = new StackExchangeClient(propLogin.getProperty("email"),
                                              propLogin.getProperty("password"));
         } catch (Exception ex) {
-            System.err.println("ERROR: Failed to initialize Stack Exchange chat client.");
+            LOGGER.error("ERROR: Failed to initialize Stack Exchange chat client.");
             ex.printStackTrace();
             return;
         }
@@ -53,7 +58,7 @@ public class UserStalker {
             try {
                 propSO.load(new FileInputStream(SO_PROPERTIES_FILE));
             } catch (IOException ex) {
-                System.err.println("WARNING: Failed to open \"StackOverflow\" property file (" + SO_PROPERTIES_FILE + "); will not start for SO.");
+                LOGGER.error("WARNING: Failed to open \"StackOverflow\" property file (" + SO_PROPERTIES_FILE + "); will not start for SO.");
                 throw ex;
             }
 
@@ -61,7 +66,7 @@ public class UserStalker {
             try {
                 roomID = Integer.parseInt(propSO.getProperty("roomID"));
             } catch (NumberFormatException ex) {
-                System.err.println("WARNING: Invalid value for \"roomID\" property in \"StackOverflow\" property file; will use default room " + roomID + ".");
+                LOGGER.error("WARNING: Invalid value for \"roomID\" property in \"StackOverflow\" property file; will use default room " + roomID + ".");
             }
 
             Room       room       = client.joinRoom(ChatHost.STACK_OVERFLOW, roomID);
@@ -69,7 +74,7 @@ public class UserStalker {
                                                    Collections.singletonList("stackoverflow"));
             botService.stalk(room);
         } catch (Exception ex) {
-            System.err.println("WARNING: Failed to start stalker service for Stack Overflow.");
+            LOGGER.error("WARNING: Failed to start stalker service for Stack Overflow.");
             ex.printStackTrace();
         }
 
@@ -79,7 +84,7 @@ public class UserStalker {
             try {
                 propSE.load(new FileInputStream(SE_PROPERTIES_FILE));
             } catch (IOException ex) {
-                System.err.println("WARNING: Failed to open \"StackExchange\" property file (" + SE_PROPERTIES_FILE + "); will not start for SE.");
+                LOGGER.error("WARNING: Failed to open \"StackExchange\" property file (" + SE_PROPERTIES_FILE + "); will not start for SE.");
                 throw ex;
             }
 
@@ -87,7 +92,7 @@ public class UserStalker {
             try {
                 roomID = Integer.parseInt(propSE.getProperty("roomID"));
             } catch (NumberFormatException ex) {
-                System.err.println("WARNING: Invalid value for \"roomID\" property in \"StackExchange\" property file; will use default room " + roomID + ".");
+                LOGGER.error("WARNING: Invalid value for \"roomID\" property in \"StackExchange\" property file; will use default room " + roomID + ".");
             }
 
             List<String> fastSites;
@@ -97,7 +102,7 @@ public class UserStalker {
                                                      ? Arrays.asList(str.split("\\s*,\\s*"))
                                                      : Collections.emptyList());
             } catch (Exception ex) {
-                System.err.println("ERROR: Failed to parse \"fastSites\" property in \"StackExchange\" property file.");
+                LOGGER.error("ERROR: Failed to parse \"fastSites\" property in \"StackExchange\" property file.");
                 throw ex;
             }
 
@@ -108,7 +113,7 @@ public class UserStalker {
                                                      ? Arrays.asList(str.split("\\s*,\\s*"))
                                                      : Collections.emptyList());
             } catch (Exception ex) {
-                System.err.println("ERROR: Failed to parse \"slowSites\" property in \"StackExchange\" property file.");
+                LOGGER.error("ERROR: Failed to parse \"slowSites\" property in \"StackExchange\" property file.");
                 throw ex;
             }
 
@@ -116,7 +121,7 @@ public class UserStalker {
             BotService botService = new BotService(fastSites, slowSites);
             botService.stalk(room);
         } catch (Exception ex) {
-            System.err.println("WARNING: Failed to start stalker service for Stack Exchange.");
+            LOGGER.error("WARNING: Failed to start stalker service for Stack Exchange.");
             ex.printStackTrace();
         }
     }

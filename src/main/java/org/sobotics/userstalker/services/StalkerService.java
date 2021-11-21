@@ -33,7 +33,8 @@ public class StalkerService {
     private static final String API_KEY            = "XKgBTF5nztGvMnDoI8gPgA((";
     private static final String API_FILTER         = "!Ln3l_2int_VA.0Iu5wL3aW";
     private static final String PHONE_NUMBER_REGEX = ".*\\d{10}.*|.*(?:\\d{3}-){2}\\d{4}.*|.*\\(\\d{3}\\)\\d{3}-?\\d{4}.*";  // https://stackoverflow.com/questions/42104546
-    private static final Logger LOGGER             = LoggerFactory.getLogger(StalkerService.class);
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StalkerService.class);
 
     private boolean      showSite;
     private Instant      previousTime;

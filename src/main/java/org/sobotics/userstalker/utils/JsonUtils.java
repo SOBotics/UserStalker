@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
  * AKA, TunaLib - All code is courtesy of Lord Tunaki
  */
 public class JsonUtils {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtils.class);
 
     public static JsonObject get(String url, String... data) throws IOException {
