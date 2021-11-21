@@ -135,7 +135,7 @@
   </module>
   <module name="LineLength">
     <property name="fileExtensions" value="java"/>
-    <property name="max" value="200"/>
+    <property name="max" value="250"/>
     <property name="ignorePattern" value="^ *\* *([^ ]+|\{@code .*|&lt;a href=&quot;[^&quot;]+&quot;&gt;)$"/>
   </module>
 
@@ -250,7 +250,7 @@
     <module name="ArrayTrailingComma"/>
     <module name="AvoidNoArgumentSuperConstructorCall"/>
     <module name="CovariantEquals"/>
-    <module name="DeclarationOrder"/>
+    <!-- <module name="DeclarationOrder"/> -->
     <module name="DefaultComesLast"/>
     <module name="EmptyStatement"/>
     <!-- <module name="EqualsAvoidNull"/> -->
@@ -319,18 +319,13 @@
     <module name="StringLiteralEquality"/>
     <module name="SuperClone"/>
     <module name="SuperFinalize"/>
-    <module name="UnnecessaryParentheses"/>
+    <!-- <module name="UnnecessaryParentheses"/> -->
     <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
     <module name="UnnecessarySemicolonInEnumeration"/>
     <module name="UnnecessarySemicolonInTryWithResources"/>
 
     <!-- Filters -->
     <module name="SuppressionCommentFilter">
-      <!--
-        Use suppressions.xml for suppressions, this is only example.
-        checkFormat will prevent suppression comments from being valid.
-      -->
-      <property name="checkFormat" value="IGNORETHIS"/>
       <property name="offCommentFormat" value="CSOFF\: .*"/>
       <property name="onCommentFormat" value="CSON\: .*"/>
     </module>
@@ -380,13 +375,19 @@
     <!-- Imports -->
     <module name="AvoidStaticImport"/>
     <module name="IllegalImport"/>
-    <module name="ImportOrder">
+    <!--<module name="CustomImportOrder">
+      <property name="customImportOrderRules"
+        value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SAME_PACKAGE(3)"/>
+      <property name="thirdPartyPackageRegExp" value="^(com|org)\."/>
+      <property name="standardPackageRegExp" value="^(java|javax)\."/>
+    </module>-->
+    <!-- <module name="ImportOrder">
       <property name="groups" value="/^java\./,javax,org"/>
       <property name="ordered" value="true"/>
       <property name="separated" value="true"/>
       <property name="option" value="top"/>
       <property name="sortStaticImportsAlphabetically" value="true"/>
-    </module>
+    </module> -->
     <module name="RedundantImport"/>
     <module name="UnusedImports"/>
 
@@ -396,7 +397,7 @@
     </module>
 
     <!-- Misc -->
-    <module name="ArrayTypeStyle"/>
+    <!-- <module name="ArrayTypeStyle"/> -->
     <!-- <module name="CommentsIndentation"/> -->
     <module name="DescendantToken"/>
     <module name="FinalParameters">
@@ -411,6 +412,7 @@
       <property name="basicOffset" value="4"/>
       <property name="braceAdjustment" value="0"/>
       <property name="caseIndent" value="4"/>
+      <property name="lineWrappingIndentation" value="0"/>
       <property name="throwsIndent" value="8"/>
     </module>
     <module name="OuterTypeFilename"/>
@@ -489,7 +491,7 @@
       <property name="tokens" value="METHOD_REF"/>
     </module>
     <module name="NoWhitespaceBefore">
-      <property name="tokens" value="DOT"/>
+      <!-- <property name="tokens" value="DOT"/> -->
       <property name="tokens" value="METHOD_REF"/>
       <property name="allowLineBreaks" value="true"/>
     </module>
@@ -547,7 +549,7 @@
       <property name="tokens" value="RBRACK"/>
       <property name="tokens" value="ARRAY_DECLARATOR"/>
       <property name="tokens" value="ELLIPSIS"/>
-      <property name="tokens" value="SEMI"/>
+      <!-- <property name="tokens" value="SEMI"/> -->
       <property name="option" value="EOL"/>
     </module>
     <!--<module name="SingleSpaceSeparator">

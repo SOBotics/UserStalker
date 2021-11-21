@@ -1,0 +1,9 @@
+# Original regex used by earlier versions of User Stalker to detect phone numbers,
+# from Ducky: https://stackoverflow.com/q/42104546
+.*\d{10}.*|.*(?:\d{3}-){2}\d{4}.*|.*\(?:\d{3}\)\d{3}-?\d{4}.*
+
+
+# New regexes to better match standard phone numbers:
+
+# Adapted from Francis Gagnon (https://stackoverflow.com/a/16702965)
+\b(?:\+?(?:\d{1,3}))?[-. (]*(?:\d{3})[-. )]*(?:\d{3})[-. ]*(?:\d{4})(?: *x(?:\d+))?\s*\b
