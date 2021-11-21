@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.PatternSyntaxException;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,31 +29,45 @@ import org.sobotics.userstalker.utils.JsonUtils;
 
 public class StalkerService {
 
-    private static final String USERS_API_URL      = "https://api.stackexchange.com/2.2/users";
-    private static final String API_KEY            = "XKgBTF5nztGvMnDoI8gPgA((";
-    private static final String API_FILTER         = "!Ln3l_2int_VA.0Iu5wL3aW";
-    private static final String PHONE_NUMBER_REGEX = ".*\\d{10}.*|.*(?:\\d{3}-){2}\\d{4}.*|.*\\(\\d{3}\\)\\d{3}-?\\d{4}.*";  // https://stackoverflow.com/questions/42104546
+    private static final String USERS_API_URL = "https://api.stackexchange.com/2.2/users";
+    private static final String API_KEY       = "XKgBTF5nztGvMnDoI8gPgA((";
+    private static final String API_FILTER    = "!Ln3l_2int_VA.0Iu5wL3aW";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StalkerService.class);
 
-    private boolean      showSite;
-    private Instant      previousTime;
-    private List<String> regexOffensive;
-    private List<String> regexUserNameInternalBlacklist;
-    private List<String> regexUserNameSmokeyBlacklist;
-    private int          quota;
+    private boolean       showSite;
+    private Instant       previousTime;
+    private int           quota;
+    private List<Pattern> regexOffensiveHi;
+    private List<Pattern> regexOffensiveMd;
+    private List<Pattern> regexNameSmokeyBlacklist;
+    private List<Pattern> regexNameBlacklist;
+    private List<Pattern> regexAboutBlacklist;
+    private List<Pattern> regexUrlBlacklist;
+    private List<Pattern> regexEmailPatterns;
+    private List<Pattern> regexPhonePatterns;
 
 
-    public StalkerService(boolean      showSite,
-                          List<String> offensiveRegex,
-                          List<String> userNameRegex,
-                          List<String> smokeyRegex) {
-        this.showSite                       = showSite;
-        this.previousTime                   = Instant.now().minusSeconds(60);
-        this.regexOffensive                 = offensiveRegex;
-        this.regexUserNameInternalBlacklist = userNameRegex;
-        this.regexUserNameSmokeyBlacklist   = smokeyRegex;
-        this.quota                          = 10000;
+    public StalkerService(boolean       showSite,
+                          List<Pattern> regexOffensiveHi,
+                          List<Pattern> regexOffensiveMd,
+                          List<Pattern> regexNameSmokeyBlacklist,
+                          List<Pattern> regexNameBlacklist,
+                          List<Pattern> regexAboutBlacklist,
+                          List<Pattern> regexUrlBlacklist,
+                          List<Pattern> regexEmailPatterns,
+                          List<Pattern> regexPhonePatterns) {
+        this.showSite                 = showSite;
+        this.previousTime             = Instant.now().minusSeconds(60);
+        this.quota                    = 10000;
+        this.regexOffensiveHi         = regexOffensiveHi;
+        this.regexOffensiveMd         = regexOffensiveMd;
+        this.regexNameSmokeyBlacklist = regexNameSmokeyBlacklist;
+        this.regexNameBlacklist       = regexNameBlacklist;
+        this.regexAboutBlacklist      = regexAboutBlacklist;
+        this.regexUrlBlacklist        = regexUrlBlacklist;
+        this.regexEmailPatterns       = regexEmailPatterns;
+        this.regexPhonePatterns       = regexPhonePatterns;
     }
 
 
@@ -62,8 +76,8 @@ public class StalkerService {
     }
 
     public void stalkOnce(Room room, List<String> sites) {
-        LOGGER.info("Stalking " + sites + " at " + Instant.now());
-        for (String site: sites) {
+        LOGGER.info("Stalking " + sites + " at " + Instant.now() + "...");
+        for (String site : sites) {
             detectBadGuys(room, site);
         }
         previousTime = Instant.now();
@@ -110,100 +124,124 @@ public class StalkerService {
     private void detectBadGuys(Room room, String site) {
         JsonObject json = callAPI(site);
         if ((json != null) && json.has("items")) {
-            LOGGER.info("Input JSON: {}", json.toString());
+            LOGGER.debug("JSON returned from SE API: " + json.toString());
             for (JsonElement element: json.get("items").getAsJsonArray()) {
                 JsonObject object = element.getAsJsonObject();
                 User       user   = new User(object);
                 user.setSite(site);
-                LOGGER.info("New user detected : {} - {}.", user.getDisplayName(), user.getLink());
+                LOGGER.info("New user detected: \"" + user.getDisplayName() + "\" (" + user.getLink() + ").");
                 LOGGER.debug(user.toString());
                 String reason = getReason(user);
                 if (!reason.isBlank()) {
-                    sendUser(room, user, reason);
+                    reportUser(room, user, reason);
                 }
             }
         }
     }
 
-    private static String getDateTimeStampToNearestMinuteFromApiDateTime(long apiDateTime) {
-        // SE API date-time fields are Unix epochs in UTC format.
-        ZonedDateTime dateTime = Instant.ofEpochSecond(apiDateTime).atZone(ZoneOffset.UTC);
-
-        // Round to the nearest whole minute.
-        if (dateTime.getSecond() >= 30)
-        {
-            dateTime = dateTime.truncatedTo(ChronoUnit.MINUTES).plus(1, ChronoUnit.MINUTES);
-        }
-
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM d yyyy 'at' HH:mm");
-        return dateTime.format(fmt);
-    }
-
     private String getReason(User user) {
-        ArrayList<String> reasons = new ArrayList<String>(20);
+        String            name     = user.getDisplayName();
+        String            location = user.getLocation();
+        String            url      = user.getWebsiteUrl();
+        String            about    = user.getAboutMe();
+        ArrayList<String> reasons  = new ArrayList<String>(20);
 
+        // Check for an active suspension.
         if (user.getTimedPenaltyDate() != null) {
 
             reasons.add("suspended until "
                         + getDateTimeStampToNearestMinuteFromApiDateTime(user.getTimedPenaltyDate()));
         }
 
-        if ((user.getDisplayName() != null) && !user.getDisplayName().isBlank()) {
-            String displayNameLower = user.getDisplayName().toLowerCase();
-
-            if ((user.getWebsiteUrl() != null)  &&
-                !user.getWebsiteUrl().isBlank() &&
-                user.getWebsiteUrl().toLowerCase().contains(displayNameLower.replaceAll("[^a-zA-Z ]", ""))) {
-                reasons.add("URL similar to username");
-            }
-
-            if (regexUserNameInternalBlacklist.stream().anyMatch(m -> regexMatch(m, displayNameLower))) {
+        // Check the display name.
+        if ((name != null) && !name.isBlank()) {
+            if (anyRegexMatches(name, this.regexNameBlacklist)) {
                 reasons.add("username on blacklist");
             }
-            if (regexUserNameSmokeyBlacklist.stream().anyMatch(m -> regexMatch(".*" + m + ".*", displayNameLower))) {
+
+            if (anyRegexMatches(name, this.regexNameSmokeyBlacklist)) {
                 reasons.add("username on Smokey's blacklist");
             }
-            if (displayNameLower.contains(Integer.toString(Year.now().getValue()))) {
+
+            if (anyRegexMatches(name, this.regexOffensiveHi)) {
+                reasons.add("username is very offensive");
+            }
+
+            if (anyRegexMatches(name, this.regexOffensiveMd)) {
+                reasons.add("username is offensive");
+            }
+
+            if (name.contains(Integer.toString(Year.now().getValue()))) {
                 reasons.add("username contains current year");
             }
-            if (displayNameLower.contains(Integer.toString(Year.now().getValue() + 1))) {
+            if (name.contains(Integer.toString(Year.now().getValue() + 1))) {
                 reasons.add("username contains next year");
             }
+
+            if ((url != null) && !url.isBlank()) {
+                String normalizedName = name.replaceAll("[^a-zA-Z ]", "").toLowerCase();
+                String normalizedUrl  = url .replaceAll("[^a-zA-Z ]", "").toLowerCase();
+                if (name.toLowerCase().contains(normalizedUrl ) ||
+                    url .toLowerCase().contains(normalizedName)) {
+                    reasons.add("URL similar to username");
+                }
+            }
         }
 
-        if ((user.getAboutMe() != null) && !user.getAboutMe().isBlank()) {
-            String aboutMeActual = user.getAboutMe();
-            String aboutMe       = aboutMeActual.toLowerCase();
-            if (aboutMe.contains("insurance")) {
-                reasons.add("insurance spammer");
+        // Check the URL.
+        if ((url != null) && !url.isBlank()) {
+            if (anyRegexMatches(url, this.regexUrlBlacklist)) {
+                reasons.add("URL on blacklist");
             }
-            if (regexOffensive.stream().anyMatch(m -> regexMatch(m, aboutMeActual))) {
+        }
+
+        // Check the location.
+        if ((location != null) && !location.isBlank()) {
+            if (anyRegexMatches(location, this.regexOffensiveHi)) {
+                reasons.add("location is very offensive");
+            }
+
+            if (anyRegexMatches(location, this.regexOffensiveMd)) {
+                reasons.add("location is offensive");
+            }
+        }
+
+        // Check the "About Me".
+        if ((about != null) && !about.isBlank()) {
+            if (anyRegexMatches(about, this.regexAboutBlacklist)) {
+                reasons.add("\"About Me\" contains blacklisted pattern");
+            }
+
+            if (anyRegexMatches(about, this.regexOffensiveHi)) {
+                reasons.add("\"About Me\" is very offensive");
+            }
+
+            if (anyRegexMatches(about, this.regexOffensiveMd)) {
                 reasons.add("\"About Me\" is offensive");
             }
-            if (regexMatch(PHONE_NUMBER_REGEX, aboutMeActual)) {
+
+            if (anyRegexMatches(about, this.regexPhonePatterns)) {
                 reasons.add("\"About Me\" contains phone number");
             }
-            if (aboutMe.contains("</a>")) {
-                reasons.add("\"About Me\" contains link");
+
+            if (anyRegexMatches(about, this.regexEmailPatterns)) {
+                reasons.add("\"About Me\" contains email");
+            }
+
+            if (anyRegexMatches(about, this.regexUrlBlacklist)) {
+                reasons.add("\"About Me\" contains blacklisted URL");
+            }
+
+            if (about.toLowerCase().contains("</a>")) {
+                reasons.add("\"About Me\" contains a link");
             }
         }
 
-        // TODO: Fix the .* stuff by using a Pattern
         return String.join("; ", reasons);
     }
 
-    private boolean regexMatch(String regex, String input) {
-        try {
-            return input.matches(regex);
-        }
-        catch (PatternSyntaxException ex) {
-            LOGGER.debug("Invalid Pattern: {}", regex);
-            return false;
-        }
-    }
-
-    private void sendUser(Room room, User user, String reason) {
-        LOGGER.info("Detected user " + user);
+    private void reportUser(Room room, User user, String reason) {
+        LOGGER.info("Detected user \"" + user + "\".");
 
         boolean isSuspended = (user.getTimedPenaltyDate() != null);
 
@@ -264,6 +302,25 @@ public class StalkerService {
             quota = json.get("quota_remaining").getAsInt();
         }
         return json;
+    }
+
+
+    private static boolean anyRegexMatches(String string, List<Pattern> patternList) {
+        return patternList.parallelStream().anyMatch(pattern -> pattern.matcher(string).matches());
+    }
+
+    private static String getDateTimeStampToNearestMinuteFromApiDateTime(long apiDateTime) {
+        // SE API date-time fields are Unix epochs in UTC format.
+        ZonedDateTime dateTime = Instant.ofEpochSecond(apiDateTime).atZone(ZoneOffset.UTC);
+
+        // Round to the nearest whole minute.
+        if (dateTime.getSecond() >= 30)
+        {
+            dateTime = dateTime.truncatedTo(ChronoUnit.MINUTES).plus(1, ChronoUnit.MINUTES);
+        }
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM d yyyy 'at' HH:mm");
+        return dateTime.format(fmt);
     }
 
 }

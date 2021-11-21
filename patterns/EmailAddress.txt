@@ -1,0 +1,2 @@
+# Adapted from wyzeman: https://stackoverflow.com/a/50914014
+\b(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(?:.[a-z]{2,}|.[0-9]{1,})\b

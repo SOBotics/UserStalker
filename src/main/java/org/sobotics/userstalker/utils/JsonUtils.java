@@ -32,7 +32,7 @@ public class JsonUtils {
 
         String json = response.body();
         if (response.statusCode() != 200) {
-            throw new IOException("HTTP " + response.statusCode() + " fetching URL " + url + ". Body is: " + response.body());
+            throw new IOException("HTTP " + response.statusCode() + " fetching URL \"" + url + "\". Body is: " + response.body());
         }
         JsonObject root = new JsonParser().parse(json).getAsJsonObject();
         return root;
@@ -48,7 +48,7 @@ public class JsonUtils {
 
         String json = response.body();
         if (response.statusCode() != 200) {
-            throw new IOException("HTTP " + response.statusCode() + " fetching URL " + url + ". Body is: " + response.body());
+            throw new IOException("HTTP " + response.statusCode() + " fetching URL \"" + url + "\". Body is: " + response.body());
         }
         JsonObject root = new JsonParser().parse(json).getAsJsonObject();
         return root;
@@ -57,7 +57,7 @@ public class JsonUtils {
     public static void handleBackoff(JsonObject root) {
         if (root.has("backoff")) {
             int backoff = root.get("backoff").getAsInt();
-            LOGGER.info("Backing off for " + backoff + " seconds. Quota left " + root.get("quota_remaining").getAsString());
+            LOGGER.info("Backing off for " + backoff + " seconds. Quota left: " + root.get("quota_remaining").getAsString() + ".");
 
             try {
                 Thread.sleep(1000 * backoff);
