@@ -1,2 +1,2 @@
-[\W]CEO[\W]
+[\W_]CEO[\W_]
 insurance
