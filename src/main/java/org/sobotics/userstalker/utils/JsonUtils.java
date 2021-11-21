@@ -34,7 +34,8 @@ public class JsonUtils {
         if (response.statusCode() != 200) {
             throw new IOException("HTTP " + response.statusCode() + " fetching URL \"" + url + "\". Body is: " + response.body());
         }
-        JsonObject root = new JsonParser().parse(json).getAsJsonObject();
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+
         return root;
     }
 
@@ -50,7 +51,8 @@ public class JsonUtils {
         if (response.statusCode() != 200) {
             throw new IOException("HTTP " + response.statusCode() + " fetching URL \"" + url + "\". Body is: " + response.body());
         }
-        JsonObject root = new JsonParser().parse(json).getAsJsonObject();
+        JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+
         return root;
     }
 
