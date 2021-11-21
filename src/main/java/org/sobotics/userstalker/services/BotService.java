@@ -51,7 +51,8 @@ public class BotService {
 + "  \u25CF \"test <user URL>\": Same as \"check\".\n"
 + "  \u25CF \"add <sitename> <fast/slow>\": Temporarily adds the specified SE site (short name) to the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n"
 + "  \u25CF \"remove <sitename> <fast/slow>\": Temporarily removes the specified SE site (short name) from the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n"
-+ "If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!).";
++ "If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!)."
+;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BotService.class);
 
