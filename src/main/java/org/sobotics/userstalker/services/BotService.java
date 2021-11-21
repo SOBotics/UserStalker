@@ -25,6 +25,8 @@ import org.sobotics.userstalker.clients.UserStalker;
 
 public class BotService {
 
+    //CSOFF: Indentation
+
     private static final int    FAST_TIME_MINUTES           = 2;
     private static final int    SLOW_TIME_MINUTES           = 5;
     private static final String OFFENSIVE_BLACKLIST_HI_URL  = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_high_score.txt";
@@ -53,6 +55,8 @@ public class BotService {
 + "  \u25CF \"remove <sitename> <fast/slow>\": Temporarily removes the specified SE site (short name) from the specified tracking list. (This is temporary in the sense that it will not persist across an unexpected server reboot.)\n"
 + "If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!)."
 ;
+
+    //CSON: Indentation
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BotService.class);
 
