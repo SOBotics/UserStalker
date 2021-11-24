@@ -1,7 +1,9 @@
 casino
 [\W_]CEO[\W_]
 furniture
+garage[\W_]*door
 insurance
 mattress
 porn
 retail
+window[\W_]*tint
