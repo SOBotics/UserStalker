@@ -5,5 +5,7 @@ garage[\W_]*door
 insurance
 mattress
 porn
+repair
 retail
+service
 window[\W_]*tint
