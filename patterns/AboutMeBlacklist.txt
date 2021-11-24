@@ -1,4 +1,7 @@
 casino
 [\W_]CEO[\W_]
+furniture
 insurance
+mattress
 porn
+retail
