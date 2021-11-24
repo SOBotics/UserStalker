@@ -1,9 +1,11 @@
 casino
 [\W_]CEO[\W_]
+brides
 furniture
 garage[\W_]*door
 insurance
 keywords:
+matrimon(?:y|ial)
 mattress
 porn
 repair
