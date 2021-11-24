@@ -3,6 +3,7 @@ casino
 furniture
 garage[\W_]*door
 insurance
+keywords:
 mattress
 porn
 repair
