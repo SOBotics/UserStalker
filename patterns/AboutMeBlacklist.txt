@@ -3,6 +3,7 @@ casino
 brides
 furniture
 garage[\W_]*door
+illuminati
 insurance
 keywords:
 matrimon(?:y|ial)
