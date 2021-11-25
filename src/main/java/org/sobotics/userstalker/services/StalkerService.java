@@ -40,6 +40,7 @@ public class StalkerService {
     private int           quota;
     private List<Pattern> regexOffensiveHi;
     private List<Pattern> regexOffensiveMd;
+    private List<Pattern> regexOffensiveLo;
     private List<Pattern> regexNameSmokeyBlacklist;
     private List<Pattern> regexNameBlacklist;
     private List<Pattern> regexAboutBlacklist;
@@ -51,6 +52,7 @@ public class StalkerService {
     public StalkerService(boolean       showSite,
                           List<Pattern> regexOffensiveHi,
                           List<Pattern> regexOffensiveMd,
+                          List<Pattern> regexOffensiveLo,
                           List<Pattern> regexNameSmokeyBlacklist,
                           List<Pattern> regexNameBlacklist,
                           List<Pattern> regexAboutBlacklist,
@@ -62,6 +64,7 @@ public class StalkerService {
         this.quota                    = 10000;
         this.regexOffensiveHi         = regexOffensiveHi;
         this.regexOffensiveMd         = regexOffensiveMd;
+        this.regexOffensiveLo         = regexOffensiveLo;
         this.regexNameSmokeyBlacklist = regexNameSmokeyBlacklist;
         this.regexNameBlacklist       = regexNameBlacklist;
         this.regexAboutBlacklist      = regexAboutBlacklist;
@@ -108,7 +111,7 @@ public class StalkerService {
                 String reasons = getReason(user);
                 String result  = " [" + user.getDisplayName() + "](" + user.getLink() + "?tab=profile)";
                 if (!reasons.isBlank()) {
-                    result += " would be caught for: ";
+                    result += " would be caught because: ";
                     result += reasons;
                 }
                 else {
@@ -144,7 +147,7 @@ public class StalkerService {
         String            location = user.getLocation();
         String            url      = user.getWebsiteUrl();
         String            about    = user.getAboutMe();
-        ArrayList<String> reasons  = new ArrayList<String>(20);
+        ArrayList<String> reasons  = new ArrayList<String>(25);
 
         // Check for an active suspension.
         if (user.getTimedPenaltyDate() != null) {
@@ -164,11 +167,15 @@ public class StalkerService {
             }
 
             if (anyRegexMatches(name, this.regexOffensiveHi)) {
-                reasons.add("username is very offensive");
+                reasons.add("username contains highly offensive pattern");
             }
 
             if (anyRegexMatches(name, this.regexOffensiveMd)) {
-                reasons.add("username is offensive");
+                reasons.add("username contains mildly offensive pattern");
+            }
+
+            if (anyRegexMatches(name, this.regexOffensiveLo)) {
+                reasons.add("username contains possibly offensive pattern");
             }
 
             if (name.contains(Integer.toString(Year.now().getValue()))) {
@@ -198,11 +205,15 @@ public class StalkerService {
         // Check the location.
         if ((location != null) && !location.isBlank()) {
             if (anyRegexMatches(location, this.regexOffensiveHi)) {
-                reasons.add("location is very offensive");
+                reasons.add("location contains highly offensive pattern");
             }
 
             if (anyRegexMatches(location, this.regexOffensiveMd)) {
-                reasons.add("location is offensive");
+                reasons.add("location contains mildly offensive pattern");
+            }
+
+            if (anyRegexMatches(location, this.regexOffensiveLo)) {
+                reasons.add("location contains possibly offensive pattern");
             }
         }
 
@@ -213,11 +224,15 @@ public class StalkerService {
             }
 
             if (anyRegexMatches(about, this.regexOffensiveHi)) {
-                reasons.add("\"About Me\" is very offensive");
+                reasons.add("\"About Me\" contains highly offensive pattern");
             }
 
             if (anyRegexMatches(about, this.regexOffensiveMd)) {
-                reasons.add("\"About Me\" is offensive");
+                reasons.add("\"About Me\" contains mildly offensive pattern");
+            }
+
+            if (anyRegexMatches(about, this.regexOffensiveLo)) {
+                reasons.add("\"About Me\" contains possibly offensive pattern");
             }
 
             if (anyRegexMatches(about, this.regexPhonePatterns)) {
@@ -276,14 +291,14 @@ public class StalkerService {
         JsonObject json = null;
         try {
             json = JsonUtils.get(USERS_API_URL,
-                    "sort"     , "creation",
-                    "site"     , site,
-                    "pagesize" , "100",
-                    "page"     , "1",
-                    "filter"   , API_FILTER,
-                    "order"    , "desc",
-                    "fromdate" , String.valueOf(previousTime.minusSeconds(1).getEpochSecond()),
-                    "key"      , API_KEY);
+                                 "sort"     , "creation",
+                                 "site"     , site,
+                                 "pagesize" , "100",
+                                 "page"     , "1",
+                                 "filter"   , API_FILTER,
+                                 "order"    , "desc",
+                                 "fromdate" , String.valueOf(previousTime.minusSeconds(1).getEpochSecond()),
+                                 "key"      , API_KEY);
         } catch (SocketTimeoutException ex) {
             ex.printStackTrace();
             try {

@@ -33,7 +33,7 @@ public class BotService {
     private static final int     POLL_TIME_MINUTES              = 3;
     private static final String  OFFENSIVE_REGEX_HI_URL         = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_high_score.txt";
     private static final String  OFFENSIVE_REGEX_MD_URL         = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_medium_score.txt";
-  //private static final String  OFFENSIVE_REGEX_LO_URL         = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_low_score.txt";
+    private static final String  OFFENSIVE_REGEX_LO_URL         = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_low_score.txt";
     private static final String  SMOKEY_NAME_REGEX_URL          = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_usernames.txt";
     private static final String  INTERNAL_NAME_REGEX_URL        = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/DisplayNameBlacklist.txt";
     private static final String  INTERNAL_ABOUT_REGEX_URL       = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/AboutMeBlacklist.txt";
@@ -85,6 +85,7 @@ public class BotService {
     private List<String>             sites;
     private List<Pattern>            regexOffensiveHi;
     private List<Pattern>            regexOffensiveMd;
+    private List<Pattern>            regexOffensiveLo;
     private List<Pattern>            regexNameSmokeyBlacklist;
     private List<Pattern>            regexNameBlacklist;
     private List<Pattern>            regexAboutBlacklist;
@@ -98,14 +99,15 @@ public class BotService {
     public BotService(List<String> sites) {
         LOGGER.info("Initializing and loading patterns...");
         this.sites                    = sites;
-        this.regexOffensiveHi         = compileRegexFromPatternList(loadPatternsFromUrl(OFFENSIVE_REGEX_HI_URL  ), ""  , ""  );
-        this.regexOffensiveMd         = compileRegexFromPatternList(loadPatternsFromUrl(OFFENSIVE_REGEX_MD_URL  ), ""  , ""  );
-        this.regexNameSmokeyBlacklist = compileRegexFromPatternList(loadPatternsFromUrl(SMOKEY_NAME_REGEX_URL   ), ".*", ".*");
-        this.regexNameBlacklist       = compileRegexFromPatternList(loadPatternsFromUrl(INTERNAL_NAME_REGEX_URL ), ""  , ""  );
-        this.regexAboutBlacklist      = compileRegexFromPatternList(loadPatternsFromUrl(INTERNAL_ABOUT_REGEX_URL), ""  , ""  );
-        this.regexUrlBlacklist        = compileRegexFromPatternList(loadPatternsFromUrl(INTERNAL_URL_REGEX_URL  ), ""  , ""  );
-        this.regexEmailPatterns       = compileRegexFromPatternList(loadPatternsFromUrl(INTERNAL_EMAIL_REGEX_URL), ""  , ""  );
-        this.regexPhonePatterns       = compileRegexFromPatternList(loadPatternsFromUrl(INTERNAL_PHONE_REGEX_URL), ""  , ""  );
+        this.regexOffensiveHi         = compileRegexFromPatternList(loadPatternsFromUrl(OFFENSIVE_REGEX_HI_URL  ), "", "");
+        this.regexOffensiveMd         = compileRegexFromPatternList(loadPatternsFromUrl(OFFENSIVE_REGEX_MD_URL  ), "", "");
+        this.regexOffensiveLo         = compileRegexFromPatternList(loadPatternsFromUrl(OFFENSIVE_REGEX_LO_URL  ), "", "");
+        this.regexNameSmokeyBlacklist = compileRegexFromPatternList(loadPatternsFromUrl(SMOKEY_NAME_REGEX_URL   ), "", "");
+        this.regexNameBlacklist       = compileRegexFromPatternList(loadPatternsFromUrl(INTERNAL_NAME_REGEX_URL ), "", "");
+        this.regexAboutBlacklist      = compileRegexFromPatternList(loadPatternsFromUrl(INTERNAL_ABOUT_REGEX_URL), "", "");
+        this.regexUrlBlacklist        = compileRegexFromPatternList(loadPatternsFromUrl(INTERNAL_URL_REGEX_URL  ), "", "");
+        this.regexEmailPatterns       = compileRegexFromPatternList(loadPatternsFromUrl(INTERNAL_EMAIL_REGEX_URL), "", "");
+        this.regexPhonePatterns       = compileRegexFromPatternList(loadPatternsFromUrl(INTERNAL_PHONE_REGEX_URL), "", "");
         this.executorService          = Executors.newSingleThreadScheduledExecutor();
     }
 
@@ -119,6 +121,7 @@ public class BotService {
         this.stalkerService   = new StalkerService(multipleSites,
                                                    regexOffensiveHi,
                                                    regexOffensiveMd,
+                                                   regexOffensiveLo,
                                                    regexNameSmokeyBlacklist,
                                                    regexNameBlacklist,
                                                    regexAboutBlacklist,
