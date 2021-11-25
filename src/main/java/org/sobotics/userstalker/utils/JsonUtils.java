@@ -69,8 +69,12 @@ public class JsonUtils {
         }
     }
 
+    public static String unescapeHtmlEncoding(String string) {
+        return Parser.unescapeEntities(string, false);
+    }
+
     public static String escapeHtmlEncoding(String message) {
-        return Parser.unescapeEntities(JsonUtils.sanitizeChatMessage(message), false).trim();
+        return unescapeHtmlEncoding(JsonUtils.sanitizeChatMessage(message)).trim();
     }
 
     public static String sanitizeChatMessage(String message) {

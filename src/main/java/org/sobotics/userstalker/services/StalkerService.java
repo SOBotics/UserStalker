@@ -109,7 +109,8 @@ public class StalkerService {
             if (array.size() > 0) {
                 User   user    = new User(array.get(0).getAsJsonObject());
                 String reasons = getReason(user);
-                String result  = " [" + user.getDisplayName() + "](" + user.getLink() + "?tab=profile)";
+                String name    = user.getDisplayName();
+                String result  = " [" + name.trim() + "](" + user.getLink() + "?tab=profile \"" + name + "\")";
                 if (!reasons.isBlank()) {
                     result += " would be caught because: ";
                     result += reasons;
@@ -128,7 +129,7 @@ public class StalkerService {
         JsonObject json = callAPI(site);
         if ((json != null) && json.has("items")) {
             LOGGER.debug("JSON returned from SE API: " + json.toString());
-            for (JsonElement element: json.get("items").getAsJsonArray()) {
+            for (JsonElement element : json.get("items").getAsJsonArray()) {
                 JsonObject object = element.getAsJsonObject();
                 User       user   = new User(object);
                 user.setSite(site);

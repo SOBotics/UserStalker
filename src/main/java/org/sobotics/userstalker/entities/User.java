@@ -3,22 +3,24 @@ package org.sobotics.userstalker.entities;
 
 import com.google.gson.JsonObject;
 
+import org.sobotics.userstalker.utils.JsonUtils;
+
 
 public class User
 {
     public User(JsonObject object) {
-        if (object.has("account_id"))          { this.setAccountId       (object.get("account_id"        ).getAsLong   ()); }
-        if (object.has("is_employee"))         { this.setIsEmployee      (object.get("is_employee"       ).getAsBoolean()); }
-        if (object.has("creation_date"))       { this.setCreationDate    (object.get("creation_date"     ).getAsLong   ()); }
-        if (object.has("user_id"))             { this.setUserId          (object.get("user_id"           ).getAsLong   ()); }
-        if (object.has("accountId"))           { this.setAccountId       (object.get("accountId"         ).getAsLong   ()); }
-        if (object.has("link"))                { this.setLink            (object.get("link"              ).getAsString ()); }
-        if (object.has("profile_image"))       { this.setProfileImage    (object.get("profile_image"     ).getAsString ()); }
-        if (object.has("display_name"))        { this.setDisplayName     (object.get("display_name"      ).getAsString ()); }
-        if (object.has("about_me"))            { this.setAboutMe         (object.get("about_me"          ).getAsString ()); }
-        if (object.has("location"))            { this.setLocation        (object.get("location"          ).getAsString ()); }
-        if (object.has("website_url"))         { this.setWebsiteUrl      (object.get("website_url"       ).getAsString ()); }
-        if (object.has("timed_penalty_date"))  { this.setTimedPenaltyDate(object.get("timed_penalty_date").getAsLong   ()); }
+        if (object.has("account_id"))          { this.setAccountId       (                               object.get("account_id"        ).getAsLong   () ); }
+        if (object.has("is_employee"))         { this.setIsEmployee      (                               object.get("is_employee"       ).getAsBoolean() ); }
+        if (object.has("creation_date"))       { this.setCreationDate    (                               object.get("creation_date"     ).getAsLong   () ); }
+        if (object.has("user_id"))             { this.setUserId          (                               object.get("user_id"           ).getAsLong   () ); }
+        if (object.has("accountId"))           { this.setAccountId       (                               object.get("accountId"         ).getAsLong   () ); }
+        if (object.has("link"))                { this.setLink            (                               object.get("link"              ).getAsString () ); }
+        if (object.has("profile_image"))       { this.setProfileImage    (                               object.get("profile_image"     ).getAsString () ); }
+        if (object.has("display_name"))        { this.setDisplayName     (JsonUtils.unescapeHtmlEncoding(object.get("display_name"      ).getAsString ())); }
+        if (object.has("about_me"))            { this.setAboutMe         (                               object.get("about_me"          ).getAsString () ); }
+        if (object.has("location"))            { this.setLocation        (JsonUtils.unescapeHtmlEncoding(object.get("location"          ).getAsString ())); }
+        if (object.has("website_url"))         { this.setWebsiteUrl      (                               object.get("website_url"       ).getAsString () ); }
+        if (object.has("timed_penalty_date"))  { this.setTimedPenaltyDate(                               object.get("timed_penalty_date").getAsLong   () ); }
     }
 
 
