@@ -72,6 +72,7 @@ stream
 super\s*bowl
 tax\s?(calculator|attorney)
 taxi
+thabet
 the ?[0-9]{4}
 ufc
 \s+vs\s+
