@@ -6,6 +6,7 @@ garage[\W_]*door
 illuminati
 insurance
 keywords:
+lingerie
 matrimon(?:y|ial)
 mattress
 no[\W_]*contract
