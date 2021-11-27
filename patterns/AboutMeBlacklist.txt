@@ -8,9 +8,12 @@ insurance
 keywords:
 matrimon(?:y|ial)
 mattress
+no[\W_]*contract
 porn
 repair
 retail
+risk[\W_]*free
+[\W_]SEO[\W_]
 service
 thabet
 window[\W_]*tint
