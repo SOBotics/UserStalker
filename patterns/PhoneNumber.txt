@@ -11,6 +11,6 @@
 # Adapted from a Gist by jacurtis: https://gist.github.com/jacurtis/ccb9ad32664d3b894c12
 # This is a universal regex designed to match all phone numbers from all countries.
 # It will allow through just about any number combination, which may result in FPs,
-# but it will catch numbers like "0211 714141", which wouldn't be caught by either
-# of the other expressions.
+# but it will catch numbers like "0211 714141" and/or "+44 20 3262 1026", which
+# wouldn't be caught by either of the other expressions.
 \b(?:\+?[\d|\(][\h|\(\d{3}\)|\.|\-|\d]{4,}\d)\b
