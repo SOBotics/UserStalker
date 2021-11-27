@@ -9,6 +9,7 @@ keywords:
 lingerie
 matrimon(?:y|ial)
 mattress
+mehndi
 no[\W_]*contract
 online[\W_]*betting
 porn
