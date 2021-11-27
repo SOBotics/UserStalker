@@ -9,6 +9,7 @@ keywords:
 matrimon(?:y|ial)
 mattress
 no[\W_]*contract
+online[\W_]*betting
 porn
 repair
 retail
