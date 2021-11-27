@@ -1,0 +1,10 @@
+# Set the default behavior.
+*  text=auto
+
+# Ensure script files are interpreted as text and use LF.
+*.sh  text  eol=lf
+
+# Ignore all Git infrastructure files when downloading repository.
+.gitattributes  export-ignore
+.gitignore      export-ignore
+.gitmodules     export-ignore
