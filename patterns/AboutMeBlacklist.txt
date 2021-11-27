@@ -12,4 +12,5 @@ porn
 repair
 retail
 service
+thabet
 window[\W_]*tint
