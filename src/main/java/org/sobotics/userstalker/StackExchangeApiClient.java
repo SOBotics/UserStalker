@@ -9,6 +9,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -35,12 +36,14 @@ public class StackExchangeApiClient
 
    private static final Logger LOGGER = LoggerFactory.getLogger(StackExchangeApiClient.class);
 
-   private int quota;
+   private Consumer<Integer> fxnRollover;
+   private int               quota;
 
 
-   public StackExchangeApiClient()
+   public StackExchangeApiClient(Consumer<Integer> fxnRollover)
    {
-      this.quota = 10000;
+      this.fxnRollover = fxnRollover;
+      this.quota       = 10000;
    }
 
 
@@ -169,9 +172,15 @@ public class StackExchangeApiClient
 
    private void UpdateQuota(JsonObject root)
    {
-      this.quota = root.get("quota_remaining").getAsInt();
+      int oldQuota = this.quota;
+      this.quota   = root.get("quota_remaining").getAsInt();
 
-      LOGGER.info("API quota left: " + this.quota + ".");
+      if (this.quota > oldQuota)
+      {
+         this.fxnRollover.accept(oldQuota);
+      }
+
+      LOGGER.info("Remaining API quota: " + this.quota + ".");
    }
 
    private JsonObject SendRequest(Connection.Method method,
@@ -193,9 +202,25 @@ public class StackExchangeApiClient
             if (response.statusCode() == 200)
             {
                JsonObject root = JsonParser.parseString(json).getAsJsonObject();
-               this.HandleBackoff(root);
-               this.UpdateQuota  (root);
-               return root;
+               if (root.has("error_id") && (root.get("error_id").getAsInt() == 502))
+               {
+                  // This error ("Violation of backoff parameter") is spontaneously returned by the
+                  // SE API for unknown reasons, even though we are appropriately handling the logic
+                  // for the backoff parameter. It fails for all of the requests in that same block,
+                  // but will then magically start working again in the next batch. There is no
+                  // suggested backoff value returned in the event of a backoff error (although it
+                  // was suggested before, many years ago: https://meta.stackexchange.com/q/256691),
+                  // but we can try waiting a "standard" amount of time and then try again.
+                  try                             { TimeUnit.SECONDS.sleep(15); }
+                  catch (InterruptedException ex) { Thread.currentThread().interrupt(); }
+                  continue;
+               }
+               else
+               {
+                  this.HandleBackoff(root);
+                  this.UpdateQuota  (root);
+                  return root;
+               }
             }
             else
             {

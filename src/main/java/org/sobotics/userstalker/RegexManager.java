@@ -54,15 +54,15 @@ public class RegexManager
    {
       LOGGER.info("Initializing and (re-)loading patterns...");
 
-      this.OffensiveHi         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_HI_URL  ), "", "");
-      this.OffensiveMd         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_MD_URL  ), "", "");
-      this.OffensiveLo         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_LO_URL  ), "", "");
-      this.NameSmokeyBlacklist = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_NAME_REGEX_URL   ), "", "");
-      this.NameBlacklist       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_NAME_REGEX_URL ), "", "");
-      this.AboutBlacklist      = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_ABOUT_REGEX_URL), "", "");
-      this.UrlBlacklist        = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_URL_REGEX_URL  ), "", "");
-      this.EmailPatterns       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_EMAIL_REGEX_URL), "", "");
-      this.PhonePatterns       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_PHONE_REGEX_URL), "", "");
+      this.OffensiveHi         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_HI_URL  ));
+      this.OffensiveMd         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_MD_URL  ));
+      this.OffensiveLo         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_LO_URL  ));
+      this.NameSmokeyBlacklist = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_NAME_REGEX_URL   ));
+      this.NameBlacklist       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_NAME_REGEX_URL ));
+      this.AboutBlacklist      = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_ABOUT_REGEX_URL));
+      this.UrlBlacklist        = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_URL_REGEX_URL  ));
+      this.EmailPatterns       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_EMAIL_REGEX_URL));
+      this.PhonePatterns       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_PHONE_REGEX_URL));
    }
 
 
@@ -114,6 +114,11 @@ public class RegexManager
                              Pattern.CASE_INSENSITIVE);
    }
 
+   private static List<Pattern> CompileRegexFromPatternList(List<String> patternList)
+   {
+      return CompileRegexFromPatternList(patternList, "", "");
+   }
+
    private static List<Pattern> CompileRegexFromPatternList(List<String> patternList,
                                                             String       prefix,
                                                             String       suffix)
@@ -131,28 +136,26 @@ public class RegexManager
 
          try
          {
-            // Java's regular-expression engine doesn't support certain types of
-            // variable-length look-behinds. Patterns on SmokeDetector's username blacklist
-            // are often constructed using look-behinds in order to match the entire name
-            // for the purposes of displaying it in the "why" reason. Since we don't care
-            // about capturing the exact match, but only positive detection, we can do a
-            // rote transformation of these look-behinds, replacing the unlimited
-            // quantifiers * and + with {0,40} and {1,40}, respectively, since usernames
-            // on SO/SE have a maximum length of 40 characters. This will have the same
-            // effect, ensuring that the exact semantics are preserved, without requiring
-            // a regex engine that supports fully variable-length look-behinds.
-            // Note that these * and + quantifiers might also be possessive quantifiers
-            // (which are heavily used by Charcoal in SmokeDetector as a performance
-            // optimization). Although the Java regex engine does support possessive
-            // quantifiers, they cannot occur inside of look-behinds because they would
-            // make the length of the look-behind subject to vary, which is not supported.
-            // Thus, the "matcher" regexes allow either 1 or 2 occurrences of these
-            // quantifiers, in order to ensure that both greedy and possessive quantifiers
+            // Java's regular-expression engine doesn't support certain types of variable-length
+            // look-behinds. Patterns on SmokeDetector's username blacklist are often constructed
+            // using look-behinds in order to match the entire name for the purposes of displaying
+            // it in the "why" reason. Since we don't care about capturing the exact match, but only
+            // positive detection, at least for now, we can do a rote transformation of these
+            // look-behinds, replacing the unlimited quantifiers * and + with {0,40} and {1,40},
+            // respectively, since usernames on SO/SE have a maximum length of 40 characters.
+            // This will have the same effect, ensuring that the exact semantics are preserved,
+            // without requiring a regex engine that supports fully variable-length look-behinds.
+            // Note that these * and + quantifiers might also be possessive quantifiers (which are
+            // heavily used by Charcoal in SmokeDetector as a performance optimization). Although
+            // the Java regex engine does support possessive quantifiers, they cannot occur inside
+            // look-behinds because they would make the length of the look-behind subject to change,
+            // which is not supported. Thus, the "matcher" regexes allow either 1 or 2 occurrences
+            // of these quantifiers, in order to ensure that both greedy and possessive quantifiers
             // are matched.
             //
-            // This translation is done only after the first attempt to compile the regex
-            // fails, and if it still fails to compile after this transformation, no other
-            // attempts at recovery are made; the unsupported regex will simply be skipped.
+            // This translation is done only after the first attempt to compile the regex fails,
+            // and if it still fails to compile after this transformation, no other attempts at
+            // recovery are made; the unsupported regex will simply be skipped.
             //
             // See also related discussion in Charcoal HQ, starting here:
             // <https://chat.stackexchange.com/transcript/message/59665065#59665065>

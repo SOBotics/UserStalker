@@ -170,7 +170,7 @@ public class ChatBot
       this.regexes = new RegexManager();
 
       // Initialize the Stack Exchange API client.
-      this.seApi = new StackExchangeApiClient();
+      this.seApi = new StackExchangeApiClient(this::OnQuotaRollover);
 
       // Start the stalking service.
       this.DoStart(false);
@@ -188,6 +188,34 @@ public class ChatBot
       if (this.roomSE != null)  { this.roomSE.send(message); }
    }
 
+
+   private void OnQuotaRollover(Integer oldQuota)
+   {
+      // Display quota rollover message.
+      String message = "Stack Exchange API quota rolled over with "
+                     + String.valueOf(oldQuota)
+                     + " requests remaining. New quota has "
+                     + String.valueOf(seApi.GetQuota())
+                     + " requests remaining.";
+      LOGGER.info(message);
+      this.BroadcastMessage(CHAT_MSG_PREFIX + " " + message);
+
+      // Display statistical information on users per-site.
+      if ((this.roomSO != null) && (this.sitesSO != null) && (!this.sitesSO.isEmpty()))
+      {
+         this.ReportStatistics(this.roomSO, this.sitesSO);
+      }
+      if ((this.roomSE != null) && (this.sitesSE != null) && (!this.sitesSE.isEmpty()))
+      {
+         this.ReportStatistics(this.roomSE, this.sitesSE);
+      }
+
+      // Reset per-site user statistics.
+      for (StackExchangeSiteInfo siteInfo : this.siteInfoMap.values())
+      {
+         siteInfo.ResetUsers();
+      }
+   }
 
    private void OnUserEntered(Room room, UserEnteredEvent event)
    {
@@ -754,5 +782,27 @@ public class ChatBot
       builder.append(")");
 
       room.send(builder.toString());
+   }
+
+   private void ReportStatistics(Room room, List<String> sites)
+   {
+      boolean hasMultiple = (sites.size() > 1);
+      String  message     = CHAT_MSG_PREFIX;
+      for (String site : sites)
+      {
+         StackExchangeSiteInfo siteInfo    = this.siteInfoMap.get(site);
+         double                percentage  = (((double)siteInfo.SuspiciousUsers /
+                                               (double)siteInfo.TotalUsers)
+                                               * 100.0);
+         if (hasMultiple)
+         {
+            message += "\n"
+                     + "\u3000\u25CF**`" + site + "`** :";
+         }
+         message += " Users Created: "    + String.valueOf(siteInfo.TotalUsers)
+                  + " Suspicious Users: " + String.valueOf(siteInfo.SuspiciousUsers)
+                  + " (" + String.valueOf(percentage) + "% of total)";
+      }
+      room.send(message);
    }
 }
