@@ -4,7 +4,9 @@ package org.sobotics.userstalker;
 import java.time.Instant;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -28,6 +30,7 @@ import org.sobotics.chatexchange.chat.event.UserEnteredEvent;
 
 import org.sobotics.userstalker.RegexManager;
 import org.sobotics.userstalker.StackExchangeApiClient;
+import org.sobotics.userstalker.StackExchangeSiteInfo;
 import org.sobotics.userstalker.User;
 
 
@@ -47,7 +50,7 @@ public class ChatBot
 + "\n\n"
 + "In addition to \"help\", I recognize some additional commands:"
 + "\n"
-+ "\u3000\u25CF \"alive\": Replies in the affirmative if the bot is up and running."
++ "\u3000\u25CF \"alive\": Replies in the affirmative if the bot is up and running; silently ignores you if it is not."
 + "\n"
 + "\u3000\u25CF \"check <user URL>\": Runs the pattern checks on the specified user account as if it were a newly-created account,"
 +                                   " and then replies with the results."
@@ -56,7 +59,9 @@ public class ChatBot
 + "\n"
 + "\u3000\u25CF \"quota\": Replies with the currently remaining size of the API quota for the stalking service."
 + "\n"
-+ "\u3000\u25CF \"list\": Replies with the list of Stack Exchange sites that are currently being stalked."
++ "\u3000\u25CF \"sites\": Replies with the list of Stack Exchange sites that are currently being stalked."
++ "\n"
++ "\u3000\u25CF \"list\": Same as \"sites\"."
 + "\n"
 + "\u3000\u25CF \"add <sitename>\": Temporarily adds the specified SE site (short name) to the stalking list."
 +                                 " (The modification will not persist across a reboot.)"
@@ -64,32 +69,35 @@ public class ChatBot
 + "\u3000\u25CF \"remove <sitename>\": Temporarily removes the specified SE site (short name) from the stalking list."
 +                                    " (The modification will not persist across a reboot.)"
 + "\n"
-+ "\u3000\u25CF \"update\": Updates the pattern databases."
++ "\u3000\u25CF \"update\": Updates the cached pattern databases that are used when checking user accounts."
 + "\n"
-+ "\u3000\u25CF \"stop\": Stops the stalking service. (The bot will remain in the room in order to respond to commands.)"
++ "\u3000\u25CF \"stop\": Stops the stalking service."
++                       " (The bot will remain in the room in order to respond to commands.)"
 + "\n"
-+ "\u3000\u25CF \"start\": Starts the stalking service. (Intended to be used after a \"stop\" command.)"
++ "\u3000\u25CF \"start\": Starts the stalking service from where it left off."
++                       " (Intended to be used after a \"stop\" command.)"
 + "\n"
-+ "\u3000\u25CF \"reboot\": Reboots the entire bot, as if the server had been rebooted."
++ "\u3000\u25CF \"restart\": Starts the stalking service fresh, beginning from the current time."
++                          " (Can be used after a \"stop\" command, or any other time.)"
++ "\n"
++ "\u3000\u25CF \"reboot\": Turns it off and back on again by rebooting the entire bot, as if the server had been rebooted."
 +                         " (Any changes to pattern databases will be picked up at this time, and"
 +                         " all temporary changes to the stalking lists will be lost.)"
-+ "\n"
-+ "\u3000\u25CF \"restart\": Same as \"reboot\"."
 + "\n\n"
 + "If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!)."
 ;
 
    private static final Logger LOGGER = LoggerFactory.getLogger(ChatBot.class);
 
-   private StackExchangeClient      client;
-   private List<String>             sitesSO;
-   private List<String>             sitesSE;
-   private Room                     roomSO;
-   private Room                     roomSE;
-   private RegexManager             regexes;
-   private StackExchangeApiClient   seApi;
-   private ScheduledExecutorService executor;
-   private Instant                  previousTime;
+   private StackExchangeClient                client;
+   private List<String>                       sitesSO;
+   private List<String>                       sitesSE;
+   private Room                               roomSO;
+   private Room                               roomSE;
+   private RegexManager                       regexes;
+   private StackExchangeApiClient             seApi;
+   private ScheduledExecutorService           executor;
+   private Map<String, StackExchangeSiteInfo> siteInfoMap;
 
 
    public ChatBot(String emailAddress, String password)
@@ -165,7 +173,19 @@ public class ChatBot
       this.seApi = new StackExchangeApiClient();
 
       // Start the stalking service.
-      this.DoStart();
+      this.DoStart(false);
+   }
+
+
+   private boolean IsRunning()
+   {
+      return (this.executor != null);
+   }
+
+   private void BroadcastMessage(String message)
+   {
+      if (this.roomSO != null)  { this.roomSO.send(message); }
+      if (this.roomSE != null)  { this.roomSE.send(message); }
    }
 
 
@@ -212,7 +232,8 @@ public class ChatBot
             this.DoQuota(room, replyID);
             return;
          }
-         else if (messageParts[1].equals("list"))
+         else if (messageParts[1].equals("sites") ||
+                  messageParts[1].equals("list" ))
          {
             this.DoList(room, replyID);
             return;
@@ -229,11 +250,15 @@ public class ChatBot
          }
          else if (messageParts[1].equals("start"))
          {
-            this.DoStart();
+            this.DoStart(true);
             return;
          }
-         else if (messageParts[1].equals("reboot") ||
-                  messageParts[1].equals("restart"))
+         else if (messageParts[1].equals("restart"))
+         {
+            this.DoStart(false);
+            return;
+         }
+         else if (messageParts[1].equals("reboot"))
          {
             this.DoReboot();
             return;
@@ -273,47 +298,47 @@ public class ChatBot
 
       if ((this.roomSO != null) && !this.sitesSO.isEmpty())
       {
-         this.OnStalk(this.roomSO, this.sitesSO);
+         this.DoStalk(this.roomSO, this.sitesSO);
       }
 
       if ((this.roomSE != null) && !this.sitesSE.isEmpty())
       {
-         this.OnStalk(this.roomSE, this.sitesSE);
+         this.DoStalk(this.roomSE, this.sitesSE);
       }
-
-      // BUG: This will almost certainly miss some users.
-      previousTime = Instant.now();
    }
 
-   private void OnStalk(Room room, List<String> sites)
+   private void DoStalk(Room room, List<String> sites)
    {
       boolean showSite = (sites.size() > 1);
       for (String site : sites)
       {
-         LOGGER.info("Stalking " + site + " at " + Instant.now() + "...");
+         long                  startTime = Instant.now().getEpochSecond();
+         StackExchangeSiteInfo siteInfo  = this.siteInfoMap.get(site);
+         siteInfo.FromDate               = siteInfo.ToDate;
+         siteInfo.ToDate                 = startTime;
 
-         JsonArray json = seApi.GetAllUsersAsJson(site,
-                                                  this.previousTime.minusSeconds(1).getEpochSecond());
+         LOGGER.info("Stalking " + site + " at " + siteInfo.ToDate + " (last was at " + siteInfo.FromDate + ")...");
+
+         JsonArray json = seApi.GetAllUsersAsJson(site, siteInfo);
          if (json != null)
          {
             LOGGER.debug("JSON returned from SE API: " + json.toString());
             for (JsonElement element : json)
             {
                JsonObject object = element.getAsJsonObject();
-               User       user   = new User(object);
-               user.setSite(site);
+               User       user   = new User(site, object);
                LOGGER.info("New user detected: \"" + user.getDisplayName() + "\" (" + user.getLink() + ").");
                String reason = CheckUser(user);
                if (!reason.isBlank())
                {
                   LOGGER.info("Detected user \"" + user + "\": " + reason + ".");
+                  siteInfo.SuspiciousUsers += 1;
                   ReportUser(room, user, reason, showSite);
                }
             }
          }
       }
    }
-
 
    private void DoUnrecognized(Room room, long replyID)
    {
@@ -337,17 +362,18 @@ public class ChatBot
 
    private void DoUpdate()
    {
-      // REVIEW: Does modifying the regexes create a race condition? Should the operator stop first?
-      this.regexes.Reload();
+      LOGGER.info("Beginning to update the pattern databases...");
 
-      String chatMessage = CHAT_MSG_PREFIX + " The pattern databases have been successfully updated.";
-      if (this.roomSO != null)
+      boolean wasRunning = this.IsRunning();
+      if (wasRunning)
       {
-         this.roomSO.send(chatMessage);
+         this.DoStop();
       }
-      if (this.roomSE != null)
+      this.regexes.Reload();
+      this.BroadcastMessage(CHAT_MSG_PREFIX + " The pattern databases have been successfully updated.");
+      if (wasRunning)
       {
-         this.roomSE.send(chatMessage);
+         this.DoStart(true);
       }
    }
 
@@ -364,7 +390,7 @@ public class ChatBot
       }
       else
       {
-         LOGGER.error("Ignoring a \"list\" mention from unknown room: " + room);
+         LOGGER.error("Ignoring a \"list\" command from unknown room: " + room);
          return;
       }
 
@@ -374,95 +400,150 @@ public class ChatBot
 
    private void DoListModify(Room room, long replyID, String command, String siteName)
    {
-      // REVIEW: Does modifying the sites list create a race condition?
-      if (command.equals("add"))
-      {
-         if (room == this.roomSO)
-         {
-            this.sitesSO.add(siteName);
-            this.roomSO.send(CHAT_MSG_PREFIX + " Temporarily adding `" + siteName + "` to the list of sites being stalked.");
-         }
-         else if (room == this.roomSE)
-         {
-            this.sitesSE.add(siteName);
-            this.roomSE.send(CHAT_MSG_PREFIX + " Temporarily adding `" + siteName + "` to the list of sites being stalked.");
-         }
-         else
-         {
-            LOGGER.error("Ignoring an \"add\" mention from unknown room: " + room);
-         }
-      }
-      else if (command.equals("remove"))
-      {
-         if (room == this.roomSO)
-         {
-            this.sitesSO.remove(siteName);
-            this.roomSO.send(CHAT_MSG_PREFIX + " Temporarily removing `" + siteName + "` from the list of sites being stalked.");
-         }
-         else if (room == this.roomSE)
-         {
-            this.sitesSE.remove(siteName);
-            this.roomSE.send(CHAT_MSG_PREFIX + " Temporarily removing `" + siteName + "` from the list of sites being stalked.");
-         }
-         else
-         {
-            LOGGER.error("Ignoring a \"remove\" mention from unknown room: " + room);
-         }
-      }
-      else
+      boolean add    = command.equals("add");
+      boolean remove = command.equals("remove");
+
+      if (!add && !remove)
       {
          room.replyTo(replyID,
                       "The specified command (\"" + command + "\") was not recognized (must be either \"add\" or \"remove\".)");
+         return;
+      }
+
+      if ((room != this.roomSO) && (room != this.roomSE))
+      {
+         LOGGER.error("Ignoring a \"" + command + "\" command from unknown room: " + room);
+         return;
+      }
+
+      LOGGER.info("Beginning to modify (" + command + ") the list of sites being stalked.");
+
+      boolean wasRunning = this.IsRunning();
+      if (wasRunning)
+      {
+         this.DoStop();
+      }
+
+      String chatMessage = (add ? CHAT_MSG_PREFIX + " Temporarily adding `" + siteName + "` to the list of sites being stalked."
+                                : CHAT_MSG_PREFIX + " Temporarily removing `" + siteName + "` from the list of sites being stalked.");
+      if (room == this.roomSO)
+      {
+         if (add)  { this.sitesSO.add   (siteName); }
+         else      { this.sitesSO.remove(siteName); }
+
+         this.roomSO.send(chatMessage);
+      }
+      else if (room == this.roomSE)
+      {
+         if (add)  { this.sitesSE.add   (siteName); }
+         else      { this.sitesSE.remove(siteName); }
+
+         this.roomSE.send(chatMessage);
+      }
+
+      if (wasRunning)
+      {
+         this.DoStart(true);
       }
    }
 
-   // TODO(low): Make this not stop if it is already stopped.
    private void DoStop()
    {
-      String message     = "Stopping the user stalker service...";
-      String chatMessage = CHAT_MSG_PREFIX + " " + message;
-
-      LOGGER.info(message);
-
-      ((this.roomSE != null) ? this.roomSE.send(chatMessage) : CompletableFuture.completedFuture(null)).thenRun(() ->
+      if (this.executor != null)
       {
-         ((this.roomSO != null) ? this.roomSO.send(chatMessage) : CompletableFuture.completedFuture(null)).thenRun(() ->
+         String stopMessage      = "Stopping the user stalker service...";
+         String stopNowMessage   = "Failed to cleanly stop user stalker service; forcibly shutting it down...";
+         String stopFinalMessage = "Forced shutdown timed out after 5 seconds; terminating anyway...";
+
+         LOGGER.info(stopMessage);
+         this.BroadcastMessage(CHAT_MSG_PREFIX + " " + stopMessage);
+
+         this.executor.shutdown();
+         try
          {
-            this.executor.shutdown();
-         });
-      });
+            if (!this.executor.awaitTermination(1, TimeUnit.MINUTES))
+            {
+               LOGGER.info(stopNowMessage);
+               this.BroadcastMessage(CHAT_MSG_PREFIX + " " + stopNowMessage);
+
+               this.executor.shutdownNow();
+               if (!this.executor.awaitTermination(5, TimeUnit.SECONDS))
+               {
+                  LOGGER.info(stopFinalMessage);
+                  this.BroadcastMessage(CHAT_MSG_PREFIX + " " + stopFinalMessage);
+               }
+            }
+         }
+         catch (InterruptedException ex)
+         {
+            this.executor.shutdownNow();
+            Thread.currentThread().interrupt();
+         }
+         this.executor = null;
+      }
+      else
+      {
+         String message = "The user stalker service is not running.";
+         LOGGER.info(message);
+         this.BroadcastMessage(CHAT_MSG_PREFIX + " " + message);
+      }
    }
 
-   // TODO(low): Make this not start if it has already started.
-   private void DoStart()
+   private void DoStart(boolean resume)
    {
       LOGGER.info("Attempting to start the user stalker service...");
 
-      this.executor = Executors.newSingleThreadScheduledExecutor();
-      if (((this.roomSO != null) && !this.sitesSO.isEmpty()) ||
-          ((this.roomSE != null) && !this.sitesSE.isEmpty()))
+      if (this.IsRunning())
       {
-         this.previousTime = Instant.now().minusSeconds(60);
+         this.DoStop();
+      }
+
+      boolean somethingToDo = (((this.roomSO != null) && !this.sitesSO.isEmpty()) ||
+                               ((this.roomSE != null) && !this.sitesSE.isEmpty()));
+      if (somethingToDo)
+      {
+         if (!resume || (this.siteInfoMap == null))
+         {
+            long startTime = Instant.now().minusSeconds(60).getEpochSecond();
+
+            int sites        = (((this.sitesSO != null) ? this.sitesSO.size() : 0) +
+                                ((this.sitesSE != null) ? this.sitesSE.size() : 0));
+            this.siteInfoMap = new HashMap<String, StackExchangeSiteInfo>(sites * 2);
+
+            if (this.sitesSO != null)
+            {
+               for (String site : this.sitesSO)
+               {
+                  this.siteInfoMap.put(site, new StackExchangeSiteInfo(startTime));
+               }
+            }
+            if (this.sitesSE != null)
+            {
+               for (String site : this.sitesSE)
+               {
+                  this.siteInfoMap.put(site, new StackExchangeSiteInfo(startTime));
+               }
+            }
+         }
+
+         this.executor = Executors.newSingleThreadScheduledExecutor();
          this.executor.scheduleAtFixedRate(() -> { this.OnStalk(); },
                                            0,
                                            POLL_TIME_MINUTES,
                                            TimeUnit.MINUTES);
-
-         String message     = "The user stalker service has started.";
-         String chatMessage = CHAT_MSG_PREFIX + " " + message;
-         ((this.roomSO != null) ? this.roomSO.send(chatMessage) : CompletableFuture.completedFuture(null)).thenRun(() ->
-         {
-            ((this.roomSE != null) ? this.roomSE.send(chatMessage) : CompletableFuture.completedFuture(null)).thenRun(() ->
-            {
-               LOGGER.info(message);
-            });
-         });
       }
+      String message = (somethingToDo ? "The user stalker service has started."
+                                      : "The user stalker service did not start because there is nothing to do.");
+      LOGGER.info(message);
+      this.BroadcastMessage(CHAT_MSG_PREFIX + " " + message);
    }
 
    private void DoReboot()
    {
-      this.DoStop();
+      if (this.IsRunning())
+      {
+         this.DoStop();
+      }
 
       LOGGER.info("Rebooting the bot...");
       if (this.roomSE != null)
@@ -495,27 +576,27 @@ public class ChatBot
       // Check the display name.
       if ((name != null) && !name.isBlank())
       {
-         if (RegexManager.AnyMatches(name, this.regexes.regexNameBlacklist))
+         if (RegexManager.AnyMatches(name, this.regexes.NameBlacklist))
          {
             reasons.add("username on blacklist");
          }
 
-         if (RegexManager.AnyMatches(name, this.regexes.regexNameSmokeyBlacklist))
+         if (RegexManager.AnyMatches(name, this.regexes.NameSmokeyBlacklist))
          {
             reasons.add("username on Smokey's blacklist");
          }
 
-         if (RegexManager.AnyMatches(name, this.regexes.regexOffensiveHi))
+         if (RegexManager.AnyMatches(name, this.regexes.OffensiveHi))
          {
             reasons.add("username contains highly offensive pattern");
          }
 
-         if (RegexManager.AnyMatches(name, this.regexes.regexOffensiveMd))
+         if (RegexManager.AnyMatches(name, this.regexes.OffensiveMd))
          {
             reasons.add("username contains mildly offensive pattern");
          }
 
-         if (RegexManager.AnyMatches(name, this.regexes.regexOffensiveLo))
+         if (RegexManager.AnyMatches(name, this.regexes.OffensiveLo))
          {
             reasons.add("username contains possibly offensive pattern");
          }
@@ -544,7 +625,7 @@ public class ChatBot
       // Check the URL.
       if ((url != null) && !url.isBlank())
       {
-         if (RegexManager.AnyMatches(url, this.regexes.regexUrlBlacklist))
+         if (RegexManager.AnyMatches(url, this.regexes.UrlBlacklist))
          {
             reasons.add("URL on blacklist");
          }
@@ -553,17 +634,17 @@ public class ChatBot
       // Check the location.
       if ((location != null) && !location.isBlank())
       {
-         if (RegexManager.AnyMatches(location, this.regexes.regexOffensiveHi))
+         if (RegexManager.AnyMatches(location, this.regexes.OffensiveHi))
          {
             reasons.add("location contains highly offensive pattern");
          }
 
-         if (RegexManager.AnyMatches(location, this.regexes.regexOffensiveMd))
+         if (RegexManager.AnyMatches(location, this.regexes.OffensiveMd))
          {
             reasons.add("location contains mildly offensive pattern");
          }
 
-         if (RegexManager.AnyMatches(location, this.regexes.regexOffensiveLo))
+         if (RegexManager.AnyMatches(location, this.regexes.OffensiveLo))
          {
             reasons.add("location contains possibly offensive pattern");
          }
@@ -572,37 +653,37 @@ public class ChatBot
       // Check the "About Me".
       if ((about != null) && !about.isBlank())
       {
-         if (RegexManager.AnyMatches(about, this.regexes.regexAboutBlacklist))
+         if (RegexManager.AnyMatches(about, this.regexes.AboutBlacklist))
          {
             reasons.add("\"About Me\" contains blacklisted pattern");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.regexOffensiveHi))
+         if (RegexManager.AnyMatches(about, this.regexes.OffensiveHi))
          {
             reasons.add("\"About Me\" contains highly offensive pattern");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.regexOffensiveMd))
+         if (RegexManager.AnyMatches(about, this.regexes.OffensiveMd))
          {
             reasons.add("\"About Me\" contains mildly offensive pattern");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.regexOffensiveLo))
+         if (RegexManager.AnyMatches(about, this.regexes.OffensiveLo))
          {
             reasons.add("\"About Me\" contains possibly offensive pattern");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.regexPhonePatterns))
+         if (RegexManager.AnyMatches(about, this.regexes.PhonePatterns))
          {
             reasons.add("\"About Me\" contains phone number");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.regexEmailPatterns))
+         if (RegexManager.AnyMatches(about, this.regexes.EmailPatterns))
          {
             reasons.add("\"About Me\" contains email");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.regexUrlBlacklist))
+         if (RegexManager.AnyMatches(about, this.regexes.UrlBlacklist))
          {
             reasons.add("\"About Me\" contains blacklisted URL");
          }

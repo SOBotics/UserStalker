@@ -33,15 +33,15 @@ public class RegexManager
 
    private static final Logger LOGGER = LoggerFactory.getLogger(RegexManager.class);
 
-   public List<Pattern> regexOffensiveHi;
-   public List<Pattern> regexOffensiveMd;
-   public List<Pattern> regexOffensiveLo;
-   public List<Pattern> regexNameSmokeyBlacklist;
-   public List<Pattern> regexNameBlacklist;
-   public List<Pattern> regexAboutBlacklist;
-   public List<Pattern> regexUrlBlacklist;
-   public List<Pattern> regexEmailPatterns;
-   public List<Pattern> regexPhonePatterns;
+   public List<Pattern> OffensiveHi;
+   public List<Pattern> OffensiveMd;
+   public List<Pattern> OffensiveLo;
+   public List<Pattern> NameSmokeyBlacklist;
+   public List<Pattern> NameBlacklist;
+   public List<Pattern> AboutBlacklist;
+   public List<Pattern> UrlBlacklist;
+   public List<Pattern> EmailPatterns;
+   public List<Pattern> PhonePatterns;
 
 
    public RegexManager()
@@ -54,15 +54,15 @@ public class RegexManager
    {
       LOGGER.info("Initializing and (re-)loading patterns...");
 
-      this.regexOffensiveHi         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_HI_URL  ), "", "");
-      this.regexOffensiveMd         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_MD_URL  ), "", "");
-      this.regexOffensiveLo         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_LO_URL  ), "", "");
-      this.regexNameSmokeyBlacklist = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_NAME_REGEX_URL   ), "", "");
-      this.regexNameBlacklist       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_NAME_REGEX_URL ), "", "");
-      this.regexAboutBlacklist      = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_ABOUT_REGEX_URL), "", "");
-      this.regexUrlBlacklist        = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_URL_REGEX_URL  ), "", "");
-      this.regexEmailPatterns       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_EMAIL_REGEX_URL), "", "");
-      this.regexPhonePatterns       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_PHONE_REGEX_URL), "", "");
+      this.OffensiveHi         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_HI_URL  ), "", "");
+      this.OffensiveMd         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_MD_URL  ), "", "");
+      this.OffensiveLo         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_LO_URL  ), "", "");
+      this.NameSmokeyBlacklist = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_NAME_REGEX_URL   ), "", "");
+      this.NameBlacklist       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_NAME_REGEX_URL ), "", "");
+      this.AboutBlacklist      = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_ABOUT_REGEX_URL), "", "");
+      this.UrlBlacklist        = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_URL_REGEX_URL  ), "", "");
+      this.EmailPatterns       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_EMAIL_REGEX_URL), "", "");
+      this.PhonePatterns       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_PHONE_REGEX_URL), "", "");
    }
 
 
