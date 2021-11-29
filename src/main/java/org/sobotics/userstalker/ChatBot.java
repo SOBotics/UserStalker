@@ -192,7 +192,7 @@ public class ChatBot
    private void OnQuotaRollover(Integer oldQuota)
    {
       // Display quota rollover message.
-      String message = "Stack Exchange API quota rolled over with "
+      String message = "Stack Exchange API quota rolled over, leaving "
                      + String.valueOf(oldQuota)
                      + " requests remaining. New quota has "
                      + String.valueOf(seApi.GetQuota())
@@ -787,21 +787,38 @@ public class ChatBot
    private void ReportStatistics(Room room, List<String> sites)
    {
       boolean hasMultiple = (sites.size() > 1);
-      String  message     = CHAT_MSG_PREFIX;
+      String  message     = "";
       for (String site : sites)
       {
          StackExchangeSiteInfo siteInfo    = this.siteInfoMap.get(site);
          double                percentage  = (((double)siteInfo.SuspiciousUsers /
                                                (double)siteInfo.TotalUsers)
                                                * 100.0);
+         if (message.isEmpty())
+         {
+            if (!hasMultiple)
+            {
+               message += CHAT_MSG_PREFIX;
+            }
+         }
+         else
+         {
+            if (hasMultiple)
+            {
+               message += "\n";
+            }
+         }
          if (hasMultiple)
          {
-            message += "\n"
-                     + "\u3000\u25CF**`" + site + "`** :";
+            message += site + ":";
          }
-         message += " Users Created: "    + String.valueOf(siteInfo.TotalUsers)
-                  + " Suspicious Users: " + String.valueOf(siteInfo.SuspiciousUsers)
-                  + " (" + String.valueOf(percentage) + "% of total)";
+         message += " Of "
+                  + String.valueOf(siteInfo.TotalUsers)
+                  + " user accounts created, "
+                  + String.valueOf(siteInfo.SuspiciousUsers)
+                  + " were suspicious ("
+                  + String.format("%.2f", percentage)
+                  + "% of total)";
       }
       room.send(message);
    }

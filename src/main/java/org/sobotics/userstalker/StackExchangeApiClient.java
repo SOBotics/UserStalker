@@ -55,67 +55,58 @@ public class StackExchangeApiClient
 
    public User GetUser(String site, int userID)
    {
-      User user = null;
-      try
+      JsonObject jsonObject = this.SendRequest(Connection.Method.GET,
+                                               API_USERS_URL + "/" + userID,
+                                               "site"    ,  site,
+                                               "key"     , API_KEY,
+                                               "filter"  , API_USERS_FILTER,
+                                               "sort"    , "creation",
+                                               "order"   , "desc",
+                                               "page"    , "1",
+                                               "pagesize", "1");
+      if ((jsonObject != null) && jsonObject.has("items"))
       {
-         JsonObject jsonObject = this.SendRequest(Connection.Method.GET,
-                                                  API_USERS_URL + "/" + userID,
-                                                  "site"    ,  site,
-                                                  "key"     , API_KEY,
-                                                  "filter"  , API_USERS_FILTER,
-                                                  "sort"    , "creation",
-                                                  "order"   , "desc",
-                                                  "page"    , "1",
-                                                  "pagesize", "1");
-
-         if (jsonObject.has("items"))
+         JsonArray jsonArray = jsonObject.get("items").getAsJsonArray();
+         int       count     = jsonArray.size();
+         if (count > 0)
          {
-            JsonArray jsonArray = jsonObject.get("items").getAsJsonArray();
-            if (jsonArray.size() > 0)
-            {
-               user = new User(site, jsonArray.get(0).getAsJsonObject());
-            }
+            return new User(site, jsonArray.get(0).getAsJsonObject());
          }
       }
-      catch (IOException ex)
+      else
       {
          LOGGER.warn("Failed to retrieve user information from SE API.");
-         ex.printStackTrace();
       }
-      return user;
+      return null;
    }
 
    // TODO: Handle has_more (by calling API again to get an additional page, and merging into "items")
    public JsonArray GetAllUsersAsJson(String site, StackExchangeSiteInfo siteInfo)
    {
-      try
+      JsonObject jsonObject = this.SendRequest(Connection.Method.GET,
+                                               API_USERS_URL,
+                                               "site"     , site,
+                                               "key"      , API_KEY,
+                                               "filter"   , API_USERS_FILTER,
+                                               "sort"     , "creation",
+                                               "order"    , "asc",
+                                               "page"     , "1",
+                                               "pagesize" , API_PAGE_SIZE_MAX,
+                                               "fromdate" , String.valueOf(siteInfo.FromDate),
+                                               "todate"   , String.valueOf(siteInfo.ToDate  ));
+      if ((jsonObject != null) && jsonObject.has("items"))
       {
-         JsonObject jsonObject = this.SendRequest(Connection.Method.GET,
-                                                  API_USERS_URL,
-                                                  "site"     , site,
-                                                  "key"      , API_KEY,
-                                                  "filter"   , API_USERS_FILTER,
-                                                  "sort"     , "creation",
-                                                  "order"    , "asc",
-                                                  "page"     , "1",
-                                                  "pagesize" , API_PAGE_SIZE_MAX,
-                                                  "fromdate" , String.valueOf(siteInfo.FromDate),
-                                                  "todate"   , String.valueOf(siteInfo.ToDate  ));
-         if (jsonObject.has("items"))
+         JsonArray jsonArray = jsonObject.get("items").getAsJsonArray();
+         int       count     = jsonArray.size();
+         if (count > 0)
          {
-            JsonArray jsonArray = jsonObject.get("items").getAsJsonArray();
-            int       count     = jsonArray.size();
-            if (count > 0)
-            {
-               siteInfo.TotalUsers += count;
-               return jsonArray;
-            }
+            siteInfo.TotalUsers += count;
+            return jsonArray;
          }
       }
-      catch (IOException ex)
+      else
       {
          LOGGER.warn("Failed to retrieve user information from SE API.");
-         ex.printStackTrace();
       }
       return null;
    }
@@ -183,9 +174,7 @@ public class StackExchangeApiClient
       LOGGER.info("Remaining API quota: " + this.quota + ".");
    }
 
-   private JsonObject SendRequest(Connection.Method method,
-                                  String            url,
-                                  String...         data) throws IOException
+   private JsonObject SendRequest(Connection.Method method, String url, String... data)
    {
       int MAX_ITERATIONS = 2;
       for (int i = 0; i < MAX_ITERATIONS; ++i)
@@ -202,34 +191,30 @@ public class StackExchangeApiClient
             if (response.statusCode() == 200)
             {
                JsonObject root = JsonParser.parseString(json).getAsJsonObject();
-               if (root.has("error_id") && (root.get("error_id").getAsInt() == 502))
-               {
-                  // This error ("Violation of backoff parameter") is spontaneously returned by the
-                  // SE API for unknown reasons, even though we are appropriately handling the logic
-                  // for the backoff parameter. It fails for all of the requests in that same block,
-                  // but will then magically start working again in the next batch. There is no
-                  // suggested backoff value returned in the event of a backoff error (although it
-                  // was suggested before, many years ago: https://meta.stackexchange.com/q/256691),
-                  // but we can try waiting a "standard" amount of time and then try again.
-                  try                             { TimeUnit.SECONDS.sleep(15); }
-                  catch (InterruptedException ex) { Thread.currentThread().interrupt(); }
-                  continue;
-               }
-               else
-               {
-                  this.HandleBackoff(root);
-                  this.UpdateQuota  (root);
-                  return root;
-               }
+
+               this.HandleBackoff(root);
+               this.UpdateQuota  (root);
+               return root;
             }
             else
             {
-               throw new IOException("HTTP "
-                                   + response.statusCode()
-                                   + " requesting URL \""
-                                   + url
-                                   + "\". Body is: "
-                                   + response.body());
+               LOGGER.warn("SE API returned HTTP "
+                         + response.statusCode()
+                         + " when requesting URL \""
+                         + url
+                         + "\". Body is: "
+                         + response.body());
+
+               // This error ("Violation of backoff parameter") is spontaneously returned by the
+               // SE API for unknown reasons, even though we are appropriately handling the logic
+               // for the backoff parameter. It fails for all of the requests in that same block,
+               // but will then magically start working again in the next batch. There is no
+               // suggested backoff value returned in the event of a backoff error (although it
+               // was suggested before, many years ago: https://meta.stackexchange.com/q/256691),
+               // but we can try waiting a "standard" amount of time and then try again.
+               try                             { TimeUnit.SECONDS.sleep(15); }
+               catch (InterruptedException ex) { Thread.currentThread().interrupt(); }
+               continue;
             }
          }
          catch (SocketTimeoutException ex)
@@ -247,6 +232,14 @@ public class StackExchangeApiClient
                   Thread.currentThread().interrupt();
                }
             }
+         }
+         catch (IOException ex)
+         {
+            LOGGER.warn("Attempt to request URL \""
+                      + url
+                      + " from SE API failed.");
+            ex.printStackTrace();
+            return null;
          }
       }
       return null;
