@@ -26,6 +26,7 @@ consumer\s?reports?
 contest
 (?:full|progressive).*cover
 crack(?:s|ing)?\s?(?:taking|tools?)
+cremat(?:e|ion)
 crossfit
 s\s?cup
 damage\s?claim
