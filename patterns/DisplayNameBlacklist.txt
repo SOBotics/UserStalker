@@ -43,6 +43,7 @@ golden\s?globes?
 grand\W?prix
 green\s?bay\s?packers?
 hire
+hotlive
 \binsur
 intilight
 league
