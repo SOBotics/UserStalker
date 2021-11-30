@@ -16,6 +16,7 @@ new\s?body
 bracket
 car in
 cash\W?rewards
+casino
 [\W_]CEO[\W_]
 champ(ion|ionship)?s?
 cheap
