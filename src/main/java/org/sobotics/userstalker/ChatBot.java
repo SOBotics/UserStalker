@@ -182,10 +182,58 @@ public class ChatBot
       return (this.executor != null);
    }
 
+
+   private CompletionStage<Long> SendMessage_Retry(Room      room,
+                                                   String    message,
+                                                   Throwable firstAttempt,
+                                                   int       iAttempt)
+   {
+      if (iAttempt < 5)
+      {
+         return room.send(message)
+                    .thenApply(CompletableFuture::completedFuture)
+                    .exceptionally(t ->
+                                   {
+                                      firstAttempt.addSuppressed(t);
+
+                                      try
+                                      {
+                                         TimeUnit.SECONDS.sleep(iAttempt + 1);
+                                      }
+                                      catch (InterruptedException ex)
+                                      {
+                                         Thread.currentThread().interrupt();
+                                      }
+
+                                      return this.SendMessage_Retry(room,
+                                                                    message,
+                                                                    firstAttempt,
+                                                                    (iAttempt + 1));
+                                   })
+                    .thenCompose(Function.identity());
+      }
+      else
+      {
+         return CompletableFuture.failedFuture(firstAttempt);
+      }
+   }
+
+   private void SendMessage(Room room, String message)
+   {
+      if (room != null)
+      {
+         room.send(message)
+             .thenApply(CompletableFuture::completedFuture)
+             .exceptionally(t -> SendMessage_Retry(room, message, t, 0))
+             .thenCompose(Function.identity());
+      }
+   }
+
+
    private void BroadcastMessage(String message)
    {
-      if (this.roomSO != null)  { this.roomSO.send(message); }
-      if (this.roomSE != null)  { this.roomSE.send(message); }
+      if (this.roomSO != null)  { this.SendMessage(this.roomSO, message); }
+      if (this.roomSE != null)  { this.SendMessage(this.roomSE, message); }
    }
 
 
@@ -459,14 +507,14 @@ public class ChatBot
          if (add)  { this.sitesSO.add   (siteName); }
          else      { this.sitesSO.remove(siteName); }
 
-         this.roomSO.send(chatMessage);
+         this.SendMessage(this.roomSO, chatMessage);
       }
       else if (room == this.roomSE)
       {
          if (add)  { this.sitesSE.add   (siteName); }
          else      { this.sitesSE.remove(siteName); }
 
-         this.roomSE.send(chatMessage);
+         this.SendMessage(this.roomSE, chatMessage);
       }
 
       if (wasRunning)
@@ -781,7 +829,7 @@ public class ChatBot
       builder.append(reason);
       builder.append(")");
 
-      room.send(builder.toString());
+      this.SendMessage(room, builder.toString());
    }
 
    private void ReportStatistics(Room room, List<String> sites)
@@ -820,6 +868,6 @@ public class ChatBot
                   + String.format("%.2f", percentage)
                   + "% of total)";
       }
-      room.send(message);
+      this.SendMessage(room, message);
    }
 }
