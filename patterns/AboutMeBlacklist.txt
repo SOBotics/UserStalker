@@ -2,6 +2,7 @@ casino
 [\W_]CEO[\W_]
 client
 consultant
+bingo
 brand
 brides
 deal
