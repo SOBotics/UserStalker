@@ -1,6 +1,11 @@
 casino
 [\W_]CEO[\W_]
+client
+consultant
+brand
 brides
+deal
+fitness
 furniture
 garage[\W_]*door
 illuminati
@@ -10,6 +15,7 @@ lingerie
 matrimon(?:y|ial)
 mattress
 mehndi
+nutrition
 no[\W_]*contract
 online[\W_]*betting
 porn
@@ -19,5 +25,6 @@ retail
 risk[\W_]*free
 [\W_]SEO[\W_]
 service
+supplement
 thabet
 window[\W_]*tint
