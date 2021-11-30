@@ -13,6 +13,7 @@ mehndi
 no[\W_]*contract
 online[\W_]*betting
 porn
+prices?
 repair
 retail
 risk[\W_]*free
