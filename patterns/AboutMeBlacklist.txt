@@ -1,5 +1,6 @@
 casino
 [\W_]CEO[\W_]
+chiropract(?:ic|or)s?
 client
 consultant
 bingo
