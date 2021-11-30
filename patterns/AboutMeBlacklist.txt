@@ -28,3 +28,4 @@ service
 supplement
 thabet
 window[\W_]*tint
+หนัง(?# "movie" in Thai)
