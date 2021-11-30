@@ -7,7 +7,7 @@ donald\s*trump|.*trump.*
 ardroid[\W_]*post
 awards
 bank\W?of\W?america
-(lean|flat)\s?belly
+(?:lean|flat)\s?belly
 belly\s?over\s?night
 bio\s?tech
 Bodily\s?Injury\s?Liability
@@ -18,21 +18,22 @@ car in
 cash\W?rewards
 casino
 [\W_]CEO[\W_]
-champ(ion|ionship)?s?
+champ(?:ion|ionship)?s?
 cheap
-(c|k)ondom
+chiropract(?:ic|or)s?
+(?:c|k)ondom
 consumer\s?reports?
 contest
-(full|progressive).*cover
-crack(s|ing)?\s?(taking|tools?)
+(?:full|progressive).*cover
+crack(?:s|ing)?\s?(?:taking|tools?)
 crossfit
 s\s?cup
 damage\s?claim
 derby
 \bkentucky\s*derb
-diabet(es|ic)
+diabet(?:es|ic)
 elimination\s?chamber
-fastlane(kg)?
+fastlane(?:kg)?
 fight
 finals?
 football
@@ -53,13 +54,13 @@ live
 march\s*madness
 mastercard
 mayweather
-miss.?(universe|world|usa)
+miss.?(?:universe|world|usa)
 musica
 nba
 ncaa
 n[hf]l
 onepageonerank
-\b(australian|british|french|italian|texas|us)[_ ]*open
+\b(?:australian|british|french|italian|texas|us)[_ ]*open
 packers
 penis
 playoff
@@ -73,7 +74,7 @@ sexy?
 stakes
 stream
 super\s*bowl
-tax\s?(calculator|attorney)
+tax\s?(?:calculator|attorney)
 taxi
 thabet
 the ?[0-9]{4}
@@ -83,7 +84,7 @@ waiver
 watch
 web\s?design
 ^world
-wrestl(e|ing)
+wrestl(?:e|ing)
 wwe
 xfinity
 ^.{1,7}dl?san$
