@@ -3,6 +3,7 @@ casino
 chiropract(?:ic|or)s?
 client
 consultant
+cremat(?:e|ion)
 bingo
 brand
 brides
