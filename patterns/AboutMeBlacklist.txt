@@ -32,5 +32,6 @@ risk[\W_]*free
 service
 supplement
 thabet
+wedding
 window[\W_]*tint
 หนัง(?# "movie" in Thai)
