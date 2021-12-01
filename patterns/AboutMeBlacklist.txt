@@ -42,11 +42,14 @@ visit[\W_]*our[\W_]*(?:web[\W_]*)?site
 wedding
 window[\W_]*tint
 
+# German
 luftreiniger
 
+# Polish
 pranie
 meblowej
 tapicerki
 
+# Asian Movie Spammers
 phim(?# "movie" in Vietnamese)
 หนัง(?# "movie" in Thai)
