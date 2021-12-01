@@ -53,6 +53,7 @@ hotlive
 intilight
 league
 live
+[\W_]loans?[\W_]
 march\s*madness
 mastercard
 mayweather
