@@ -30,8 +30,10 @@ retail
 risk[\W_]*free
 [\W_]SEO[\W_]
 service
+sex
 supplement
 thabet
 wedding
 window[\W_]*tint
+phim(?# "movie" in Vietnamese)
 หนัง(?# "movie" in Thai)
