@@ -1,3 +1,4 @@
 der-umzugshelfer\.de
+(?:gas|signal)pistole
 luftreiniger
 web88th\.com
