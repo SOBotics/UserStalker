@@ -39,5 +39,10 @@ transplant
 visit[\W_]*our[\W_]*(?:web[\W_]*)?site
 wedding
 window[\W_]*tint
+
+pranie
+meblowej
+tapicerki
+
 phim(?# "movie" in Vietnamese)
 หนัง(?# "movie" in Thai)
