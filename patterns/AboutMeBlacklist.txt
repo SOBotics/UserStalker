@@ -15,6 +15,7 @@ fitness
 furniture
 garage[\W_]*door
 gi8\.info
+[\W_]HPV[\W_]
 illuminati
 insurance
 keywords:
