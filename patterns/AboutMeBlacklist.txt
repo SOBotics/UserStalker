@@ -8,6 +8,7 @@ bingo
 brand
 brides
 deal
+dispensary
 fitness
 furniture
 garage[\W_]*door
@@ -15,6 +16,7 @@ illuminati
 insurance
 keywords:
 lingerie
+marijuana
 matrimon(?:y|ial)
 mattress
 mehndi
