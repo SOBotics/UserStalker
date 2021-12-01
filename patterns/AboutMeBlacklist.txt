@@ -10,6 +10,7 @@ brides
 deal
 dispensary
 erotic
+firewood
 fitness
 furniture
 garage[\W_]*door
@@ -35,6 +36,7 @@ service
 sex
 supplement
 thabet
+to your door
 transplant
 visit[\W_]*our[\W_]*(?:web[\W_]*)?site
 wedding
