@@ -45,6 +45,7 @@ window[\W_]*tint
 Wyndham 
 
 # German
+(?:signal|gas)pistole
 luftreiniger
 
 # Polish
