@@ -19,6 +19,7 @@ insurance
 keywords:
 lingerie
 marijuana
+(?:major)?[\W_]*brands?[\W_]*(?:names?)?
 matrimon(?:y|ial)
 mattress
 massage
@@ -41,6 +42,7 @@ transplant
 visit[\W_]*our[\W_]*(?:web[\W_]*)?site
 wedding
 window[\W_]*tint
+Wyndham 
 
 # German
 luftreiniger
