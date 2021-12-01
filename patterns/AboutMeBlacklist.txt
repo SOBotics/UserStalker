@@ -42,6 +42,8 @@ visit[\W_]*our[\W_]*(?:web[\W_]*)?site
 wedding
 window[\W_]*tint
 
+luftreiniger
+
 pranie
 meblowej
 tapicerki
