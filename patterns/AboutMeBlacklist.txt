@@ -14,6 +14,7 @@ firewood
 fitness
 furniture
 garage[\W_]*door
+gi8\.info
 illuminati
 insurance
 keywords:
