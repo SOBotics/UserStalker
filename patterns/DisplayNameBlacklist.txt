@@ -87,6 +87,7 @@ ufc
 waiver
 watch
 web\s?design
+[\W_]weed[\W_]
 ^world
 wrestl(?:e|ing)
 wwe
