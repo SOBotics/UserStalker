@@ -86,6 +86,7 @@ thabet
 the ?[0-9]{4}
 ufc
 \s+vs\s+
+vap(?:e|ing)
 waiver
 watch
 web\s?design
