@@ -2,6 +2,7 @@ casino
 [\W_]CBD[\W_]
 [\W_]CEO[\W_]
 chiropract(?:ic|or)s?
+cheat
 client
 consultant
 credit
@@ -39,6 +40,7 @@ matrimon(?:y|ial)
 mattress
 massage
 mehndi
+mortgage
 movie
 nutrition
 no[\W_]*contract
@@ -46,6 +48,7 @@ online[\W_]*betting
 porn
 prices?
 repair
+refinanc(?:e|ing)
 retail
 risk[\W_]*free
 same[\W_]*day
@@ -58,6 +61,7 @@ thabet
 to your door
 transplant
 vap(?:e|ing)
+[\W_]VIP[\W_]
 visit[\W_]*our[\W_]*(?:web[\W_]*)?site
 wedding
 window[\W_]*tint
