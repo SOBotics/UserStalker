@@ -21,6 +21,7 @@ illuminati
 insurance
 keywords:
 lingerie
+luxur(?:y|ious)
 marijuana
 (?:major)?[\W_]*brands?[\W_]*(?:names?)?
 matchfinder
@@ -46,7 +47,8 @@ transplant
 visit[\W_]*our[\W_]*(?:web[\W_]*)?site
 wedding
 window[\W_]*tint
-Wyndham 
+Wyndham
+yacht
 
 # German
 (?:gas|signal)pistole
