@@ -5,6 +5,7 @@ client
 consultant
 cremat(?:e|ion)
 bingo
+blogspot
 brand
 brides
 deal
