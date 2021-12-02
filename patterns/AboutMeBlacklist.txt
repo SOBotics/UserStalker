@@ -64,6 +64,7 @@ yacht
 
 # German
 (?:gas|signal)pistole
+haartrockner
 luftreiniger
 
 # Polish
