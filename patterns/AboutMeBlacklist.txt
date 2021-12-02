@@ -19,6 +19,8 @@ furniture
 garage[\W_]*door
 gi8\.info
 [\W_]HPV[\W_]
+[\W_]IELTS[\W_]
+IELTSMindX
 illuminati
 insurance
 keywords:
