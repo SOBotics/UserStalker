@@ -29,6 +29,7 @@ matrimon(?:y|ial)
 mattress
 massage
 mehndi
+movie
 nutrition
 no[\W_]*contract
 online[\W_]*betting
