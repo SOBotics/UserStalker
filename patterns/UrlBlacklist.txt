@@ -1,6 +1,7 @@
 bestechplots\.in
 \.blogspot\.
 der-umzugshelfer\.de
+doodlekit\.com
 empowher\.com
 fun88chna\.com
 (?:gas|signal)pistole
