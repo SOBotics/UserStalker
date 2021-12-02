@@ -1,4 +1,5 @@
 casino
+[\W_]CBD[\W_]
 [\W_]CEO[\W_]
 chiropract(?:ic|or)s?
 client
@@ -21,6 +22,7 @@ flor(?:al|ist)
 furniture
 garage[\W_]*door
 gi8\.info
+gumm(?:y|ies)
 hotline
 [\W_]HPV[\W_]
 [\W_]IELTS[\W_]
