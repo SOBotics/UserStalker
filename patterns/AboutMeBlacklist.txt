@@ -41,6 +41,7 @@ risk[\W_]*free
 service
 sex
 supplement
+swimming pool
 thabet
 to your door
 transplant
