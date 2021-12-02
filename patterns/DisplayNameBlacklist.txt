@@ -52,6 +52,7 @@ hire
 hotlive
 \binsur
 intilight
+IELTSMindX
 league
 live
 [\W_]loans?[\W_]
