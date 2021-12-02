@@ -74,6 +74,9 @@ pranie
 meblowej
 tapicerki
 
+# Russian
+цене(?# "price")
+
 # Asian Movie Spammers
 phim(?# "movie" in Vietnamese)
 หนัง(?# "movie" in Thai)
