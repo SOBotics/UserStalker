@@ -3,7 +3,9 @@ casino
 chiropract(?:ic|or)s?
 client
 consultant
+credit
 cremat(?:e|ion)
+crypto
 bingo
 blogspot
 brand
@@ -12,6 +14,7 @@ dating
 deal
 dispensary
 erotic
+financ(?:e|ial)
 firewood
 fitness
 flor(?:al|ist)
