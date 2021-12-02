@@ -77,6 +77,7 @@ rugby
 save\s?money
 series
 sexy?
+Shree[\W_]*Tripada
 stakes
 stream
 super\s*bowl
