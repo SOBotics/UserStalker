@@ -18,6 +18,7 @@ flor(?:al|ist)
 furniture
 garage[\W_]*door
 gi8\.info
+hotline
 [\W_]HPV[\W_]
 [\W_]IELTS[\W_]
 IELTSMindX
@@ -51,6 +52,7 @@ swimming pool
 thabet
 to your door
 transplant
+vap(?:e|ing)
 visit[\W_]*our[\W_]*(?:web[\W_]*)?site
 wedding
 window[\W_]*tint
