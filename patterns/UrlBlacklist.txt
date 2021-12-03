@@ -52,7 +52,6 @@ timeforchangecounselling\.com
 time[\W_]*share
 vegas11\.live
 vnice\.io
-w88wins\.net
-w88thpro\.com
+w88
 web88th\.com
 xtgem\.com
