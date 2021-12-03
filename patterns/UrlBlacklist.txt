@@ -1,4 +1,5 @@
 188\.166\.253\.192
+128\.199\.76\.124
 almoheet-travel\.com
 bestechplots\.in
 bloggersdelight\.dk
@@ -30,6 +31,7 @@ matchfinder
 metasevers\.com
 miel\.travel
 mixgupshup\.com
+poker
 over-blog\.com
 sapphirehairclinic\.com
 speedyshare\.com
