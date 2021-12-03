@@ -12,6 +12,7 @@ diigo\.com
 doodlekit\.com
 empoweredconversations\.com
 empowher\.com
+fun888ben\.com
 fun88chna\.com
 (?:gas|signal)pistole
 gi8\.info
