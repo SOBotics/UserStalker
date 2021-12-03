@@ -1,9 +1,14 @@
 package org.sobotics.userstalker;
 
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.Instant;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,11 +41,13 @@ import org.sobotics.userstalker.User;
 
 public class ChatBot
 {
-   private static final int    POLL_TIME_MINUTES = 3;
-   private static final String BOT_URL           = "https://git.io/v5CGT";
-   private static final String CHAT_MSG_PREFIX   = "[ [User Stalker](" + BOT_URL + ") ]";
-   private static final String UNKNOWN_CMD_MSG   = "You talkin\u2019 to me? Psst\u2026ping me and say \"help\".";
-   private static final String HELP_CMD_MSG      =
+   private static final String PERSISTED_STATE_FILE  = "savedState.bin";
+   private static final int    POLL_TIME_MINUTES     = 3;
+   private static final long   SO_CHAT_USER_ADMINS[] = { 366904, };
+   private static final String BOT_URL               = "https://git.io/v5CGT";
+   private static final String CHAT_MSG_PREFIX       = "[ [User Stalker](" + BOT_URL + ") ]";
+   private static final String UNKNOWN_CMD_MSG       = "You talkin\u2019 to me? Psst\u2026ping me and say \"help\".";
+   private static final String HELP_CMD_MSG          =
   "I'm User Stalker (" + BOT_URL + "), a bot that continuously queries the "
 + "Stack Exchange \"/users\" API (https://api.stackexchange.com/docs/users) in order to "
 + "track all newly-created user accounts. If a suspicious pattern is detected in one of "
@@ -77,12 +84,13 @@ public class ChatBot
 + "\u3000\u25CF \"start\": Starts the stalking service from where it left off."
 +                       " (Intended to be used after a \"stop\" command.)"
 + "\n"
-+ "\u3000\u25CF \"restart\": Starts the stalking service fresh, beginning from the current time."
-+                          " (Can be used after a \"stop\" command, or any other time.)"
++ "\u3000\u25CF \"reboot\": Turns it off and back on again by rebooting the entire bot."
++                         " (All temporary changes to the stalking lists will be lost.)"
 + "\n"
-+ "\u3000\u25CF \"reboot\": Turns it off and back on again by rebooting the entire bot, as if the server had been rebooted."
-+                         " (Any changes to pattern databases will be picked up at this time, and"
-+                         " all temporary changes to the stalking lists will be lost.)"
++ "\u3000\u25CF \"upgrade\": Like \"reboot\", but pulls latest code from GitHub, performs a build, and"
++                         " replaces the current binary with the resulting new version before rebooting."
++                         " (All temporary changes to the stalking lists will be lost. Usage of this"
++                         "  command is limited to the SO room from users with admin privileges.)"
 + "\n\n"
 + "If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!)."
 ;
@@ -174,7 +182,7 @@ public class ChatBot
       this.seApi = new StackExchangeApiClient(this::OnQuotaRollover);
 
       // Start the stalking service.
-      this.DoStart(false);
+      this.DoStart();
    }
 
 
@@ -327,17 +335,17 @@ public class ChatBot
          }
          else if (messageParts[1].equals("start"))
          {
-            this.DoStart(true);
-            return;
-         }
-         else if (messageParts[1].equals("restart"))
-         {
-            this.DoStart(false);
+            this.DoStart();
             return;
          }
          else if (messageParts[1].equals("reboot"))
          {
             this.DoReboot();
+            return;
+         }
+         else if (messageParts[1].equals("upgrade"))
+         {
+            this.DoUpgrade(room, replyID, message.getUser());
             return;
          }
       }
@@ -460,7 +468,7 @@ public class ChatBot
       this.BroadcastMessage(CHAT_MSG_PREFIX + " The pattern databases have been successfully updated.");
       if (wasRunning)
       {
-         this.DoStart(true);
+         this.DoStart();
       }
    }
 
@@ -530,7 +538,7 @@ public class ChatBot
 
       if (wasRunning)
       {
-         this.DoStart(true);
+         this.DoStart();
       }
    }
 
@@ -538,9 +546,9 @@ public class ChatBot
    {
       if (this.executor != null)
       {
-         String stopMessage      = "Stopping the user stalker service...";
-         String stopNowMessage   = "Failed to cleanly stop user stalker service; forcibly shutting it down...";
-         String stopFinalMessage = "Forced shutdown timed out after 5 seconds; terminating anyway...";
+         String stopMessage      = "Stopping the User Stalker service...";
+         String stopNowMessage   = "Failed to cleanly stop User Stalker service; forcibly shutting it down...";
+         String stopFinalMessage = "Forced shutdown of User Stalker service timed out after 5 seconds; terminating anyway...";
 
          LOGGER.info(stopMessage);
          this.BroadcastMessage(CHAT_MSG_PREFIX + " " + stopMessage);
@@ -567,18 +575,33 @@ public class ChatBot
             Thread.currentThread().interrupt();
          }
          this.executor = null;
+
+         LOGGER.info("Persisting state to file (\"" + PERSISTED_STATE_FILE + "\")...");
+         try
+         {
+            FileOutputStream   fos = new FileOutputStream(PERSISTED_STATE_FILE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this.siteInfoMap);
+            oos.close();
+            fos.close();
+         }
+         catch (IOException ex)
+         {
+            LOGGER.warn("Failed to persist state to file: " + ex + ".");
+            ex.printStackTrace();
+         }
       }
       else
       {
-         String message = "The user stalker service is not running.";
+         String message = "The User Stalker service is not running.";
          LOGGER.info(message);
          this.BroadcastMessage(CHAT_MSG_PREFIX + " " + message);
       }
    }
 
-   private void DoStart(boolean resume)
+   private void DoStart()
    {
-      LOGGER.info("Attempting to start the user stalker service...");
+      LOGGER.info("Attempting to start the User Stalker service...");
 
       if (this.IsRunning())
       {
@@ -589,26 +612,40 @@ public class ChatBot
                                ((this.roomSE != null) && !this.sitesSE.isEmpty()));
       if (somethingToDo)
       {
-         if (!resume || (this.siteInfoMap == null))
+         if (this.siteInfoMap == null)
          {
             long startTime = Instant.now().minusSeconds(60).getEpochSecond();
+            int sites      = (((this.sitesSO != null) ? this.sitesSO.size() : 0) +
+                              ((this.sitesSE != null) ? this.sitesSE.size() : 0));
 
-            int sites        = (((this.sitesSO != null) ? this.sitesSO.size() : 0) +
-                                ((this.sitesSE != null) ? this.sitesSE.size() : 0));
-            this.siteInfoMap = new HashMap<String, StackExchangeSiteInfo>(sites * 2);
+            LOGGER.info("Attempting to load persisted state from file (\"" + PERSISTED_STATE_FILE + "\")...");
+            try
+            {
+               FileInputStream   fis = new FileInputStream(PERSISTED_STATE_FILE);
+               ObjectInputStream ois = new ObjectInputStream(fis);
+               this.siteInfoMap      = (Map<String, StackExchangeSiteInfo>)ois.readObject();
+               ois.close();
+            }
+            catch (IOException ex)
+            {
+               LOGGER.warn("Failed to load persisted state from file: " + ex + ".");
+               ex.printStackTrace();
+
+               this.siteInfoMap = new HashMap<String, StackExchangeSiteInfo>(sites * 2);
+            }
 
             if (this.sitesSO != null)
             {
                for (String site : this.sitesSO)
                {
-                  this.siteInfoMap.put(site, new StackExchangeSiteInfo(startTime));
+                  this.siteInfoMap.putIfAbsent(site, new StackExchangeSiteInfo(startTime));
                }
             }
             if (this.sitesSE != null)
             {
                for (String site : this.sitesSE)
                {
-                  this.siteInfoMap.put(site, new StackExchangeSiteInfo(startTime));
+                  this.siteInfoMap.putIfAbsent(site, new StackExchangeSiteInfo(startTime));
                }
             }
          }
@@ -619,10 +656,24 @@ public class ChatBot
                                            POLL_TIME_MINUTES,
                                            TimeUnit.MINUTES);
       }
-      String message = (somethingToDo ? "The user stalker service has started."
-                                      : "The user stalker service did not start because there is nothing to do.");
+      String message = "The User Stalker service (v " + UserStalker.VERSION + ") "
+                     + (somethingToDo ? "has started."
+                                      : "did not start because there is nothing to do.");
       LOGGER.info(message);
       this.BroadcastMessage(CHAT_MSG_PREFIX + " " + message);
+   }
+
+   private void DoLeave()
+   {
+      if (this.roomSE != null)
+      {
+         this.roomSE.leave();
+      }
+
+      if (this.roomSO != null)
+      {
+         this.roomSO.leave();
+      }
    }
 
    private void DoReboot()
@@ -633,15 +684,41 @@ public class ChatBot
       }
 
       LOGGER.info("Rebooting the bot...");
-      if (this.roomSE != null)
-      {
-         this.roomSE.leave();
-      }
-      if (this.roomSO != null)
-      {
-         this.roomSO.leave();
-      }
+      this.DoLeave();
       System.exit(0);
+   }
+
+   private void DoUpgrade(Room room, long replyID, User sendingUser)
+   {
+      // Require that the message comes from the SO room and that it comes from a user whose chat ID
+      // indicates that they have admin privileges.
+      if ((room == this.roomSO)                              &&
+          (room.getHost().getName().equals("stackoverflow")) &&
+          (sendingUser != null)                              &&
+          (Arrays.stream(SO_CHAT_USER_ADMINS).anyMatch(id -> id == sendingUser.getId())))
+      {
+         if (this.IsRunning())
+         {
+            this.DoStop();
+         }
+
+         LOGGER.info("The bot is going down for an upgrade...");
+         this.BroadcastMessage(CHAT_MSG_PREFIX + " " + "Going down for an upgrade; be back soon!");
+         this.DoLeave();
+         System.exit(42);
+      }
+      else
+      {
+         String logMessage = "Unprivileged attempt to upgrade (Room: " + room.toString();
+         if (sendingUser != null)
+         {
+            logMessage += "; User: " + user.toString();
+         }
+         logMessage += ").";
+         LOGGER.warn(logMessage);
+
+         room.replyTo(replyID, "I'm sorry, Dave. I'm afraid I can't do that.");
+      }
    }
 
 

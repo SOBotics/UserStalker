@@ -22,11 +22,19 @@ public class UserStalker
 
    private static final Logger LOGGER = LoggerFactory.getLogger(UserStalker.class);
 
+   public static String VERSION;
+
 
    public static void main(String[] args) throws IOException
    {
       try
       {
+         // Load version number from properties.
+         Properties properties = new Properties();
+         properties.load(UserStalker.class.getClassLoader().getResourceAsStream("project.properties"));
+         VERSION = properties.getProperty("version");
+         LOGGER.info("Starting User Stalker v" + VERSION + "...");
+
          // Load "login" properties file.
          Properties propLogin = new Properties();
          try
