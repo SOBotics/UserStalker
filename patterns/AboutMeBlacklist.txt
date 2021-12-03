@@ -46,6 +46,7 @@ movie
 nutrition
 no[\W_]*contract
 online[\W_]*betting
+poker
 porn
 prices?
 repair
