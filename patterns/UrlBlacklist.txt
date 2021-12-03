@@ -42,7 +42,7 @@ teknologia\.co
 thedcteam\.com
 thepulplist\.com
 timeforchangecounselling\.com
-timeshare
+time[\W_]*share
 vegas11\.live
 vnice\.io
 w88wins\.net
