@@ -28,34 +28,34 @@ public class User
    public String getSite()                                 { return site; }
 
 
-   public String getAboutMe()                              { return aboutMe; }
+   public String getAboutMe()                              { return aboutMe;         }
    public void setAboutMe(String aboutMe)                  { this.aboutMe = aboutMe; }
 
-   public Long getAccountId()                              { return accountId; }
+   public Long getAccountId()                              { return accountId;           }
    public void setAccountId(Long accountId)                { this.accountId = accountId; }
 
-   public Long getCreationDate()                           { return creationDate; }
+   public Long getCreationDate()                           { return creationDate;              }
    public void setCreationDate(Long creationDate)          { this.creationDate = creationDate; }
 
-   public String getDisplayName()                          { return displayName; }
+   public String getDisplayName()                          { return displayName;             }
    public void setDisplayName(String displayName)          { this.displayName = displayName; }
 
-   public String getLink()                                 { return link; }
+   public String getLink()                                 { return link;      }
    public void setLink(String link)                        { this.link = link; }
 
-   public String getLocation()                             { return location; }
+   public String getLocation()                             { return location;          }
    public void setLocation(String location)                { this.location = location; }
 
-   public String getProfileImage()                         { return profileImage; }
+   public String getProfileImage()                         { return profileImage;              }
    public void setProfileImage(String profileImage)        { this.profileImage = profileImage; }
 
-   public Long getTimedPenaltyDate()                       { return timedPenaltyDate; }
+   public Long getTimedPenaltyDate()                       { return timedPenaltyDate;                  }
    public void setTimedPenaltyDate(Long timedPenaltyDate)  { this.timedPenaltyDate = timedPenaltyDate; }
 
-   public Long getUserId()                                 { return userId; }
+   public Long getUserId()                                 { return userId;        }
    public void setUserId(Long userId)                      { this.userId = userId; }
 
-   public String getWebsiteUrl()                           { return websiteUrl; }
+   public String getWebsiteUrl()                           { return websiteUrl;            }
    public void setWebsiteUrl(String websiteUrl)            { this.websiteUrl = websiteUrl; }
 
 

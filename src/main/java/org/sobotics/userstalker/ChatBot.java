@@ -98,6 +98,7 @@ public class ChatBot
    private StackExchangeApiClient             seApi;
    private ScheduledExecutorService           executor;
    private Map<String, StackExchangeSiteInfo> siteInfoMap;
+   private boolean                            stalkSE = true;
 
 
    public ChatBot(String emailAddress, String password)
@@ -377,10 +378,14 @@ public class ChatBot
          this.DoStalk(this.roomSO, this.sitesSO);
       }
 
-      if ((this.roomSE != null) && !this.sitesSE.isEmpty())
+      if (this.stalkSE)
       {
-         this.DoStalk(this.roomSE, this.sitesSE);
+         if ((this.roomSE != null) && !this.sitesSE.isEmpty())
+         {
+            this.DoStalk(this.roomSE, this.sitesSE);
+         }
       }
+      this.stalkSE = !this.stalkSE;
    }
 
    private void DoStalk(Room room, List<String> sites)
@@ -388,9 +393,10 @@ public class ChatBot
       boolean showSite = (sites.size() > 1);
       for (String site : sites)
       {
+         long                  oldTime   = siteInfo.ToDate;
          long                  startTime = Instant.now().getEpochSecond();
          StackExchangeSiteInfo siteInfo  = this.siteInfoMap.get(site);
-         siteInfo.FromDate               = siteInfo.ToDate;
+         siteInfo.FromDate               = oldTime;
          siteInfo.ToDate                 = startTime;
 
          LOGGER.info("Stalking " + site + " at " + siteInfo.ToDate + " (last was at " + siteInfo.FromDate + ")...");
@@ -412,6 +418,11 @@ public class ChatBot
                   ReportUser(room, user, reason, showSite);
                }
             }
+         }
+         else
+         {
+            LOGGER.warn("Failed to retrieve user information from SE API when stalking " + site + "; skipping this time.");
+            siteInfo.ToDate = oldTime;
          }
       }
    }
@@ -634,13 +645,18 @@ public class ChatBot
    }
 
 
+   private static boolean ContainsNonLatin(String string)
+   {
+      return string.codePoints().anyMatch(codepoint -> Character.UnicodeScript.of(codepoint) != Character.UnicodeScript.LATIN);
+   }
+
    private String CheckUser(User user)
    {
       String            name     = user.getDisplayName();
       String            location = user.getLocation();
       String            url      = user.getWebsiteUrl();
       String            about    = user.getAboutMe();
-      ArrayList<String> reasons  = new ArrayList<String>(25);
+      ArrayList<String> reasons  = new ArrayList<String>(32);
 
       // Check for an active suspension.
       if (user.getTimedPenaltyDate() != null)
@@ -677,6 +693,11 @@ public class ChatBot
             reasons.add("username contains possibly offensive pattern");
          }
 
+         if (RegexManager.AnyMatches(name, this.regexes.KeywordSmokeyBlacklist))
+         {
+            reasons.add("username contains keyword on Smokey's blacklist");
+         }
+
          if (name.contains(Integer.toString(Year.now().getValue())))
          {
             reasons.add("username contains current year");
@@ -686,12 +707,22 @@ public class ChatBot
             reasons.add("username contains next year");
          }
 
+         if (RegexManager.AnyMatches(name, this.regexes.UrlPatterns))
+         {
+            reasons.add("username contains URL");
+         }
+
+         if (this.ContainsNonLatin(name))
+         {
+            reasons.add("username contains non-Latin character");
+         }
+
          if ((url != null) && !url.isBlank())
          {
-            String normalizedName = name.replaceAll("[^a-zA-Z ]", "").toLowerCase();
-            String normalizedUrl  = url .replaceAll("[^a-zA-Z ]", "").toLowerCase();
-            if (name.toLowerCase().contains(normalizedUrl ) ||
-                url .toLowerCase().contains(normalizedName))
+            String normalizedName = name.replaceAll("[^a-zA-Z]", "").toLowerCase();
+            String normalizedUrl  = url .replaceAll("[^a-zA-Z]", "").toLowerCase();
+            if (normalizedName.toLowerCase().contains(normalizedUrl ) ||
+                normalizedUrl .toLowerCase().contains(normalizedName))
             {
                reasons.add("URL similar to username");
             }
@@ -704,6 +735,21 @@ public class ChatBot
          if (RegexManager.AnyMatches(url, this.regexes.UrlBlacklist))
          {
             reasons.add("URL on blacklist");
+         }
+
+         if (RegexManager.AnyMatches(url, this.regexes.UrlSmokeyBlacklist))
+         {
+            reasons.add("URL on Smokey's blacklist");
+         }
+
+         if (RegexManager.AnyMatches(url, this.regexes.KeywordSmokeyBlacklist))
+         {
+            reasons.add("URL contains keyword on Smokey's blacklist");
+         }
+
+         if (this.ContainsNonLatin(url))
+         {
+            reasons.add("URL contains non-Latin character");
          }
       }
 
@@ -723,6 +769,16 @@ public class ChatBot
          if (RegexManager.AnyMatches(location, this.regexes.OffensiveLo))
          {
             reasons.add("location contains possibly offensive pattern");
+         }
+
+         if (RegexManager.AnyMatches(location, this.regexes.KeywordSmokeyBlacklist))
+         {
+            reasons.add("location contains keyword on Smokey's blacklist");
+         }
+
+         if (RegexManager.AnyMatches(location, this.regexes.UrlPatterns))
+         {
+            reasons.add("location contains URL");
          }
       }
 
@@ -749,6 +805,11 @@ public class ChatBot
             reasons.add("\"About Me\" contains possibly offensive pattern");
          }
 
+         if (RegexManager.AnyMatches(about, this.regexes.KeywordSmokeyBlacklist))
+         {
+            reasons.add("\"About Me\" contains keyword on Smokey's blacklist");
+         }
+
          if (RegexManager.AnyMatches(about, this.regexes.PhonePatterns))
          {
             reasons.add("\"About Me\" contains phone number");
@@ -761,12 +822,31 @@ public class ChatBot
 
          if (RegexManager.AnyMatches(about, this.regexes.UrlBlacklist))
          {
-            reasons.add("\"About Me\" contains blacklisted URL");
+            reasons.add("\"About Me\" contains URL on blacklist");
+         }
+
+         if (RegexManager.AnyMatches(about, this.regexes.UrlSmokeyBlacklist))
+         {
+            reasons.add("\"About Me\" contains URL on Smokey's blacklist");
          }
 
          if (about.toLowerCase().contains("</a>"))
          {
             reasons.add("\"About Me\" contains a link");
+         }
+         else
+         {
+            // Even if there is not an actual link, check to see if there is a non-linked URL
+            // (e.g., "example.com").
+            if (RegexManager.AnyMatches(about, this.regexes.UrlPatterns))
+            {
+               reasons.add("location contains URL");
+            }
+         }
+
+         if (this.ContainsNonLatin(about))
+         {
+            reasons.add("\"About Me\" contains non-Latin character");
          }
       }
 

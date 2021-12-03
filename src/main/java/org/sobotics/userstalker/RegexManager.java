@@ -22,11 +22,15 @@ public class RegexManager
    private static final String  OFFENSIVE_REGEX_MD_URL         = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_medium_score.txt";
    private static final String  OFFENSIVE_REGEX_LO_URL         = "https://raw.githubusercontent.com/SOBotics/SOCVFinder/master/SOCVDBService/ini/regex_low_score.txt";
    private static final String  SMOKEY_NAME_REGEX_URL          = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_usernames.txt";
+   private static final String  SMOKEY_URL_REGEX_URL           = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_websites.txt";
+   private static final String  SMOKEY_KEYWORD_REGEX_URL       = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/bad_keywords.txt";
+ //private static final String  SMOKEY_KEYWORD_REGEX_WATCH_URL = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/watched_keywords.txt";
    private static final String  INTERNAL_NAME_REGEX_URL        = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/DisplayNameBlacklist.txt";
    private static final String  INTERNAL_ABOUT_REGEX_URL       = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/AboutMeBlacklist.txt";
    private static final String  INTERNAL_URL_REGEX_URL         = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/UrlBlacklist.txt";
    private static final String  INTERNAL_PHONE_REGEX_URL       = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/PhoneNumber.txt";
    private static final String  INTERNAL_EMAIL_REGEX_URL       = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/EmailAddress.txt";
+   private static final String  INTERNAL_URL_PATTERN_REGEX_URL = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/Url.txt";
    private static final Pattern REGEX_COMMENT_PATTERN          = Pattern.compile("\\(\\?#.*\\)"                        , Pattern.CASE_INSENSITIVE);
    private static final Pattern REGEX_POSITIVE_LOOKBEHIND_STAR = Pattern.compile("(\\(\\?\\<\\=.*?)(?:\\*{1,2})(.*\\))", Pattern.CASE_INSENSITIVE);
    private static final Pattern REGEX_POSITIVE_LOOKBEHIND_PLUS = Pattern.compile("(\\(\\?\\<\\=.*?)(?:\\+{1,2})(.*\\))", Pattern.CASE_INSENSITIVE);
@@ -37,6 +41,8 @@ public class RegexManager
    public List<Pattern> OffensiveMd;
    public List<Pattern> OffensiveLo;
    public List<Pattern> NameSmokeyBlacklist;
+   public List<Pattern> UrlSmokeyBlacklist;
+   public List<Pattern> KeywordSmokeyBlacklist;
    public List<Pattern> NameBlacklist;
    public List<Pattern> AboutBlacklist;
    public List<Pattern> UrlBlacklist;
@@ -54,15 +60,19 @@ public class RegexManager
    {
       LOGGER.info("Initializing and (re-)loading patterns...");
 
-      this.OffensiveHi         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_HI_URL  ));
-      this.OffensiveMd         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_MD_URL  ));
-      this.OffensiveLo         = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_LO_URL  ));
-      this.NameSmokeyBlacklist = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_NAME_REGEX_URL   ));
-      this.NameBlacklist       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_NAME_REGEX_URL ));
-      this.AboutBlacklist      = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_ABOUT_REGEX_URL));
-      this.UrlBlacklist        = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_URL_REGEX_URL  ));
-      this.EmailPatterns       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_EMAIL_REGEX_URL));
-      this.PhonePatterns       = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_PHONE_REGEX_URL));
+      this.OffensiveHi            = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_HI_URL        ));
+      this.OffensiveMd            = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_MD_URL        ));
+      this.OffensiveLo            = CompileRegexFromPatternList(LoadPatternsFromUrl(OFFENSIVE_REGEX_LO_URL        ));
+      this.NameSmokeyBlacklist    = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_NAME_REGEX_URL         ));
+      this.UrlSmokeyBlacklist     = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_URL_REGEX_URL          ));
+      this.KeywordSmokeyBlacklist = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_KEYWORD_REGEX_URL      ));
+    //this.KeywordSmokeyWatchlist = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_KEYWORD_REGEX_WATCH_URL));  // WARNING: Needs special parsing!
+      this.NameBlacklist          = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_NAME_REGEX_URL       ));
+      this.AboutBlacklist         = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_ABOUT_REGEX_URL      ));
+      this.UrlBlacklist           = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_URL_REGEX_URL        ));
+      this.PhonePatterns          = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_PHONE_REGEX_URL      ));
+      this.EmailPatterns          = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_EMAIL_REGEX_URL      ));
+      this.UrlPatterns            = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_URL_PATTERN_REGEX_URL));
    }
 
 

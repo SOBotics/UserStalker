@@ -205,15 +205,15 @@ public class StackExchangeApiClient
                          + "\". Body is: "
                          + response.body());
 
-               // This error ("Violation of backoff parameter") is spontaneously returned by the
+               // The error 502 ("Violation of backoff parameter") is spontaneously returned by the
                // SE API for unknown reasons, even though we are appropriately handling the logic
                // for the backoff parameter. It fails for all of the requests in that same block,
-               // but will then magically start working again in the next batch. There is no
-               // suggested backoff value returned in the event of a backoff error (although it
-               // was suggested before, many years ago: https://meta.stackexchange.com/q/256691),
-               // but we can try waiting a "standard" amount of time and then try again.
-               try                             { TimeUnit.SECONDS.sleep(15); }
-               catch (InterruptedException ex) { Thread.currentThread().interrupt(); }
+               // but will then magically start working again in the next batch (or so). There is no
+               // suggested backoff value returned in the event of a backoff error (although it was
+               // suggested before, many years ago: https://meta.stackexchange.com/q/256691), but
+               // we can try waiting a "standard" amount of time and then try again.
+               try                              { TimeUnit.SECONDS.sleep(20); }
+               catch (InterruptedException ex)  { Thread.currentThread().interrupt(); }
                continue;
             }
          }
