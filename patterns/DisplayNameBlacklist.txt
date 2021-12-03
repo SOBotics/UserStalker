@@ -42,6 +42,7 @@ fight
 finals?
 football
 free
+fun888
 (?:classic|games)[a-z0-9 ]*?[0-9]{4}
 game\s?of\s?
 giro
