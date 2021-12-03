@@ -85,6 +85,7 @@ tapicerki
 # Russian
 цене(?# "price")
 
-# Asian Movie Spammers
+# Asian
 phim(?# "movie" in Vietnamese)
 หนัง(?# "movie" in Thai)
+คาสิโน(?# "casino" in Thai)
