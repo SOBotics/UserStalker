@@ -1,10 +1,11 @@
-casino
+(?:c|k)asino
 [\W_]CBD[\W_]
 [\W_]CEO[\W_]
 chiropract(?:ic|or)s?
 cheat
 client
 consultant
+coupon
 credit
 cremat(?:e|ion)
 crypto
@@ -72,6 +73,9 @@ yacht
 (?:gas|signal)pistole
 haartrockner
 luftreiniger
+
+# French
+greffe[\W_]*de[\W_]*cheveux
 
 # Polish
 pranie
