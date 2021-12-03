@@ -48,6 +48,7 @@ golden\s?globes?
 \bgrammy
 grand\W?prix
 green\s?bay\s?packers?
+greffe[\W_]*de[\W_]*cheveux
 hire
 hotlive
 \binsur
@@ -59,6 +60,7 @@ live
 march\s*madness
 mastercard
 mayweather
+miel[\W_]*travel
 miss.?(?:universe|world|usa)
 musica
 nba
