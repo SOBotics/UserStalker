@@ -8,6 +8,7 @@ alldatmatterz
 ardroid[\W_]*post
 awards
 bank\W?of\W?america
+beauty[\W_]*solutions?
 (?:lean|flat)\s?belly
 belly\s?over\s?night
 bio\s?tech
