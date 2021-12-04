@@ -30,8 +30,7 @@ empowher\.com
 evernote\.com\/shard
 fiverr\.com
 freewebcams
-fun888ben\.com
-fun88chna\.com
+fun888?\S*\.com
 (?:gas|signal)pistole
 gi8\.info
 greenlinecoffee\.net
@@ -47,6 +46,8 @@ jigsy\.com
 kjandhairspray\.com
 krrailengg\.com
 ku66
+lawyer
+learningmywaym\.org
 lowescouponn\.com
 lucialpiazzale\.com
 luftreiniger
@@ -56,6 +57,7 @@ matchfinder
 metasevers\.com
 miel\.travel
 mixgupshup\.com
+modestfashionstylist\.com
 namenecklaces\.co
 page\.tl
 paletuaglasses\.com
@@ -66,15 +68,18 @@ over-blog\.com
 revivebeautysolutions\.ca
 rubiredtea\.com\.au
 russianpassportsandvisas\.com
+saovietjsc\.vn
 sapphirehairclinic\.com
 shemale
 snsrheumatology\.com
 sodocasino\.xyz
+spadadigital\.com
 speedyshare\.com
 stageit\.com
-studiokhora\.com
 strips\.finance
+studiokhora\.com
 suckhoeceo247\.com
+taringa\.net
 teknologia\.co
 thedcteam\.com
 theodysseyonline\.com
