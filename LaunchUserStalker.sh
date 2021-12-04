@@ -17,15 +17,29 @@ do
 	java -jar "${JAR_FILE}" >> "${LOG_FILE}" 2>&1
 	if [ $? -eq 42 ]; then
 		# Do in-place upgrade.
-		mkdir -p "temp"
-		rm -rf 'temp/{*,.*}'
-		cd "temp" || exit
-		git clone "${GIT_CLONE_URL}"
-		cd "UserStalker" || exit
-		mvn package
-		cp "target/UserStalker-*.jar" "${SCRIPT_DIR}/UserStalker.jar"
-		cp "LaunchUserStalker.sh" "${SCRIPT_DIR}"
-		chmod +x "../LaunchUserStalker.sh"
-		# NOTE: Do not copy .properties files!
+		{
+			printf '\n'
+			printf '-%.0s' {1..80}
+			printf "Start of in-place upgrade attempt."
+			printf '-%.0s' {1..80}
+			printf '\n'
+
+			mkdir -p "temp"
+			rm -rf 'temp/{*,.*}'
+			cd "temp" || exit
+			git clone "${GIT_CLONE_URL}"
+			cd "UserStalker" || exit
+			mvn package
+			cp "target/UserStalker-*.jar" "${SCRIPT_DIR}/UserStalker.jar"
+			cp "LaunchUserStalker.sh" "${SCRIPT_DIR}"
+			chmod +x "../LaunchUserStalker.sh"
+			# NOTE: Do not copy .properties files!
+
+			printf '\n'
+			printf '-%.0s' {1..80}
+			printf "End of in-place upgrade attempt."
+			printf '-%.0s' {1..80}
+			printf '\n'
+		} >> "${LOG_FILE}"
 	fi
 done
