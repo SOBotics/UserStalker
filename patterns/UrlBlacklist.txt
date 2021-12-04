@@ -81,6 +81,7 @@ threedashesagency\.com\.au
 timeforchangecounselling\.com
 time[\W_]*share
 vegas11\.live
+vhearts\.net
 vnice\.io
 w88
 web88th\.com
