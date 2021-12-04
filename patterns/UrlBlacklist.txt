@@ -1,6 +1,7 @@
 174\.138\.20\.63
 188\.166\.253\.192
 128\.199\.76\.124
+4shared\.com
 advancedrestorationsolutions\.com
 almoheet-travel\.com
 bathlanegarage\.co\.uk
@@ -10,10 +11,12 @@ bestechplots\.in
 bestinsuranceonline\.ca
 bloggersdelight\.dk
 \.blogspot\.
+blueskyes\.app
 bravesites\.com
 cheatpekalonganvip\.com
 codenamecentrepoint\.com
 corecrack\.com
+cryptodevelopers\.net
 cuachongmuoihoaphat\.net
 der-umzugshelfer\.de
 dermalcosmeticpharma\.com
@@ -22,6 +25,7 @@ doodlekit\.com
 dumpscafe\.com
 empoweredconversations\.com
 empowher\.com
+evernote\.com\/shard
 fiverr\.com
 freewebcams
 fun888ben\.com
@@ -54,6 +58,7 @@ namenecklaces\.co
 page\.tl
 paletuaglasses\.com
 penzu\.com
+pixnet\.net
 poker
 over-blog\.com
 revivebeautysolutions\.ca
@@ -65,11 +70,13 @@ snsrheumatology\.com
 sodocasino\.xyz
 speedyshare\.com
 stageit\.com
+studiokhora\.com
 suckhoeceo247\.com
 teknologia\.co
 thedcteam\.com
 theodysseyonline\.com
 thepulplist\.com
+threedashesagency\.com\.au
 timeforchangecounselling\.com
 time[\W_]*share
 vegas11\.live
