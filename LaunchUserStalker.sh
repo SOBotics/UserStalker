@@ -23,7 +23,7 @@ do
 		git clone "${GIT_CLONE_URL}"
 		cd "UserStalker" || exit
 		mvn package
-		cp "target/UserStalker.jar" "${SCRIPT_DIR}"
+		cp "target/UserStalker-*.jar" "${SCRIPT_DIR}/UserStalker.jar"
 		cp "LaunchUserStalker.sh" "${SCRIPT_DIR}"
 		chmod +x "../LaunchUserStalker.sh"
 		# NOTE: Do not copy .properties files!
