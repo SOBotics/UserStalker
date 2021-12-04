@@ -33,6 +33,7 @@ hotline
 IELTSMindX
 illuminati
 insurance
+interest[\W_]*rate
 keywords:
 lingerie
 luxur(?:y|ious)
