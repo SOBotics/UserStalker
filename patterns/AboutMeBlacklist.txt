@@ -17,6 +17,7 @@ dating
 deal
 dispensary
 erotic
+exam
 financ(?:e|ial)
 firewood
 fitness
