@@ -41,6 +41,7 @@ hits943\.com
 homemakersinterior\.com
 hpage\.com
 [\W_]+hpv[\W_]+
+huicopper\.com
 iamarrows\.com
 infoapartemen\.com
 jigsy\.com
