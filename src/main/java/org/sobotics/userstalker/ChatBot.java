@@ -11,6 +11,7 @@ import java.time.Instant;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executors;
@@ -44,13 +45,20 @@ import org.sobotics.userstalker.StackExchangeSiteInfo;
 
 public class ChatBot
 {
-   private static final String PERSISTED_STATE_FILE  = "savedState.bin";
-   private static final int    POLL_TIME_MINUTES     = 3;
-   private static final long   SO_CHAT_USER_ADMINS[] = { 366904, };
-   private static final String BOT_URL               = "https://git.io/v5CGT";
-   private static final String CHAT_MSG_PREFIX       = "[ [User Stalker](" + BOT_URL + ") ]";
-   private static final String UNKNOWN_CMD_MSG       = "You talkin\u2019 to me? Psst\u2026ping me and say \"help\".";
-   private static final String HELP_CMD_MSG          =
+   private static final int                 POLL_TIME_MINUTES     = 3;
+   private static final Map<String, long[]> CHAT_ADMIN_USERIDS;
+      static
+      {
+         HashMap<String, long[]> map = new HashMap<String, long[]>();
+         map.put("stackoverflow.com", new long[] { 366904, });
+         map.put("stackexchange.com", new long[] { 7959, });
+         CHAT_ADMIN_USERIDS = Collections.unmodifiableMap(map);
+      }
+   private static final String              PERSISTED_STATE_FILE  = "savedState.bin";
+   private static final String              BOT_URL               = "https://git.io/v5CGT";
+   private static final String              CHAT_MSG_PREFIX       = "[ [User Stalker](" + BOT_URL + ") ]";
+   private static final String              UNKNOWN_CMD_MSG       = "You talkin\u2019 to me? Psst\u2026ping me and say \"help\".";
+   private static final String              HELP_CMD_MSG          =
   "I'm User Stalker (" + BOT_URL + "), a bot that continuously queries the "
 + "Stack Exchange \"/users\" API (https://api.stackexchange.com/docs/users) in order to "
 + "track all newly-created user accounts. If a suspicious pattern is detected in one of "
@@ -92,8 +100,8 @@ public class ChatBot
 + "\n"
 + "\u3000\u25CF \"upgrade\": Like \"reboot\", but pulls latest code from GitHub, performs a build, and"
 +                         " replaces the current binary with the resulting new version before rebooting."
-+                         " (All temporary changes to the stalking lists will be lost. Usage of this"
-+                         "  command is limited to the SO room from users with admin privileges.)"
++                         " (All temporary changes to the stalking lists will be lost."
++                         "  Usage of this command is limited to users with admin privileges.)"
 + "\n\n"
 + "If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!)."
 ;
@@ -698,35 +706,37 @@ public class ChatBot
 
    private void DoUpgrade(Room room, long replyID, org.sobotics.chatexchange.chat.User sendingUser)
    {
-      // Require that the message comes from the SO room and that it comes from a user whose chat ID
-      // indicates that they have admin privileges.
-      if ((room == this.roomSO)                              &&
-          (room.getHost().getName().equals("stackoverflow")) &&
-          (sendingUser != null)                              &&
-          (Arrays.stream(SO_CHAT_USER_ADMINS).anyMatch(id -> id == sendingUser.getId())))
+      // Require that the message comes from a user whose chat user ID indicates that
+      // they have admin privileges.
+      if ((room != null) && (sendingUser != null))
       {
-         if (this.IsRunning())
+         String hostName = room.getHost().getName();
+         long[] userIDs  = this.CHAT_ADMIN_USERIDS.get(hostName);
+         if ((userIDs != null) &&
+             (Arrays.stream(userIDs).anyMatch(id -> id == sendingUser.getId())))
          {
-            this.DoStop();
-         }
+            if (this.IsRunning())
+            {
+               this.DoStop();
+            }
 
-         LOGGER.info("The bot is going down for an upgrade...");
-         this.BroadcastMessage(CHAT_MSG_PREFIX + " " + "Going down for an upgrade; be back soon!");
-         this.DoLeave();
-         System.exit(42);
+            LOGGER.info("The bot is going down for an upgrade...");
+            this.BroadcastMessage(CHAT_MSG_PREFIX + " " + "Going down for an upgrade; be back soon!");
+            this.DoLeave();
+            System.exit(42);
+            return;
+         }
       }
-      else
+
+      String logMessage = "Unprivileged attempt to upgrade (Room: " + room.getRoomId() + " on " + room.getHost().getName();
+      if (sendingUser != null)
       {
-         String logMessage = "Unprivileged attempt to upgrade (Room: " + room.getRoomId() + " on " + room.getHost().getName();
-         if (sendingUser != null)
-         {
-            logMessage += "; User: " + sendingUser.getId();
-         }
-         logMessage += ").";
-         LOGGER.warn(logMessage);
-
-         room.replyTo(replyID, "I'm sorry, Dave. I'm afraid I can't do that.");
+         logMessage += "; User: " + sendingUser.getId();
       }
+      logMessage += ").";
+      LOGGER.warn(logMessage);
+
+      room.replyTo(replyID, "I'm sorry, Dave. I'm afraid I can't do that.");
    }
 
 
