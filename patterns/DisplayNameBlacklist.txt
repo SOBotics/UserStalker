@@ -38,6 +38,7 @@ diabet(?:es|ic)
 doktors
 download
 elimination\s?chamber
+fashion
 fastlane(?:kg)?
 fight
 finals?
