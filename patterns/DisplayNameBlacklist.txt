@@ -35,6 +35,7 @@ damage\s?claim
 derby
 \bkentucky\s*derb
 diabet(?:es|ic)
+doktors
 download
 elimination\s?chamber
 fastlane(?:kg)?
