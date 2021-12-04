@@ -732,7 +732,12 @@ public class ChatBot
 
    private static boolean ContainsNonLatin(String string)
    {
-      return string.codePoints().anyMatch(codepoint -> Character.UnicodeScript.of(codepoint) != Character.UnicodeScript.LATIN);
+      return string.codePoints().anyMatch(codepoint ->
+      {
+         Character.UnicodeScript script = Character.UnicodeScript.of(codepoint);
+         return ((script != Character.UnicodeScript.LATIN ) &&
+                 (script != Character.UnicodeScript.COMMON));
+      });
    }
 
    private String CheckUser(User user)
