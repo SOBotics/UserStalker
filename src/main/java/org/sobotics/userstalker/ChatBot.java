@@ -3,19 +3,23 @@ package org.sobotics.userstalker;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.Throwable;
 import java.time.Instant;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -36,7 +40,6 @@ import org.sobotics.chatexchange.chat.event.UserEnteredEvent;
 import org.sobotics.userstalker.RegexManager;
 import org.sobotics.userstalker.StackExchangeApiClient;
 import org.sobotics.userstalker.StackExchangeSiteInfo;
-import org.sobotics.userstalker.User;
 
 
 public class ChatBot
@@ -192,10 +195,10 @@ public class ChatBot
    }
 
 
-   private CompletionStage<Long> SendMessage_Retry(Room      room,
-                                                   String    message,
-                                                   Throwable firstAttempt,
-                                                   int       iAttempt)
+   private CompletableFuture<Long> SendMessage_Retry(Room      room,
+                                                     String    message,
+                                                     Throwable firstAttempt,
+                                                     int       iAttempt)
    {
       if (iAttempt < 5)
       {
@@ -219,7 +222,8 @@ public class ChatBot
                                                                     firstAttempt,
                                                                     (iAttempt + 1));
                                    })
-                    .thenCompose(Function.identity());
+                    .thenCompose(Function.identity())
+                    .toCompletableFuture();
       }
       else
       {
@@ -401,9 +405,9 @@ public class ChatBot
       boolean showSite = (sites.size() > 1);
       for (String site : sites)
       {
+         StackExchangeSiteInfo siteInfo  = this.siteInfoMap.get(site);
          long                  oldTime   = siteInfo.ToDate;
          long                  startTime = Instant.now().getEpochSecond();
-         StackExchangeSiteInfo siteInfo  = this.siteInfoMap.get(site);
          siteInfo.FromDate               = oldTime;
          siteInfo.ToDate                 = startTime;
 
@@ -623,10 +627,14 @@ public class ChatBot
             {
                FileInputStream   fis = new FileInputStream(PERSISTED_STATE_FILE);
                ObjectInputStream ois = new ObjectInputStream(fis);
-               this.siteInfoMap      = (Map<String, StackExchangeSiteInfo>)ois.readObject();
+
+               @SuppressWarnings("unchecked")
+               Map<String, StackExchangeSiteInfo> map = (Map<String, StackExchangeSiteInfo>)ois.readObject();
+               this.siteInfoMap                       = map;
+
                ois.close();
             }
-            catch (IOException ex)
+            catch (IOException | ClassNotFoundException ex)
             {
                LOGGER.warn("Failed to load persisted state from file: " + ex + ".");
                ex.printStackTrace();
@@ -688,7 +696,7 @@ public class ChatBot
       System.exit(0);
    }
 
-   private void DoUpgrade(Room room, long replyID, User sendingUser)
+   private void DoUpgrade(Room room, long replyID, org.sobotics.chatexchange.chat.User sendingUser)
    {
       // Require that the message comes from the SO room and that it comes from a user whose chat ID
       // indicates that they have admin privileges.
@@ -712,7 +720,7 @@ public class ChatBot
          String logMessage = "Unprivileged attempt to upgrade (Room: " + room.toString();
          if (sendingUser != null)
          {
-            logMessage += "; User: " + user.toString();
+            logMessage += "; User: " + sendingUser.toString();
          }
          logMessage += ").";
          LOGGER.warn(logMessage);

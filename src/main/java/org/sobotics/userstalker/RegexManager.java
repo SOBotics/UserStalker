@@ -2,8 +2,8 @@ package org.sobotics.userstalker;
 
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -43,11 +43,13 @@ public class RegexManager
    public List<Pattern> NameSmokeyBlacklist;
    public List<Pattern> UrlSmokeyBlacklist;
    public List<Pattern> KeywordSmokeyBlacklist;
+ //public List<Pattern> KeywordSmokeyWatchlist;
    public List<Pattern> NameBlacklist;
    public List<Pattern> AboutBlacklist;
    public List<Pattern> UrlBlacklist;
-   public List<Pattern> EmailPatterns;
    public List<Pattern> PhonePatterns;
+   public List<Pattern> EmailPatterns;
+   public List<Pattern> UrlPatterns;
 
 
    public RegexManager()
