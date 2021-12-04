@@ -1,7 +1,10 @@
 package org.sobotics.userstalker;
 
 
-public class StackExchangeSiteInfo
+import java.io.Serializable;
+
+
+public class StackExchangeSiteInfo implements Serializable
 {
    public long FromDate;
    public long ToDate;

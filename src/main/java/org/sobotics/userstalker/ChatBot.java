@@ -407,7 +407,7 @@ public class ChatBot
       {
          StackExchangeSiteInfo siteInfo  = this.siteInfoMap.get(site);
          long                  oldTime   = siteInfo.ToDate;
-         long                  startTime = Instant.now().getEpochSecond();
+         long                  startTime = Instant.now().minusSeconds(60).getEpochSecond();
          siteInfo.FromDate               = oldTime;
          siteInfo.ToDate                 = startTime;
 
@@ -664,7 +664,7 @@ public class ChatBot
                                            POLL_TIME_MINUTES,
                                            TimeUnit.MINUTES);
       }
-      String message = "The User Stalker service (v " + UserStalker.VERSION + ") "
+      String message = "The User Stalker service (v" + UserStalker.VERSION + ") "
                      + (somethingToDo ? "has started."
                                       : "did not start because there is nothing to do.");
       LOGGER.info(message);
@@ -717,10 +717,10 @@ public class ChatBot
       }
       else
       {
-         String logMessage = "Unprivileged attempt to upgrade (Room: " + room.toString();
+         String logMessage = "Unprivileged attempt to upgrade (Room: " + room.getRoomId() + " on " + room.getHost().getName();
          if (sendingUser != null)
          {
-            logMessage += "; User: " + sendingUser.toString();
+            logMessage += "; User: " + sendingUser.getId();
          }
          logMessage += ").";
          LOGGER.warn(logMessage);
