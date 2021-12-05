@@ -26,10 +26,6 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
 import org.sobotics.chatexchange.chat.ChatHost;
 import org.sobotics.chatexchange.chat.Message;
 import org.sobotics.chatexchange.chat.Room;
@@ -449,15 +445,11 @@ public class ChatBot
 
       LOGGER.info("Stalking " + site + " at " + siteInfo.ToDate + " (last was at " + siteInfo.FromDate + ")...");
 
-      JsonArray json = seApi.GetAllUsersAsJson(site, siteInfo);
-      if (json != null)
+      List<User> users = seApi.GetAllUsers(site, siteInfo);
+      if (users != null)
       {
-         LOGGER.debug("JSON returned from SE API: " + json.toString());
-         for (JsonElement element : json)
+         for (User user : users)
          {
-            JsonObject object = element.getAsJsonObject();
-            User       user   = new User(site, object);
-            LOGGER.info("New user detected: \"" + user.getDisplayName() + "\" (" + user.getLink() + ").");
             String reason = CheckUser(site, user);
             if (!reason.isBlank())
             {
@@ -469,7 +461,7 @@ public class ChatBot
       }
       else
       {
-         LOGGER.warn("Failed to retrieve user information from SE API when stalking " + site + "; skipping this time.");
+         LOGGER.warn("Failed to retrieve new user information from SE API when stalking " + site + "; skipping this time.");
          siteInfo.ToDate = oldTime;
       }
    }

@@ -8,8 +8,10 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.time.ZonedDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import java.util.List;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -75,13 +77,13 @@ public class StackExchangeApiClient
       }
       else
       {
-         LOGGER.warn("Failed to retrieve user information from SE API.");
+         LOGGER.warn("Failed to retrieve information about a single user from the SE API.");
       }
       return null;
    }
 
    // TODO: Handle has_more (by calling API again to get an additional page, and merging into "items")
-   public JsonArray GetAllUsersAsJson(String site, StackExchangeSiteInfo siteInfo)
+   public List<User> GetAllUsers(String site, StackExchangeSiteInfo siteInfo)
    {
       JsonObject jsonObject = this.SendRequest(Connection.Method.GET,
                                                API_USERS_URL,
@@ -97,15 +99,27 @@ public class StackExchangeApiClient
       if ((jsonObject != null) && jsonObject.has("items"))
       {
          JsonArray jsonArray = jsonObject.get("items").getAsJsonArray();
-         int       count     = jsonArray.size();
-         siteInfo.TotalUsers += count;
-         return jsonArray;
+         LOGGER.debug("JSON returned from SE API: " + jsonArray.toString());
+
+         int        cUsers    = jsonArray.size();
+         List<User> users     = new ArrayList<User>(cUsers);
+         siteInfo.TotalUsers += cUsers;
+
+         for (JsonElement element : jsonArray)
+         {
+            JsonObject object = element.getAsJsonObject();
+            User       user   = new User(site, object);
+            LOGGER.info("New user detected: \"" + user.getDisplayName() + "\" (" + user.getLink() + ").");
+            users.add(user);
+         }
+
+         return users;
       }
       else
       {
-         LOGGER.warn("Failed to retrieve user information from SE API.");
+         LOGGER.warn("Failed to retrieve information about multiple users from the SE API.");
+         return null;
       }
-      return null;
    }
 
 
@@ -130,7 +144,7 @@ public class StackExchangeApiClient
       {
          int backoffInSeconds = root.get("backoff").getAsInt();
 
-         LOGGER.info("Backing off API for " + backoffInSeconds + " sec.");
+         LOGGER.info("Backing off SE API for " + backoffInSeconds + " sec.");
 
          try
          {
@@ -168,7 +182,7 @@ public class StackExchangeApiClient
          this.fxnRollover.accept(oldQuota);
       }
 
-      LOGGER.info("Remaining API quota: " + this.quota + ".");
+      LOGGER.info("Remaining SE API quota: " + this.quota + ".");
    }
 
    private JsonObject SendRequest(Connection.Method method, String url, String... data)
@@ -216,7 +230,7 @@ public class StackExchangeApiClient
          }
          catch (SocketTimeoutException ex)
          {
-            LOGGER.warn("Caught SocketTimeoutException when making API request: " + ex);
+            LOGGER.warn("Caught SocketTimeoutException when making SE API request: " + ex);
 
             if (i < (MAX_ITERATIONS - 1))
             {
