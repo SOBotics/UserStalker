@@ -753,16 +753,26 @@ public class ChatBot
    private String CheckUser(User user)
    {
       String            name     = user.getDisplayName();
+      String            avatar   = user.getProfileImage();
       String            location = user.getLocation();
       String            url      = user.getWebsiteUrl();
       String            about    = user.getAboutMe();
-      ArrayList<String> reasons  = new ArrayList<String>(32);
+      ArrayList<String> reasons  = new ArrayList<String>(33);
 
       // Check for an active suspension.
       if (user.getTimedPenaltyDate() != null)
       {
          reasons.add("suspended until "
                    + StackExchangeApiClient.FormatDateTimeToNearestMinute(user.getTimedPenaltyDate()));
+      }
+
+      // Check the avatar.
+      if ((avatar != null) && !avatar.isBlank())
+      {
+         if (RegexManager.AnyMatches(avatar, this.regexes.AvatarBlacklist))
+         {
+            reasons.add("avatar on blacklist");
+         }
       }
 
       // Check the display name.

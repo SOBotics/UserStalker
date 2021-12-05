@@ -28,6 +28,7 @@ public class RegexManager
    private static final String  INTERNAL_NAME_REGEX_URL        = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/DisplayNameBlacklist.txt";
    private static final String  INTERNAL_ABOUT_REGEX_URL       = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/AboutMeBlacklist.txt";
    private static final String  INTERNAL_URL_REGEX_URL         = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/UrlBlacklist.txt";
+   private static final String  INTERNAL_AVATAR_REGEX_URL      = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/AvatarBlacklist.txt";
    private static final String  INTERNAL_PHONE_REGEX_URL       = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/PhoneNumber.txt";
    private static final String  INTERNAL_EMAIL_REGEX_URL       = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/EmailAddress.txt";
    private static final String  INTERNAL_URL_PATTERN_REGEX_URL = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/Url.txt";
@@ -47,6 +48,7 @@ public class RegexManager
    public List<Pattern> NameBlacklist;
    public List<Pattern> AboutBlacklist;
    public List<Pattern> UrlBlacklist;
+   public List<Pattern> AvatarBlacklist;
    public List<Pattern> PhonePatterns;
    public List<Pattern> EmailPatterns;
    public List<Pattern> UrlPatterns;
@@ -72,6 +74,7 @@ public class RegexManager
       this.NameBlacklist          = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_NAME_REGEX_URL       ));
       this.AboutBlacklist         = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_ABOUT_REGEX_URL      ));
       this.UrlBlacklist           = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_URL_REGEX_URL        ));
+      this.AvatarBlacklist        = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_AVATAR_REGEX_URL     ));
       this.PhonePatterns          = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_PHONE_REGEX_URL      ));
       this.EmailPatterns          = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_EMAIL_REGEX_URL      ));
       this.UrlPatterns            = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_URL_PATTERN_REGEX_URL));
