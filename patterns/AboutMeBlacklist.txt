@@ -60,6 +60,7 @@ refinanc(?:e|ing)
 repair
 retail
 risk[\W_]*free
+rupiahqq
 same[\W_]*day
 [\W_]SEO[\W_]
 service
