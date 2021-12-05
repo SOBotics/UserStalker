@@ -98,11 +98,8 @@ public class StackExchangeApiClient
       {
          JsonArray jsonArray = jsonObject.get("items").getAsJsonArray();
          int       count     = jsonArray.size();
-         if (count > 0)
-         {
-            siteInfo.TotalUsers += count;
-            return jsonArray;
-         }
+         siteInfo.TotalUsers += count;
+         return jsonArray;
       }
       else
       {

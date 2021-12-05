@@ -45,7 +45,7 @@ import org.sobotics.userstalker.StackExchangeSiteInfo;
 
 public class ChatBot
 {
-   private static final int                 POLL_TIME_MINUTES     = 3;
+   private static final int                 POLL_TIME_MINUTES    = 3;
    private static final Map<String, long[]> CHAT_ADMIN_USERIDS;
       static
       {
@@ -54,11 +54,11 @@ public class ChatBot
          map.put("stackexchange.com", new long[] { 7959, });
          CHAT_ADMIN_USERIDS = Collections.unmodifiableMap(map);
       }
-   private static final String              PERSISTED_STATE_FILE  = "savedState.bin";
-   private static final String              BOT_URL               = "https://git.io/v5CGT";
-   private static final String              CHAT_MSG_PREFIX       = "[ [User Stalker](" + BOT_URL + ") ]";
-   private static final String              UNKNOWN_CMD_MSG       = "You talkin\u2019 to me? Psst\u2026ping me and say \"help\".";
-   private static final String              HELP_CMD_MSG          =
+   private static final String              PERSISTED_STATE_FILE = "savedState.bin";
+   private static final String              BOT_URL              = "https://git.io/v5CGT";
+   private static final String              CHAT_MSG_PREFIX      = "[ [User Stalker](" + BOT_URL + ") ]";
+   private static final String              UNKNOWN_CMD_MSG      = "You talkin\u2019 to me? Psst\u2026ping me and say \"help\".";
+   private static final String              HELP_CMD_MSG         =
   "I'm User Stalker (" + BOT_URL + "), a bot that continuously queries the "
 + "Stack Exchange \"/users\" API (https://api.stackexchange.com/docs/users) in order to "
 + "track all newly-created user accounts. If a suspicious pattern is detected in one of "
