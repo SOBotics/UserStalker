@@ -26,6 +26,7 @@ bloggersdelight\.dk
 blueskyes\.app
 bookeasyclean\.com
 bravesites\.com
+castlerockseniorcare\.org
 cavandoragh\.org
 cheatpekalonganvip\.com
 codenamecentrepoint\.com
@@ -46,12 +47,14 @@ dragonpearll\.com
 dumpscafe\.com
 easycartcleaning\.co\.uk
 edukacjalic\.pl
+electricexpertyyc\.ca
 empoweredconversations\.com
 empowher\.com
 ennasgifts\.com
 essengisemfmk47\.page\.tl
 evernote\.com\/shard
 fernandoecky004\.de\.tl
+fitmoversuae\.com
 fiverr\.com
 fotosdefrases\.com
 freewebcams
@@ -149,6 +152,7 @@ threadless\.com
 threedashesagency\.com\.au
 time[\W_]*share
 timeforchangecounselling\.com
+topshelfuae\.com
 trexgame\.net
 uifresh\.net
 vegas11\.live
