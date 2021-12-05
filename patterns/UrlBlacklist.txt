@@ -107,6 +107,7 @@ quickbooks
 rapidtest\.nyc
 revivebeautysolutions\.ca
 roundrockroadside\.com
+royaltyhawaii\.com
 rubermedia\.com
 rubiredtea\.com\.au
 russianpassportsandvisas\.com
@@ -137,6 +138,7 @@ threedashesagency\.com\.au
 time[\W_]*share
 timeforchangecounselling\.com
 trexgame\.net
+uifresh\.net
 vegas11\.live
 vhearts\.net
 viptoolaz\.com
