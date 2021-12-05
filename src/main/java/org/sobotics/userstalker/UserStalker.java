@@ -171,11 +171,11 @@ public class UserStalker
          }
          if (joinSE)
          {
-            bot.JoinSE(seRoomID, seSites, nonEnglishSites);
+            bot.JoinSE(seRoomID);
          }
 
          // Start stalking.
-         bot.Run();
+         bot.Run(seSites, nonEnglishSites);
       }
       catch (Exception ex)
       {

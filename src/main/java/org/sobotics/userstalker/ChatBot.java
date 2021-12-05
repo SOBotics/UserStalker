@@ -45,7 +45,8 @@ import org.sobotics.userstalker.StackExchangeSiteInfo;
 
 public class ChatBot
 {
-   private static final int                 POLL_TIME_MINUTES    = 3;
+   private static final int                 POLL_TIME_MINUTES    = 5;
+   private static final int                 OFFSET_TIME_MINUTES  = 2;
    private static final Map<String, long[]> CHAT_ADMIN_USERIDS;
       static
       {
@@ -109,11 +110,10 @@ public class ChatBot
    private static final Logger LOGGER = LoggerFactory.getLogger(ChatBot.class);
 
    private StackExchangeClient                client;
-   private List<String>                       sitesSO;
-   private List<String>                       sitesSE;
-   private List<String>                       nonEnglishSites;
    private Room                               roomSO;
    private Room                               roomSE;
+   private List<String>                       sites;
+   private List<String>                       nonEnglishSites;
    private RegexManager                       regexes;
    private StackExchangeApiClient             seApi;
    private ScheduledExecutorService           executor;
@@ -139,12 +139,8 @@ public class ChatBot
 
    public void JoinSO(int roomID)
    {
-      LOGGER.info("Joining Stack Overflow room " + roomID + "...");
-      if ((this.roomSO == null) && (this.sitesSO == null))
+      if (this.roomSO == null)
       {
-         this.sitesSO = new ArrayList<String>();
-         this.sitesSO.add("stackoverflow");
-
          this.roomSO = this.JoinRoom(ChatHost.STACK_OVERFLOW, roomID, true);
       }
       else
@@ -153,23 +149,10 @@ public class ChatBot
       }
    }
 
-   public void JoinSE(int roomID, List<String> sites, List<String> nonEnglishSites)
+   public void JoinSE(int roomID)
    {
-      LOGGER.info("Joining Stack Exchange room " + roomID + "...");
-      if ((this.roomSE == null) && (this.sitesSE == null))
+      if (this.roomSE == null)
       {
-         this.sitesSE = new ArrayList<String>();
-         if (sites != null)
-         {
-            this.sitesSE.addAll(sites);
-         }
-
-         this.nonEnglishSites = new ArrayList<String>();
-         if (nonEnglishSites != null)
-         {
-            this.nonEnglishSites.addAll(nonEnglishSites);
-         }
-
          this.roomSE = this.JoinRoom(ChatHost.STACK_EXCHANGE, roomID, true);
       }
       else
@@ -180,6 +163,7 @@ public class ChatBot
 
    private Room JoinRoom(ChatHost host, int roomID, boolean addListeners)
    {
+      LOGGER.info("Attempting to join chat room " + roomID + " on " + host.getName() + "...");
       Room room = this.client.joinRoom(host, roomID);
       if (addListeners)
       {
@@ -191,13 +175,29 @@ public class ChatBot
    }
 
 
-   public void Run()
+   public void Run(List<String> seSites, List<String> nonEnglishSites)
    {
       // Load the regular expressions.
       this.regexes = new RegexManager();
 
       // Initialize the Stack Exchange API client.
       this.seApi = new StackExchangeApiClient(this::OnQuotaRollover);
+
+      // Create the site lists.
+      this.sites           = new ArrayList<String>();
+      this.nonEnglishSites = new ArrayList<String>();
+      if (this.roomSO != null)
+      {
+         this.sites.add("stackoverflow");
+      }
+      if (this.roomSE != null)
+      {
+         this.sites.addAll(seSites);
+      }
+      if (nonEnglishSites != null)
+      {
+         this.nonEnglishSites.addAll(nonEnglishSites);
+      }
 
       // Start the stalking service.
       this.DoStart();
@@ -276,14 +276,17 @@ public class ChatBot
       LOGGER.info(message);
       this.BroadcastMessage(CHAT_MSG_PREFIX + " " + message);
 
-      // Display statistical information on users per-site.
-      if ((this.roomSO != null) && (this.sitesSO != null) && (!this.sitesSO.isEmpty()))
+      // Display per-site statistical information on users.
+      if ((this.sites != null) && !this.sites.isEmpty())
       {
-         this.ReportStatistics(this.roomSO, this.sitesSO);
-      }
-      if ((this.roomSE != null) && (this.sitesSE != null) && (!this.sitesSE.isEmpty()))
-      {
-         this.ReportStatistics(this.roomSE, this.sitesSE);
+         if (this.roomSO != null)
+         {
+            this.ReportStatistics(this.roomSO, Collections.singletonList("stackoverflow"));
+         }
+         if (this.roomSE != null)
+         {
+            this.ReportStatistics(this.roomSE, this.sites);
+         }
       }
 
       // Reset per-site user statistics.
@@ -398,59 +401,63 @@ public class ChatBot
 
    private void OnStalk()
    {
-      LOGGER.info("Periodic stalker routine running...");
+      LOGGER.info("Starting periodic stalking (stalkSE: " + String.valueOf(this.stalkSE) + ")...");
 
-      if ((this.roomSO != null) && !this.sitesSO.isEmpty())
+      if ((this.roomSO != null) && this.sites.contains("stackoverflow"))
       {
-         this.DoStalk(this.roomSO, this.sitesSO);
+         this.DoStalk(this.roomSO, "stackoverflow", false);
       }
 
-      if (this.stalkSE)
+      if (this.roomSE != null)
       {
-         if ((this.roomSE != null) && !this.sitesSE.isEmpty())
+         if (this.stalkSE)
          {
-            this.DoStalk(this.roomSE, this.sitesSE);
-         }
-      }
-      this.stalkSE = !this.stalkSE;
-   }
-
-   private void DoStalk(Room room, List<String> sites)
-   {
-      boolean showSite = (sites.size() > 1);
-      for (String site : sites)
-      {
-         StackExchangeSiteInfo siteInfo  = this.siteInfoMap.get(site);
-         long                  oldTime   = siteInfo.ToDate;
-         long                  startTime = Instant.now().minusSeconds(60).getEpochSecond();
-         siteInfo.FromDate               = oldTime;
-         siteInfo.ToDate                 = startTime;
-
-         LOGGER.info("Stalking " + site + " at " + siteInfo.ToDate + " (last was at " + siteInfo.FromDate + ")...");
-
-         JsonArray json = seApi.GetAllUsersAsJson(site, siteInfo);
-         if (json != null)
-         {
-            LOGGER.debug("JSON returned from SE API: " + json.toString());
-            for (JsonElement element : json)
+            for (String site : sites)
             {
-               JsonObject object = element.getAsJsonObject();
-               User       user   = new User(site, object);
-               LOGGER.info("New user detected: \"" + user.getDisplayName() + "\" (" + user.getLink() + ").");
-               String reason = CheckUser(site, user);
-               if (!reason.isBlank())
+               if (!site.equals("stackoverflow"))
                {
-                  LOGGER.info("Detected user \"" + user + "\": " + reason + ".");
-                  siteInfo.SuspiciousUsers += 1;
-                  ReportUser(room, user, reason, showSite);
+                  this.DoStalk(this.roomSE, site, true);
                }
             }
+
          }
-         else
+
+         this.stalkSE = !this.stalkSE;
+      }
+   }
+
+   private void DoStalk(Room room, String site, boolean showSite)
+   {
+      StackExchangeSiteInfo siteInfo  = this.siteInfoMap.get(site);
+      long                  oldTime   = siteInfo.ToDate;
+      long                  startTime = Instant.now().minusSeconds(OFFSET_TIME_MINUTES * 60).getEpochSecond();
+      siteInfo.FromDate               = oldTime;
+      siteInfo.ToDate                 = startTime;
+
+      LOGGER.info("Stalking " + site + " at " + siteInfo.ToDate + " (last was at " + siteInfo.FromDate + ")...");
+
+      JsonArray json = seApi.GetAllUsersAsJson(site, siteInfo);
+      if (json != null)
+      {
+         LOGGER.debug("JSON returned from SE API: " + json.toString());
+         for (JsonElement element : json)
          {
-            LOGGER.warn("Failed to retrieve user information from SE API when stalking " + site + "; skipping this time.");
-            siteInfo.ToDate = oldTime;
+            JsonObject object = element.getAsJsonObject();
+            User       user   = new User(site, object);
+            LOGGER.info("New user detected: \"" + user.getDisplayName() + "\" (" + user.getLink() + ").");
+            String reason = CheckUser(site, user);
+            if (!reason.isBlank())
+            {
+               LOGGER.info("Detected user \"" + user + "\": " + reason + ".");
+               siteInfo.SuspiciousUsers += 1;
+               ReportUser(room, user, reason, showSite);
+            }
          }
+      }
+      else
+      {
+         LOGGER.warn("Failed to retrieve user information from SE API when stalking " + site + "; skipping this time.");
+         siteInfo.ToDate = oldTime;
       }
    }
 
@@ -493,22 +500,9 @@ public class ChatBot
 
    private void DoList(Room room, long replyID)
    {
-      List<String> sites;
-      if (room == this.roomSO)
-      {
-         sites = this.sitesSO;
-      }
-      else if (room == this.roomSE)
-      {
-         sites = this.sitesSE;
-      }
-      else
-      {
-         LOGGER.error("Ignoring a \"list\" command from unknown room: " + room);
-         return;
-      }
-
-      String siteList = sites.stream().collect(Collectors.joining("`, `", "`", "`"));
+      String siteList = sites.stream()
+                             .filter(i -> ((room != this.roomSO) | i.equals("stackoverflow")))
+                             .collect(Collectors.joining("`, `", "`", "`"));
       room.replyTo(replyID, "Stalking sites: " + sites);
    }
 
@@ -516,19 +510,33 @@ public class ChatBot
    {
       boolean add    = command.equals("add");
       boolean remove = command.equals("remove");
-
-      if (!add && !remove)
+      if (add)
+      {
+         if (this.sites.contains(siteName))
+         {
+            room.replyTo(replyID,
+                         "The site `" + siteName + "` is already on the list of sites being stalked, "
+                       + "so it makes no sense to add it.");
+            return;
+         }
+      }
+      else if (remove)
+      {
+         if (!this.sites.contains(siteName))
+         {
+            room.replyTo(replyID,
+                         "The site `" + siteName + "` is not currently on the list of sites being stalked, "
+                       + "so it makes no sense to remove it.");
+            return;
+         }
+      }
+      else
       {
          room.replyTo(replyID,
                       "The specified command (\"" + command + "\") was not recognized (must be either \"add\" or \"remove\".)");
          return;
       }
 
-      if ((room != this.roomSO) && (room != this.roomSE))
-      {
-         LOGGER.error("Ignoring a \"" + command + "\" command from unknown room: " + room);
-         return;
-      }
 
       LOGGER.info("Beginning to modify (" + command + ") the list of sites being stalked.");
 
@@ -538,22 +546,11 @@ public class ChatBot
          this.DoStop();
       }
 
-      String chatMessage = (add ? CHAT_MSG_PREFIX + " Temporarily adding `" + siteName + "` to the list of sites being stalked."
+      if (add)  { this.sites.add   (siteName); }
+      else      { this.sites.remove(siteName); }
+
+      this.BroadcastMessage(add ? CHAT_MSG_PREFIX + " Temporarily adding `" + siteName + "` to the list of sites being stalked."
                                 : CHAT_MSG_PREFIX + " Temporarily removing `" + siteName + "` from the list of sites being stalked.");
-      if (room == this.roomSO)
-      {
-         if (add)  { this.sitesSO.add   (siteName); }
-         else      { this.sitesSO.remove(siteName); }
-
-         this.SendMessage(this.roomSO, chatMessage);
-      }
-      else if (room == this.roomSE)
-      {
-         if (add)  { this.sitesSE.add   (siteName); }
-         else      { this.sitesSE.remove(siteName); }
-
-         this.SendMessage(this.roomSE, chatMessage);
-      }
 
       if (wasRunning)
       {
@@ -627,15 +624,12 @@ public class ChatBot
          this.DoStop();
       }
 
-      boolean somethingToDo = (((this.roomSO != null) && !this.sitesSO.isEmpty()) ||
-                               ((this.roomSE != null) && !this.sitesSE.isEmpty()));
+      boolean somethingToDo = (!this.sites.isEmpty() && ((this.roomSO != null) || (this.roomSE != null)));
       if (somethingToDo)
       {
          if (this.siteInfoMap == null)
          {
-            long startTime = Instant.now().minusSeconds(60).getEpochSecond();
-            int sites      = (((this.sitesSO != null) ? this.sitesSO.size() : 0) +
-                              ((this.sitesSE != null) ? this.sitesSE.size() : 0));
+            long startTime = Instant.now().minusSeconds(OFFSET_TIME_MINUTES * 60).getEpochSecond();
 
             LOGGER.info("Attempting to load persisted state from file (\"" + PERSISTED_STATE_FILE + "\")...");
             try
@@ -654,22 +648,12 @@ public class ChatBot
                LOGGER.warn("Failed to load persisted state from file: " + ex + ".");
                ex.printStackTrace();
 
-               this.siteInfoMap = new HashMap<String, StackExchangeSiteInfo>(sites * 2);
+               this.siteInfoMap = new HashMap<String, StackExchangeSiteInfo>((this.sites.size() * 3) / 2);
             }
 
-            if (this.sitesSO != null)
+            for (String site : this.sites)
             {
-               for (String site : this.sitesSO)
-               {
-                  this.siteInfoMap.putIfAbsent(site, new StackExchangeSiteInfo(startTime));
-               }
-            }
-            if (this.sitesSE != null)
-            {
-               for (String site : this.sitesSE)
-               {
-                  this.siteInfoMap.putIfAbsent(site, new StackExchangeSiteInfo(startTime));
-               }
+               this.siteInfoMap.putIfAbsent(site, new StackExchangeSiteInfo(startTime));
             }
          }
 
