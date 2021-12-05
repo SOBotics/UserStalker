@@ -946,7 +946,7 @@ public class ChatBot
             // (e.g., "example.com").
             if (RegexManager.AnyMatches(about, this.regexes.UrlPatterns))
             {
-               reasons.add("location contains URL");
+               reasons.add("\"About Me\" contains URL");
             }
          }
 
