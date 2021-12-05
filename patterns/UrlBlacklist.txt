@@ -34,6 +34,7 @@ dantri\.com\.vn
 der-umzugshelfer\.de
 dermalcosmeticpharma\.com
 dienmaynewsun\.com
+digiuseppedesign\.com
 diigo\.com
 doodlekit\.com
 dragonpearll\.com
@@ -55,6 +56,7 @@ gambl(?:e|ing)
 gi8\.info
 greenlinecoffee\.net
 gumroad\.com
+haroshee\.com
 healinghpvnaturally\.com
 heymannlawfirm\.com
 hits943\.com
