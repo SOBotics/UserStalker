@@ -448,7 +448,7 @@ public class ChatBot
             String reason = CheckUser(site, user);
             if (!reason.isBlank())
             {
-               LOGGER.info("Detected user \"" + user + "\": " + reason + ".");
+               LOGGER.info("Suspicious user detected: \"" + user + "\": " + reason + ".");
                siteInfo.SuspiciousUsers += 1;
                ReportUser(room, user, reason, showSite);
             }
@@ -473,7 +473,7 @@ public class ChatBot
 
    private void DoAlive(Room room, long replyID)
    {
-      room.replyTo(replyID, "Yep, I'm alive!");
+      room.replyTo(replyID, "Yep, I'm alive! (This is version " + UserStalker.VERSION + ".)");
    }
 
    private void DoQuota(Room room, long replyID)
