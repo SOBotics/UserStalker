@@ -71,6 +71,7 @@ heymannlawfirm\.com
 hits943\.com
 hollywoodfanmail\.com
 homemakersinterior\.com
+homemotivate\.com
 hpage\.com
 [\W_]+hpv[\W_]+
 huicopper\.com
@@ -106,6 +107,7 @@ mrcasino\.bet
 namenecklaces\.co
 netvibes\.com
 onfeetnation\.com
+onlydiningchairs\.com
 openlearning\.com
 over-blog\.com
 page\.tl
