@@ -24,8 +24,8 @@ do
 			printf '\055%.0s' {1..80}
 			printf '\n'
 
+			rm -rf 'temp'
 			mkdir -p "temp"
-			rm -rf 'temp/{*,.*}'
 			cd "temp" || exit
 			git clone "${GIT_CLONE_URL}" || exit
 			cd "UserStalker" || exit
