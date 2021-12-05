@@ -33,7 +33,7 @@ do
 			cp "target/UserStalker-"*".jar" "${SCRIPT_DIR}/UserStalker.jar"
 			cp "LaunchUserStalker.sh" "${SCRIPT_DIR}"
 			chmod +x "${SCRIPT_DIR}/LaunchUserStalker.sh"
-			# NOTE: Do not copy .properties files!
+			cp "properties/"*[^login].properties "${SCRIPT_DIR}/properties/" # do not copy "login.properties" file!
 
 			printf '\n'
 			printf '\055%.0s' {1..80}
