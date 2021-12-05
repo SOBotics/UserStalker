@@ -87,6 +87,7 @@ rugby
 russianpassportsandvisas
 save\s?money
 series
+seven[\W_]*me
 sexy?
 Shree[\W_]*Tripada
 stakes
