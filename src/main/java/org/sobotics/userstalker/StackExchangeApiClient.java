@@ -33,7 +33,7 @@ public class StackExchangeApiClient
    private static final String            API_USERS_URL     = "https://api.stackexchange.com/2.3/users";
    private static final String            API_USERS_FILTER  = "!)4T7SDSXYTGhY8vIBklauF55f";
    private static final String            API_KEY           = "XKgBTF5nztGvMnDoI8gPgA((";
-   private static final String            API_PAGE_SIZE_MAX = "100";
+   private static final int               API_PAGE_SIZE_MAX = 100;
    private static final DateTimeFormatter FMT_DT_AS_MINUTES = DateTimeFormatter.ofPattern("MMM d yyyy 'at' HH:mm");
 
    private static final Logger LOGGER = LoggerFactory.getLogger(StackExchangeApiClient.class);
@@ -82,44 +82,54 @@ public class StackExchangeApiClient
       return null;
    }
 
-   // TODO: Handle has_more (by calling API again to get an additional page, and merging into "items")
-   public List<User> GetAllUsers(String site, StackExchangeSiteInfo siteInfo)
+   public ArrayList<User> GetAllUsers(String site, StackExchangeSiteInfo siteInfo)
    {
-      JsonObject jsonObject = this.SendRequest(Connection.Method.GET,
-                                               API_USERS_URL,
-                                               "site"     , site,
-                                               "key"      , API_KEY,
-                                               "filter"   , API_USERS_FILTER,
-                                               "sort"     , "creation",
-                                               "order"    , "asc",
-                                               "page"     , "1",
-                                               "pagesize" , API_PAGE_SIZE_MAX,
-                                               "fromdate" , String.valueOf(siteInfo.FromDate),
-                                               "todate"   , String.valueOf(siteInfo.ToDate  ));
-      if ((jsonObject != null) && jsonObject.has("items"))
+      ArrayList<User> users   = new ArrayList<User>(API_PAGE_SIZE_MAX);
+      boolean         hasMore = true;
+      int             page    = 1;
+      while (hasMore)
       {
-         JsonArray jsonArray = jsonObject.get("items").getAsJsonArray();
-         LOGGER.debug("JSON returned from SE API: " + jsonArray.toString());
-
-         int        cUsers    = jsonArray.size();
-         List<User> users     = new ArrayList<User>(cUsers);
-         siteInfo.TotalUsers += cUsers;
-
-         for (JsonElement element : jsonArray)
+         JsonObject jsonObject = this.SendRequest(Connection.Method.GET,
+                                                  API_USERS_URL,
+                                                  "site"     , site,
+                                                  "key"      , API_KEY,
+                                                  "filter"   , API_USERS_FILTER,
+                                                  "sort"     , "creation",
+                                                  "order"    , "asc",
+                                                  "page"     , String.valueOf(page),
+                                                  "pagesize" , String.valueOf(API_PAGE_SIZE_MAX),
+                                                  "fromdate" , String.valueOf(siteInfo.FromDate),
+                                                  "todate"   , String.valueOf(siteInfo.ToDate  ));
+         if ((jsonObject != null) && jsonObject.has("items"))
          {
-            JsonObject object = element.getAsJsonObject();
-            User       user   = new User(site, object);
-            LOGGER.info("New user detected: \"" + user.getDisplayName() + "\" (" + user.getLink() + ").");
-            users.add(user);
-         }
+            JsonArray jsonArray = jsonObject.get("items").getAsJsonArray();
+            LOGGER.debug("JSON returned from SE API: " + jsonArray.toString());
 
-         return users;
+            int cUsers           = jsonArray.size();
+            siteInfo.TotalUsers += cUsers;
+
+            for (JsonElement element : jsonArray)
+            {
+               JsonObject object = element.getAsJsonObject();
+               User       user   = new User(site, object);
+               LOGGER.info("New user detected: \"" + user.getDisplayName() + "\" (" + user.getLink() + ").");
+               users.add(user);
+            }
+
+            hasMore = jsonObject.get("has_more").getAsBoolean();
+            if (hasMore)
+            {
+               ++page;
+               users.ensureCapacity(API_PAGE_SIZE_MAX * page);
+            }
+         }
+         else
+         {
+            LOGGER.warn("Failed to retrieve information about multiple users from the SE API.");
+            return null;
+         }
       }
-      else
-      {
-         LOGGER.warn("Failed to retrieve information about multiple users from the SE API.");
-         return null;
-      }
+      return users;
    }
 
 
