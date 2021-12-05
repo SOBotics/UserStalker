@@ -210,6 +210,8 @@ public class ChatBot
    }
 
 
+   // TODO(low): Review the async code below for both correctness and efficiency!
+
    private CompletableFuture<Long> SendMessage_Retry(Room      room,
                                                      String    message,
                                                      Throwable firstAttempt,
@@ -246,14 +248,18 @@ public class ChatBot
       }
    }
 
-   private void SendMessage(Room room, String message)
+   private CompletionStage<Long> SendMessage(Room room, String message)
    {
       if (room != null)
       {
-         room.send(message)
-             .thenApply(CompletableFuture::completedFuture)
-             .exceptionally(t -> SendMessage_Retry(room, message, t, 0))
-             .thenCompose(Function.identity());
+         return room.send(message)
+                    .thenApply(CompletableFuture::completedFuture)
+                    .exceptionally(t -> SendMessage_Retry(room, message, t, 0))
+                    .thenCompose(Function.identity());
+      }
+      else
+      {
+         return CompletableFuture.completedFuture(null);
       }
    }
 
@@ -262,6 +268,13 @@ public class ChatBot
    {
       if (this.roomSO != null)  { this.SendMessage(this.roomSO, message); }
       if (this.roomSE != null)  { this.SendMessage(this.roomSE, message); }
+   }
+
+   private void BroadcastMessageAndWait(String message)
+   {
+      CompletableFuture.allOf(this.SendMessage(this.roomSO, message).toCompletableFuture(),
+                              this.SendMessage(this.roomSE, message).toCompletableFuture())
+                       .join();
    }
 
 
@@ -712,7 +725,7 @@ public class ChatBot
             }
 
             LOGGER.info("The bot is going down for an upgrade...");
-            this.BroadcastMessage(CHAT_MSG_PREFIX + " " + "Going down for an upgrade; be back soon!");
+            this.BroadcastMessageAndWait(CHAT_MSG_PREFIX + " " + "Going down for an upgrade; be back soon!");
             this.DoLeave();
             System.exit(42);
             return;
