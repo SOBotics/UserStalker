@@ -14,7 +14,7 @@ do
 	} >> "${LOG_FILE}" 2>&1
 
 	cd "${SCRIPT_DIR}" || exit
-	java -jar "${JAR_FILE}" >> "${LOG_FILE}" 2>&1
+	java -jar "${JAR_FILE}" "${1}" >> "${LOG_FILE}" 2>&1
 	if [ $? -eq 42 ]; then
 		# Do in-place upgrade.
 		{
