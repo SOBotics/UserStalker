@@ -4,6 +4,7 @@ donald\s*trump|.*trump.*
 (insur?a?n?c?e?|repair|reimb(ursement)?|rent(al)?|accident|hire|tax|rent\s?a|park(ed)?|finance|quotes?)\s?(card?|van|truck)
 ^(?:masters|wrestlemania|c(?:owboys|rack)|el ?clasico|[0-9]{4})
 [a-z]*19
+Ahsun[\W_]*Irfan
 alldatmatterz
 ardroid[\W_]*post
 awards
