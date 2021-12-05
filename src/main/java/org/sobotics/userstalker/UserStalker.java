@@ -94,9 +94,10 @@ public class UserStalker
          }
 
          // Load "StackExchange" properties file.
-         boolean      joinSE   = true;
-         int          seRoomID = 59667;
-         List<String> seSites  = null;
+         boolean      joinSE          = true;
+         int          seRoomID        = 59667;
+         List<String> seSites         = null;
+         List<String> nonEnglishSites = null;
          try
          {
             // Attempt to load Stack Exchange properties file.
@@ -135,6 +136,20 @@ public class UserStalker
             {
                LOGGER.warn("Missing or invalid value for \"sites\" property in \"StackExchange\" property file; will not monitor any sites.");
             }
+
+            // Attempt to load the list of non-English sites from the properties file.
+            try
+            {
+               String sites = propSE.getProperty("nonEnglish");
+               if ((sites != null) && !sites.isBlank())
+               {
+                  nonEnglishSites = Arrays.asList(sites.split("\\s*,\\s*"));
+               }
+            }
+            catch (Exception ex)
+            {
+               LOGGER.warn("Missing or invalid value for \"nonEnglish\" property in \"StackExchange\" property file; will not exclude any sites from non-Latin character checks.");
+            }
          }
          catch (Exception ex)
          {
@@ -156,7 +171,7 @@ public class UserStalker
          }
          if (joinSE)
          {
-            bot.JoinSE(seRoomID, seSites);
+            bot.JoinSE(seRoomID, seSites, nonEnglishSites);
          }
 
          // Start stalking.

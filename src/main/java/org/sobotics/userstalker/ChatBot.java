@@ -111,6 +111,7 @@ public class ChatBot
    private StackExchangeClient                client;
    private List<String>                       sitesSO;
    private List<String>                       sitesSE;
+   private List<String>                       nonEnglishSites;
    private Room                               roomSO;
    private Room                               roomSE;
    private RegexManager                       regexes;
@@ -152,7 +153,7 @@ public class ChatBot
       }
    }
 
-   public void JoinSE(int roomID, List<String> sites)
+   public void JoinSE(int roomID, List<String> sites, List<String> nonEnglishSites)
    {
       LOGGER.info("Joining Stack Exchange room " + roomID + "...");
       if ((this.roomSE == null) && (this.sitesSE == null))
@@ -161,6 +162,12 @@ public class ChatBot
          if (sites != null)
          {
             this.sitesSE.addAll(sites);
+         }
+
+         this.nonEnglishSites = new ArrayList<String>();
+         if (nonEnglishSites != null)
+         {
+            this.nonEnglishSites.addAll(nonEnglishSites);
          }
 
          this.roomSE = this.JoinRoom(ChatHost.STACK_EXCHANGE, roomID, true);
@@ -430,7 +437,7 @@ public class ChatBot
                JsonObject object = element.getAsJsonObject();
                User       user   = new User(site, object);
                LOGGER.info("New user detected: \"" + user.getDisplayName() + "\" (" + user.getLink() + ").");
-               String reason = CheckUser(user);
+               String reason = CheckUser(site, user);
                if (!reason.isBlank())
                {
                   LOGGER.info("Detected user \"" + user + "\": " + reason + ".");
@@ -750,7 +757,7 @@ public class ChatBot
       });
    }
 
-   private String CheckUser(User user)
+   private String CheckUser(String site, User user)
    {
       String            name     = user.getDisplayName();
       String            avatar   = user.getProfileImage();
@@ -822,7 +829,7 @@ public class ChatBot
             reasons.add("username contains URL");
          }
 
-         if (this.ContainsNonLatin(name))
+         if (!this.nonEnglishSites.contains(site) && this.ContainsNonLatin(name))
          {
             reasons.add("username contains non-Latin character");
          }
@@ -969,7 +976,7 @@ public class ChatBot
       if (user != null)
       {
          String name    = user.getDisplayName();
-         String reasons = CheckUser(user);
+         String reasons = CheckUser(site, user);
          String result  = " [" + name.trim() + "](" + user.getLink() + "?tab=profile \"" + name + "\")";
          if (!reasons.isBlank())
          {
