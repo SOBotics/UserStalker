@@ -37,6 +37,7 @@ derby
 diabet(?:es|ic)
 doktors
 download
+Easycart
 elimination\s?chamber
 fashion
 fastlane(?:kg)?
@@ -65,6 +66,7 @@ live
 march\s*madness
 mastercard
 mayweather
+MetroKleen
 miel[\W_]*travel
 miss.?(?:universe|world|usa)
 musica
