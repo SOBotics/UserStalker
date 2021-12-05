@@ -91,6 +91,7 @@ series
 seven[\W_]*me
 sexy?
 Shree[\W_]*Tripada
+SpikeJams
 stakes
 stream
 super\s*bowl
