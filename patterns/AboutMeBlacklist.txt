@@ -1,3 +1,6 @@
+acre
+affordable
+apartment
 bedding
 bingo
 BINOMO
@@ -70,6 +73,7 @@ porn
 prices?
 refinanc(?:e|ing)
 repair
+residen(?:tial|ce)
 retail
 risk[\W_]*free
 roof[\W_]*repair
@@ -87,6 +91,7 @@ thabet
 time[\W_]*share
 to your door
 transplant
+travel[\W_]*guide
 vap(?:e|ing)
 [\W_]VIP[\W_]
 visit[\W_]*our[\W_]*(?:web[\W_]*)?site
