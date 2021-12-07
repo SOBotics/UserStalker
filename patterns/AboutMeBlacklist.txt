@@ -2,6 +2,7 @@
 acre
 affordable
 apartment
+Aravalii
 attorney
 auction
 [\W_]B2B[\W_]
@@ -60,6 +61,7 @@ hotline
 [\W_]IELTS[\W_]
 IELTSMindX
 illuminati
+(?:indoor|home)[\W_]*(?:indoor|home)?[\W_]*plants?
 ink[\W_]*cartridges?
 insurance
 interest[\W_]*rate
@@ -117,6 +119,7 @@ time[\W_]*share
 to your door
 transplant
 travel[\W_]*guide
+Trust[\W_]*News
 vap(?:e|ing)
 [\W_]VIP[\W_]
 visit[\W_]*(?:our[\W_]*(?:web[\W_]*)?site|us)
