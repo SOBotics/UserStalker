@@ -26,7 +26,7 @@ deal
 dent(?:al|ist)
 detox
 dispensary
-\be[\W_]?store\b
+\be[\W_]?(?:store|retail(?:er)?)\b
 Easycart
 electricians
 erotic
@@ -54,8 +54,9 @@ lingerie
 lounge[\W_]*wear
 luxur(?:y|ious)
 Luxury[\W_]*Transfers[\W_]*Zagreb
-marijuana
 (?:major)?[\W_]*brands?[\W_]*(?:names?)?
+marijuana
+market[\W_]*share
 massage
 matchfinder
 matrimon(?:y|ial)
