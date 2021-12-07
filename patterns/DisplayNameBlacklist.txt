@@ -61,6 +61,7 @@ greffe[\W_]*de[\W_]*cheveux
 GUNAS
 hire
 hotlive
+House[\W_]*of[\W_]*Budz
 IELTSMindX
 \binsur
 intilight
