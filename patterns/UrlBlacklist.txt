@@ -36,6 +36,7 @@ autocad
 automat\.com\.de
 autopeople\.com
 aycspro\.com
+b2bmap\.com
 bajackets\.com
 bakersfieldepoxy\.com
 bathlanegarage\.co\.uk
@@ -127,6 +128,7 @@ expostandservice\.com
 fanteamshop\.com
 fernandoecky004\.de\.tl
 files\.fm
+filsrich\.com
 fitmoversuae\.com
 fiverr\.com
 fleetsafeparts\.com
@@ -267,6 +269,7 @@ queenslifts\.com
 rapidtest\.nyc
 rapplimited\.com
 random-meet\.com
+realt(?:or|y)
 revivebeautysolutions\.ca
 robinhoodnews\.com
 rocketwellness\.com
@@ -289,6 +292,7 @@ seraro\.com
 sevahome\.in
 sevenme\.net
 shemale
+shopdavydav\.com
 skalasc\.pl
 slideserve\.com
 snsrheumatology\.com
