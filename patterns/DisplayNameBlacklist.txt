@@ -49,6 +49,7 @@ fastlane(?:kg)?
 fight
 filsrich
 finals?
+Fogg[\W_]*Haus[\W_]*Vapes
 football
 free
 fun888
@@ -66,11 +67,14 @@ hire
 hotlive
 House[\W_]*of[\W_]*Budz
 IELTSMindX
+instagram[\W_]*army
 \binsur
 intilight
 ivi[\W_]*esper(?:anto|01n)
 ku66
+kubet11
 Kundli[\W_]*Jyotish
+law[\W_]*firm
 league
 live
 [\W_]loans?[\W_]
@@ -111,6 +115,7 @@ save\s?money
 series
 seven[\W_]*me
 sexy?
+sex[\W_]*hiep[\W_]*dam
 Shree[\W_]*Tripada
 slot
 SpikeJams
@@ -125,6 +130,7 @@ TeknoBuilt
 thabet
 the ?[0-9]{4}
 ufc
+unlock[\W_]*land
 \s+vs\s+
 vap(?:e|ing)
 waiver
