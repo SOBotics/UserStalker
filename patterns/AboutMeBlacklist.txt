@@ -72,6 +72,7 @@ PCR[\W_]*Test[\W_]*Manhattan
 poker
 porn
 prices?
+products
 refinanc(?:e|ing)
 repair
 residen(?:tial|ce)
@@ -96,7 +97,7 @@ transplant
 travel[\W_]*guide
 vap(?:e|ing)
 [\W_]VIP[\W_]
-visit[\W_]*our[\W_]*(?:web[\W_]*)?site
+visit[\W_]*(?:our[\W_]*(?:web[\W_]*)?site|us)
 Website[\W_]*Drona
 wedding
 WeDoLaundry
