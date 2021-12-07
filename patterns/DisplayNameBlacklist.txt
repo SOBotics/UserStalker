@@ -27,6 +27,7 @@ cheap
 chiropract(?:ic|or)s?
 (?:c|k)ondom
 consumer\s?reports?
+container[\W_]*waste
 contest
 (?:full|progressive).*cover
 crack(?:s|ing)?\s?(?:taking|tools?)
@@ -93,6 +94,7 @@ online[\W_]*store
 \b(?:australian|british|french|italian|texas|us)[_ ]*open
 packers
 pancingangka
+\bpest\b
 penis
 playoff
 preakness
