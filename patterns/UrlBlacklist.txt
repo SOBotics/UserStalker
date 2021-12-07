@@ -160,6 +160,7 @@ hollywoodfanmail\.com
 homemakersinterior\.com
 homesmakeover\.net
 homemotivate\.com
+houseofbudz\.ca
 hpage\.com
 [\W_]+hpv[\W_]+
 hsapclaw\.com
