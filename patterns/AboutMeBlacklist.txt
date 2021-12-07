@@ -3,6 +3,7 @@ affordable
 apartment
 attorney
 auction
+[\W_]B2B[\W_]
 bankruptcy
 bedding
 bidvaluable
@@ -13,7 +14,7 @@ blogspot
 brand
 brides
 built[\W_]*to[\W_]*last[\W_]*seo[\W_]*agency
-business[\W_]*needs?
+business[\W_]*(?:hour|need)s?
 \bcall[\W_]*us\b
 (?:c|k)asino
 [\W_]CBD[\W_]
@@ -29,6 +30,7 @@ cremat(?:e|ion)
 crypto
 dating
 deal
+denim
 dent(?:al|ist)
 detox
 dispensary
@@ -63,7 +65,7 @@ luxur(?:y|ious)
 Luxury[\W_]*Transfers[\W_]*Zagreb
 (?:major)?[\W_]*brands?[\W_]*(?:names?)?
 marijuana
-market[\W_]*share
+market[\W_]*(?:place|share)
 massage
 matchfinder
 matrimon(?:y|ial)
@@ -79,9 +81,12 @@ online[\W_]*betting
 PCR[\W_]*Test[\W_]*Manhattan
 poker
 porn
+portal
 prices?
 products
+real(?:ty|tor|[\W_]*estate)
 refinanc(?:e|ing)
+relocat(?:e|ing)
 repair
 residen(?:tial|ce)
 retail
