@@ -29,6 +29,7 @@ aucklandelectrician\.co\.nz
 autocad
 automat\.com\.de
 aycspro\.com
+bajackets\.com
 bakersfieldepoxy\.com
 bathlanegarage\.co\.uk
 bausch\.com\.my
@@ -164,6 +165,7 @@ kaskus\.co\.id
 kazin0\.online
 kekkon1213\.net
 keywordseo\.com
+khoeplus\.com\.vn
 kjandhairspray\.com
 krrailengg\.com
 ku(?:19|66)
@@ -204,6 +206,7 @@ monsieur-compta\.fr
 moversandmakers\.ie
 mrcasino\.bet
 msofficeeasyforyou\.wordpress
+muasamgiatot\.net
 mybirmusic\.com
 mymmjdoctor\.com
 mynewsdesk\.com
@@ -306,6 +309,8 @@ trackroad\.com
 travelers\.com
 trcpamco\.com
 trexgame\.net
+triggeredpt\.com
+ugamegold\.com
 uifresh\.net
 unblog\.fr
 urlscan\.io
