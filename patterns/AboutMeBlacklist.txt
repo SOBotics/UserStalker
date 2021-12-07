@@ -16,6 +16,7 @@ brides
 built[\W_]*to[\W_]*last[\W_]*seo[\W_]*agency
 business[\W_]*(?:hour|need)s?
 \bcall[\W_]*us\b
+cannabis
 (?:c|k)asino
 [\W_]CBD[\W_]
 [\W_]CEO[\W_]
@@ -104,6 +105,7 @@ supplement
 Sweethearts[\W_]*Bridal[\W_]*Shop
 swimming pool
 thabet
+[\W_]THC[\W_]
 time[\W_]*share
 to your door
 transplant
