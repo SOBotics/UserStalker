@@ -25,6 +25,7 @@ chiropract(?:ic|or)s?
 client
 Coffee[\W_]*(?:with[\W_]*)?Karina
 consultant
+contact[\W_]*us
 coupon
 credit
 cremat(?:e|ion)
@@ -57,6 +58,7 @@ hotline
 [\W_]IELTS[\W_]
 IELTSMindX
 illuminati
+ink[\W_]*cartridges?
 insurance
 interest[\W_]*rate
 keywords:
@@ -84,10 +86,12 @@ poker
 porn
 portal
 prices?
+Printer[\W_]*Tales?
 products
 real(?:ty|tor|[\W_]*estate)
 refinanc(?:e|ing)
 relocat(?:e|ing)
+renowned
 repair
 residen(?:tial|ce)
 retail
