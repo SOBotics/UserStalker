@@ -68,6 +68,7 @@ IELTSMindX
 intilight
 ivi[\W_]*esper(?:anto|01n)
 ku66
+Kundli[\W_]*Jyotish
 league
 live
 [\W_]loans?[\W_]
