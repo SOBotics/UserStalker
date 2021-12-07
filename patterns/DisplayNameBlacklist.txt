@@ -74,6 +74,7 @@ Kundli[\W_]*Jyotish
 league
 live
 [\W_]loans?[\W_]
+logo[\W_]*design
 march\s*madness
 mas[\W_]*tatag
 mastercard
