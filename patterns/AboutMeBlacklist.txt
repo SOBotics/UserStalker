@@ -1,7 +1,9 @@
 acre
 affordable
 apartment
+attorney
 auction
+bankruptcy
 bedding
 bidvaluable
 bingo
@@ -11,6 +13,7 @@ blogspot
 brand
 brides
 built[\W_]*to[\W_]*last[\W_]*seo[\W_]*agency
+business[\W_]*needs?
 \bcall[\W_]*us\b
 (?:c|k)asino
 [\W_]CBD[\W_]
@@ -41,6 +44,7 @@ fitness
 flor(?:al|ist)
 furniture
 garage[\W_]*door
+get[\W_]*in[\W_*]touch
 gi8\.info
 gumm(?:y|ies)
 GUNAS
