@@ -461,7 +461,7 @@ public class ChatBot
       }
       else
       {
-         LOGGER.warn("Failed to retrieve new user information from SE API when stalking " + site + "; skipping this time.");
+         LOGGER.warn("Failed to retrieve new user information from SE API when stalking site \"" + site + "\"; skipping this time.");
          siteInfo.ToDate = oldTime;
       }
    }
@@ -554,7 +554,7 @@ public class ChatBot
       if (add)  { this.sites.add   (siteName); }
       else      { this.sites.remove(siteName); }
 
-      this.BroadcastMessage(add ? CHAT_MSG_PREFIX + " Temporarily adding `" + siteName + "` to the list of sites being stalked."
+      this.BroadcastMessage(add ? CHAT_MSG_PREFIX + " Temporarily adding `"   + siteName + "` to the list of sites being stalked."
                                 : CHAT_MSG_PREFIX + " Temporarily removing `" + siteName + "` from the list of sites being stalked.");
 
       if (wasRunning)
@@ -752,8 +752,15 @@ public class ChatBot
       String            avatar   = user.getProfileImage();
       String            location = user.getLocation();
       String            url      = user.getWebsiteUrl();
-      String            about    = user.getAboutMe();
+      String            aboutMe  = user.getAboutMe();
       ArrayList<String> reasons  = new ArrayList<String>(33);
+
+      boolean hasName       = ((name     != null) && !name    .isBlank());
+      boolean hasAvatar     = ((avatar   != null) && !avatar  .isBlank());
+      boolean hasLocation   = ((location != null) && !location.isBlank());
+      boolean hasURL        = ((url      != null) && !url     .isBlank());
+      boolean hasAboutMe    = ((aboutMe  != null) && !aboutMe .isBlank());
+      boolean hasAnyContent = (hasLocation || hasURL || hasAboutMe);
 
       // Check for an active suspension.
       if (user.getTimedPenaltyDate() != null)
@@ -763,7 +770,7 @@ public class ChatBot
       }
 
       // Check the avatar.
-      if ((avatar != null) && !avatar.isBlank())
+      if (hasAvatar)
       {
          if (RegexManager.AnyMatches(avatar, this.regexes.AvatarBlacklist))
          {
@@ -772,7 +779,7 @@ public class ChatBot
       }
 
       // Check the display name.
-      if ((name != null) && !name.isBlank())
+      if (hasName)
       {
          if (RegexManager.AnyMatches(name, this.regexes.NameBlacklist))
          {
@@ -820,10 +827,18 @@ public class ChatBot
 
          if (!this.nonEnglishSites.contains(site) && this.ContainsNonLatin(name))
          {
-            reasons.add("username contains non-Latin character");
+            // To reduce the number of false-positives, this reason is only triggered if the user
+            // profile has content in any other fields. In truth, this is the only case where it
+            // would be justifiable for a moderator to take action on such a match (e.g., by
+            // destroying the user account), so there's no need to even report it if there is
+            // not sufficient information to motivate action.
+            if (hasAnyContent)
+            {
+               reasons.add("username contains non-Latin character");
+            }
          }
 
-         if ((url != null) && !url.isBlank())
+         if (hasURL)
          {
             String normalizedName = name.replaceAll("[^a-zA-Z]", "").toLowerCase();
             String normalizedUrl  = url .replaceAll("[^a-zA-Z]", "").toLowerCase();
@@ -836,7 +851,7 @@ public class ChatBot
       }
 
       // Check the URL.
-      if ((url != null) && !url.isBlank())
+      if (hasURL)
       {
          if (RegexManager.AnyMatches(url, this.regexes.UrlBlacklist))
          {
@@ -860,7 +875,7 @@ public class ChatBot
       }
 
       // Check the location.
-      if ((location != null) && !location.isBlank())
+      if (hasLocation)
       {
          if (RegexManager.AnyMatches(location, this.regexes.OffensiveHi))
          {
@@ -889,54 +904,54 @@ public class ChatBot
       }
 
       // Check the "About Me".
-      if ((about != null) && !about.isBlank())
+      if (hasAboutMe)
       {
-         if (RegexManager.AnyMatches(about, this.regexes.AboutBlacklist))
+         if (RegexManager.AnyMatches(aboutMe, this.regexes.AboutBlacklist))
          {
             reasons.add("\"About Me\" contains blacklisted pattern");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.OffensiveHi))
+         if (RegexManager.AnyMatches(aboutMe, this.regexes.OffensiveHi))
          {
             reasons.add("\"About Me\" contains highly offensive pattern");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.OffensiveMd))
+         if (RegexManager.AnyMatches(aboutMe, this.regexes.OffensiveMd))
          {
             reasons.add("\"About Me\" contains mildly offensive pattern");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.OffensiveLo))
+         if (RegexManager.AnyMatches(aboutMe, this.regexes.OffensiveLo))
          {
             reasons.add("\"About Me\" contains possibly offensive pattern");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.KeywordSmokeyBlacklist))
+         if (RegexManager.AnyMatches(aboutMe, this.regexes.KeywordSmokeyBlacklist))
          {
             reasons.add("\"About Me\" contains keyword on Smokey's blacklist");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.PhonePatterns))
+         if (RegexManager.AnyMatches(aboutMe, this.regexes.PhonePatterns))
          {
             reasons.add("\"About Me\" contains phone number");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.EmailPatterns))
+         if (RegexManager.AnyMatches(aboutMe, this.regexes.EmailPatterns))
          {
             reasons.add("\"About Me\" contains email");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.UrlBlacklist))
+         if (RegexManager.AnyMatches(aboutMe, this.regexes.UrlBlacklist))
          {
             reasons.add("\"About Me\" contains URL on blacklist");
          }
 
-         if (RegexManager.AnyMatches(about, this.regexes.UrlSmokeyBlacklist))
+         if (RegexManager.AnyMatches(aboutMe, this.regexes.UrlSmokeyBlacklist))
          {
             reasons.add("\"About Me\" contains URL on Smokey's blacklist");
          }
 
-         if (about.toLowerCase().contains("</a>"))
+         if (aboutMe.toLowerCase().contains("</a>"))
          {
             reasons.add("\"About Me\" contains a link");
          }
@@ -944,13 +959,13 @@ public class ChatBot
          {
             // Even if there is not an actual link, check to see if there is a non-linked URL
             // (e.g., "example.com").
-            if (RegexManager.AnyMatches(about, this.regexes.UrlPatterns))
+            if (RegexManager.AnyMatches(aboutMe, this.regexes.UrlPatterns))
             {
                reasons.add("\"About Me\" contains URL");
             }
          }
 
-         if (this.ContainsNonLatin(about))
+         if (this.ContainsNonLatin(aboutMe))
          {
             reasons.add("\"About Me\" contains non-Latin character");
          }
@@ -1030,7 +1045,11 @@ public class ChatBot
                                                * 100.0);
          if (message.isEmpty())
          {
-            if (!hasMultiple)
+            if (hasMultiple)
+            {
+               message += "STATISTICS:\n";
+            }
+            else
             {
                message += CHAT_MSG_PREFIX;
             }
