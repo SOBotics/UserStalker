@@ -132,6 +132,7 @@ fiverr\.com
 fleetsafeparts\.com
 fotosdefrases\.com
 freewebcams
+freezoner\.net
 fun888?
 g-casinos\.com
 gambl(?:e|ing)
@@ -159,6 +160,7 @@ homesmakeover\.net
 homemotivate\.com
 hpage\.com
 [\W_]+hpv[\W_]+
+hsapclaw\.com
 huicopper\.com
 iamarrows\.com
 ic0902\.org
