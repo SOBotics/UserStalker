@@ -1,3 +1,4 @@
+\b24\/7\b
 acre
 affordable
 apartment
@@ -63,6 +64,7 @@ ink[\W_]*cartridges?
 insurance
 interest[\W_]*rate
 keywords:
+Kundli[\W_]*Jyotish
 lingerie
 lounge[\W_]*wear
 luxur(?:y|ious)
