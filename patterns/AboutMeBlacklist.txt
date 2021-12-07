@@ -1,4 +1,4 @@
-\b24\/7\b
+\b24[\W_]*(?:\/7|hour)\b
 acre
 affordable
 apartment
@@ -7,6 +7,7 @@ attorney
 auction
 [\W_]B2B[\W_]
 bankruptcy
+beauty
 bed[\W_]*bug
 bedding
 bidvaluable
@@ -27,6 +28,8 @@ cheat
 chemical[\W_]*free
 chiropract(?:ic|or)s?
 client
+clinical[\W_]*depression
+cock
 Coffee[\W_]*(?:with[\W_]*)?Karina
 consultant
 contact[\W_]*us
@@ -34,6 +37,7 @@ container[\W_]*waste
 coupon
 credit
 cremat(?:e|ion)
+criminal[\W_]*defense
 crypto
 dating
 deal
@@ -41,6 +45,10 @@ denim
 dent(?:al|ist)
 detox
 dispensary
+DNA[\W_]*PRO[\W_]*AKADEMI
+DOKTORS
+dragon[\W_]*ball
+(?:driving|traffic)[\W_]*school
 \be[\W_]?(?:store|retail(?:er)?)\b
 Easycart
 electricians
@@ -55,7 +63,9 @@ fitness
 flor(?:al|ist)
 furniture
 garage[\W_]*door
+Geico
 get[\W_]*in[\W_*]touch
+GFA[\W_]*Trust
 gi8\.info
 gumm(?:y|ies)
 GUNAS
@@ -70,7 +80,9 @@ ink[\W_]*cartridges?
 insurance
 interest[\W_]*rate
 iwinapp[\W_]*link
+job[\W_]*seekers?
 keywords:
+kubet11
 Kundli[\W_]*Jyotish
 lingerie
 lounge[\W_]*wear
@@ -85,6 +97,7 @@ matrimon(?:y|ial)
 mattress
 mehndi
 MetroKleen
+mobile[\W_]*market(?:ing)?
 mortgage
 movie
 no[\W_]*contract
@@ -93,6 +106,7 @@ oldbreweryguest
 online[\W_]*betting
 partner[\W_]*company
 PCR[\W_]*Test[\W_]*Manhattan
+personal[\W_]*injury
 poker
 porn
 portal
@@ -109,13 +123,16 @@ retail
 risk[\W_]*free
 roof[\W_]*repair
 rupiahqq
+Safety(?:Docs|Culture)
 same[\W_]*day
 scented[\W_]*candle
 [\W_]SEO[\W_]
 service
 sex
+sex[\W_]*hiep[\W_]*dam
 skin[\W_]*care
 Slotxo
+State[\W_]*Farm
 supplement
 Sweethearts[\W_]*Bridal[\W_]*Shop
 swimming pool
@@ -127,7 +144,9 @@ transplant
 travel[\W_]*guide
 Trust[\W_]*News
 vap(?:e|ing)
+vending[\W_]*machine
 [\W_]VIP[\W_]
+virgin
 visit[\W_]*(?:our[\W_]*(?:web[\W_]*)?site|us)
 Website[\W_]*Drona
 wedding
@@ -155,7 +174,8 @@ tapicerki
 цене(?# "price")
 
 # Middle Eastern
-کازینو آنلاین(# "online casino" in Persian)
+کازینو(?# "casino" in Persian)
+شرط بندی(?# "betting" in Persian)
 
 # Asian
 phim(?# "movie" in Vietnamese)
@@ -165,3 +185,4 @@ phim(?# "movie" in Vietnamese)
 บาคาร่า(?# "baccarat" in Thai)
 judi(?# "gambling" in Indonesian)
 cờ bạc(?# "gambling" in Vietnamese)
+마사지(?# "massage" in Korean)
