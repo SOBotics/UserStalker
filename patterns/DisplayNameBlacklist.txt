@@ -6,6 +6,7 @@ donald\s*trump|.*trump.*
 [a-z]*19
 Ahsun[\W_]*Irfan
 alldatmatterz
+Aravalii
 ardroid[\W_]*post
 awards
 bank\W?of\W?america
