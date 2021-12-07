@@ -23,6 +23,7 @@ cremat(?:e|ion)
 crypto
 dating
 deal
+dent(?:al|ist)
 detox
 dispensary
 \be[\W_]?store\b
