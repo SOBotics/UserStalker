@@ -41,6 +41,7 @@ download
 Easycart
 elimination\s?chamber
 eWandzDigital
+exness
 fashion
 fastlane(?:kg)?
 fight
