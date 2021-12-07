@@ -2,6 +2,7 @@
 (?:\?)?url(?:\?q)?=
 13\.250\.159\.90
 36\.255\.141\.55
+52\.76\.232\.86
 69\.16\.215\.119
 103\.3\.60\.204
 128\.199\.76\.124
@@ -42,9 +43,11 @@ bajackets\.com
 bakersfieldepoxy\.com
 bathlanegarage\.co\.uk
 bausch\.com\.my
+bbb\.org
 beegara\.com
 bestechplots\.in
 bestinsuranceonline\.ca
+bestsoccerstore\.com
 beterhbo\.ning\.com
 bidvaluable\.com
 bigreview\.com
@@ -64,6 +67,7 @@ bollineniastra\.org\.in
 bookeasyclean\.com
 bravesites\.com
 browsvie\.at
+buildboard\.com
 builttolastseoagency
 bullzeyeconsulting\.com
 callthecomputerguy\.net
@@ -75,12 +79,14 @@ chaturbate
 cheaperseeker\.com
 cheatpekalonganvip\.com
 chesseasy\.com
+chinapinfactory\.com
 click4r\.com
 comfykitchen\.com
 codenamecentrepoint\.com
 coffee-with-karina
 comfortbeddings\.com
 conexino\.com
+containerwaste\.co\.nz
 controlc\.com
 coopwb\.org
 copycatupholstery\.com
@@ -103,6 +109,7 @@ designzoned\.com
 detik\.com
 dienmaynewsun\.com
 digiuseppedesign\.com
+digitalconvert\.co\.uk
 diigo\.com
 dggamingthai\.com
 docdro\.id
@@ -155,6 +162,7 @@ gunasthebrand\.com
 haroshee\.com
 healinghpvnaturally\.com
 healthgymbeauty\.com
+herbica\.com
 heymannlawfirm\.com
 hits943\.com
 hnewyear\.com
@@ -171,12 +179,14 @@ iamarrows\.com
 ic0902\.org
 icon-plaza\.vn
 image-perth\.org
+indiagateflours\.com
 indoorcardiopro\.com
 infoapartemen\.com
 interline-duesseldorf\.de
 ipsnews\.net
 ipuppytech\.tk
 ivi-esperanto\.org
+iwinapp\.link
 izmirbayrakci\.com
 j30strike\.org
 jaipurhotescorts\.com
@@ -197,6 +207,7 @@ ladyalba\.co\.kr
 lafato\.de
 larsondauer\.com
 lawyer
+lbk\.com\.tw
 learningmywaym\.org
 leatherbag
 limosa\.vn
@@ -222,6 +233,7 @@ mezabgas\.com
 miel\.travel
 mini-bmx\.de
 mixgupshup\.com
+mlrefrigeration\.com\.au
 mobtreeservice\.com
 modestfashionstylist\.com
 monkeybusiness\.xyz
@@ -242,6 +254,7 @@ nextcomputerworld\.com
 notes\.io
 oceanwraps\.com
 oldbreweryguesthouse\.com
+oltenchina\.com
 oncarbrands\.com
 onfeetnation\.com
 online88club\.com
@@ -329,10 +342,12 @@ teknobuilt\.com
 teknologia\.co
 tesissiliwqjyt0\.tumblr
 thatsfurniture\.com\.au
+thebedbugcompany\.com
 theboostranking\.com
 theburnward\.com
 thedcteam\.com
 theglensecret\.com
+themeorbit\.net
 theodysseyonline\.com
 thepulplist\.com
 threadless\.com
@@ -344,6 +359,7 @@ tobu-wedding\.com
 togelhongkong\.org
 topcleangloves\.com
 topshelfuae\.com
+tpdclaimslawyers\.com\.au
 trackroad\.com
 travelers\.com
 travelguide
@@ -385,6 +401,7 @@ writeablog\.net
 xinghaoya\.net
 xtgem\.com
 ymp\.com\.hk
+younaturalcare\.com
 yousher\.com
 yowinslot\.com
 zenwriting\.net
