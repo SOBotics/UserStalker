@@ -48,6 +48,7 @@ erotic
 eWandzDigital
 exam
 exness
+favou?rite (?:T[\W_]*V|television) shows?(?# a specific type of profile spammer)
 financ(?:e|ial)
 firewood
 fitness
