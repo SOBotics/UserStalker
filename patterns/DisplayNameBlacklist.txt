@@ -40,6 +40,7 @@ doktors
 download
 Easycart
 elimination\s?chamber
+eWandzDigital
 fashion
 fastlane(?:kg)?
 fight
