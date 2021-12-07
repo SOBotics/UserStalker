@@ -73,6 +73,7 @@ same[\W_]*day
 [\W_]SEO[\W_]
 service
 sex
+skin[\W_]*care
 Slotxo
 supplement
 Sweethearts[\W_]*Bridal[\W_]*Shop
