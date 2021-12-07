@@ -23,6 +23,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1030,7 +1034,28 @@ public class ChatBot
       builder.append(reason);
       builder.append(")");
 
-      this.SendMessage(room, builder.toString());
+      // HACK: This is merely to reduce the noise in the chat room logs.
+      //       Remove this once this spammer is dealt with.
+      if ((room == this.roomSO)                    &&
+          (user.getSite().equals("stackoverflow")) &&
+          (user.getProfileImage() != null)         &&
+          user.getProfileImage().contains("gravatar.com/avatar/573ab1b5acb73217ad973eb9efa0e026"))
+      {
+         try (FileWriter     fw = new FileWriter("SO_Chinese_Profile_Spammers.txt", true);
+              BufferedWriter bw = new BufferedWriter(fw);
+              PrintWriter    pw = new PrintWriter(bw))
+         {
+             pw.println(builder.toString());
+         }
+         catch (IOException ex)
+         {
+            LOGGER.error("Failed to append to Chinese profile spammer log file: " + ex);
+         }
+      }
+      else
+      {
+         this.SendMessage(room, builder.toString());
+      }
    }
 
    private void ReportStatistics(Room room, List<String> sites)
