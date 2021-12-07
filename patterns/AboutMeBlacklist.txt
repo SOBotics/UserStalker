@@ -72,6 +72,7 @@ refinanc(?:e|ing)
 repair
 retail
 risk[\W_]*free
+roof[\W_]*repair
 rupiahqq
 same[\W_]*day
 [\W_]SEO[\W_]
