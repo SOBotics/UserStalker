@@ -47,6 +47,7 @@ insurance
 interest[\W_]*rate
 keywords:
 lingerie
+lounge[\W_]*wear
 luxur(?:y|ious)
 Luxury[\W_]*Transfers[\W_]*Zagreb
 marijuana
