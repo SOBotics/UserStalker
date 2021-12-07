@@ -1,13 +1,17 @@
 bingo
+BINOMO
+bitcoins?[\W_]*recovery[\W_]*tool
 blogspot
 brand
 brides
+built[\W_]*to[\W_]*last[\W_]*seo[\W_]*agency
 (?:c|k)asino
 [\W_]CBD[\W_]
 [\W_]CEO[\W_]
 cheat
 chiropract(?:ic|or)s?
 client
+Coffee[\W_]*(?:with[\W_]*)?Karina
 consultant
 coupon
 credit
@@ -28,6 +32,8 @@ furniture
 garage[\W_]*door
 gi8\.info
 gumm(?:y|ies)
+GUNAS
+hijab
 hotline
 [\W_]HPV[\W_]
 [\W_]IELTS[\W_]
@@ -65,7 +71,9 @@ same[\W_]*day
 [\W_]SEO[\W_]
 service
 sex
+Slotxo
 supplement
+Sweethearts[\W_]*Bridal[\W_]*Shop
 swimming pool
 thabet
 time[\W_]*share
@@ -75,9 +83,11 @@ vap(?:e|ing)
 [\W_]VIP[\W_]
 visit[\W_]*our[\W_]*(?:web[\W_]*)?site
 wedding
+WeDoLaundry
 window[\W_]*tint
 Wyndham
 yacht
+yowinslot
 
 # German
 (?:gas|signal)pistole
@@ -93,9 +103,17 @@ meblowej
 tapicerki
 
 # Russian
+казино(?# "casino")
 цене(?# "price")
+
+# Middle Eastern
+کازینو آنلاین(# "online casino" in Persian)
 
 # Asian
 phim(?# "movie" in Vietnamese)
 หนัง(?# "movie" in Thai)
 คาสิโน(?# "casino" in Thai)
+สล็อต(?# "slots" in Thai)
+บาคาร่า(?# "baccarat" in Thai)
+judi(?# "gambling" in Indonesian)
+cờ bạc(?# "gambling" in Vietnamese)
