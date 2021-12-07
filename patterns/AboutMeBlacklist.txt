@@ -7,6 +7,7 @@ attorney
 auction
 [\W_]B2B[\W_]
 bankruptcy
+bed[\W_]*bug
 bedding
 bidvaluable
 bingo
@@ -23,11 +24,13 @@ cannabis
 [\W_]CBD[\W_]
 [\W_]CEO[\W_]
 cheat
+chemical[\W_]*free
 chiropract(?:ic|or)s?
 client
 Coffee[\W_]*(?:with[\W_]*)?Karina
 consultant
 contact[\W_]*us
+container[\W_]*waste
 coupon
 credit
 cremat(?:e|ion)
@@ -65,6 +68,7 @@ illuminati
 ink[\W_]*cartridges?
 insurance
 interest[\W_]*rate
+iwinapp[\W_]*link
 keywords:
 Kundli[\W_]*Jyotish
 lingerie
@@ -86,6 +90,7 @@ no[\W_]*contract
 nutrition
 oldbreweryguest
 online[\W_]*betting
+partner[\W_]*company
 PCR[\W_]*Test[\W_]*Manhattan
 poker
 porn
