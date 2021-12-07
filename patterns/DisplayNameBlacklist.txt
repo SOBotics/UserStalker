@@ -93,6 +93,7 @@ pancingangka
 penis
 playoff
 preakness
+Printer[\W_]*Tales?
 random[\W_]*meet
 rental
 repair
