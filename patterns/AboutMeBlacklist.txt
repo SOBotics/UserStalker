@@ -22,6 +22,7 @@ dating
 deal
 detox
 dispensary
+\be[\W_]?store\b
 Easycart
 electricians
 erotic
