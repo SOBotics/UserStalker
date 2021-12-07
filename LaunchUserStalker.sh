@@ -42,6 +42,7 @@ do
 			printf '\n'
 
 			sudo reboot
+			break
 		} >> "${LOG_FILE}" 2>&1
 	fi
 done
