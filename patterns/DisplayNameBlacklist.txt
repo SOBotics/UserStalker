@@ -118,6 +118,7 @@ stakes
 stream
 super\s*bowl
 Sweethearts[\W_]*Bridal[\W_]*Shop
+szkol(?# specific Polish spammers)
 tax\s?(?:calculator|attorney)
 taxi
 TeknoBuilt
