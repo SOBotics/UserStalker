@@ -54,6 +54,7 @@ DNA[\W_]*PRO[\W_]*AKADEMI
 DOKTORS
 dragon[\W_]*ball
 (?:driving|traffic)[\W_]*school
+drunk[\W_]*driv(?:ing|er)
 \be[\W_]?(?:store|retail(?:er)?)\b
 Easycart
 electricians
