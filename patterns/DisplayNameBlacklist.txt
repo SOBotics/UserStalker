@@ -27,6 +27,7 @@ casino
 champ(?:ion|ionship)?s?
 cheap
 chiropract(?:ic|or)s?
+Cleod9(?:[\W_]*Voice)?
 (?:c|k)ondom
 consumer\s?reports?
 container[\W_]*waste
