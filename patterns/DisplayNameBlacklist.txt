@@ -124,6 +124,7 @@ seven[\W_]*me
 sexy?
 sex[\W_]*hiep[\W_]*dam
 Shree[\W_]*Tripada
+skillbee
 slot
 SpikeJams
 stakes
