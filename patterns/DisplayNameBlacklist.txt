@@ -4,8 +4,10 @@ donald\s*trump|.*trump.*
 (insur?a?n?c?e?|repair|reimb(ursement)?|rent(al)?|accident|hire|tax|rent\s?a|park(ed)?|finance|quotes?)\s?(card?|van|truck)
 ^(?:masters|wrestlemania|c(?:owboys|rack)|el ?clasico|[0-9]{4})
 [a-z]*19
+advanced[\W_]*mineral[\W_]*makeup
 Ahsun[\W_]*Irfan
 alldatmatterz
+amm(?:o|unitions?)
 Aravalii
 ardroid[\W_]*post
 awards
@@ -86,6 +88,7 @@ mayweather
 metasever
 MetroKleen
 miel[\W_]*travel
+Mirin[\W_]*Media
 miss.?(?:universe|world|usa)
 mixgups
 moversandmakers
@@ -102,6 +105,7 @@ pancingangka
 \bpest\b
 penis
 playoff
+pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
 preakness
 Printer[\W_]*Tales?
 random[\W_]*meet
@@ -133,6 +137,7 @@ ufc
 unlock[\W_]*land
 \s+vs\s+
 vap(?:e|ing)
+w88
 waiver
 watch
 web\s?design
