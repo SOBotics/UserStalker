@@ -125,8 +125,8 @@ online[\W_]*betting
 partner[\W_]*company
 PCR[\W_]*Test[\W_]*Manhattan
 personal[\W_]*injury
-pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
 poker
+pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
 porn
 portal
 poultry
@@ -182,6 +182,7 @@ w88
 Website[\W_]*Drona
 wedding
 WeDoLaundry
+(?:weight|fat)[\W_]*(?:loss|reduc(?:e|tion))
 window[\W_]*tint
 Wyndham
 XOSLOTZ?
