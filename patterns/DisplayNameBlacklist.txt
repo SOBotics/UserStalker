@@ -75,6 +75,7 @@ instagram[\W_]*army
 \binsur
 intilight
 ivi[\W_]*esper(?:anto|01n)
+Kioko[\W_]*Center
 ku66
 kubet11
 Kundli[\W_]*Jyotish
