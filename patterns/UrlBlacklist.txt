@@ -28,6 +28,7 @@ airductxperts\.com
 airport-taxi-split\.com
 algorrithm\.com
 allhomestudy\.com
+allsafemeds\.com
 almoheet-travel\.com
 americanlifeguard\.com
 annefrankparallelstories\.com
@@ -179,10 +180,12 @@ forbesblog\.org
 fotosdefrases\.com
 freewebcams
 freezoner\.net
+frontierdevelopments\.co\.uk
 fun888?
 g-casinos\.com
 \bgambl(?:e|ing)\b
 gameauland\.com
+gamespot\.com
 (?:gas|signal)pistole
 gematodiatrofi\.hua\.gr
 getmonero\.org
@@ -239,6 +242,7 @@ j30strike\.org
 jaipurhotescorts\.com
 jejakterkini\.com
 jigsy\.com
+just6f\.com
 justcreativelight\.com
 justpaste\.it
 kaskus\.co\.id
@@ -258,6 +262,7 @@ ktbinhduong\.com
 ku(?:19|66)
 kubet11\.life
 kuechenrueckwandfolie\.de
+kunalvastu\.com
 kundlijyotish\.com
 kvtekh\.org
 ladyalba\.co\.kr
@@ -316,6 +321,7 @@ mushahadati\.com
 mybirmusic\.com
 mymmjdoctor\.com
 mynewsdesk\.com
+mythesis\.co\.in
 mytrvlclub\.com
 myvplaw\.com
 namenecklaces\.co
@@ -453,6 +459,7 @@ theglossarymagazine\.com
 themeorbit\.net
 theodysseyonline\.com
 thepulplist\.com
+theservicemart\.in
 thietbibeboi
 threadless\.com
 threedashesagency\.com\.au
