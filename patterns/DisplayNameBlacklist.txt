@@ -67,6 +67,7 @@ grand\W?prix
 green\s?bay\s?packers?
 greffe[\W_]*de[\W_]*cheveux
 GUNAS
+hair[\W_]*transplant
 hire
 hotlive
 House[\W_]*of[\W_]*Budz
