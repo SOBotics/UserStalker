@@ -71,6 +71,7 @@ blogfreely\.net
 bloggersdelight\.dk
 blogitudes\.com
 \.blogspot\.
+blossomboutique\.com
 blueskyes\.app
 blurb\.com
 bollineniastra\.org\.in
@@ -391,6 +392,7 @@ speedyshare\.com
 spidercars\.ae
 spikejams
 spreaker\.com
+srmnet\.org
 stageit\.com
 storeboard\.com
 strips\.finance
