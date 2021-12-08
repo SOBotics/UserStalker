@@ -52,6 +52,7 @@ fastlane(?:kg)?
 fight
 filsrich
 finals?
+florist
 Fogg[\W_]*Haus[\W_]*Vapes
 football
 free
