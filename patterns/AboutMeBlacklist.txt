@@ -107,6 +107,7 @@ Mirin[\W_]*Media
 mobile[\W_]*market(?:ing)?
 mortgage
 movie
+MUSHAHADATI
 NBA[\W_]*Draft
 no[\W_]*contract
 nutrition
@@ -192,6 +193,7 @@ tapicerki
 # Middle Eastern
 کازینو(?# "casino" in Persian)
 شرط بندی(?# "betting" in Persian)
+أفلام(?# "films" in Arabic)
 
 # Asian
 phim(?# "movie" in Vietnamese)
