@@ -104,6 +104,7 @@ lounge[\W_]*wear
 luxur(?:y|ious)
 Luxury[\W_]*Transfers[\W_]*Zagreb
 (?:major)?[\W_]*brands?[\W_]*(?:names?)?
+male[\W_]*enhance(?:ment)?
 marijuana
 market[\W_]*(?:place|share)
 massage
@@ -125,6 +126,7 @@ oldbreweryguest
 online[\W_]*betting
 partner[\W_]*company
 PCR[\W_]*Test[\W_]*Manhattan
+penis
 personal[\W_]*injury
 poker
 pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
