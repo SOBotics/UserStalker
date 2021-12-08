@@ -63,6 +63,7 @@ eWandzDigital
 exam
 exness
 favou?rite (?:T[\W_]*V|television) shows?(?# a specific type of profile spammer)
+[\W_]FDA[\W_]
 financ(?:e|ial)
 firewood
 fitness
@@ -91,6 +92,7 @@ iwinapp[\W_]*link
 job[\W_]*seekers?
 kelmatt
 keywords:
+kid[\W_]*friendly
 Kioko[\W_]*Center
 kubet11
 Kundli[\W_]*Jyotish
@@ -158,6 +160,7 @@ swimming pool
 Techno[\W_]*Fibre
 thabet
 [\W_]THC[\W_]
+thesis[\W_]*writ(?:er|ing)
 time[\W_]*share
 to your door
 tooth[\W_]*(?:whitening|sensitivity)
