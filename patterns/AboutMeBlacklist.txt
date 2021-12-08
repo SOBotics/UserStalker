@@ -1,6 +1,7 @@
 \b24[\W_]*(?:\/7|hour)\b
 acre
 affordable
+amm(?:o|unitions?)
 apartment
 Aravalii
 attorney
@@ -31,6 +32,7 @@ client
 clinical[\W_]*depression
 cock
 Coffee[\W_]*(?:with[\W_]*)?Karina
+cold[\W_]*virus
 consultant
 contact[\W_]*us
 container[\W_]*waste
@@ -81,9 +83,11 @@ insurance
 interest[\W_]*rate
 iwinapp[\W_]*link
 job[\W_]*seekers?
+kelmatt
 keywords:
 kubet11
 Kundli[\W_]*Jyotish
+Land[\W_]*cruiser
 lingerie
 lounge[\W_]*wear
 luxur(?:y|ious)
@@ -97,9 +101,11 @@ matrimon(?:y|ial)
 mattress
 mehndi
 MetroKleen
+Mirin[\W_]*Media
 mobile[\W_]*market(?:ing)?
 mortgage
 movie
+NBA[\W_]*Draft
 no[\W_]*contract
 nutrition
 oldbreweryguest
@@ -107,9 +113,11 @@ online[\W_]*betting
 partner[\W_]*company
 PCR[\W_]*Test[\W_]*Manhattan
 personal[\W_]*injury
+pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
 poker
 porn
 portal
+poultry
 prices?
 Printer[\W_]*Tales?
 products
@@ -132,14 +140,17 @@ sex
 sex[\W_]*hiep[\W_]*dam
 skin[\W_]*care
 Slotxo
+(?:sports?|football)[\W_]*bets?
 State[\W_]*Farm
 supplement
 Sweethearts[\W_]*Bridal[\W_]*Shop
 swimming pool
+Techno[\W_]*Fibre
 thabet
 [\W_]THC[\W_]
 time[\W_]*share
 to your door
+tooth[\W_]*(?:whitening|sensitivity)
 transplant
 travel[\W_]*guide
 Trust[\W_]*News
@@ -148,11 +159,13 @@ vending[\W_]*machine
 [\W_]VIP[\W_]
 virgin
 visit[\W_]*(?:our[\W_]*(?:web[\W_]*)?site|us)
+w88
 Website[\W_]*Drona
 wedding
 WeDoLaundry
 window[\W_]*tint
 Wyndham
+Xtream[\W_]*Forex
 yacht
 yowinslot
 
