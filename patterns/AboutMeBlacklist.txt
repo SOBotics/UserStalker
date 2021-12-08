@@ -140,6 +140,7 @@ scented[\W_]*candle
 service
 sex
 sex[\W_]*hiep[\W_]*dam
+skillbee
 skin[\W_]*care
 Slotxo
 (?:sports?|football)[\W_]*bets?
