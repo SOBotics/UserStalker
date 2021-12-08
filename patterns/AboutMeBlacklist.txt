@@ -13,6 +13,7 @@ beauty
 bed[\W_]*bug
 bedding
 bidvaluable
+bike[\W_]*repairs?
 bingo
 BINOMO
 bitcoins?[\W_]*recovery[\W_]*tool
