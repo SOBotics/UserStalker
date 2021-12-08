@@ -52,6 +52,7 @@ detox
 dispensary
 DNA[\W_]*PRO[\W_]*AKADEMI
 DOKTORS
+drachen(?# male enhancement product)
 dragon[\W_]*ball
 (?:driving|traffic)[\W_]*school
 drunk[\W_]*driv(?:ing|er)
