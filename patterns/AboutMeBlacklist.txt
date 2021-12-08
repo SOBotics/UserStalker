@@ -4,6 +4,7 @@ affordable
 amm(?:o|unitions?)
 apartment
 Aravalii
+assignment
 attorney
 auction
 [\W_]B2B[\W_]
@@ -73,6 +74,7 @@ gi8\.info
 gumm(?:y|ies)
 GUNAS
 hijab
+homework
 hotline
 [\W_]HPV[\W_]
 [\W_]IELTS[\W_]
