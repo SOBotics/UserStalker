@@ -163,6 +163,7 @@ tooth[\W_]*(?:whitening|sensitivity)
 transplant
 travel[\W_]*guide
 Trust[\W_]*News
+upbeat[\W_]*digital
 vap(?:e|ing)
 vending[\W_]*machine
 [\W_]VIP[\W_]
