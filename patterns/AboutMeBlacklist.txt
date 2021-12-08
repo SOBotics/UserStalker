@@ -112,6 +112,7 @@ mortgage
 movie
 MUSHAHADATI
 NBA[\W_]*Draft
+nguy(?:e|ễ)n[\W_]*th(?:e|ế)[\W_]*h(?:o|ò)a
 no[\W_]*contract
 nutrition
 oldbreweryguest
