@@ -140,6 +140,7 @@ thabet
 the ?[0-9]{4}
 ufc
 unlock[\W_]*land
+upbeat[\W_]*digital
 \s+vs\s+
 vap(?:e|ing)
 w88
