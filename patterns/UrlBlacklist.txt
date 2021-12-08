@@ -141,6 +141,7 @@ dragonball90\.com
 dragonpearll\.com
 drdecarlo\.net
 drjoshipura\.com
+dsprelated\.com
 dumpscafe\.com
 easycartcleaning\.co\.uk
 edukacjalic\.pl
@@ -175,7 +176,7 @@ freewebcams
 freezoner\.net
 fun888?
 g-casinos\.com
-gambl(?:e|ing)
+\bgambl(?:e|ing)\b
 gameauland\.com
 (?:gas|signal)pistole
 gematodiatrofi\.hua\.gr
@@ -206,14 +207,14 @@ homemotivate\.com
 hoower\.net
 houseofbudz\.ca
 hpage\.com
-[\W_]+hpv[\W_]+
+\bhpv\b
 hsapclaw\.com
 huicopper\.com
 iamarrows\.com
 ic0902\.org
 icon-plaza\.vn
 image-perth\.org
-imuscle
+\bimuscle\b
 indiagateflours\.com
 indoorcardiopro\.com
 infoapartemen\.com
@@ -254,7 +255,7 @@ ladyalba\.co\.kr
 lafato\.de
 larsondauer\.com
 law[\W_]*firm
-lawyer
+\blawyer\b
 lbk\.com\.tw
 learningmywaym\.org
 leatherbag
@@ -344,7 +345,7 @@ periodismolatino\.com
 petesultimatemovers\.com
 pixnet\.net
 popsmokemerchshop\.com
-poker
+\bpoker\b
 ponnavaram\.org
 postheaven\.net
 prestigeprimrosehills360\.org\.in
@@ -353,7 +354,7 @@ proposal-to-mary\.com
 qrmart\.com\.sg
 quangcaokimlong\.com
 quatangmunus\.com
-quickbooks
+\bquickbooks\b
 queenslifts\.com
 rapidtest\.nyc
 rapplimited\.com
@@ -382,7 +383,7 @@ seraro\.com
 sevahome\.in
 sevenme\.net
 sexhiepdam\.live
-shemale
+\bshemale\b
 shopdavydav\.com
 shutterfly\.com
 simplesite\.com
