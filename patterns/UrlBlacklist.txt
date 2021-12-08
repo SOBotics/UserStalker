@@ -403,6 +403,7 @@ sweetheartsbridalshop\.com
 syntellicore\.com
 \b.*szkol.*\.pl\b
 takipcenneti\.net
+tannersmiths\.com
 taringa\.net
 tearosediner\.net
 technetbloggers\.de
