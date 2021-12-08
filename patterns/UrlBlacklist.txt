@@ -235,8 +235,10 @@ kelmatt\.com\.au
 keywordseo\.com
 khoeplus\.com\.vn
 kholedgiasi\.com
+kiokocenter\.com
 kjandhairspray\.com
 kolkataff\.today
+krausegroup\.com\.au
 krrailengg\.com
 ku(?:19|66)
 kubet11\.life
@@ -406,6 +408,7 @@ surf\.dev
 sweetheartsbridalshop\.com
 syntellicore\.com
 \b.*szkol.*\.pl\b
+tajalmaerifa\.com
 takipcenneti\.net
 tannersmiths\.com
 taringa\.net
@@ -458,6 +461,7 @@ unlockland\.com
 urlscan\.io
 v7uytin\.com
 valimu\.com
+vastuconsultantindubai\.com
 vastuforhome\.com
 vegas11\.live
 veksor\.com
