@@ -37,11 +37,13 @@ appzbank\.com
 aravalii\.com
 argadetectives\.com
 aroundhendrickscounty\.com
+asean2021\.bn
 aszkolnik\.pl
 atelierdolzi\.com
 atoallinks\.com
 aucklandelectrician\.co\.nz
 autocad
+autoecufile\.com
 automat\.com\.de
 autopeople\.com
 avitechnutrition\.com
@@ -50,6 +52,7 @@ b2bmap\.com
 bajackets\.com
 bakersfieldepoxy\.com
 barefootfoundation\.com
+basislink\.nl
 bathlanegarage\.co\.uk
 bausch\.com\.my
 bbb\.org
@@ -64,11 +67,13 @@ bigpharmausa\.com
 bignewsnetwork\.com
 binaryreviewsrace\.com
 binomo\.in\.ua
+birlatisyabangalore\.org\.in
 bitcoin
 bitcoinsrecoverytool\.com
 bk8top1\.com
 blaqmax\.net
 blogbright\.net
+bloghuongdan\.com
 blogfreely\.net
 bloggersdelight\.dk
 blogitudes\.com
@@ -80,6 +85,7 @@ bollineniastra\.org\.in
 bookeasyclean\.com
 box\.com
 bravesites\.com
+brightwoodliving\.org
 bromleyaesthetics\.co\.uk
 browsvie\.at
 buildboard\.com
@@ -91,8 +97,10 @@ castlerockseniorcare\.org
 caterertaiwan\.com
 cavandoragh\.org
 cellphones\.com\.vn
+cervical-dysplasia-cure\.com
 chaturbate
 cheaperseeker\.com
+cheapohosting\.com
 cheatpekalonganvip\.com
 chesseasy\.com
 chinapinfactory\.com
@@ -133,6 +141,7 @@ dienmaynewsun\.com
 digiuseppedesign\.com
 digitalconvert\.co\.uk
 diigo\.com
+divephotoguide\.com
 dggaming(?:\.org|thai\.com)
 doassignmenthelp\.com
 docs\.google\.com
@@ -163,6 +172,7 @@ eszkolik\.pl
 evernote\.com\/shard
 ewandzdigital\.com
 examencentro\.com
+exammodern\.com
 exness\.com
 expertelectricgroup\.com
 expostandservice\.com
@@ -172,6 +182,7 @@ fernandoecky004\.de\.tl
 files\.fm
 filsrich\.com
 finetunedinstruments\.com
+firstservecleaning\.com
 fitmoversuae\.com
 fiverr\.com
 fleetsafeparts\.com
@@ -188,6 +199,7 @@ gameauland\.com
 gamespot\.com
 (?:gas|signal)pistole
 gematodiatrofi\.hua\.gr
+genesisautowash\.com
 getmonero\.org
 gddga\.com
 gfatrust\.com
@@ -230,6 +242,7 @@ image-perth\.org
 indiagateflours\.com
 indoorcardiopro\.com
 infoapartemen\.com
+inovaclinics\.se
 instantpromotion\.com
 interline-duesseldorf\.de
 ipsnews\.net
@@ -240,11 +253,14 @@ iwinapp\.link
 izmirbayrakci\.com
 j30strike\.org
 jaipurhotescorts\.com
+jbhnews\.com
 jejakterkini\.com
 jigsy\.com
+jobtody\.com
 just6f\.com
 justcreativelight\.com
 justpaste\.it
+k2print\.pl
 kaskus\.co\.id
 kazin0\.online
 kekkon1213\.net
@@ -273,9 +289,11 @@ law[\W_]*firm
 lbk\.com\.tw
 learningmywaym\.org
 leatherbag
+licbazateksty\.pl
 limosa\.vn
 live-player\.com
 localmoves\.com\.au
+loganwindowblinds\.com
 logodesignscompany\.com
 longisland\.com
 lowescouponn\.com
@@ -360,6 +378,7 @@ penzu\.com
 periodismolatino\.com
 petesultimatemovers\.com
 pixnet\.net
+plumberinfortlauderdale\.org
 popsmokemerchshop\.com
 \bpoker\b
 ponnavaram\.org
@@ -377,6 +396,7 @@ rapplimited\.com
 random-meet\.com
 rbc\.com
 realt(?:or|y)
+redcorept\.com
 revivebeautysolutions\.ca
 robinhoodnews\.com
 rocketwellness\.com
@@ -386,8 +406,10 @@ rubermedia\.com
 rubiredtea\.com\.au
 russianpassportsandvisas\.com
 ruthamcauquan3\.info
+saakin\.com
 safeco\.com
 safetyculture\.com
+sailventuresinc\.com
 sandstone\.com\.au
 sanjaykumarro\.com
 santhuoc\.net
@@ -409,7 +431,9 @@ skalasc\.pl
 skillbee\.com
 skincell\.org
 skyrock\.com
+skyzone\.com
 slideserve\.com
+slotxogame\.net
 \bslut\b
 smlife\.vn
 snsrheumatology\.com
@@ -421,6 +445,7 @@ speedyshare\.com
 spidercars\.ae
 spike\.cc
 spikejams
+splice\.com
 spreaker\.com
 srmnet\.org
 stageit\.com
@@ -442,11 +467,13 @@ tajalmaerifa\.com
 takipcenneti\.net
 tannersmiths\.com
 taringa\.net
+teamfs\.ca
 tearosediner\.net
 technetbloggers\.de
 technofibre\.com
 teknobuilt\.com
 teknologia\.co
+telegra\.ph
 terapeame\.net
 tesissiliwqjyt0\.tumblr
 thatsfurniture\.com\.au
@@ -470,6 +497,7 @@ tobu-wedding\.com
 todaybabyexpo\.com
 togelhongkong\.org
 tobaccokings\.com
+topcacnhacai\.com
 topcleangloves\.com
 topshelfuae\.com
 topthaiplay\.com
@@ -483,12 +511,14 @@ triggeredpt\.com
 triumfo\.in
 trustnews24\.com
 truxgo\.net
+ttytcammy\.vn
 ugamegold\.com
 uifresh\.net
 ufoinfo\.com
 unblog\.fr
 union\.com\.vn
 unlockland\.com
+unsplash\.com
 upbeat\.digital
 urlscan\.io
 v7uytin\.com
@@ -529,7 +559,9 @@ xtreamforex\.com
 ymp\.com\.hk
 younaturalcare\.com
 yousher\.com
+youtube-mp3-converter\.xyz
 yowinslot\.com
 zenwriting\.net
 zippyshare\.com
+zohorfashion\.com
 zleceniateksty\.pl
