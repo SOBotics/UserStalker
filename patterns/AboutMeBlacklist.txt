@@ -28,6 +28,7 @@ cannabis
 cheat
 chemical[\W_]*free
 chiropract(?:ic|or)s?
+Cleod9(?:[\W_]*Voice)?
 client
 clinical[\W_]*depression
 cock
