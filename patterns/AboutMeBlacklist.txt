@@ -74,6 +74,7 @@ GFA[\W_]*Trust
 gi8\.info
 gumm(?:y|ies)
 GUNAS
+hair[\W_]*transplant
 hijab
 homework
 hotline
