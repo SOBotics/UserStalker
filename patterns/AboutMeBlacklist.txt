@@ -68,6 +68,7 @@ financ(?:e|ial)
 firewood
 fitness
 flor(?:al|ist)
+for[\W_]*sale
 furniture
 garage[\W_]*door
 Geico
