@@ -128,7 +128,7 @@ online[\W_]*betting
 partner[\W_]*company
 PCR[\W_]*Test[\W_]*Manhattan
 penis
-personal[\W_]*injury
+personal[\W_]*i(?:mmunity|njury)
 poker
 pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
 porn
