@@ -92,30 +92,34 @@ public class RegexManager
       ArrayList<String> list = new ArrayList<String>();
       try
       {
-         URL            data   = new URL(url);
-         BufferedReader reader = new BufferedReader(new InputStreamReader(data.openStream(),
-                                                                          StandardCharsets.UTF_8));
-
-         String line;
-         while ((line = reader.readLine()) != null)
+         URL data = new URL(url);
+         try (
+              InputStreamReader isr = new InputStreamReader(data.openStream(),
+                                                            StandardCharsets.UTF_8);
+              BufferedReader    br  = new BufferedReader(isr);
+             )
          {
-            if (!line.startsWith("#"))
+            String line;
+            while ((line = br.readLine()) != null)
             {
-               String expression = line.trim();
-
-               // Java's regular-expression engine doesn't support embedded comment groups, so
-               // when we try to compile such a regex later, the attempt will fail. Therefore,
-               // we strip out any embedded comments here, using a regex, of all things!
-               expression = REGEX_COMMENT_PATTERN.matcher(expression).replaceAll("");
-
-               if (!expression.isBlank())
+               if (!line.startsWith("#"))
                {
-                  list.add(expression);
+                  String expression = line.trim();
+
+                  // Java's regular-expression engine doesn't support embedded comment groups, so when
+                  // we later go to compile such a regex, the attempt will fail. Therefore, we strip
+                  // out any embedded comments in the regex here, using a regex of all things!
+                  expression = REGEX_COMMENT_PATTERN.matcher(expression).replaceAll("");
+
+                  if (!expression.isBlank())
+                  {
+                     list.add(expression);
+                  }
                }
             }
          }
       }
-      catch (IOException ex)
+      catch (Exception ex)
       {
          LOGGER.warn("Failed to load regex patterns from <" + url + ">.");
          ex.printStackTrace();

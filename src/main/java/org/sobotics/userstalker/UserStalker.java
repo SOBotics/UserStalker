@@ -2,6 +2,7 @@ package org.sobotics.userstalker;
 
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,10 +31,11 @@ public class UserStalker
       try
       {
          // Attempt to load version number from properties.
-         try
+         try (InputStream is = UserStalker.class.getClassLoader().getResourceAsStream("project.properties"))
          {
             Properties properties = new Properties();
-            properties.load(UserStalker.class.getClassLoader().getResourceAsStream("project.properties"));
+            properties.load(is);
+
             VERSION = properties.getProperty("version");
          }
          catch (IOException ex)
@@ -52,9 +54,9 @@ public class UserStalker
 
          // Load "login" properties file.
          Properties propLogin = new Properties();
-         try
+         try (FileInputStream fis = new FileInputStream(LOGIN_PROPERTIES_FILE))
          {
-            propLogin.load(new FileInputStream(LOGIN_PROPERTIES_FILE));
+            propLogin.load(fis);
          }
          catch (IOException ex)
          {
@@ -63,15 +65,14 @@ public class UserStalker
          }
 
          // Load "StackOverflow" properties file.
-         boolean joinSO   = true;
-         int     soRoomID = -1;
-         try
+         int soRoomID = -1;
+         try (FileInputStream fis = new FileInputStream(SO_PROPERTIES_FILE))
          {
             // Attempt to load Stack Overflow properties file.
             Properties propSO = new Properties();
             try
             {
-               propSO.load(new FileInputStream(SO_PROPERTIES_FILE));
+               propSO.load(fis);
             }
             catch (IOException ex)
             {
@@ -84,24 +85,23 @@ public class UserStalker
          }
          catch (Exception ex)
          {
-            joinSO = false;
+            soRoomID = -1;
 
             LOGGER.warn("Something went wrong trying to set up stalking for Stack Overflow; will not stalk new users on that site.");
             ex.printStackTrace();
          }
 
          // Load "StackExchange" properties file.
-         boolean      joinSE          = true;
+         int          seRoomID        = -1;
          List<String> seSites         = null;
          List<String> nonEnglishSites = null;
-         int          seRoomID        = -1;
-         try
+         try (FileInputStream fis = new FileInputStream(SE_PROPERTIES_FILE))
          {
             // Attempt to load Stack Exchange properties file.
             Properties propSE = new Properties();
             try
             {
-               propSE.load(new FileInputStream(SE_PROPERTIES_FILE));
+               propSE.load(fis);
             }
             catch (IOException ex)
             {
@@ -110,31 +110,27 @@ public class UserStalker
             }
 
             // Attempt to load the list of sites from the properties file.
-            try
+            String sites = propSE.getProperty("sites");
+            if ((sites != null) && !sites.isBlank())
             {
-               String sites = propSE.getProperty("sites");
-               if ((sites != null) && !sites.isBlank())
-               {
-                  seSites = Arrays.asList(sites.split("\\s*,\\s*"));
-               }
+               seSites = Arrays.asList(sites.split("\\s*,\\s*"));
             }
-            catch (Exception ex)
+            else
             {
-               LOGGER.warn("Missing or invalid value for \"sites\" property in \"StackExchange\" property file; will not monitor any sites.");
+               LOGGER.warn("Missing or invalid value for \"sites\" property in \"StackExchange\" property file;"
+                         + " will not monitor any sites.");
             }
 
             // Attempt to load the list of non-English sites from the properties file.
-            try
+            String nonEnglish = propSE.getProperty("nonEnglish");
+            if ((nonEnglish != null) && !nonEnglish.isBlank())
             {
-               String sites = propSE.getProperty("nonEnglish");
-               if ((sites != null) && !sites.isBlank())
-               {
-                  nonEnglishSites = Arrays.asList(sites.split("\\s*,\\s*"));
-               }
+               nonEnglishSites = Arrays.asList(nonEnglish.split("\\s*,\\s*"));
             }
-            catch (Exception ex)
+            else
             {
-               LOGGER.warn("Missing or invalid value for \"nonEnglish\" property in \"StackExchange\" property file; will not exclude any sites from non-Latin character checks.");
+               LOGGER.warn("Missing or invalid value for \"nonEnglish\" property in \"StackExchange\" property file;"
+                         + " will not exclude any sites from non-Latin character checks.");
             }
 
             // Attempt to load and parse the room number from the properties file.
@@ -142,29 +138,31 @@ public class UserStalker
          }
          catch (Exception ex)
          {
-            joinSE = false;
+            seRoomID = -1;
 
-            LOGGER.warn("Something went wrong trying to set up stalking for Stack Exchange; will not stalk new users on these sites.");
+            LOGGER.warn("Something went wrong trying to set up stalking for Stack Exchange;"
+                      + " will not stalk new users on these sites.");
             ex.printStackTrace();
          }
 
          // Create an instance of the ChatBot class, which will automatically try to log in to
          // Stack Exchange with the specified credentials.
-         ChatBot bot = new ChatBot(propLogin.getProperty("email"),
-                                   propLogin.getProperty("password"));
-
-         // Join the appropriate rooms.
-         if (joinSO && (soRoomID != -1))
+         try (ChatBot bot = new ChatBot(propLogin.getProperty("email"),
+                                        propLogin.getProperty("password")))
          {
-            bot.JoinSO(soRoomID);
-         }
-         if (joinSE && (seRoomID != -1))
-         {
-            bot.JoinSE(seRoomID);
-         }
+            // Join the appropriate rooms.
+            if (soRoomID != -1)
+            {
+               bot.JoinSO(soRoomID);
+            }
+            if (seRoomID != -1)
+            {
+               bot.JoinSE(seRoomID);
+            }
 
-         // Start stalking.
-         bot.Run(seSites, nonEnglishSites);
+            // Start stalking.
+            bot.Run(seSites, nonEnglishSites);
+         }
       }
       catch (Exception ex)
       {

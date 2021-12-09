@@ -6,7 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.lang.Throwable;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.Year;
 import java.util.ArrayList;
@@ -43,23 +45,24 @@ import org.sobotics.userstalker.StackExchangeApiClient;
 import org.sobotics.userstalker.StackExchangeSiteInfo;
 
 
-public class ChatBot
+public class ChatBot implements AutoCloseable
 {
-   private static final int                 POLL_TIME_MINUTES    = 5;
-   private static final int                 OFFSET_TIME_MINUTES  = 2;
+   private static final int                 POLL_TIME_MINUTES        = 5;
+   private static final int                 OFFSET_TIME_MINUTES      = 2;
    private static final Map<String, long[]> CHAT_ADMIN_USERIDS;
       static
       {
          HashMap<String, long[]> map = new HashMap<String, long[]>();
          map.put("stackoverflow.com", new long[] { 366904, });
-         map.put("stackexchange.com", new long[] { 7959, });
+         map.put("stackexchange.com", new long[] {   7959, });
          CHAT_ADMIN_USERIDS = Collections.unmodifiableMap(map);
       }
-   private static final String              PERSISTED_STATE_FILE = "savedState.bin";
-   private static final String              BOT_URL              = "https://git.io/v5CGT";
-   private static final String              CHAT_MSG_PREFIX      = "[ [User Stalker](" + BOT_URL + ") ]";
-   private static final String              UNKNOWN_CMD_MSG      = "You talkin\u2019 to me? Psst\u2026ping me and say \"help\".";
-   private static final String              HELP_CMD_MSG         =
+   private static final String              PERSISTED_STATE_FILE     = "savedState.bin";
+   private static final String              SO_CHINESE_SPAMMERS_FILE = "SO_Chinese_Profile_Spammers.txt";
+   private static final String              BOT_URL                  = "https://git.io/v5CGT";
+   private static final String              CHAT_MSG_PREFIX          = "[ [User Stalker](" + BOT_URL + ") ]";
+   private static final String              UNKNOWN_CMD_MSG          = "You talkin\u2019 to me? Psst\u2026ping me and say \"help\".";
+   private static final String              HELP_CMD_MSG             =
   "I'm User Stalker (" + BOT_URL + "), a bot that continuously queries the "
 + "Stack Exchange \"/users\" API (https://api.stackexchange.com/docs/users) in order to "
 + "track all newly-created user accounts. If a suspicious pattern is detected in one of "
@@ -120,6 +123,13 @@ public class ChatBot
    private Map<String, StackExchangeSiteInfo> siteInfoMap;
    private boolean                            stalkSE = true;
 
+   // HACK: This is merely to reduce the noise in the chat room logs caused by an extremely
+   //       persistent wave of Chinese profile spammers on Stack Overflow, which follow an
+   //       extremely predictable pattern. Remove this hack once this spammer is dealt with
+   //       (e.g., by a system-level block).
+   private FileOutputStream                   fosForSOChineseSpammers = null;
+   private OutputStreamWriter                 oswForSOChineseSpammers = null;
+
 
    public ChatBot(String emailAddress, String password)
    {
@@ -134,6 +144,13 @@ public class ChatBot
          LOGGER.error("Failed to log in and initialize Stack Exchange chat client.");
          throw ex;
       }
+   }
+
+   @Override
+   public void close() throws Exception
+   {
+      this.oswForSOChineseSpammers.close();
+      this.fosForSOChineseSpammers.close();
    }
 
 
@@ -197,6 +214,19 @@ public class ChatBot
       if (nonEnglishSites != null)
       {
          this.nonEnglishSites.addAll(nonEnglishSites);
+      }
+
+      // Attempt to open the file into which we log the Chinese profile spammers on Stack Overflow.
+      // This file is opened for appending, so that we don't overwrite its previous contents.
+      try
+      {
+         fosForSOChineseSpammers = new FileOutputStream(SO_CHINESE_SPAMMERS_FILE, true);
+         oswForSOChineseSpammers = new OutputStreamWriter(fosForSOChineseSpammers,
+                                                          StandardCharsets.UTF_8);
+      }
+      catch (IOException ex)
+      {
+         LOGGER.warn("Failed to open Stack Overflow Chinese profile spammer log file: " + ex);
       }
 
       // Start the stalking service.
@@ -322,10 +352,10 @@ public class ChatBot
 
    private void OnMentioned(Room room, PingMessageEvent event, boolean isReply)
    {
-      Message  message       = event.getMessage();
-      long     replyID       = message.getId();
-      String   messageString = message.getPlainContent();
-      String[] messageParts  = messageString.trim().toLowerCase().split(" ");
+      Message message        = event.getMessage();
+      long    replyID        = message.getId();
+      String  messageString  = message.getPlainContent();
+      String  messageParts[] = messageString.trim().toLowerCase().split(" ");
 
       LOGGER.info("New mention in room "
                 + room.getRoomId()
@@ -602,13 +632,12 @@ public class ChatBot
          this.executor = null;
 
          LOGGER.info("Persisting state to file (\"" + PERSISTED_STATE_FILE + "\")...");
-         try
+         try (
+              FileOutputStream   fos = new FileOutputStream(PERSISTED_STATE_FILE);
+              ObjectOutputStream oos = new ObjectOutputStream(fos)
+             )
          {
-            FileOutputStream   fos = new FileOutputStream(PERSISTED_STATE_FILE);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(this.siteInfoMap);
-            oos.close();
-            fos.close();
          }
          catch (IOException ex)
          {
@@ -641,16 +670,14 @@ public class ChatBot
             long startTime = Instant.now().minusSeconds(OFFSET_TIME_MINUTES * 60).getEpochSecond();
 
             LOGGER.info("Attempting to load persisted state from file (\"" + PERSISTED_STATE_FILE + "\")...");
-            try
+            try (
+                 FileInputStream   fis = new FileInputStream(PERSISTED_STATE_FILE);
+                 ObjectInputStream ois = new ObjectInputStream(fis);
+                )
             {
-               FileInputStream   fis = new FileInputStream(PERSISTED_STATE_FILE);
-               ObjectInputStream ois = new ObjectInputStream(fis);
-
                @SuppressWarnings("unchecked")
                Map<String, StackExchangeSiteInfo> map = (Map<String, StackExchangeSiteInfo>)ois.readObject();
                this.siteInfoMap                       = map;
-
-               ois.close();
             }
             catch (IOException | ClassNotFoundException ex)
             {
@@ -728,7 +755,9 @@ public class ChatBot
          }
       }
 
-      String logMessage = "Unprivileged attempt to upgrade (Room: " + room.getRoomId() + " on " + room.getHost().getName();
+      String logMessage = "Unprivileged attempt to upgrade"
+                        + " (Room: " + room.getRoomId()
+                        + " on " + room.getHost().getName();
       if (sendingUser != null)
       {
          logMessage += "; User: " + sendingUser.getId();
@@ -1007,54 +1036,53 @@ public class ChatBot
    {
       boolean isSuspended = (user.getTimedPenaltyDate() != null);
 
-      StringBuilder builder = new StringBuilder();
-      builder.append(CHAT_MSG_PREFIX);
-      builder.append(" [");
+      StringBuilder str = new StringBuilder();
+      str.append(CHAT_MSG_PREFIX);
+      str.append(" [");
       if (isSuspended)
       {
-         builder.append("*");
+         str.append("*");
       }
-      builder.append(user.getDisplayName().trim());
+      str.append(user.getDisplayName().trim());
       if (isSuspended)
       {
-         builder.append("*");
+         str.append("*");
       }
-      builder.append("](");
-      builder.append(user.getLink());
-      builder.append("?tab=profile \"");
-      builder.append(user.getDisplayName());
-      builder.append("\") ");
+      str.append("](");
+      str.append(user.getLink());
+      str.append("?tab=profile \"");
+      str.append(user.getDisplayName());
+      str.append("\") ");
       if (showSite)
       {
-         builder.append("on **`");
-         builder.append(user.getSite());
-         builder.append("`** ");
+         str.append("on **`");
+         str.append(user.getSite());
+         str.append("`** ");
       }
-      builder.append("(");
-      builder.append(reason);
-      builder.append(")");
+      str.append("(");
+      str.append(reason);
+      str.append(")");
 
-      // HACK: This is merely to reduce the noise in the chat room logs.
-      //       Remove this once this spammer is dealt with.
-      if ((room == this.roomSO)                    &&
+      if ((this.oswForSOChineseSpammers != null)   &&
+          (room == this.roomSO)                    &&
           (user.getSite().equals("stackoverflow")) &&
           (user.getProfileImage() != null)         &&
           user.getProfileImage().contains("gravatar.com/avatar/573ab1b5acb73217ad973eb9efa0e026"))
       {
-         try (FileWriter     fw = new FileWriter("SO_Chinese_Profile_Spammers.txt", true);
-              BufferedWriter bw = new BufferedWriter(fw);
-              PrintWriter    pw = new PrintWriter(bw))
+         str.append("\n");
+
+         try
          {
-             pw.println(builder.toString());
+            this.oswForSOChineseSpammers.write(str.toString());
          }
          catch (IOException ex)
          {
-            LOGGER.error("Failed to append to Chinese profile spammer log file: " + ex);
+            LOGGER.error("Failed to append to Stack Overflow Chinese profile spammer log file: " + ex);
          }
       }
       else
       {
-         this.SendMessage(room, builder.toString());
+         this.SendMessage(room, str.toString());
       }
    }
 
