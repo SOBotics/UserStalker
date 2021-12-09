@@ -1,6 +1,7 @@
 \b24[\W_]*(?:\/7|hour)\b
 acre
 affordable
+Agen[\W_]*(?:Casino|Slot)
 amm(?:o|unitions?)
 apartment
 Aravalii
@@ -12,24 +13,29 @@ bankruptcy
 beauty
 bed[\W_]*bug
 bedding
+belaprimavera\.com\.br
 bidvaluable
 bike[\W_]*repairs?
 bingo
 BINOMO
 bitcoins?[\W_]*recovery[\W_]*tool
+blogging[\W_]*platform
 blogspot
+(?:body|skin)[\W_]*care
 brand
 brides
 built[\W_]*to[\W_]*last[\W_]*seo[\W_]*agency
 business[\W_]*(?:hour|need)s?
 \bcall[\W_]*us\b
 cannabis
+cash[\W_]*transaction
 (?:c|k)asino
 [\W_]CBD[\W_]
 [\W_]CEO[\W_]
 cheat
 chemical[\W_]*free
 chiropract(?:ic|or)s?
+cleaning[\W_]*services?
 Cleod9(?:[\W_]*Voice)?
 client
 clinical[\W_]*depression
@@ -63,6 +69,8 @@ erotic
 eWandzDigital
 exam
 exness
+experienced[\W_]*professional
+fashion[\W_]*brand
 favou?rite (?:T[\W_]*V|television) shows?(?# a specific type of profile spammer)
 [\W_]FDA[\W_]
 financ(?:e|ial)
@@ -78,6 +86,7 @@ GFA[\W_]*Trust
 gi8\.info
 gumm(?:y|ies)
 GUNAS
+gutters?[\W_]*clean(?:ing|ed)?
 hair[\W_]*transplant
 HappyLuke
 hijab
@@ -93,6 +102,7 @@ insurance
 interest[\W_]*rate
 iwinapp[\W_]*link
 job[\W_]*seekers?
+Kelley[\W_]*Blue[\W_]*Book
 kelmatt
 keywords:
 kid[\W_]*friendly
@@ -118,6 +128,7 @@ Mirin[\W_]*Media
 mobile[\W_]*market(?:ing)?
 mortgage
 movie
+moving[\W_]*service
 MUSHAHADATI
 NBA[\W_]*Draft
 nguy(?:e|ễ)n[\W_]*th(?:e|ế)[\W_]*h(?:o|ò)a
@@ -160,7 +171,6 @@ sex
 sex[\W_]*hiep[\W_]*dam
 shared[\W_]*hosting
 skillbee
-skin[\W_]*care
 SLOT[\W_]*XO
 (?:sports?|football)[\W_]*bets?
 State[\W_]*Farm
@@ -193,6 +203,7 @@ Wyndham
 XOSLOTZ?
 Xtream[\W_]*Forex
 yacht
+your[\W_]*skin
 yowinslot
 
 # German
