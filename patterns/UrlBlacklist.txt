@@ -17,7 +17,7 @@
 123movie
 4shared\.com
 88bet
-8b\.com
+8b\.(?:com|io)
 9alba\.com
 about\.me
 achievementlearn\.com
@@ -111,6 +111,7 @@ chinapinfactory\.com
 click4r\.com
 codenamecentrepoint\.com
 coffee-with-karina
+colchoesmartini\.com\.br
 comfortbeddings\.com
 comfykitchen\.com
 conexino\.com
@@ -183,6 +184,7 @@ expertelectricgroup\.com
 expostandservice\.com
 fanteamshop\.com
 fastcourse4less\.com
+fenonmagazine\.com
 fernandoecky004\.de\.tl
 files\.fm
 filsrich\.com
@@ -459,6 +461,7 @@ sodocasino\.xyz
 somalilandgov\.com
 spacecoastdaily\.com
 spadadigital\.com
+spartanmealpreps\.com
 speedyshare\.com
 spidercars\.ae
 spike\.cc
@@ -522,6 +525,7 @@ topshelfuae\.com
 topthaiplay\.com
 tpdclaimslawyers\.com\.au
 trackroad\.com
+trademama\.com
 travelers\.com
 travelguide
 trcpamco\.com
