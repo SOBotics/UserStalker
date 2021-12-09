@@ -124,6 +124,7 @@ nguy(?:e|ễ)n[\W_]*th(?:e|ế)[\W_]*h(?:o|ò)a
 no[\W_]*contract
 nutrition
 oldbreweryguest
+on[\W_]*best[\W_]*deal
 online[\W_]*betting
 partner[\W_]*company
 PCR[\W_]*Test[\W_]*Manhattan
