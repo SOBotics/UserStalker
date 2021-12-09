@@ -55,6 +55,7 @@ deal
 denim
 dent(?:al|ist)
 detox
+digital[\W_]*market(?:ing)?
 dispensary
 DNA[\W_]*PRO[\W_]*AKADEMI
 DOKTORS
@@ -78,6 +79,7 @@ firewood
 fitness
 flor(?:al|ist)
 for[\W_]*sale
+free[\W_]*quote
 furniture
 garage[\W_]*door
 Geico
@@ -89,9 +91,11 @@ GUNAS
 gutters?[\W_]*clean(?:ing|ed)?
 hair[\W_]*transplant
 HappyLuke
+hidden[\W_]*fees
 hijab
 homework
 hotline
+hourly[\W_]*rate
 [\W_]HPV[\W_]
 [\W_]IELTS[\W_]
 IELTSMindX
