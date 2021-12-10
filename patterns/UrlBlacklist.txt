@@ -28,6 +28,7 @@ about\.me
 aboutbmw\.net
 acheaperlocksmith\.us
 achievementlearn\.com
+adarshsavanabangalore\.org\.in
 advanceddrivewaysolutions\.co\.uk
 advancedmineralmakeup\.com
 advancedrestorationsolutions\.com
@@ -600,6 +601,7 @@ skku\.edu
 skyflytrips\.com
 skyrock\.com
 skyzone\.com
+slickcall\.com
 slideserve\.com
 slotxogame\.net
 \bslut\b
