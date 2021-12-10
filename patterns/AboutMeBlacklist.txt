@@ -18,7 +18,6 @@ bankruptcy
 beauty
 bed[\W_]*bug
 bedding
-belaprimavera\.com\.br
 bidvaluable
 bike[\W_]*repairs?
 bingo
