@@ -113,6 +113,7 @@ illuminati
 (?:indoor|home)[\W_]*(?:indoor|home)?[\W_]*plants?
 ink[\W_]*cartridges?
 insurance
+international[\W_]*call
 interest[\W_]*rate
 iwinapp[\W_]*link
 job[\W_]*seekers?
@@ -134,7 +135,7 @@ Luxury[\W_]*Transfers[\W_]*Zagreb
 (?:major)?[\W_]*brands?[\W_]*(?:names?)?
 male[\W_]*enhance(?:ment)?
 marijuana
-market[\W_]*(?:place|share)
+market[\W_]*(?:place|price|share)
 massage
 matchfinder
 matrimon(?:y|ial)
