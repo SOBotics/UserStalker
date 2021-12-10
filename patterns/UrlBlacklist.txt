@@ -424,6 +424,7 @@ mastatag\.com
 masteryourmortgagenow\.com\.au
 matchfinder
 mattadrawing\.com
+mdoec\.in
 mdwarchitektura\.eu
 measuremanage\.com\.au
 mein-bitcoinautomat\.de
@@ -632,6 +633,7 @@ sweetheartsbridalshop\.com
 sweetypiesbakery\.com
 syntellicore\.com
 \b.*szkol.*\.pl\b
+tahawa\.vn
 tajalmaerifa\.com
 takipcenneti\.net
 tannersmiths\.com
