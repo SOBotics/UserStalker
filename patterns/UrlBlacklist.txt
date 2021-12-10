@@ -33,11 +33,13 @@ advanceallied\.com
 advanceddrivewaysolutions\.co\.uk
 advancedmineralmakeup\.com
 advancedrestorationsolutions\.com
+advocatetusharsrivastava\.com
 advsry\.com
 aegeancollege\.gr
 afbcash\.live
 agenslot2022\.com
 agobet\.co
+ahmedmedico\.pk
 ahsunirfan\.com
 airductxperts\.com
 airport-taxi-split\.com
@@ -117,6 +119,7 @@ blueskyes\.app
 blurb\.com
 bollineniastra\.org\.in
 bookeasyclean\.com
+botanyscrapmetal\.net
 box\.com
 bravesites\.com
 brightwoodliving\.org
@@ -244,6 +247,7 @@ examstestsimulator\.com
 exness\.com
 expertelectricgroup\.com
 expostandservice\.com
+eyshopp\.com
 ezeeonline\.in
 f(?:a|un)888?
 famouskollegalastrologycentre\.com
@@ -406,6 +410,7 @@ law[\W_]*firm
 lbk\.com\.tw
 learningmywaym\.org
 leatherbag
+letsgetmovingcanada\.com
 licbazateksty\.pl
 limosa\.vn
 lingo\.ly
@@ -515,6 +520,7 @@ paarthinfra\.com
 page\.tl
 paletuaglasses\.com
 pancingangka\.com
+pass4future\.com
 pathtogrow\.com
 pbase\.com
 pd12\.co
@@ -555,6 +561,7 @@ rattsakuten\.com
 rbc\.com
 realt(?:or|y)
 redcorept\.com
+removaloxford\.co\.uk
 revivebeautysolutions\.ca
 riocokidswear\.com
 robinhoodnews\.com
