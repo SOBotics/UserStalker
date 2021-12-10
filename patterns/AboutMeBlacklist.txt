@@ -1,5 +1,7 @@
 \b24[\W_]*(?:\/7|hour)\b
+\b401\(?k\)?[\W_]*plan
 acre
+advertising[\W_]*(?:agenc(?:y|ies)|solutions?)
 affordable
 Agen[\W_]*(?:Casino|Slot)
 amm(?:o|unitions?)
@@ -8,7 +10,10 @@ Aravalii
 assignment
 attorney
 auction
+authorized[\W_]*dealer
 [\W_]B2B[\W_]
+background[\W_]*check
+Baladi[\W_]*Studio
 bankruptcy
 beauty
 bed[\W_]*bug
@@ -25,7 +30,8 @@ blogspot
 brand
 brides
 built[\W_]*to[\W_]*last[\W_]*seo[\W_]*agency
-business[\W_]*(?:hour|need)s?
+business[\W_]*(?:hour|need|owner)s?
+buying[\W_]*experience
 \bcall[\W_]*us\b
 cannabis
 cash[\W_]*transaction
@@ -50,6 +56,7 @@ credit
 cremat(?:e|ion)
 criminal[\W_]*defense
 crypto
+cutting[\W_]*edge
 dating
 deal
 denim
@@ -80,6 +87,7 @@ fitness
 flor(?:al|ist)
 for[\W_]*sale
 free[\W_]*quote
+fun888?
 furniture
 garage[\W_]*door
 Geico
@@ -89,11 +97,13 @@ gi8\.info
 gumm(?:y|ies)
 GUNAS
 gutters?[\W_]*clean(?:ing|ed)?
-hair[\W_]*transplant
 HappyLuke
+hair[\W_]*transplant
+hassle[\W_]*free
 hidden[\W_]*fees
 hijab
 homework
+hotel[\W_]*management
 hotline
 hourly[\W_]*rate
 [\W_]HPV[\W_]
@@ -114,6 +124,7 @@ Kioko[\W_]*Center
 kubet11
 Kundli[\W_]*Jyotish
 Land[\W_]*cruiser
+leading[\W_]*company
 lingerie
 lounge[\W_]*wear
 luxur(?:y|ious)
@@ -130,6 +141,7 @@ mehndi
 MetroKleen
 Mirin[\W_]*Media
 mobile[\W_]*market(?:ing)?
+MODAFINIL
 mortgage
 movie
 moving[\W_]*service
@@ -146,6 +158,7 @@ PCR[\W_]*Test[\W_]*Manhattan
 penis
 personal[\W_]*i(?:mmunity|njury)
 poker
+pool[\W_]*clean
 pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
 porn
 portal
@@ -168,16 +181,20 @@ rupiahqq
 Safety(?:Docs|Culture)
 same[\W_]*day
 satisfaction[\W_]*guaranteed?
+Satta[\W_]*King
 scented[\W_]*candle
 [\W_]SEO[\W_]
 service
 sex
 sex[\W_]*hiep[\W_]*dam
 shared[\W_]*hosting
+situsqqalfa
 skillbee
 SLOT[\W_]*XO
 (?:sports?|football)[\W_]*bets?
+Squeaky[\W_]*Pete
 State[\W_]*Farm
+sugar[\_W]*balance
 supplement
 Sweethearts[\W_]*Bridal[\W_]*Shop
 swimming pool
@@ -195,9 +212,12 @@ upbeat[\W_]*digital
 vap(?:e|ing)
 vending[\W_]*machine
 [\W_]VIP[\W_]
+ViralKida
 virgin
+Viro[\W_]*Valor
 visit[\W_]*(?:our[\W_]*(?:web[\W_]*)?site|us)
 w88
+we[\W_]*offer
 Website[\W_]*Drona
 wedding
 WeDoLaundry
@@ -218,6 +238,9 @@ luftreiniger
 # French
 greffe[\W_]*de[\W_]*cheveux
 
+# Spanish
+seguros(?# "insurance")
+
 # Polish
 pranie
 meblowej
@@ -230,6 +253,8 @@ tapicerki
 # Middle Eastern
 کازینو(?# "casino" in Persian)
 شرط بندی(?# "betting" in Persian)
+فروشگاه(?# "store" in Persian)
+اختلال دو قطبی(?# "bipolar disorder" in Persian)
 أفلام(?# "films" in Arabic)
 
 # Asian
