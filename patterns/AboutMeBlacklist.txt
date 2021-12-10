@@ -119,6 +119,7 @@ job[\W_]*seekers?
 junk[\W_]*remov(?:e|al)
 Kelley[\W_]*Blue[\W_]*Book
 kelmatt
+ketamine
 keywords:
 kid[\W_]*friendly
 Kioko[\W_]*Center
