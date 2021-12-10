@@ -77,6 +77,7 @@ instagram[\W_]*army
 \binsur
 intilight
 ivi[\W_]*esper(?:anto|01n)
+ketamine
 Kioko[\W_]*Center
 ku66
 kubet11
