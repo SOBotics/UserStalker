@@ -11,6 +11,7 @@ amm(?:o|unitions?)
 Aravalii
 ardroid[\W_]*post
 awards
+Baladi[\W_]*Studio
 bank\W?of\W?america
 beauty[\W_]*solutions?
 (?:lean|flat)\s?belly
@@ -110,6 +111,7 @@ pancingangka
 \bpest\b
 penis
 playoff
+\bpomodoro\b
 pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
 preakness
 Printer[\W_]*Tales?
@@ -131,6 +133,7 @@ slot
 SpikeJams
 stakes
 stream
+sugar[\_W]*balance
 super\s*bowl
 Sweethearts[\W_]*Bridal[\W_]*Shop
 szkol(?# specific Polish spammers)
@@ -144,6 +147,7 @@ unlock[\W_]*land
 upbeat[\W_]*digital
 \s+vs\s+
 vap(?:e|ing)
+ViralKida
 w88
 waiver
 watch
