@@ -11,6 +11,7 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import java.util.HashMap;
 import java.util.List;
 
 import org.jsoup.Connection;
@@ -25,16 +26,15 @@ import com.google.gson.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.sobotics.userstalker.StackExchangeSiteInfo;
-
 
 public class StackExchangeApiClient
 {
-   private static final String            API_USERS_URL     = "https://api.stackexchange.com/2.3/users";
-   private static final String            API_USERS_FILTER  = "!)4T7SDSXYTGhY8vIBklauF55f";
-   private static final String            API_KEY           = "XKgBTF5nztGvMnDoI8gPgA((";
-   private static final int               API_PAGE_SIZE_MAX = 100;
-   private static final DateTimeFormatter FMT_DT_AS_MINUTES = DateTimeFormatter.ofPattern("MMM d yyyy 'at' HH:mm");
+   private static final String            API_USERS_URL            = "https://api.stackexchange.com/2.3/users";
+   private static final String            API_SITE_USERS_FILTER    = "!)4T7SDSXYTGhY8vIBklauF55f";
+   private static final String            API_NETWORK_USERS_FILTER = "!VuI2L*-aRyQz*";
+   private static final String            API_KEY                  = "XKgBTF5nztGvMnDoI8gPgA((";
+   private static final int               API_PAGE_SIZE_MAX        = 100;
+   private static final DateTimeFormatter FMT_DT_AS_MINUTES        = DateTimeFormatter.ofPattern("MMM d yyyy 'at' HH:mm");
 
    private static final Logger LOGGER = LoggerFactory.getLogger(StackExchangeApiClient.class);
 
@@ -61,7 +61,7 @@ public class StackExchangeApiClient
                                                API_USERS_URL + "/" + userID,
                                                "site"    ,  site,
                                                "key"     , API_KEY,
-                                               "filter"  , API_USERS_FILTER,
+                                               "filter"  , API_SITE_USERS_FILTER,
                                                "sort"    , "creation",
                                                "order"   , "desc",
                                                "page"    , "1",
@@ -91,15 +91,15 @@ public class StackExchangeApiClient
       {
          JsonObject jsonObject = this.SendRequest(Connection.Method.GET,
                                                   API_USERS_URL,
-                                                  "site"     , site,
-                                                  "key"      , API_KEY,
-                                                  "filter"   , API_USERS_FILTER,
-                                                  "sort"     , "creation",
-                                                  "order"    , "asc",
-                                                  "page"     , String.valueOf(page),
-                                                  "pagesize" , String.valueOf(API_PAGE_SIZE_MAX),
-                                                  "fromdate" , String.valueOf(siteInfo.FromDate),
-                                                  "todate"   , String.valueOf(siteInfo.ToDate  ));
+                                                  "site"    , site,
+                                                  "key"     , API_KEY,
+                                                  "filter"  , API_SITE_USERS_FILTER,
+                                                  "sort"    , "creation",
+                                                  "order"   , "asc",
+                                                  "page"    , String.valueOf(page),
+                                                  "pagesize", String.valueOf(API_PAGE_SIZE_MAX),
+                                                  "fromdate", String.valueOf(siteInfo.FromDate),
+                                                  "todate"  , String.valueOf(siteInfo.ToDate  ));
          if ((jsonObject != null) && jsonObject.has("items"))
          {
             JsonArray jsonArray = jsonObject.get("items").getAsJsonArray();
@@ -130,6 +130,82 @@ public class StackExchangeApiClient
          }
       }
       return users;
+   }
+
+
+   public HashMap<Integer, ArrayList<NetworkAccount>> GetAllNetworkAccounts(List<SuspiciousUser> users)
+   {
+      if (users == null)
+      {
+         return null;
+      }
+
+      int           approximateCount  = users.size();
+      StringBuilder networkAccountIDs = new StringBuilder(approximateCount * 10);
+      for (SuspiciousUser suspiciousUser : users)
+      {
+         // If the user has a network account ID, add it to the semicolon-delimited list
+         // of network account IDs that we need to retrive information about.
+         Integer networkAccountID = suspiciousUser.user.getNetworkAccountID();
+         if (networkAccountID != null)
+         {
+            if (networkAccountIDs.length() > 0)
+            {
+               networkAccountIDs.append(";");
+            }
+            networkAccountIDs.append(String.valueOf(networkAccountID));
+         }
+      }
+
+      return this.GetAllNetworkAccounts(networkAccountIDs.toString(), approximateCount);
+   }
+
+   public HashMap<Integer, ArrayList<NetworkAccount>> GetAllNetworkAccounts(String networkAccountIDs,
+                                                                            int    approximateCount)
+   {
+      HashMap<Integer, ArrayList<NetworkAccount>> networkAccountsMap = new HashMap<Integer, ArrayList<NetworkAccount>>((API_PAGE_SIZE_MAX * approximateCount) / 2);
+      boolean                                     hasMore            = true;
+      int                                         page               = 1;
+      while (hasMore)
+      {
+         JsonObject jsonObject = this.SendRequest(Connection.Method.GET,
+                                                  API_USERS_URL + "/" + networkAccountIDs + "/associated",
+                                                  "key"     , API_KEY,
+                                                  "filter"  , API_NETWORK_USERS_FILTER,
+                                                  "types"   , "main_site",
+                                                  "page"    , String.valueOf(page),
+                                                  "pagesize", String.valueOf(API_PAGE_SIZE_MAX));
+         if ((jsonObject != null) && jsonObject.has("items"))
+         {
+            JsonArray jsonArray = jsonObject.get("items").getAsJsonArray();
+            LOGGER.debug("JSON returned from SE API: " + jsonArray.toString());
+
+            for (JsonElement element : jsonArray)
+            {
+               JsonObject                object           = element.getAsJsonObject();
+               Integer                   networkAccountID = object.get("account_id").getAsInt();
+               ArrayList<NetworkAccount> networkAccounts  = networkAccountsMap.get(networkAccountID);
+               if (networkAccounts == null)
+               {
+                  networkAccounts = new ArrayList<NetworkAccount>(5);
+               }
+               networkAccounts.add(new NetworkAccount(object));
+               networkAccountsMap.put(networkAccountID, networkAccounts);
+            }
+
+            hasMore = jsonObject.get("has_more").getAsBoolean();
+            if (hasMore)
+            {
+               ++page;
+            }
+         }
+         else
+         {
+            LOGGER.warn("Failed to retrieve information about multiple users' network accounts from the SE API.");
+            return null;
+         }
+      }
+      return networkAccountsMap;
    }
 
 

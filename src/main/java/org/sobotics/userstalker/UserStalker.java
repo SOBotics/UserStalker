@@ -12,8 +12,6 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.sobotics.userstalker.ChatBot;
-
 
 public class UserStalker
 {

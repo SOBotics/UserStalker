@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.lang.Throwable;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,10 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,10 +36,6 @@ import org.sobotics.chatexchange.chat.StackExchangeClient;
 import org.sobotics.chatexchange.chat.event.EventType;
 import org.sobotics.chatexchange.chat.event.PingMessageEvent;
 import org.sobotics.chatexchange.chat.event.UserEnteredEvent;
-
-import org.sobotics.userstalker.RegexManager;
-import org.sobotics.userstalker.StackExchangeApiClient;
-import org.sobotics.userstalker.StackExchangeSiteInfo;
 
 
 public class ChatBot implements AutoCloseable
@@ -147,7 +140,7 @@ public class ChatBot implements AutoCloseable
    }
 
    @Override
-   public void close() throws Exception
+   public void close() throws IOException
    {
       this.oswForSOChineseSpammers.close();
       this.fosForSOChineseSpammers.close();
@@ -448,55 +441,135 @@ public class ChatBot implements AutoCloseable
 
       if ((this.roomSO != null) && this.sites.contains("stackoverflow"))
       {
-         this.DoStalk(this.roomSO, "stackoverflow", false);
+         this.DoStalk(this.roomSO, Collections.singletonList("stackoverflow"), 100);
       }
 
       if (this.roomSE != null)
       {
          if (this.stalkSE)
          {
-            for (String site : sites)
-            {
-               if (!site.equals("stackoverflow"))
-               {
-                  this.DoStalk(this.roomSE, site, true);
-               }
-            }
+            ArrayList<String> seSites = new ArrayList<String>(this.sites);
+            seSites.remove("stackoverflow");
 
+            this.DoStalk(this.roomSE, seSites, (seSites.size() * 20));
          }
 
          this.stalkSE = !this.stalkSE;
       }
    }
 
-   private void DoStalk(Room room, String site, boolean showSite)
+
+   private void DoStalk(Room room, List<String> sites, int approximateUserCount)
    {
-      StackExchangeSiteInfo siteInfo  = this.siteInfoMap.get(site);
-      long                  oldTime   = siteInfo.ToDate;
-      long                  startTime = Instant.now().minusSeconds(OFFSET_TIME_MINUTES * 60).getEpochSecond();
-      siteInfo.FromDate               = oldTime;
-      siteInfo.ToDate                 = startTime;
-
-      LOGGER.info("Stalking " + site + " at " + siteInfo.ToDate + " (last was at " + siteInfo.FromDate + ")...");
-
-      List<User> users = seApi.GetAllUsers(site, siteInfo);
-      if (users != null)
+      // Get all potentially suspicious users from all sites in the list of sites to stalk.
+      ArrayList<SuspiciousUser> suspiciousUsers = new ArrayList<SuspiciousUser>(approximateUserCount);
+      for (String site : sites)
       {
-         for (User user : users)
+         StackExchangeSiteInfo siteInfo  = this.siteInfoMap.get(site);
+         long                  oldTime   = siteInfo.ToDate;
+         long                  startTime = Instant.now().minusSeconds(OFFSET_TIME_MINUTES * 60).getEpochSecond();
+         siteInfo.FromDate               = oldTime;
+         siteInfo.ToDate                 = startTime;
+
+         LOGGER.info("Stalking " + site + " at " + siteInfo.ToDate + " (last was at " + siteInfo.FromDate + ")...");
+
+         List<User> users = this.seApi.GetAllUsers(site, siteInfo);
+         if (users != null)
          {
-            String reason = CheckUser(site, user);
-            if (!reason.isBlank())
+            suspiciousUsers.ensureCapacity(suspiciousUsers.size() + users.size());
+            for (User user : users)
             {
-               LOGGER.info("Suspicious user detected: \"" + user + "\": " + reason + ".");
-               siteInfo.SuspiciousUsers += 1;
-               ReportUser(room, user, reason, showSite);
+               String reason = this.CheckUser(site, user);
+               if (!reason.isBlank())
+               {
+                  LOGGER.info("Potentially suspicious user detected: \"" + user + "\": " + reason + ".");
+                  suspiciousUsers.add(new SuspiciousUser(user, reason));
+               }
+            }
+         }
+         else
+         {
+            LOGGER.warn("Failed to retrieve new user information from SE API when stalking site \"" + site + "\"; skipping site this time.");
+            siteInfo.ToDate = oldTime;
+         }
+      }
+
+      // If no potentially suspicious users were found, bail out now.
+      if (suspiciousUsers.isEmpty())
+      {
+         return;
+      }
+
+      // Filter the list of suspicious users, excluding those users who have accounts that are in
+      // good standing on other Stack Exchange network sites to help reduce false-positives.
+      // (Many of our criteria for what makes a user "suspicious", such as having links in their
+      // profile, are excellent heuristics for brand-new users, but equally poor heuristics for
+      // established users.)
+      ArrayList<SuspiciousUser>               finalSuspiciousUsers = new ArrayList<SuspiciousUser>(suspiciousUsers.size());
+      Map<Integer, ArrayList<NetworkAccount>> accountsMap          = this.seApi.GetAllNetworkAccounts(suspiciousUsers);
+      if (accountsMap != null)
+      {
+         for (SuspiciousUser suspiciousUser : suspiciousUsers)
+         {
+            boolean isUserSuspicious = true;  // assume user is suspicious absent evidence to the contrary
+
+            List<NetworkAccount> accounts = accountsMap.get(suspiciousUser.user.getNetworkAccountID());
+            if (accounts != null)
+            {
+               // If this user has a network account, then we need to check all of their accounts
+               // on other Stack Exchange network sites to see if any of those accounts are in
+               // good standing. If so, this frees them from suspicion.
+               int     userNetworkAccountID = suspiciousUser.user.getNetworkAccountID().intValue();
+
+               long    stalkDate            = this.siteInfoMap.get(suspiciousUser.user.getSite()).ToDate;
+               Instant stalkInstant         = Instant.ofEpochSecond(stalkDate);
+               Instant oldEnoughInstant     = stalkInstant.minus(7, ChronoUnit.DAYS);
+               long    oldEnoughDate        = oldEnoughInstant.getEpochSecond();
+               for (NetworkAccount account : accounts)
+               {
+                  Integer networkAccountID = account.getNetworkAccountID();
+                  String  userType         = account.getUserType();
+                  Integer reputation       = account.getReputation();
+                  Long    creationDate     = account.getCreationDate();
+                  Integer postCount        = account.getPostCount();
+                  if (((networkAccountID != null) && (networkAccountID.intValue() == userNetworkAccountID)) &&
+                      ((userType         != null)))
+                  {
+                     boolean isModerator  = (userType.equals("moderator"));
+                     boolean isRegistered = (userType.equals("registered") ||
+                                             userType.equals("team_admin"));
+                     if (isModerator || (isRegistered && ((reputation   != null) && (reputation  .intValue () >= 30))
+                                                      && ((creationDate != null) && (creationDate.longValue() <  oldEnoughDate))
+                                                      && ((postCount    != null) && (postCount   .intValue () >= 1))))
+                     {
+                        isUserSuspicious = false;
+                        break;
+                     }
+                  }
+               }
+            }
+
+            if (isUserSuspicious)
+            {
+               // Either we could not get any information about the user's network accounts, or
+               // the information that we did retrieve was unable to free them from suspicion.
+               finalSuspiciousUsers.add(suspiciousUser);
             }
          }
       }
       else
       {
-         LOGGER.warn("Failed to retrieve new user information from SE API when stalking site \"" + site + "\"; skipping this time.");
-         siteInfo.ToDate = oldTime;
+         LOGGER.warn("Failed to retrieve network account information for suspicious users from SE API;"
+                   + " reporting all potentially suspicious as suspicious.");
+         finalSuspiciousUsers.addAll(suspiciousUsers);
+      }
+
+      // Report all of the actually suspicious users.
+      boolean showSiteName = (sites.size() > 1);
+      for (SuspiciousUser suspiciousUser : finalSuspiciousUsers)
+      {
+         this.siteInfoMap.get(suspiciousUser.user.getSite()).SuspiciousUsers += 1;
+         this.ReportUser(room, suspiciousUser.user, suspiciousUser.reason, showSiteName);
       }
    }
 
@@ -781,25 +854,27 @@ public class ChatBot implements AutoCloseable
 
    private String CheckUser(String site, User user)
    {
-      String            name     = user.getDisplayName();
-      String            avatar   = user.getProfileImage();
-      String            location = user.getLocation();
-      String            url      = user.getWebsiteUrl();
-      String            aboutMe  = user.getAboutMe();
-      ArrayList<String> reasons  = new ArrayList<String>(33);
+      Long              suspendedUntil = user.getTimedPenaltyDate();
+      String            name           = user.getDisplayName();
+      String            avatar         = user.getProfileImage();
+      String            location       = user.getLocation();
+      String            url            = user.getWebsiteUrl();
+      String            aboutMe        = user.getAboutMe();
+      ArrayList<String> reasons        = new ArrayList<String>(33);
 
-      boolean hasName       = ((name     != null) && !name    .isBlank());
-      boolean hasAvatar     = ((avatar   != null) && !avatar  .isBlank());
-      boolean hasLocation   = ((location != null) && !location.isBlank());
-      boolean hasURL        = ((url      != null) && !url     .isBlank());
-      boolean hasAboutMe    = ((aboutMe  != null) && !aboutMe .isBlank());
+      boolean isSuspended   = ((suspendedUntil != null)                       );
+      boolean hasName       = ((name           != null) && !name    .isBlank());
+      boolean hasAvatar     = ((avatar         != null) && !avatar  .isBlank());
+      boolean hasLocation   = ((location       != null) && !location.isBlank());
+      boolean hasURL        = ((url            != null) && !url     .isBlank());
+      boolean hasAboutMe    = ((aboutMe        != null) && !aboutMe .isBlank());
       boolean hasAnyContent = (hasLocation || hasURL || hasAboutMe);
 
       // Check for an active suspension.
-      if (user.getTimedPenaltyDate() != null)
+      if (isSuspended)
       {
          reasons.add("suspended until "
-                   + StackExchangeApiClient.FormatDateTimeToNearestMinute(user.getTimedPenaltyDate()));
+                   + StackExchangeApiClient.FormatDateTimeToNearestMinute(suspendedUntil));
       }
 
       // Check the avatar.
