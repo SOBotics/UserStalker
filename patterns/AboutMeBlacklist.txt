@@ -29,7 +29,7 @@ blogspot
 brand
 brides
 built[\W_]*to[\W_]*last[\W_]*seo[\W_]*agency
-business[\W_]*(?:hour|need|owner)s?
+business[\W_]*(?:hour|model|need|owner)s?
 buying[\W_]*experience
 \bcall[\W_]*us\b
 cannabis
@@ -106,6 +106,7 @@ hotel[\W_]*management
 hotline
 hourly[\W_]*rate
 [\W_]HPV[\W_]
+[\W_]HVAC[\W_]
 [\W_]IELTS[\W_]
 IELTSMindX
 illuminati
