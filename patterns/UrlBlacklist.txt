@@ -61,6 +61,7 @@ allhomestudy\.com
 allpositivewords\.com
 allsafemeds\.com
 allsitedevelopments\.com\.au
+allsystemshvac\.com
 almoheet-travel\.com
 am-motion\.eu
 ameblo\.jp
@@ -319,6 +320,7 @@ freewebcams
 freezoner\.net
 frontierdevelopments\.co\.uk
 fullsoftwaregratis\.com
+fun88one\.net
 furaka\.com
 g-casinos\.com
 \bgambl(?:e|ing)\b
@@ -413,6 +415,7 @@ interline-duesseldorf\.de
 ippbx\.com
 ipsnews\.net
 ipuppytech\.tk
+irpel\.org
 isovle\.net
 issuu\.com
 ivi-esperanto\.org
@@ -558,6 +561,7 @@ neighbors-parking\.com
 nescloud\.com
 netvibes\.com
 newretailfx\.com
+newz4ward\.com
 nextcomputerworld\.com
 nextdoor\.com
 nhungdieuthuvitphcm\.com
@@ -768,6 +772,7 @@ thatsfurniture\.com\.au
 thebedbugcompany\.com
 theboostranking\.com
 theburnward\.com
+theculinarygene\.com
 thedcteam\.com
 theemailhelpline\.com
 thegadgetflow\.com
