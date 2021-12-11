@@ -24,6 +24,7 @@
 24ambulance\.com
 24x7geyserservicecentre\.in
 33sport\.ru
+365solarenergy\.com
 4shared\.com
 7searchppc\.com
 88(?:bet|pro)
@@ -288,6 +289,7 @@ expertelectricgroup\.com
 expostandservice\.com
 eyshopp\.com
 ezeeonline\.in
+f1automotori\.com
 f(?:a|un)888?
 familytreemakerhelps\.com
 famouskollegalastrologycentre\.com
