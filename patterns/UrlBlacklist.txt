@@ -27,6 +27,7 @@
 365solarenergy\.com
 4shared\.com
 7searchppc\.com
+78wind\.com
 88(?:bet|pro)
 886\.lv
 8b\.(?:com|io)
@@ -59,6 +60,7 @@ alavu-restaurant\.de
 algorrithm\.com
 allgaeu-news\.com
 allhomestudy\.com
+allpestext\.com
 allpositivewords\.com
 allsafemeds\.com
 allsitedevelopments\.com\.au
@@ -163,6 +165,7 @@ cabinzero\.com
 cakhia\.com
 callpsychicnow\.com
 callthecomputerguy\.net
+caramellaapp\.com
 casinononaams\.online
 castlerockseniorcare\.org
 caterertaiwan\.com
@@ -609,6 +612,7 @@ pbase\.com
 pd12\.co
 pearltrees\.com
 penzu\.com
+peoplemattersglobal\.com
 periodismolatino\.com
 personalmoneynetwork\.com
 petesultimatemovers\.com
