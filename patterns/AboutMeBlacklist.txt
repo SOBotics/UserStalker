@@ -6,6 +6,7 @@ affordable
 Agen[\W_]*(?:Casino|Slot)
 amm(?:o|unitions?)
 apartment
+(?:appliance|bike)[\W_]*repairs?
 Aravalii
 assignment
 attorney
@@ -21,7 +22,6 @@ bed[\W_]*bug
 bedding
 bet[\W_]*thai
 bidvaluable
-bike[\W_]*repairs?
 bingo
 BINOMO
 bitcoins?[\W_]*recovery[\W_]*tool
