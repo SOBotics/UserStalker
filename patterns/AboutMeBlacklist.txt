@@ -164,6 +164,7 @@ nutrition
 oldbreweryguest
 on[\W_]*best[\W_]*deal
 online[\W_]*betting
+opiate
 partner[\W_]*company
 Paula[\W_]*White
 pay[\W_]*day(?:[\W_]*loans?)?
