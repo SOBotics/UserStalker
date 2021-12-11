@@ -49,6 +49,18 @@ public class NetworkAccount
       }
    }
 
+   public String getLink()
+   {
+      if (this.getSiteUrl() != null)
+      {
+         if (this.getUserID() != null)
+         {
+            return (this.getSiteUrl() + "/users/" + this.getUserID());
+         }
+      }
+      return null;
+   }
+
    private Integer accountID;
    private Integer userID;
    private String  siteName;

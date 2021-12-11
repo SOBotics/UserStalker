@@ -482,14 +482,16 @@ public class ChatBot implements AutoCloseable
                String reason = this.CheckUser(site, user);
                if (!reason.isBlank())
                {
-                  LOGGER.info("Potentially suspicious user detected: \"" + user + "\": " + reason + ".");
+                  LOGGER.info("Potentially suspicious user detected: " + user + " because: { " + reason + " }.");
                   suspiciousUsers.add(new SuspiciousUser(user, reason));
                }
             }
          }
          else
          {
-            LOGGER.warn("Failed to retrieve new user information from SE API when stalking site \"" + site + "\"; skipping site this time.");
+            LOGGER.warn("Failed to retrieve new user information from SE API when stalking site \""
+                      + site
+                      + "\"; skipping site this time.");
             siteInfo.ToDate = oldTime;
          }
       }
@@ -543,6 +545,10 @@ public class ChatBot implements AutoCloseable
                                                       && ((postCount    != null) && (postCount   .intValue () >= 1))))
                      {
                         isUserSuspicious = false;
+                        LOGGER.info("Due to account in good standing on "
+                                  + account.getSiteName()
+                                  + " (" + account.getLink() + "), "
+                                  + "no longer suspecting the user: " + suspiciousUser.user + ".");
                         break;
                      }
                   }
