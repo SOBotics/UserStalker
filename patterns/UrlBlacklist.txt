@@ -31,6 +31,7 @@
 886\.lv
 8b\.(?:com|io)
 9alba\.com
+abcxon\.com
 about\.me
 aboutbmw\.net
 acheaperlocksmith\.us
@@ -632,6 +633,7 @@ promotionalcalendars\.co\.uk
 proposal-to-mary\.com
 psywearstore\.com
 q3132\.com
+qckinetix\.com
 qrmart\.com\.sg
 quangcaokimlong\.com
 quatangmunus\.com
@@ -810,6 +812,7 @@ topcacnhacai\.com
 topcleangloves\.com
 topshelfuae\.com
 topthaiplay\.com
+torontovikingrepair\.ca
 totoyaplay\.com
 tpdclaimslawyers\.com\.au
 trackroad\.com
