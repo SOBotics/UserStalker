@@ -29,6 +29,8 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import info.debatty.java.stringsimilarity.RatcliffObershelp;
+
 import org.sobotics.chatexchange.chat.ChatHost;
 import org.sobotics.chatexchange.chat.Message;
 import org.sobotics.chatexchange.chat.Room;
@@ -111,6 +113,7 @@ public class ChatBot implements AutoCloseable
    private List<String>                       sites;
    private List<String>                       nonEnglishSites;
    private RegexManager                       regexes;
+   private HomoglyphManager                   homoglyphs;
    private StackExchangeApiClient             seApi;
    private ScheduledExecutorService           executor;
    private Map<String, StackExchangeSiteInfo> siteInfoMap;
@@ -189,6 +192,9 @@ public class ChatBot implements AutoCloseable
    {
       // Load the regular expressions.
       this.regexes = new RegexManager();
+
+      // Load the homoglyphs.
+      this.homoglyphs = new HomoglyphManager();
 
       // Initialize the Stack Exchange API client.
       this.seApi = new StackExchangeApiClient(this::OnQuotaRollover);
@@ -608,8 +614,12 @@ public class ChatBot implements AutoCloseable
       {
          this.DoStop();
       }
-      this.regexes.Reload();
+
+      this.regexes   .Reload();
+      this.homoglyphs.Reload();
+
       this.BroadcastMessage(CHAT_MSG_PREFIX + " The pattern databases have been successfully updated.");
+
       if (wasRunning)
       {
          this.DoStart();
@@ -866,7 +876,7 @@ public class ChatBot implements AutoCloseable
       String            location       = user.getLocation();
       String            url            = user.getWebsiteUrl();
       String            aboutMe        = user.getAboutMe();
-      ArrayList<String> reasons        = new ArrayList<String>(33);
+      ArrayList<String> reasons        = new ArrayList<String>(34);
 
       boolean isSuspended   = ((suspendedUntil != null)                       );
       boolean hasName       = ((name           != null) && !name    .isBlank());
@@ -951,17 +961,6 @@ public class ChatBot implements AutoCloseable
                reasons.add("username contains non-Latin character");
             }
          }
-
-         if (hasURL)
-         {
-            String normalizedName = name.replaceAll("[^a-zA-Z]", "").toLowerCase();
-            String normalizedUrl  = url .replaceAll("[^a-zA-Z]", "").toLowerCase();
-            if (normalizedName.toLowerCase().contains(normalizedUrl ) ||
-                normalizedUrl .toLowerCase().contains(normalizedName))
-            {
-               reasons.add("URL similar to username");
-            }
-         }
       }
 
       // Check the URL.
@@ -975,6 +974,28 @@ public class ChatBot implements AutoCloseable
          if (RegexManager.AnyMatches(url, this.regexes.UrlSmokeyBlacklist))
          {
             reasons.add("URL on Smokey's blacklist");
+         }
+
+         if (hasName)
+         {
+            String normalizedName = name.replaceAll("[^a-zA-Z]", "").toLowerCase();
+            String normalizedUrl  = url .replaceAll("[^a-zA-Z]", "").toLowerCase();
+            if (normalizedName.contains(normalizedUrl ) ||
+                normalizedUrl .contains(normalizedName))
+            {
+               reasons.add("URL similar to username");
+            }
+
+            String canonicalizedName = this.homoglyphs.Canonicalize(name.replaceAll(" ", ""));
+            String canonicalizedUrl  = this.homoglyphs.Canonicalize(url .replaceAll(" ", ""));
+            double similarity        = new RatcliffObershelp().similarity(canonicalizedName,
+                                                                          canonicalizedUrl);
+            if (similarity >= 0.3)
+            {
+               reasons.add("URL similar to username (R/O: "
+                         + String.format("%.2f", similarity)
+                         + ")");
+            }
          }
 
          if (RegexManager.AnyMatches(url, this.regexes.KeywordSmokeyBlacklist))
