@@ -70,6 +70,7 @@ golden\s?globes?
 grand\W?prix
 green\s?bay\s?packers?
 greffe[\W_]*de[\W_]*cheveux
+group
 GUNAS
 hair[\W_]*transplant
 hire
@@ -89,8 +90,10 @@ Kundli[\W_]*Jyotish
 law[\W_]*firm
 league
 live
+[\W_]LLC[\W_]
 [\W_]loans?[\W_]
 logo[\W_]*design
+[\W_]Ltd[\W_]
 march\s*madness
 mas[\W_]*tatag
 mastercard
@@ -114,13 +117,14 @@ online[\W_]*store
 \b(?:australian|british|french|italian|texas|us)[_ ]*open
 packers
 pancingangka
-\bpest\b
+[\W_]pest[\W_]
 penis
 playoff
-\bpomodoro\b
+[\W_]pomodoro[\W_]
 pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
 preakness
 Printer[\W_]*Tales?
+[\W_]Pvt[\W_]
 random[\W_]*meet
 rental
 repair
