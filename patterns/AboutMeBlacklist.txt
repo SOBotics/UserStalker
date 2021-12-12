@@ -146,6 +146,7 @@ kitchen[\W_]*(?design|cabinet)
 kubet11
 Kundli[\W_]*Jyotish
 Land[\W_]*cruiser
+Lash[\W_]*Glo
 leading[\W_]*company
 lingerie
 lounge[\W_]*wear
