@@ -4,6 +4,7 @@ donald\s*trump|.*trump.*
 (insur?a?n?c?e?|repair|reimb(ursement)?|rent(al)?|accident|hire|tax|rent\s?a|park(ed)?|finance|quotes?)\s?(card?|van|truck)
 ^(?:masters|wrestlemania|c(?:owboys|rack)|el ?clasico|[0-9]{4})
 [a-z]*19
+Adu[\W_]*Joker
 advanced[\W_]*mineral[\W_]*makeup
 Ahsun[\W_]*Irfan
 alldatmatterz
@@ -13,6 +14,7 @@ ardroid[\W_]*post
 awards
 Baladi[\W_]*Studio
 bank\W?of\W?america
+beaut(?:y|ies)
 beauty[\W_]*solutions?
 (?:lean|flat)\s?belly
 belly\s?over\s?night
@@ -21,6 +23,7 @@ Bodily\s?Injury\s?Liability
 bowl
 new\s?body
 bracket
+capit[ao]l
 car in
 cash\W?rewards
 casino
@@ -103,6 +106,7 @@ musica
 nba
 ncaa
 n[hf]l
+number
 offices?
 on[\W_]*best[\W_]*deal
 onepageonerank
@@ -137,6 +141,7 @@ stakes
 stream
 sugar[\_W]*balance
 super\s*bowl
+support
 Sweethearts[\W_]*Bridal[\W_]*Shop
 szkol(?# specific Polish spammers)
 tax\s?(?:calculator|attorney)
