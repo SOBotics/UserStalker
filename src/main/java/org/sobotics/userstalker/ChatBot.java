@@ -1032,33 +1032,18 @@ public class ChatBot implements AutoCloseable
             String canonicalizedName = this.homoglyphs.Canonicalize(name.replaceAll(" ", ""));
             String canonicalizedUrl  = this.homoglyphs.Canonicalize(url .replaceAll(" ", ""));
 
-            ArrayList<String> similarities = new ArrayList<String>(3);
-
-            double jwSimilarity = new JaroWinkler().similarity(canonicalizedName,
-                                                               canonicalizedUrl);
-            if (jwSimilarity > 0)
-            {
-               similarities.add("J-W: " + String.format("%.2f", jwSimilarity));
-            }
-
+            double jwSimilarity = new JaroWinkler      ().similarity(canonicalizedName,
+                                                                     canonicalizedUrl);
             double roSimilarity = new RatcliffObershelp().similarity(canonicalizedName,
                                                                      canonicalizedUrl);
-            if (roSimilarity > 0)
-            {
-               similarities.add("R-O: " + String.format("%.2f", roSimilarity));
-            }
+            double sdSimilarity = new SorensenDice     ().similarity(canonicalizedName,
+                                                                     canonicalizedUrl);
 
-            double sdSimilarity = new SorensenDice().similarity(canonicalizedName,
-                                                                canonicalizedUrl);
-            if (sdSimilarity > 0)
-            {
-               similarities.add("S-D: " + String.format("%.2f", sdSimilarity));
-            }
-
-            if (!similarities.isEmpty())
-            {
-               reasons.add("URL similar to username (" + String.join(", ", similarities) + ")");
-            }
+            reasons.add("URL similar to username"
+                      + " [" + "J-W: " + String.format("%.2f", jwSimilarity)
+                      + ", " + "R-O: " + String.format("%.2f", roSimilarity)
+                      + ", " + "S-D: " + String.format("%.2f", sdSimilarity)
+                      + "]");
          }
 
          if (RegexManager.AnyMatches(url, this.regexes.KeywordSmokeyBlacklist))
