@@ -927,7 +927,7 @@ public class ChatBot implements AutoCloseable
       String            location       = user.getLocation();
       String            url            = user.getWebsiteUrl();
       String            aboutMe        = user.getAboutMe();
-      ArrayList<String> reasons        = new ArrayList<String>(34);
+      ArrayList<String> reasons        = new ArrayList<String>(37);
 
       boolean isSuspended   = ((suspendedUntil != null)                       );
       boolean hasName       = ((name           != null) && !name    .isBlank());
@@ -984,6 +984,11 @@ public class ChatBot implements AutoCloseable
          if (RegexManager.AnyMatches(name, this.regexes.KeywordSmokeyBlacklist))
          {
             reasons.add("username contains keyword on Smokey's blacklist");
+         }
+
+         if (RegexManager.AnyMatches(name, this.regexes.KeywordSmokeyWatchlist))
+         {
+            reasons.add("username contains keyword on Smokey's watchlist");
          }
 
          if (name.contains(Integer.toString(Year.now().getValue())))
@@ -1051,6 +1056,11 @@ public class ChatBot implements AutoCloseable
             reasons.add("URL contains keyword on Smokey's blacklist");
          }
 
+         if (RegexManager.AnyMatches(url, this.regexes.KeywordSmokeyWatchlist))
+         {
+            reasons.add("URL contains keyword on Smokey's watchlist");
+         }
+
          if (this.ContainsNonLatin(url))
          {
             reasons.add("URL contains non-Latin character");
@@ -1078,6 +1088,11 @@ public class ChatBot implements AutoCloseable
          if (RegexManager.AnyMatches(location, this.regexes.KeywordSmokeyBlacklist))
          {
             reasons.add("location contains keyword on Smokey's blacklist");
+         }
+
+         if (RegexManager.AnyMatches(location, this.regexes.KeywordSmokeyWatchlist))
+         {
+            reasons.add("location contains keyword on Smokey's watchlist");
          }
 
          if (RegexManager.AnyMatches(location, this.regexes.UrlPatterns))
@@ -1112,6 +1127,11 @@ public class ChatBot implements AutoCloseable
          if (RegexManager.AnyMatches(aboutMe, this.regexes.KeywordSmokeyBlacklist))
          {
             reasons.add("\"About Me\" contains keyword on Smokey's blacklist");
+         }
+
+         if (RegexManager.AnyMatches(aboutMe, this.regexes.KeywordSmokeyWatchlist))
+         {
+            reasons.add("\"About Me\" contains keyword on Smokey's watchlist");
          }
 
          if (RegexManager.AnyMatches(aboutMe, this.regexes.PhonePatterns))

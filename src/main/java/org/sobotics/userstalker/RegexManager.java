@@ -24,7 +24,7 @@ public class RegexManager
    private static final String  SMOKEY_NAME_REGEX_URL          = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_usernames.txt";
    private static final String  SMOKEY_URL_REGEX_URL           = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/blacklisted_websites.txt";
    private static final String  SMOKEY_KEYWORD_REGEX_URL       = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/bad_keywords.txt";
- //private static final String  SMOKEY_KEYWORD_REGEX_WATCH_URL = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/watched_keywords.txt";
+   private static final String  SMOKEY_KEYWORD_REGEX_WATCH_URL = "https://raw.githubusercontent.com/Charcoal-SE/SmokeDetector/master/watched_keywords.txt";
    private static final String  INTERNAL_NAME_REGEX_URL        = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/DisplayNameBlacklist.txt";
    private static final String  INTERNAL_ABOUT_REGEX_URL       = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/AboutMeBlacklist.txt";
    private static final String  INTERNAL_URL_REGEX_URL         = "https://raw.githubusercontent.com/SOBotics/UserStalker/master/patterns/UrlBlacklist.txt";
@@ -44,7 +44,7 @@ public class RegexManager
    public List<Pattern> NameSmokeyBlacklist;
    public List<Pattern> UrlSmokeyBlacklist;
    public List<Pattern> KeywordSmokeyBlacklist;
- //public List<Pattern> KeywordSmokeyWatchlist;
+   public List<Pattern> KeywordSmokeyWatchlist;
    public List<Pattern> NameBlacklist;
    public List<Pattern> AboutBlacklist;
    public List<Pattern> UrlBlacklist;
@@ -70,7 +70,7 @@ public class RegexManager
       this.NameSmokeyBlacklist    = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_NAME_REGEX_URL         ));
       this.UrlSmokeyBlacklist     = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_URL_REGEX_URL          ));
       this.KeywordSmokeyBlacklist = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_KEYWORD_REGEX_URL      ));
-    //this.KeywordSmokeyWatchlist = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_KEYWORD_REGEX_WATCH_URL));  // WARNING: Needs special parsing!
+      this.KeywordSmokeyWatchlist = CompileRegexFromPatternList(LoadPatternsFromUrl(SMOKEY_KEYWORD_REGEX_WATCH_URL));
       this.NameBlacklist          = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_NAME_REGEX_URL       ));
       this.AboutBlacklist         = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_ABOUT_REGEX_URL      ));
       this.UrlBlacklist           = CompileRegexFromPatternList(LoadPatternsFromUrl(INTERNAL_URL_REGEX_URL        ));
@@ -105,6 +105,10 @@ public class RegexManager
                if (!line.startsWith("#"))
                {
                   String expression = line.trim();
+                  if (url.equals(SMOKEY_KEYWORD_REGEX_WATCH_URL))
+                  {
+                     expression = expression.split("\t")[2];
+                  }
 
                   // Java's regular-expression engine doesn't support embedded comment groups, so when
                   // we later go to compile such a regex, the attempt will fail. Therefore, we strip
