@@ -198,6 +198,7 @@ prices?
 Printer[\W_]*Tales?
 products
 profile\.Â
+reallyfacts
 real(?:ty|tor|[\W_]*estate)
 refinanc(?:e|ing)
 relax[\W_]*your
