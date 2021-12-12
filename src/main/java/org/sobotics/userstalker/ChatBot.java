@@ -839,6 +839,7 @@ public class ChatBot implements AutoCloseable
       }
 
       LOGGER.info("Rebooting the bot...");
+      this.BroadcastMessageAndWait(CHAT_MSG_PREFIX + " " + "Going down for a reboot; be back soon!");
       this.DoLeave();
       System.exit(0);
    }
