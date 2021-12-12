@@ -888,6 +888,7 @@ public class ChatBot implements AutoCloseable
          }
 
          LOGGER.info("The bot has been killed by an admin...");
+         this.BroadcastMessageAndWait(CHAT_MSG_PREFIX + " " + "Going down upon request; inactive until further notice!");
          this.DoLeave();
          System.exit(1);
       }
