@@ -1,5 +1,6 @@
 \b24[\W_]*(?:\/7|hour)\b
 \b401\(?k\)?[\W_]*plan
+Adu[\W_]*Joker
 acre
 advertising[\W_]*(?:agenc(?:y|ies)|solutions?)
 affordable
@@ -20,6 +21,7 @@ bankruptcy
 beauty
 bed[\W_]*bug
 bedding
+best[\W_]*minecraft[\W_]*servers?
 bet[\W_]*thai
 bidvaluable
 bingo
@@ -37,9 +39,11 @@ business[\W_]*(?:hour|model|need|owner)s?
 buying[\W_]*experience
 \bcall[\W_]*us\b
 cannabis
+(?:carpet|rug|upholstery)[\W_]*clean(?:ing)?
 cash[\W_]*transaction
 (?:c|k)asino
 [\W_]CBD[\W_]
+[\W_]CCTV[\W_]?install
 [\W_]CEO[\W_]
 cheat
 chemical[\W_]*free
@@ -54,6 +58,7 @@ cold[\W_]*virus
 consultant
 contact[\W_]*us
 container[\W_]*waste
+cost[\W_]*efficient
 coupon
 credit
 cremat(?:e|ion)
@@ -83,6 +88,7 @@ eWandzDigital
 exam
 exness
 experienced[\W_]*professional
+fake[\W_]*(?:id|driver|license)
 fashion[\W_]*brand
 favou?rite (?:T[\W_]*V|television) shows?(?# a specific type of profile spammer)
 [\W_]FDA[\W_]
@@ -100,6 +106,7 @@ Geico
 get[\W_]*in[\W_*]touch
 GFA[\W_]*Trust
 gi8\.info
+Globaltroni(?:cs|x)
 gumm(?:y|ies)
 GUNAS
 gutters?[\W_]*clean(?:ing|ed)?
@@ -108,6 +115,7 @@ hair[\W_]*(?:clinic|loss|transplant)
 hassle[\W_]*free
 hidden[\W_]*fees
 hijab
+home[\W_]*security
 homework
 hotel[\W_]*management
 hotline
@@ -129,7 +137,7 @@ Kelley[\W_]*Blue[\W_]*Book
 kelmatt
 ketamine
 keywords:
-kid[\W_]*friendly
+(?:kid|pet)[\W_]*(?:friendly|safe)
 Kioko[\W_]*Center
 kitchen[\W_]*(?design|cabinet)
 kubet11
@@ -158,6 +166,8 @@ movie
 moving[\W_]*service
 MUSHAHADATI
 NBA[\W_]*Draft
+news(?:paper)?[\W_]*writing
+news[\W_]*(?:(?:and|&)[\W_]*)?entertainment
 nguy(?:e|ễ)n[\W_]*th(?:e|ế)[\W_]*h(?:o|ò)a
 no[\W_]*contract
 nutrition
@@ -200,6 +210,7 @@ same[\W_]*day
 satisfaction[\W_]*guaranteed?
 Satta[\W_]*King
 scented[\W_]*candle
+security[\W_]*cameras?
 [\W_]SEO[\W_]
 service
 sex
@@ -208,6 +219,8 @@ shared[\W_]*hosting
 situsqqalfa
 skillbee
 SLOT[\W_]*XO
+slotenmaker
+source[\W_]*of[\W_]*news
 (?:sports?|football)[\W_]*bets?
 Squeaky[\W_]*Pete
 State[\W_]*Farm
@@ -289,3 +302,4 @@ Kế Toán(?# "accounting"/"accountant" in Vietnamese)
 bất động sản(?# "real estate" in Vietnamese)
 電子煙(?# "e-cigarette" in Chinese)
 ダッチワイフ(?# "sex dolls" in Japanese)
+成绩单(?# "transcript" in Chinese)
