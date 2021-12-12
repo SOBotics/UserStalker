@@ -85,6 +85,7 @@ drunk[\W_]*driv(?:ing|er)
 \be[\W_]?(?:store|retail(?:er)?)\b
 Easycart
 electricians
+enema
 erotic
 escorts?
 eWandzDigital
