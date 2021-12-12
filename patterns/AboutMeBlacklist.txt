@@ -1,5 +1,6 @@
 \b24[\W_]*(?:\/7|hour)\b
 \b401\(?k\)?[\W_]*plan
+\b(?:18|eighteen)[\W_]*year[\W_]*old
 Adu[\W_]*Joker
 acre
 advertising[\W_]*(?:agenc(?:y|ies)|solutions?)
