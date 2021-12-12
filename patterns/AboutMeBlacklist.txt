@@ -224,7 +224,7 @@ source[\W_]*of[\W_]*news
 (?:sports?|football)[\W_]*bets?
 Squeaky[\W_]*Pete
 State[\W_]*Farm
-sugar[\_W]*balance
+sugarr?[\W_]*(?:balance|(?:bab|dadd)(?:y|ies))
 supplement
 sustainable[\W_]*cloth(?:es|ing)
 Sweethearts[\W_]*Bridal[\W_]*Shop
