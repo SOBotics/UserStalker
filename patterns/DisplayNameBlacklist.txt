@@ -21,8 +21,8 @@ belly\s?over\s?night
 bio\s?tech
 Bodily\s?Injury\s?Liability
 bowl
-new\s?body
 bracket
+buy[\W_]*service[\W_]*usa
 capit[ao]l
 car in
 cash\W?rewards
@@ -108,6 +108,7 @@ moversandmakers
 musica
 nba
 ncaa
+new\s?body
 n[hf]l
 number
 offices?
