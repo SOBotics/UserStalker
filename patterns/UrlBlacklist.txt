@@ -343,6 +343,7 @@ fitmoversuae\.com
 fiverr\.com
 fixedfeeplumbing\.com
 fixitmy\.com
+flashforge3dp\.com
 fleetsafeparts\.com
 fogghausvapes\.co\.uk
 forbesblog\.org
@@ -390,6 +391,7 @@ glasshoppers\.co\.in
 globaltronix\.com
 greenlinecoffee\.net
 grelix\.com
+groundscape\.org
 grydownload\.pl
 guideline\.com
 gumroad\.com
@@ -696,7 +698,7 @@ popsmokemerchshop\.com
 poker
 porn
 pornooanal\.com
-porn(?:pov|tub)\.top
+porn(?:pov|tub|young)\.top
 portableblenders\.com\.au
 postheaven\.net
 prestigeedenpark\.org\.in
