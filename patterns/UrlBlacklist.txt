@@ -83,6 +83,7 @@ apadanasupply\.com
 app\.works
 appzbank\.com
 aravalii\.com
+areallygoodejob\.com
 arenajudionline\.com
 argadetectives\.com
 arianedesign\.com
@@ -488,6 +489,7 @@ justcreativelight\.com
 justpaste\.it
 k2print\.pl
 kaapimachines\.com
+kalsyangroup\.com
 kanadoll\.jp
 karachitutors\.com
 kartkowki24\.pl
@@ -611,6 +613,7 @@ msejf\.pl
 msofficeeasyforyou\.wordpress
 mtcremovals\.com
 muasamgiatot\.net
+multi-soft\.co\.il
 murphybednyc\.com
 mushahadati\.com
 mybirmusic\.com
@@ -693,7 +696,7 @@ popsmokemerchshop\.com
 poker
 porn
 pornooanal\.com
-porntub\.top
+porn(?:pov|tub)\.top
 portableblenders\.com\.au
 postheaven\.net
 prestigeedenpark\.org\.in
@@ -762,6 +765,7 @@ salesdatagenerator\.com
 sandstone\.com\.au
 sanjaykumarro\.com
 santhuoc\.net
+santicazorla\.com
 saovietjsc\.vn
 sapcertificationdumps\.com
 sapphirehairclinic\.com
@@ -771,6 +775,7 @@ savemax\.com
 sayyedfiresystem\.com
 sblenergy\.com
 scagwebsites\.com
+schwab-entruempelung\.de
 scientificvastu\.in
 scriling\.com
 seckinulusoy\.com
