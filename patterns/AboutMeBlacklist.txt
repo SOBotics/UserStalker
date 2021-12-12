@@ -139,6 +139,7 @@ kelmatt
 ketamine
 keywords:
 (?:kid|pet)[\W_]*(?:friendly|safe)
+kidnap
 Kioko[\W_]*Center
 kitchen[\W_]*(?design|cabinet)
 kubet11
