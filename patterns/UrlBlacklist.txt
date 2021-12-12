@@ -327,6 +327,7 @@ eyshopp\.com
 ezeeonline\.in
 f1automotori\.com
 f(?:a|un)888?
+fair-news\.de
 familytreemakerhelps\.com
 famouskollegalastrologycentre\.com
 fanteamshop\.com
@@ -611,6 +612,7 @@ moroccanoliveoils\.com
 moroccojs\.org
 mossietactics\.com
 mot-centre\.com
+motherandsonporn\.com
 moversandmakers\.ie
 moversmorriscountynj\.com
 mrcasino\.bet
@@ -1040,6 +1042,7 @@ xxx
 xxxpor\.win
 xxxvidos\.top
 yarabook\.com
+yellows\.com\.tw
 yelp\.c(?:a|om)
 ymp\.com\.hk
 yolasite\.com
