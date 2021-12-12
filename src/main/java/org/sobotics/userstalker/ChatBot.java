@@ -990,7 +990,7 @@ public class ChatBot implements AutoCloseable
             String canonicalizedUrl  = this.homoglyphs.Canonicalize(url .replaceAll(" ", ""));
             double similarity        = new RatcliffObershelp().similarity(canonicalizedName,
                                                                           canonicalizedUrl);
-            if (similarity >= 0.3)
+            if (similarity > 0)
             {
                reasons.add("URL similar to username (R/O: "
                          + String.format("%.2f", similarity)
