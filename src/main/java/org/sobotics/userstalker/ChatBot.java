@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import info.debatty.java.stringsimilarity.RatcliffObershelp;
+import info.debatty.java.stringsimilarity.*;
 
 import org.sobotics.chatexchange.chat.ChatHost;
 import org.sobotics.chatexchange.chat.Message;
@@ -978,23 +978,35 @@ public class ChatBot implements AutoCloseable
 
          if (hasName)
          {
-            String normalizedName = name.replaceAll("[^a-zA-Z]", "").toLowerCase();
-            String normalizedUrl  = url .replaceAll("[^a-zA-Z]", "").toLowerCase();
-            if (normalizedName.contains(normalizedUrl ) ||
-                normalizedUrl .contains(normalizedName))
-            {
-               reasons.add("URL similar to username");
-            }
-
             String canonicalizedName = this.homoglyphs.Canonicalize(name.replaceAll(" ", ""));
             String canonicalizedUrl  = this.homoglyphs.Canonicalize(url .replaceAll(" ", ""));
-            double similarity        = new RatcliffObershelp().similarity(canonicalizedName,
-                                                                          canonicalizedUrl);
-            if (similarity > 0)
+
+            ArrayList<String> similarities = new ArrayList<String>(3);
+
+            double jwSimilarity = new JaroWinkler().similarity(canonicalizedName,
+                                                               canonicalizedUrl);
+            if (jwSimilarity > 0)
             {
-               reasons.add("URL similar to username (R/O: "
-                         + String.format("%.2f", similarity)
-                         + ")");
+               similarities.add("J-W: " + String.format("%.2f", jwSimilarity));
+            }
+
+            double roSimilarity = new RatcliffObershelp().similarity(canonicalizedName,
+                                                                     canonicalizedUrl);
+            if (roSimilarity > 0)
+            {
+               similarities.add("R-O: " + String.format("%.2f", roSimilarity));
+            }
+
+            double sdSimilarity = new SorensenDice().similarity(canonicalizedName,
+                                                                canonicalizedUrl);
+            if (sdSimilarity > 0)
+            {
+               similarities.add("S-D: " + String.format("%.2f", sdSimilarity));
+            }
+
+            if (!similarities.isEmpty())
+            {
+               reasons.add("URL similar to username (" + String.join(", ", similarities) + ")");
             }
          }
 
