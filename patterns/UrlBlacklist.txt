@@ -98,6 +98,7 @@ atoallinks\.com
 aucklandelectrician\.co\.nz
 aurafiber\.com
 autocad
+autodailypost\.com
 autoecufile\.com
 automat\.com\.de
 autopeople\.com
@@ -707,6 +708,7 @@ pornooanal\.com
 porn(?:pov|tub|young)\.top
 portableblenders\.com\.au
 postheaven\.net
+potomacdistro\.com
 prestigeedenpark\.org\.in
 prestigeprimrosehills360\.org\.in
 pretty-gaming\.net
@@ -859,7 +861,9 @@ stuffingarage\.com
 suadieuhoa.*\.com
 suadodien\.com
 substack\.com
+\bsuckhoe
 suckhoeceo247\.com
+suckhoeso1\.net
 sugarbalance\.org
 sugarlandacandheating\.com
 sunrisebeautyacademy\.com
@@ -1032,6 +1036,7 @@ xinghaoya\.net
 xkldimi\.com
 xkldvietnam\.com
 xlxxx\.top
+(?:xnxx)?bangbros\.com
 xtgem\.com
 xtreamforex\.com
 xxn
