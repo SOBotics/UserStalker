@@ -167,6 +167,7 @@ wellness
 wrestl(?:e|ing)
 wwe
 xfinity
+yoga[\W_]*mat
 zohor[\W_]*fashion
 ^.{1,7}dl?san$
 (?-i)^[A-Z]{1}[a-z]{3,7}(19[3-9][0-9])$
