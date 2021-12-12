@@ -101,6 +101,9 @@ public class ChatBot implements AutoCloseable
 +                         " replaces the current binary with the resulting new version before rebooting."
 +                         " (All temporary changes to the stalking lists will be lost."
 +                         "  Usage of this command is limited to users with admin privileges.)"
++ "\n"
++ "\u3000\u25CF \"die\": Like \"stop\", but also leaves the room and kills the bot without rebooting it."
++                         " (Usage of this command is limited to users with admin privileges.)"
 + "\n\n"
 + "If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!)."
 ;
@@ -236,6 +239,21 @@ public class ChatBot implements AutoCloseable
    private boolean IsRunning()
    {
       return (this.executor != null);
+   }
+
+   private boolean IsAdmin(Room room, org.sobotics.chatexchange.chat.User user)
+   {
+      if ((room != null) && (user != null))
+      {
+         String hostName  = room.getHost().getName();
+         long   userIDs[] = this.CHAT_ADMIN_USERIDS.get(hostName);
+         if ((userIDs != null) &&
+             (Arrays.stream(userIDs).anyMatch(id -> id == user.getId())))
+         {
+            return true;
+         }
+      }
+      return false;
    }
 
 
@@ -410,6 +428,11 @@ public class ChatBot implements AutoCloseable
          else if (messageParts[1].equals("upgrade"))
          {
             this.DoUpgrade(room, replyID, message.getUser());
+            return;
+         }
+         else if (messageParts[1].equals("die"))
+         {
+            this.DoDie(room, replyID, message.getUser());
             return;
          }
       }
@@ -824,37 +847,63 @@ public class ChatBot implements AutoCloseable
    {
       // Require that the message comes from a user whose chat user ID indicates that
       // they have admin privileges.
-      if ((room != null) && (sendingUser != null))
+      if (this.IsAdmin(room, sendingUser))
       {
-         String hostName = room.getHost().getName();
-         long[] userIDs  = this.CHAT_ADMIN_USERIDS.get(hostName);
-         if ((userIDs != null) &&
-             (Arrays.stream(userIDs).anyMatch(id -> id == sendingUser.getId())))
+         if (this.IsRunning())
          {
-            if (this.IsRunning())
-            {
-               this.DoStop();
-            }
-
-            LOGGER.info("The bot is going down for an upgrade...");
-            this.BroadcastMessageAndWait(CHAT_MSG_PREFIX + " " + "Going down for an upgrade; be back soon!");
-            this.DoLeave();
-            System.exit(42);
-            return;
+            this.DoStop();
          }
-      }
 
-      String logMessage = "Unprivileged attempt to upgrade"
-                        + " (Room: " + room.getRoomId()
-                        + " on " + room.getHost().getName();
-      if (sendingUser != null)
+         LOGGER.info("The bot is going down for an upgrade...");
+         this.BroadcastMessageAndWait(CHAT_MSG_PREFIX + " " + "Going down for an upgrade; be back soon!");
+         this.DoLeave();
+         System.exit(42);
+      }
+      else
       {
-         logMessage += "; User: " + sendingUser.getId();
-      }
-      logMessage += ").";
-      LOGGER.warn(logMessage);
+         String logMessage = "Unprivileged attempt to upgrade"
+                           + " (Room: " + room.getRoomId()
+                           + " on " + room.getHost().getName();
+         if (sendingUser != null)
+         {
+            logMessage += "; User: " + sendingUser.getId();
+         }
+         logMessage += ").";
+         LOGGER.warn(logMessage);
 
-      room.replyTo(replyID, "I'm sorry, Dave. I'm afraid I can't do that.");
+         room.replyTo(replyID, "I'm sorry, Dave. I'm afraid I can't do that.");
+      }
+   }
+
+   private void DoDie(Room room, long replyID, org.sobotics.chatexchange.chat.User sendingUser)
+   {
+      // Require that the message comes from a user whose chat user ID indicates that
+      // they have admin privileges.
+      if (this.IsAdmin(room, sendingUser))
+      {
+         if (this.IsRunning())
+         {
+            this.DoStop();
+         }
+
+         LOGGER.info("The bot has been killed by an admin...");
+         this.DoLeave();
+         System.exit(1);
+      }
+      else
+      {
+         String logMessage = "Unprivileged attempt to kill"
+                           + " (Room: " + room.getRoomId()
+                           + " on " + room.getHost().getName();
+         if (sendingUser != null)
+         {
+            logMessage += "; User: " + sendingUser.getId();
+         }
+         logMessage += ").";
+         LOGGER.warn(logMessage);
+
+         room.replyTo(replyID, "I'm sorry, Dave. I'm afraid I can't do that.");
+      }
    }
 
 

@@ -15,7 +15,9 @@ do
 
 	cd "${SCRIPT_DIR}" || exit
 	java -jar "${JAR_FILE}" "${1}" >> "${LOG_FILE}" 2>&1
-	if [ $? -eq 42 ]; then
+	EXIT_STATUS=$?
+
+	if (( EXIT_STATUS == 42 )); then
 		# Do in-place upgrade.
 		{
 			printf '\n'
@@ -44,5 +46,8 @@ do
 			sudo reboot
 			break
 		} >> "${LOG_FILE}" 2>&1
+	elif (( EXIT_STATUS != 0 )); then
+		break
 	fi
+
 done
