@@ -61,6 +61,7 @@ airconservicingsingapore\.net
 airductxperts\.com
 airport-taxi-split\.com
 airtimeinflate\.com
+akaninsurance\.ca
 aladdinrugs\.co\.nz
 alameraclean\.com
 alavu-restaurant\.de
@@ -83,6 +84,7 @@ annefrankparallelstories\.com
 annmsmusic\.com
 answerdev\.com
 antechhair\.ca
+anysex\.it
 apadanasupply\.com
 app\.works
 appzbank\.com
@@ -127,6 +129,7 @@ bcz\.com
 beautiesforever\.com
 bebehome\.gr
 beegara\.com
+beegsex\.it
 begroup\.com\.sg
 belaprimavera\.com\.br
 bellbroshvac\.com
@@ -197,6 +200,7 @@ catsaceshop\.com
 cavandoragh\.org
 cci-logistics\.com
 cbdmovers\.in
+cellardoor24\.de
 cellphones\.com\.vn
 cert\.edu\.au
 cervical-dysplasia-cure\.com
@@ -421,6 +425,7 @@ habitbomb\.com
 hainamsolar\.net
 hairtransplantinpakistan\.com
 haitchlegal\.com\.au
+halalcheck4u\.de
 handmadepanties\.com
 hardballwarriors\.com
 hardlineheating\.com
@@ -520,9 +525,11 @@ kazin0\.online
 kekkon1213\.net
 kellyslocksmith\.com
 kelmatt\.com\.au
+keygeninja\.com
 keywordseo\.com
 khoeplus\.com\.vn
 kholedgiasi\.com
+khonggiansach365\.com
 khutrungxanh\.com
 kiokocenter\.com
 kizi-mizi\.pl
@@ -555,6 +562,7 @@ ldlstore\.com\.vn
 lcsmiami\.com
 learningmywaym\.org
 leatherbag
+ledlightforcars\.com
 lessontoday\.com
 letsgetmovingcanada\.com
 licbazateksty\.pl
@@ -617,6 +625,7 @@ mintable\.app
 mirinmedia\.com
 misticosdooriente\.com\.br
 mixgupshup\.com
+mktee\.com
 mlgindia\.com
 mlrefrigeration\.com\.au
 mmumullana\.org
@@ -793,6 +802,7 @@ russianpassportsandvisas\.com
 ruthamcauquan3\.info
 s3\.amazonaws\.com\/
 saakin\.com
+safari-dreams\.com
 safeco\.com
 safetyculture\.com
 sailventuresinc\.com
@@ -869,6 +879,7 @@ spike\.cc
 spikejams?
 splice\.com
 sports\.yahoo\.com
+sport9s\.com
 spreaker\.com
 sps\.org\.vn
 squareblogs\.net
@@ -923,6 +934,7 @@ technofibre\.com
 teenporn\.work
 teknicoolairconditioning\.com
 teknobuilt\.com
+teknoharian\.com
 teknologia\.co
 telegra\.ph
 terapeame\.net
@@ -950,10 +962,12 @@ thestorageplace\.co\.uk
 thetravelhackr\.com
 theweekndmerchshop\.com
 thewhaleycenter\.com
+theymakeapps\.com
 thietbibeboi
 threadless\.com
 threedashesagency\.com\.au
 tienluong\.com
+tilemax\.co\.nz
 timberan\.com
 time[\W_]*share
 timeforchangecounselling\.com
@@ -1012,7 +1026,7 @@ v7uytin\.com
 valimu\.com
 vardiseguros\.com\.co
 vapehabitat\.com
-vastuconsultantindubai\.com
+vastuconsultants?in.*\.com
 vastuforhome\.com
 vegas11\.live
 veksor\.com
@@ -1074,7 +1088,8 @@ xkldimi\.com
 xkldvietnam\.com
 xlxxx\.top
 (?:xnxx)?bangbros\.com
-xnxxteen\.work
+xnxx(?:teen)?\.(?:top|work)
+xnxxteenvideos\.com
 xtgem\.com
 xtreamforex\.com
 xxn
