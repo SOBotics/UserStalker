@@ -23,6 +23,7 @@ beauty
 bed[\W_]*bug
 bedding
 best[\W_]*minecraft[\W_]*servers?
+best[\W_]*wines?
 bet[\W_]*thai
 bidvaluable
 bingo
@@ -121,6 +122,7 @@ hidden[\W_]*fees
 hijab
 home[\W_]*security
 homework
+horny
 hotel[\W_]*management
 hotline
 hourly[\W_]*rate
@@ -180,7 +182,7 @@ no[\W_]*contract
 nutrition
 oldbreweryguest
 on[\W_]*best[\W_]*deal
-online[\W_]*betting
+online[\W_]*(?:betting|store)
 opiate
 partner[\W_]*company
 Paula[\W_]*White
@@ -189,7 +191,7 @@ PCR[\W_]*Test[\W_]*Manhattan
 penis
 permit[\W_]*violat
 personal[\W_]*i(?:mmunity|njury)
-personal(?:ized)?[\W_]*care
+personal(?:ized)?[\W_]*(?:care|products?)
 poker
 pool[\W_]*clean
 pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
@@ -248,6 +250,7 @@ transplant
 travel[\W_]*guide
 Trust[\W_]*News
 upbeat[\W_]*digital
+unexpected[\W_]*lover
 vap(?:e|ing)
 vending[\W_]*machine
 [\W_]VIP[\W_]
