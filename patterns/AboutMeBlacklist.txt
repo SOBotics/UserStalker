@@ -165,7 +165,6 @@ Kundli[\W_]*Jyotish
 Land[\W_]*cruiser
 Lash[\W_]*Glo
 leading[\W_]*company
-which[\W_]*light[\W_]*bulb
 lingerie
 live[\W_]*betting
 lock[\W_]*smith
@@ -183,6 +182,7 @@ masseuse
 matchfinder
 matrimon(?:y|ial)
 mattress
+Mea[\W_]*Cantik
 medical[\W_]*procedure
 mehndi
 MetroKleen
@@ -299,6 +299,7 @@ Website[\W_]*Drona
 wedding
 WeDoLaundry
 (?:weight|fat)[\W_]*(?:loss|reduc(?:e|tion))
+which[\W_]*light[\W_]*bulb
 window[\W_]*tint
 Wyndham
 XOSLOTZ?
