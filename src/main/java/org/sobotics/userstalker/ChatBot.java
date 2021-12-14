@@ -14,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -114,8 +116,8 @@ public class ChatBot implements AutoCloseable
    private StackExchangeClient                client;
    private Room                               roomSO;
    private Room                               roomSE;
-   private List<String>                       sites;
-   private List<String>                       nonEnglishSites;
+   private TreeSet<String>                    sites;
+   private TreeSet<String>                    nonEnglishSites;
    private RegexManager                       regexes;
    private HomoglyphManager                   homoglyphs;
    private StackExchangeApiClient             seApi;
@@ -192,7 +194,7 @@ public class ChatBot implements AutoCloseable
    }
 
 
-   public void Run(List<String> seSites, List<String> nonEnglishSites)
+   public void Run(TreeSet<String> seSites, TreeSet<String> nonEnglishSites)
    {
       // Load the regular expressions.
       this.regexes = new RegexManager();
@@ -204,8 +206,8 @@ public class ChatBot implements AutoCloseable
       this.seApi = new StackExchangeApiClient(this::OnQuotaRollover);
 
       // Create the site lists.
-      this.sites           = new ArrayList<String>();
-      this.nonEnglishSites = new ArrayList<String>();
+      this.sites           = new TreeSet<String>();
+      this.nonEnglishSites = new TreeSet<String>();
       if (this.roomSO != null)
       {
          this.sites.add("stackoverflow");
@@ -493,7 +495,7 @@ public class ChatBot implements AutoCloseable
    }
 
 
-   private void DoStalk(Room room, List<String> sites, int approximateUserCount)
+   private void DoStalk(Room room, Collection<String> sites, int approximateUserCount)
    {
       // Get all potentially suspicious users from all sites in the list of sites to stalk.
       ArrayList<SuspiciousUser> suspiciousUsers = new ArrayList<SuspiciousUser>(approximateUserCount);
@@ -1266,7 +1268,7 @@ public class ChatBot implements AutoCloseable
       }
    }
 
-   private void ReportStatistics(Room room, List<String> sites)
+   private void ReportStatistics(Room room, Collection<String> sites)
    {
       boolean hasMultiple = (sites.size() > 1);
       String  message     = "";

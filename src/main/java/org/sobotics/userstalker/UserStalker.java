@@ -4,10 +4,9 @@ package org.sobotics.userstalker;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
+import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,9 +89,9 @@ public class UserStalker
          }
 
          // Load "StackExchange" properties file.
-         int          seRoomID        = -1;
-         List<String> seSites         = null;
-         List<String> nonEnglishSites = null;
+         int             seRoomID        = -1;
+         TreeSet<String> seSites         = null;
+         TreeSet<String> nonEnglishSites = null;
          try (FileInputStream fis = new FileInputStream(SE_PROPERTIES_FILE))
          {
             // Attempt to load Stack Exchange properties file.
@@ -111,7 +110,7 @@ public class UserStalker
             String sites = propSE.getProperty("sites");
             if ((sites != null) && !sites.isBlank())
             {
-               seSites = Arrays.asList(sites.split("\\s*,\\s*"));
+               seSites = new TreeSet<String>(Arrays.asList(sites.split("\\s*,\\s*")));
             }
             else
             {
@@ -123,7 +122,7 @@ public class UserStalker
             String nonEnglish = propSE.getProperty("nonEnglish");
             if ((nonEnglish != null) && !nonEnglish.isBlank())
             {
-               nonEnglishSites = Arrays.asList(nonEnglish.split("\\s*,\\s*"));
+               nonEnglishSites = new TreeSet<String>(Arrays.asList(nonEnglish.split("\\s*,\\s*")));
             }
             else
             {
