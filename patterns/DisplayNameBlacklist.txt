@@ -105,6 +105,7 @@ march\s*madness
 mas[\W_]*tatag
 mastercard
 mayweather
+Mea[\W_]*Cantik
 merch
 metasever
 MetroKleen
