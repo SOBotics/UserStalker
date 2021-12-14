@@ -163,6 +163,7 @@ Kundli[\W_]*Jyotish
 Land[\W_]*cruiser
 Lash[\W_]*Glo
 leading[\W_]*company
+which[\W_]*light[\W_]*bulb
 lingerie
 live[\W_]*betting
 lounge[\W_]*wear
@@ -317,6 +318,7 @@ seguros(?# "insurance")
 bomb(?:ce|ki)
 meblowej
 nieruchomośc(?# "real estate*")
+pozycjonowan(?# "positioning*")
 pranie
 tapicerki
 
