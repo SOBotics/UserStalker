@@ -32,6 +32,7 @@ capit[ao]l
 car in
 cash\W?rewards
 casino
+[\W_]CBD[\W_]
 [\W_]CEO[\W_]
 champ(?:ion|ionship)?s?
 cheap
