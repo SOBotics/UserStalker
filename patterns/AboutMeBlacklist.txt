@@ -7,6 +7,7 @@ Adu[\W_]*Joker
 advertising[\W_]*(?:agenc(?:y|ies)|solutions?)
 affordable
 Agen[\W_]*(?:Casino|Slot)
+alert[\W_]*bracelets?
 Aman[\W_]*Shandilya
 American[\W_]*Samoa[\W_]*LLC
 amm(?:o|unitions?)
@@ -58,7 +59,7 @@ cash[\W_]*transaction
 cheat
 chemical[\W_]*free
 chiropract(?:ic|or)s?
-cleaning[\W_]*services?
+cleaning[\W_]*(?:product|service)s?
 Cleod9(?:[\W_]*Voice)?
 client
 clinical[\W_]*depression
