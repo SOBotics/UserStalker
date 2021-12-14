@@ -1,11 +1,14 @@
 \b24[\W_]*(?:\/7|hour)\b
 \b401\(?k\)?[\W_]*plan
 \b(?:18|eighteen)[\W_]*year[\W_]*old
-Adu[\W_]*Joker
 acre
+Actual[\W_]*SEO[\W_]*Media
+Adu[\W_]*Joker
 advertising[\W_]*(?:agenc(?:y|ies)|solutions?)
 affordable
 Agen[\W_]*(?:Casino|Slot)
+Aman[\W_]*Shandilya
+American[\W_]*Samoa[\W_]*LLC
 amm(?:o|unitions?)
 apartment
 (?:appliance|bike)[\W_]*repairs?
@@ -16,6 +19,7 @@ auction
 authorized[\W_]*dealer
 auto(?:mo(?:bile|tive)?)[\W_]*parts?
 [\W_]B2B[\W_]
+baccarat[\W_*](?:live|online)
 background[\W_]*check
 Baladi[\W_]*Studio
 bankruptcy
@@ -25,6 +29,7 @@ bedding
 best[\W_]*minecraft[\W_]*servers?
 best[\W_]*wines?
 bet[\W_]*thai
+betting[\W_]*online
 bidvaluable
 bingo
 BINOMO
@@ -33,13 +38,14 @@ bitcoins?[\W_]*recovery[\W_]*tool
 blogging[\W_]*platform
 blogspot
 (?:body|skin)[\W_]*care
+book[\W_]*cheap
 brand
 brides
 build(?:ing)?[\W_]*permit
 built[\W_]*to[\W_]*last[\W_]*seo[\W_]*agency
 business[\W_]*(?:hour|model|need|owner)s?
-buying[\W_]*experience
 Buy[\W_]*Service[\W_]*USA
+buying[\W_]*experience
 \bcall[\W_]*us\b
 cannabis
 (?:carpet|rug|upholstery)[\W_]*clean(?:ing)?
@@ -61,6 +67,7 @@ cold[\W_]*virus
 consultant
 contact[\W_]*us
 container[\W_]*waste
+cooking[\W_]*utensil
 cost[\W_]*efficient
 coupon
 creampie
@@ -71,9 +78,11 @@ crypto
 cutting[\W_]*edge
 dating
 deal
+defensive[\W_]*driv(?:er|ing)
 denim
 dent(?:al|ist)
 detox
+diamond[\W_]*expert
 digital[\W_]*market(?:ing)?
 dispensary
 DNA[\W_]*PRO[\W_]*AKADEMI
@@ -115,12 +124,13 @@ Globaltroni(?:cs|x)
 gumm(?:y|ies)
 GUNAS
 gutters?[\W_]*clean(?:ing|ed)?
-HappyLuke
 hair[\W_]*(?:clinic|loss|transplant)
+HappyLuke
 hassle[\W_]*free
+head[\W_]*lights?
 hidden[\W_]*fees
 hijab
-home[\W_]*security
+home[\W_]*(?:loan|security)
 homework
 horny
 hotel[\W_]*management
@@ -134,10 +144,11 @@ illuminati
 (?:indoor|home)[\W_]*(?:indoor|home)?[\W_]*plants?
 ink[\W_]*cartridges?
 insurance
-international[\W_]*call
 interest[\W_]*rate
+international[\W_]*call
 iwinapp[\W_]*link
 job[\W_]*seekers?
+Joker[\W_]*123
 junk[\W_]*remov(?:e|al)
 Kelley[\W_]*Blue[\W_]*Book
 kelmatt
@@ -153,18 +164,21 @@ Land[\W_]*cruiser
 Lash[\W_]*Glo
 leading[\W_]*company
 lingerie
+live[\W_]*betting
 lounge[\W_]*wear
 luxur(?:y|ious)
 Luxury[\W_]*Transfers[\W_]*Zagreb
+M888?[\W_]*Slot[\W_]*(?:Online|Terbaik)
 (?:major)?[\W_]*brands?[\W_]*(?:names?)?
 male[\W_]*enhance(?:ment)?
 marijuana
 market[\W_]*(?:place|price|share)
 massage
+masseuse
 matchfinder
 matrimon(?:y|ial)
 mattress
-masseuse
+medical[\W_]*procedure
 mehndi
 MetroKleen
 Mirin[\W_]*Media
@@ -180,10 +194,12 @@ news[\W_]*(?:(?:and|&)[\W_]*)?entertainment
 nguy(?:e|ễ)n[\W_]*th(?:e|ế)[\W_]*h(?:o|ò)a
 no[\W_]*contract
 nutrition
+nymph
 oldbreweryguest
 on[\W_]*best[\W_]*deal
 online[\W_]*(?:betting|store)
 opiate
+Pandit[\W_]*S[\W_]*\.[\W_]*K[\W_]*\.[\W_]*Shastri
 partner[\W_]*company
 Paula[\W_]*White
 pay[\W_]*day(?:[\W_]*loans?)?
@@ -192,6 +208,7 @@ penis
 permit[\W_]*violat
 personal[\W_]*i(?:mmunity|njury)
 personal(?:ized)?[\W_]*(?:care|products?)
+pkv[\W_]*games
 poker
 pool[\W_]*clean
 pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
@@ -201,10 +218,11 @@ poultry
 premium
 prices?
 Printer[\W_]*Tales?
+private[\W_]*luxury
 products
-profile\.Â
-reallyfacts
+[\W_]PTFE[\W_]
 real(?:ty|tor|[\W_]*estate)
+reallyfacts
 refinanc(?:e|ing)
 relax[\W_]*your
 relocat(?:e|ing)
@@ -226,9 +244,12 @@ service
 sex
 sex[\W_]*hiep[\W_]*dam
 shared[\W_]*hosting
+Sharina[\W_]*World
+shower
+Sinaumedia
 situsqqalfa
 skillbee
-SLOT[\W_]*XO
+SLOT[\W_]*(?:888?|XO)
 slotenmaker
 source[\W_]*of[\W_]*news
 (?:sports?|football)[\W_]*bets?
@@ -239,19 +260,26 @@ supplement
 sustainable[\W_]*cloth(?:es|ing)
 Sweethearts[\W_]*Bridal[\W_]*Shop
 swimming pool
+taxi[\W_]*(?:drivers?|service)
 Techno[\W_]*Fibre
+Teksands?
 thabet
 [\W_]THC[\W_]
 thesis[\W_]*writ(?:er|ing)
+thirukadaiyur
 time[\W_]*share
 to your door
 tooth[\W_]*(?:whitening|sensitivity)
 transplant
 travel[\W_]*guide
 Trust[\W_]*News
-upbeat[\W_]*digital
 unexpected[\W_]*lover
+upbeat[\W_]*digital
+Uzi[\W_]*Grindler
 vap(?:e|ing)
+vashikaran
+[\W_]VAT[\W_]
+venbor
 vending[\W_]*machine
 [\W_]VIP[\W_]
 ViralKida
@@ -272,6 +300,7 @@ Xtream[\W_]*Forex
 yacht
 your[\W_]*skin
 yowinslot
+\.Â$
 
 # German
 (?:gas|signal)pistole
@@ -285,20 +314,18 @@ greffe[\W_]*de[\W_]*cheveux
 seguros(?# "insurance")
 
 # Polish
-pranie
+bomb(?:ce|ki)
 meblowej
+nieruchomośc(?# "real estate*")
+pranie
 tapicerki
 
 # Russian
 казино(?# "casino")
 цене(?# "price")
 
-# Middle Eastern
-کازینو(?# "casino" in Persian)
-شرط بندی(?# "betting" in Persian)
-فروشگاه(?# "store" in Persian)
-اختلال دو قطبی(?# "bipolar disorder" in Persian)
-أفلام(?# "films" in Arabic)
+# Indonesian
+kualitas[\W_]*terbaik(?# "best quality")
 
 # Asian
 phim(?# "movie" in Vietnamese)
@@ -314,3 +341,16 @@ bất động sản(?# "real estate" in Vietnamese)
 電子煙(?# "e-cigarette" in Chinese)
 ダッチワイフ(?# "sex dolls" in Japanese)
 成绩单(?# "transcript" in Chinese)
+グリホサート(?# "glyphosate" in Japanese)
+카지노(?# "casino" in Korean)
+Du lịch(?# "tourism" in Vietnamese)
+Sửa(?# "repair" in Vietnamese)
+
+# Middle Eastern
+کازینو(?# "casino" in Persian)
+شرط بندی(?# "betting" in Persian)
+فروشگاه(?# "store" in Persian)
+اختلال دو قطبی(?# "bipolar disorder" in Persian)
+أفلام(?# "films" in Arabic)
+شاهد مباريات(?# "watch matches" in Arabic)
+عزل خزانا(?# "insulation tank" in Arabic)
