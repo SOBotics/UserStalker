@@ -545,6 +545,7 @@ glamourprivates\.com
 glasshoppers\.co\.in
 glenferriedental\.com\.au
 globaltronix\.com
+go2joy\.vn
 godaddysites\.com
 godfatherslot88\.net
 gofynder\.com
@@ -725,7 +726,7 @@ krrailengg\.com
 kspa\.ae
 ktbinhduong\.com
 ku(?:19|66)
-kubet11\.life
+kubet(?:11|888?)\.(?:life|vip)
 kuechenrueckwandfolie\.de
 kunalvastu\.com
 kundlijyotish\.com
