@@ -194,6 +194,7 @@ mortgage
 movie
 moving[\W_]*service
 MUSHAHADATI
+NamSo[\W_]*Gen
 NBA[\W_]*Draft
 near[\W_]*me
 news(?:paper)?[\W_]*writing
