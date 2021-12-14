@@ -26,6 +26,7 @@ bio\s?tech
 Bodily\s?Injury\s?Liability
 bowl
 bracket
+butt\b
 buy[\W_]*service[\W_]*usa
 capit[ao]l
 car in
