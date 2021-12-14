@@ -5,6 +5,7 @@
 (?-i:UCIorliJ58U9Eb-QqP0UlXgA)(?# YouTube channel)
 (?-i:UC2mr3saNQReiHDiaDwM0A0g)(?# YouTube channel)
 (?-i:PeZo5PXKRgM)(?# YouTube video)
+(?-i:3t6k_A7Dpz0)(?# YouTube video)
 13\.228\.233\.2
 13\.250\.159\.90
 36\.255\.141\.55
@@ -995,6 +996,7 @@ prachurja\.com
 prestigeedenpark\.org\.in
 prestigeprimrosehills360\.org\.in
 pretty-gaming\.net
+primalcamp\.com
 primeglasswindows\.com
 printerloop\.com
 printertales\.co\.uk
