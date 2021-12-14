@@ -2,10 +2,13 @@
 (?:\?)?url(?:\?q)?=
 \.de\.tl
 @johncooleydk
-(?-i:UCIorliJ58U9Eb-QqP0UlXgA)(?# YouTube channel)
 (?-i:UC2mr3saNQReiHDiaDwM0A0g)(?# YouTube channel)
-(?-i:PeZo5PXKRgM)(?# YouTube video)
+(?-i:UCIorliJ58U9Eb-QqP0UlXgA)(?# YouTube channel)
+(?-i:UCXRP1VE7iQR-74pBAzdJaOg)(?# YouTube channel)
+(?-i:0Tm7Dw_VbWU)(?# YouTube video)
 (?-i:3t6k_A7Dpz0)(?# YouTube video)
+(?-i:PeZo5PXKRgM)(?# YouTube video)
+(?-i:yJDxTOurw0o)(?# YouTube video)
 13\.228\.233\.2
 13\.250\.159\.90
 18\.139\.141\.111
@@ -30,6 +33,7 @@
 198\.187\.31\.113
 199\.188\.201\.79
 216\.158\.239\.149
+122joker\.org
 123movie
 1sports\.com\.ua
 1win1\.in
@@ -41,15 +45,22 @@
 33sport\.ru
 365solarenergy\.com
 4alarmjunkremoval\.com
+4mw\.pl
 4shared\.com
+525\.pl
+6po\.pl
 78wind\.com
+79dni\.pl
 7ealt7y\.blogspot
 7searchppc\.com
 88(?:bet|pro)(?:thai)?
 886\.lv
 8b\.(?:com|io)
+929\.pl
+939\.pl
 9alba\.com
 aalimoservices\.com
+aamas2008\.org
 abcteksty\.pl
 abcxon\.com
 about\.me
@@ -71,6 +82,7 @@ advanceddrivewaysolutions\.co\.uk
 advancedmineralmakeup\.com
 advancedrestorationsolutions\.com
 adventureclimbingframes\.com
+adventurer\.com\.pl
 advocatetusharsrivastava\.com
 advsry\.com
 aegeancollege\.gr
@@ -81,6 +93,7 @@ agapetc\.com
 agenpragmaticplay\.net
 agenslot2022\.com
 agobet\.co
+agresiv\.pl
 ahmedmedico\.pk
 ahref=
 ahsunirfan\.com
@@ -89,15 +102,18 @@ airconservicingsingapore\.net
 airductxperts\.com
 airport-taxi-split\.com
 airtimeinflate\.com
+aise-infoday2013\.eu
 akaninsurance\.ca
 aladdinrugs\.co\.nz
 alameraclean\.com
 alavu-restaurant\.de
 albertalegal\.ca
+aldenlawfirm\.com
 algorrithm\.com
 alignable\.com
 allaboutpubs\.com
 allgaeu-news\.com
+allhandsondecknyc\.com
 allhomestudy\.com
 allindianfestivals\.in
 allpestext\.com
@@ -115,28 +131,37 @@ americanlifeguard\.com
 ancientpathnaturals\.com
 ancoras\.com\.br
 angelsoffinance\.com
+anise-network\.org
 annabauman\.com
 annefrankparallelstories\.com
 annmsmusic\.com
 anotepad\.com
 answerdev\.com
 antechhair\.ca
+anticheat\.pl
 antiquemilitariabuyers\.com
 anysex\.it
 apadanasupply\.com
+apiuemilano\.it
 app\.works
 appzbank\.com
 apxdigital\.co\.za
 aravalii\.com
+archiwizacja-?danych\.(?:com|eu)
 areallygoodejob\.com
 arenajudionline\.com
 argadetectives\.com
 arianedesign\.com
+ario-parkview\.com
 arizonafamilyinstitute\.com
 arkansasnotary\.com
+armoryden\.com
 aroundhendrickscounty\.com
+arquitectoszaragoza\.net
+arrowfactory\.org
 asean2021\.bn
 asianageonline\.com
+asieno\.com
 assistme360\.com
 assuredassignmenthelp\.com
 astro-wiki\.win
@@ -151,6 +176,7 @@ aucklandelectrician\.co\.nz
 aufaitux\.com
 aurafiber\.com
 aussieelectricalandsolar\.com\.au
+authorscrew\.com
 autocad
 autodailypost\.com
 autoecufile\.com
@@ -190,6 +216,8 @@ belaprimavera\.com\.br
 bellbroshvac\.com
 bellvaadventureindonesia\.com
 bengkelmotorbekasi\.com
+bergmannkuchnie\.pl
+best-babycarseats\.com
 best-sat-prep\.com
 bestastrologerinindia\.com
 bestechplots\.in
@@ -215,8 +243,10 @@ bitcoin
 bitcoin-upp\.com
 bitcoinsrecoverytool\.com
 bizzskills\.com
+bjkmedia\.com
 bk8top1\.com
 blackcannabismagazine\.com
+blancostore\.com\.ar
 blaqmax\.net
 blekon\.com
 blogbright\.net
@@ -233,6 +263,7 @@ bluebellshipping\.com
 bluedragon\.one
 blueskyes\.app
 blurb\.com
+bodyhero\.com
 bohemianbeachboutique\.com
 bollineniastra\.org\.in
 bonestudio\.net
@@ -266,15 +297,18 @@ buysocialpack\.com
 bvkrongbong\.com
 cabanova\.com
 cabinzero\.com
+cafesgranell\.es
 cakhia\.com
 callpsychicnow\.com
 callthecomputerguy\.net
 cambyocar\.com
 camerahainam\.net
-camerawifihd\.net
 camerawifichinhhang\.com
+camerawifihd\.net
 canadadrugsdirect\.com
 cannamazoo\.com
+cansoft\.com
+cantalupa\.pl
 caramellaapp\.com
 careersuccessnow\.com
 carpetcleaningyeronga\.com
@@ -287,10 +321,13 @@ catherinecoombs\.com
 catsaceshop\.com
 cavandoragh\.org
 cbdmovers\.in
+cccone\.org
 cci-logistics\.com
 cctyrespenrith\.com
+ceeenergyawards\.com
 cellardoor24\.de
 cellphones\.com\.vn
+cemr2016\.eu
 centurypropertiespk\.com
 cert\.edu\.au
 cervical-dysplasia-cure\.com
@@ -307,13 +344,16 @@ cheatpekalonganvip\.com
 chesseasy\.com
 chikucab\.com
 chinapinfactory\.com
+choicedesks\.com
 christmaswishes\.de
+chrysler-enter-to-win\.com
 cimalight\.onl
 cityautolocksmiths\.com
 click4r\.com
 clickercounter\.org
 clinicacimov\.com
 clix\.capital
+cloudbox99\.com
 clouddevs\.com
 clovisconcreterepairandleveling\.com
 cmdrecruitment\.com
@@ -367,9 +407,11 @@ daalchini\.co\.in
 daftarkoinqq\.org
 daftarslot138\.com
 daga360vn\.com
+dailyiowan\.com
 dailyuploads\.net
 daiphatco\.com
 dalahome\.se
+dalamantransport\.com
 danatunaibandung\.com
 dantri\.com\.vn
 dathoaonline\.com
@@ -396,16 +438,19 @@ dienlanhanhthang\.com
 dienmaynewsun\.com
 dienmaytot\.org
 digitalconvert\.co\.uk
+digitalmediavictoria\.ca
 digiuseppedesign\.com
 diigo\.com
 divadentistry\.com
 divephotoguide\.com
 dnbstore\.in
 doassignmenthelp\.com
+doc\.co\.vu
 docdro\.id
 docs\.google\.com
 docspal\.com
 doge4nascar\.org
+dogelumens\.com
 doktors\.co\.in
 dokumentys\.pl
 dollarwayz\.com
@@ -446,6 +491,7 @@ edukacjalic\.pl
 edukacjowo\.pl
 edukolandia\.pl
 el-kef\.blogspot
+eldoradoconcreterepairandleveling\.com
 electricexpertyyc\.ca
 elegantshowers\.co\.uk
 elevenfootball\.org
@@ -457,6 +503,7 @@ emailcustomersupportnumber\.com
 emailmeform\.com
 emekliol\.org
 emiliophzs823\.tumblr
+emirates\.estate
 empoweredconversations\.com
 empowher\.com
 enchantmentwholesales\.com
@@ -471,6 +518,7 @@ esignwebservices\.in
 eskaypay\.com
 essaywritersnear\.me
 essengisemfmk47\.page\.tl
+estudiodelapisada\.com
 esvrm\.com
 eszkolik\.pl
 eugdpr\.gr
@@ -494,6 +542,7 @@ familytreemakerhelps\.com
 famousastrologerskshastri\.com
 famouskollegalastrologycentre\.com
 fanteamshop\.com
+farnsworthfirearms\.com
 fastcourse4less\.com
 faxitfast\.com
 fenonmagazine\.com
@@ -527,6 +576,7 @@ fotosdefrases\.com
 foxporns\.top
 franchiserealme\.com
 frankievskitchen\.com
+freedownloadfiles\.org
 freemoon\.online
 freepornamatuer\.com
 freewebcams
@@ -534,9 +584,11 @@ freezoner\.net
 fresh2daflows\.blogspot
 frontierdevelopments\.co\.uk
 fullsoftwaregratis\.com
+fun888?
 fun888ben55
 fun888ben\.com
 fun88one\.net
+fun88th1\.com
 furaka\.com
 g-casinos\.com
 gambl(?:e|ing)
@@ -557,6 +609,7 @@ getyoufix\.com
 gfatrust\.com
 gi8\.info
 gianphoibaominh\.com
+giasubienhoa\.edu\.vn
 glamorgift\.com
 glamourprivates\.com
 glasshoppers\.co\.in
@@ -564,11 +617,14 @@ glenferriedental\.com\.au
 globaltronix\.com
 go2joy\.vn
 godaddysites\.com
+godandquantumphysics\.com
 godfatherslot88\.net
+gofa\.co
 gofynder\.com
 gogoanime\.mom
 gohoardings\.com
 goldcasinogiris\.com
+goldcoastgolfcourses\.com\.au
 goldservicelocksmiths\.com\.au
 golike\.net
 gomunime\.is
@@ -605,6 +661,7 @@ haugiang\.land
 haviettrung\.com
 healinghpvnaturally\.com
 healthgymbeauty\.com
+healthinfobd\.com
 healthreviewfactory\.com
 healthscrutiny\.com
 healthytimesonline\.com
@@ -629,6 +686,7 @@ homedoporn\.net
 homemakersinterior\.com
 homemotivate\.com
 homesmakeover\.net
+homify\.in
 hoower\.net
 hopstack\.io
 hotsexvideo\.vip
@@ -652,6 +710,7 @@ ic0902\.org
 icon-plaza\.vn
 iconbazaar\.com
 iderepublica\.pl
+iformsupport\.dk
 igrab\.net
 ijcrr\.com
 image-perth\.org
@@ -672,6 +731,7 @@ inmods\.com
 innov8tiv\.com
 inovaclinics\.se
 instagram\.com\/paulamichellewhite
+instaleaf\.ca
 installgamepc\.com
 instantpromotion\.com
 instapaper\.com\/read\/1467653269
@@ -685,6 +745,7 @@ iqbalir\.com
 irc101\.org
 ireview365\.com
 irpel\.org
+irresistibleexpressions\.com
 isovle\.net
 issuu\.com
 it-lead\.eu
@@ -694,6 +755,7 @@ izend-clothes\.com
 izmirbayrakci\.com
 j30strike\.org
 jaipurhotescorts\.com
+jamyeprice\.com
 jayshinde\.com
 jbhnews\.com
 jdmlight\.com
@@ -733,6 +795,7 @@ kholedgiasi\.com
 khongdaurehon\.com
 khonggiansach365\.com
 khutrungxanh\.com
+kienthucnganhang\.vn
 king2\.fun
 kiokocenter\.com
 kisskissbankbank\.com
@@ -741,6 +804,7 @@ kjandhairspray\.com
 kolkataff\.today
 korastsherot\.com
 koreansex\.top
+korytarzeks\.pl
 krausegroup\.com\.au
 krrailengg\.com
 kspa\.ae
@@ -750,6 +814,7 @@ kubet(?:11|888?)\.(?:life|vip)
 kuechenrueckwandfolie\.de
 kunalvastu\.com
 kundlijyotish\.com
+kuwaitibazaar\.com
 kvtekh\.org
 lacocinademariajose\.com
 lacopadisplay\.com
@@ -767,13 +832,14 @@ lcsmiami\.com
 ldlstore\.com\.vn
 learningmywaym\.org
 leatherbag
+lecoffreauxmerveilles\.fr
 ledlightforcars\.com
 lekcjenaszybko\.pl
 lesbian(?:babez|poses)\.net
 lessontoday\.com
 letmejerk\.it
-letsgetmovingcanada\.com
 letsavebig\.com
+letsgetmovingcanada\.com
 lewabo\.com
 licbazateksty\.pl
 likizolettings\.co\.ke
@@ -800,6 +866,7 @@ lowescouponn\.com
 luacheiabeach\.com
 lucialpiazzale\.com
 luftreiniger
+luxurier\.co
 luxurytransferszagreb\.com
 m8winsoikeo\.com
 m98\.app
@@ -810,6 +877,7 @@ magdantnes
 magecaptain\.com
 makemybusinessboom\.com
 malosmileusa\.com
+mamathefox\.com
 maps\.google\.com
 maria-jewel\.com
 markrobinsonflooring\.co\.uk
@@ -825,6 +893,7 @@ mdoec\.in
 mdwarchitektura\.eu
 meacantik\.com
 measuremanage\.com\.au
+mediafire\.com
 medicaldeviceregistration\.com
 medium\.com
 mednowlabs\.com
@@ -840,6 +909,7 @@ miastownetrzbrw\.pl
 microvastu\.com
 midwestcoastflooring\.com
 miel\.travel
+migratedata\.co\.uk
 mikotech\.vn
 milf
 milfamatuerporn\.com
@@ -849,6 +919,7 @@ mini-bmx\.de
 miniteksty\.pl
 mintable\.app
 mirinmedia\.com
+misterpoll\.com
 misticosdooriente\.com\.br
 mixgupshup\.com
 mktee\.com
@@ -899,6 +970,7 @@ mystrikingly\.com
 mythesis\.co\.in
 mytrvlclub\.com
 myvplaw\.com
+mywifiext\.net
 nadobeauty\.com
 nakeddog\.co\.uk
 NameMyCompany\.com
@@ -934,6 +1006,7 @@ notesmyfoot\.com
 novadjs\.com\.au
 noveldentalgroup\.com
 novogradnjevprihodu\.si
+nspsecurity\.com\.au
 nueveporciento\.com
 nufca\.com
 nuvectramedical\.com
@@ -951,6 +1024,7 @@ oltenchina\.com
 omni-pro\.net
 onbestdeal\.com
 oncarbrands\.com
+onerehab\.com
 onfeetnation\.com
 onlinecasinonews\.ca
 (?:online|web)88(?:club|th)\.com
@@ -963,9 +1037,11 @@ openclassrooms\.com
 openlearning\.com
 openn\.eu
 opisownik\.pl
+opracowaniaedu\.pl
 opticalcrm\.com
 orogoldair\.com
 orthowiki\.pl
+osoule\.com
 oswallpapers\.com
 ottawalife\.com
 over-blog\.com
@@ -974,11 +1050,15 @@ paarthinfra\.com
 pabnaenterprise\.com
 padlet\.com
 page\.tl
+pakrevenue\.com
 palada\.vn
 paletuaglasses\.com
 pancingangka\.com
+paribahisgirisi\.com
 parkview-property\.co\.uk
+paservices\.pk
 pass4future\.com
+passionvisiontraction\.com
 pastelink\.(?:com|net)
 pasticceriadentoni\.it
 pathtogrow\.com
@@ -995,10 +1075,12 @@ perkpal\.co\.uk
 personalmoneynetwork\.com
 petesultimatemovers\.com
 pgslot-game\.cc
+phongkhamdakhoathudaumot\.vn
 phoxygen\.com
 picspornzocwj\.blogspot
 pinnaclepoolcompany\.com
 pintoresenzaragoza\.es
+pipeprosutah\.com
 pixnet\.net
 pkvgamesqq\.asia
 plagiarismexperts\.org
@@ -1037,9 +1119,10 @@ priyachoudhary\.in
 priyaring\.com
 procontractorservices\.net
 professionalairductcleaningtx\.com
-propkartonline\.com
 promobio\.eu
 promotionalcalendars\.co\.uk
+propkartonline\.com
+proplumberaurorailco\.com
 proposal-to-mary\.com
 psouuszczecinek\.pl
 psychologybookshop\.com
@@ -1086,12 +1169,14 @@ removaloxford\.co\.uk
 renovilla\.ca
 rental
 replelix\.co\.kr
+restorarug\.com
 reviewer-rating\.de
 revivebeautysolutions\.ca
 rexporn\.vip
 riffart\.com
 rightmovemover\.ca
 riocokidswear\.com
+riverstate\.de
 robinhoodnews\.com
 rocketwellness\.com
 rocksolars\.com
@@ -1106,6 +1191,7 @@ rtpcrepair\.com
 ruaxetudong\.org
 rubermedia\.com
 rubiredtea\.com\.au
+ruhilcare\.com\.au
 rushradar\.com
 russianpassportsandvisas\.com
 russiansdolls\.top
@@ -1139,6 +1225,7 @@ schwab-entruempelung\.de
 scientificvastu\.in
 scribd\.com
 scriling\.com
+sealyhome\.com
 seckinulusoy\.com
 securedcapital\.com\.au
 sedno\.org\.pl
@@ -1150,6 +1237,7 @@ seofreelancer\.dk
 seoluciones\.com
 seraro\.com
 seriallink\.org
+serviceonwheel\.com
 serwisploterow\.(?:net|org)
 setsunaepic\.com
 sevahome\.in
@@ -1162,6 +1250,7 @@ sexporn\.win
 sexpuppenetz\.de
 sexxxhd\.top
 sexylava66\.com
+sfi\.ca
 sharinaworld\.com
 shemale
 shemoans\.pl
@@ -1175,16 +1264,19 @@ shutterfly\.com
 shwetakaur\.in
 signalscv\.com
 simplesite\.com
+sinargadinglks\.com
 sinaumedia\.com
 sinhvienit\.dev
 siroprestaurant\.com
 site123\.me
 sitejot\.com
+siterubix\.com
 sites\.google\.com
 situsdaduonline77\.club
 skalasc\.pl
 skidsolutions\.com
 skillbee\.com
+skinblog\.net
 skincell\.org
 skku\.edu
 skyflytrips\.com
@@ -1198,6 +1290,7 @@ slotoke99\.com
 slotxogame\.net
 slut
 smallaxetreeservice\.com
+smarthomeelectro\.com
 smartproductsbuy\.com
 smlife\.vn
 smugfashion\.com
@@ -1232,6 +1325,7 @@ sps\.org\.vn
 squareblogs\.net
 srmnet\.org
 ssalba\.co\.kr
+ssvcodingtuts\.ml
 staatsanwaltschaften\.zh\.ch
 stadadehem\.se
 stageit\.com
@@ -1263,6 +1357,7 @@ svgboilerplate\.com
 sweetheartsbridalshop\.com
 sweetypiesbakery\.com
 swiatbombki\.pl
+swiftmovesllc\.com
 swingerwife\.win
 sydneychiropractorcbd\.com\.au
 sydneypearllimousines\.com\.au
@@ -1270,6 +1365,8 @@ syntellicore\.com
 szczecin\.pl
 \b.*szkol.*\.pl
 szkol(?:nesprawdziany|niarsko)\.pl
+szkolaiteksty\.pl
+szkolniarsko\.pl
 sztomato\.com
 szybowanie\.pl
 tahawa\.vn
@@ -1286,6 +1383,7 @@ tarotegipski\.pl
 tawkgirls\.in
 taxihersham\.com
 taxisincarlisle\.co\.uk
+tcellis\.com
 teachertraininguk\.org
 teamfs\.ca
 teamtweaks\.com
@@ -1324,10 +1422,12 @@ thephotoediting\.com
 theporn\.cam
 thepulplist\.com
 thequchange\.com
+therawtarian\.com
 theservicemart\.in
 theshelf\.com
 thesoftroots\.com
 thestorageplace\.co\.uk
+thetentshouse\.com
 thetravelhackr\.com
 theweekndmerchshop\.com
 thewhaleycenter\.com
@@ -1346,6 +1446,8 @@ time[\W_]*share
 timeforchangecounselling\.com
 timmileslaw\.com
 tinvivu\.com
+tipstrick\.ro
+tireplanet\.ca
 tknoithatchungcunhadepviet
 tobaccokings\.com
 tobu-wedding\.com
@@ -1361,16 +1463,19 @@ topthaiplay\.com
 torontovikingrepair\.ca
 torstar\.net
 totoyaplay\.com
+toxicbabylawyer\.com
 tpdclaimslawyers\.com\.au
 trackroad\.com
 trademama\.com
 travelers\.com
 travelguide
 trcpamco\.com
+trendylatina\.com
 trendyread\.com
 trexgame\.net
 trexperienceperu\.com
 triggeredpt\.com
+tritonlandscaping\.ca
 triumfo\.in
 trustnews24\.com
 truxgo\.net
@@ -1389,6 +1494,7 @@ ufa356s\.com
 ufabet999\.com
 ufoinfo\.com
 ugamegold\.com
+ugbodybuilding\.com
 uhamka\.ac\.id
 uifresh\.net
 uk49prediction\.com
@@ -1425,6 +1531,7 @@ vapehabitat\.com
 vardiseguros\.com\.co
 vastuconsultants?in.*\.com
 vastuforhome\.com
+vegaingenium\.it
 vegas11\.live
 vegascampers\.com
 vehiclestuffdiy\.com
@@ -1442,6 +1549,7 @@ vesinh43\.com
 vhearts\.net
 vhpmark\.com
 vidporn\.top
+vienquanlyxaydung\.edu\.vn
 vietnamnet\.vn
 vinciland\.com\.vn
 vingle\.net
@@ -1463,9 +1571,11 @@ w88
 w88ben\.com
 w88inlive\.com
 w88od\.com
+waleedalkalash\.com
 wallnut\.co\.in
 watchrepairuk\.com
 waterfilterdubai\.com
+watsons\.ua
 watsonsflowers\.com
 wawaland\.eu
 wearekindbrand\.com
@@ -1473,6 +1583,7 @@ weargraphene\.com
 webcam
 webdesigncoast\.com
 webhitlist\.com
+webselfsite\.net
 websitedesign
 websitedrona\.com
 websupplies\.gr
@@ -1485,8 +1596,11 @@ wetellbrandstory\.com
 wife
 wifeporn\.win
 wifexxx\.vip
+wifiextendersetup\.us
 wiki-tonic\.win
 wilcherish\.com
+wildernesstaskforce\.org
+windows11activators\.com
 windows\.net
 windy\.com
 winstoncap\.com
@@ -1496,6 +1610,8 @@ wowzforhappiness\.online
 wpsuo\.com
 writeablog\.net
 wypiszcos\.pl
+wzoryiumowypdf\.pl
+wzorypdfy\.pl
 xedapdiencuvietcuong\.com
 xhealthinfo\.com
 xinghaoya\.net
@@ -1503,8 +1619,7 @@ xkldimi\.com
 xkldvietnam\.com
 xlxxx\.top
 (?:xnxx)?bangbros\.com
-xn--22c2bl4aa1hjt6ksbgj9c\.net
-xn--mp2b70qpyc0wl\.com
+xn--\w+\.(?:com|net)
 xnxx(?:teen)?\.(?:it|top|work)
 xnxxteenvideos\.com
 xtgem\.com
@@ -1516,7 +1631,9 @@ xxporno\.top
 xxx
 xxxpor\.win
 xxxvidos\.top
+yallacase\.com
 yarabook\.com
+yatescabo\.com
 yegbuds\.co
 yellows\.com\.tw
 yelp\.c(?:a|om)
