@@ -4,6 +4,7 @@
 @johncooleydk
 (?-i:UCIorliJ58U9Eb-QqP0UlXgA)(?# YouTube channel)
 (?-i:UC2mr3saNQReiHDiaDwM0A0g)(?# YouTube channel)
+(?-i:PeZo5PXKRgM)(?# YouTube video)
 13\.228\.233\.2
 13\.250\.159\.90
 36\.255\.141\.55
@@ -114,6 +115,7 @@ anysex\.it
 apadanasupply\.com
 app\.works
 appzbank\.com
+apxdigital\.co\.za
 aravalii\.com
 areallygoodejob\.com
 arenajudionline\.com
@@ -127,6 +129,7 @@ astro-wiki\.win
 astrologeramanshandilya\.com
 astrologersanjaysharma\.com
 aszkolnik\.pl
+atavi\.com
 atelierdolzi\.com
 atoallinks\.com
 aucklandelectrician\.co\.nz
@@ -161,6 +164,7 @@ bbwxnxx\.it
 bcz\.com
 beautiesforever\.com
 bebehome\.gr
+bedbugflorida\.com
 beegara\.com
 beegsex\.it
 begroup\.com\.sg
@@ -235,6 +239,7 @@ busmedia\.vn
 buy-hoodia\.info
 buyketamineonlineusa\.com
 buyserviceusa\.com
+buysocialpack\.com
 bvkrongbong\.com
 cabanova\.com
 cabinzero\.com
@@ -382,6 +387,7 @@ duniaslot88\.co
 dunlopillo\.info
 dupitek\.com
 dutchmanshop\.us
+dvmagic\.team
 easy4soft\.com
 easycartcleaning\.co\.uk
 easyfie\.com
@@ -394,10 +400,12 @@ eduedukacje\.pl
 edukacjalic\.pl
 edukacjowo\.pl
 edukolandia\.pl
+el-kef\.blogspot
 electricexpertyyc\.ca
 elegantshowers\.co\.uk
 elevenfootball\.org
 elfabshop\.com
+eliminatedhpv\.com
 elitesystemsme\.com
 elly\.vn
 emailmeform\.com
@@ -516,6 +524,7 @@ grelix\.com
 groundscape\.org
 groupbuyseotools\.net
 grydownload\.pl
+gtmowers\.com
 guideline\.com
 guilded\.gg
 gumroad\.com
@@ -584,6 +593,7 @@ igrab\.net
 ijcrr\.com
 image-perth\.org
 imaginationmb\.ca
+immarketinggoddess\.com
 \bimuscle\b
 incataloguetphcm\.com
 independentlivinentertainment\.com
@@ -606,6 +616,7 @@ ipsnews\.net
 ipuppytech\.tk
 iqbalir\.com
 irc101\.org
+ireview365\.com
 irpel\.org
 isovle\.net
 issuu\.com
@@ -695,6 +706,7 @@ licbazateksty\.pl
 limosa\.vn
 limoshirelondon\.co\.uk
 lingo\.ly
+littlegreensubmarine\.com
 live-player\.com
 livejournal\.com
 livoffers\.com
@@ -809,6 +821,7 @@ nakeddog\.co\.uk
 NameMyCompany\.com
 namenecklaces\.co
 nangstuff\.com\.au
+nashvilleelopementpackages\.com
 naturaltransplants\.com
 naturesliving\.co\.uk
 nawazbrothers\.com
@@ -926,7 +939,9 @@ proposal-to-mary\.com
 psouuszczecinek\.pl
 psychologybookshop\.com
 psywearstore\.com
+puma-web\.co\.uk
 puppy-coin\.com
+pusatwin\.co
 pzarchitects\.com
 q3132\.com
 qckinetix\.com
@@ -1047,6 +1062,7 @@ skyflytrips\.com
 skyrock\.com
 skyzone\.com
 slickcall\.com
+slicktech\.nl
 slideserve\.com
 slotenmaker-nk\.nl
 slotxogame\.net
@@ -1054,11 +1070,13 @@ slut
 smallaxetreeservice\.com
 smartproductsbuy\.com
 smlife\.vn
+smugfashion\.com
 snarb\.co\.uk
 snsrheumatology\.com
 soap2day\.plus
 sobir\.pl
 socialcali\.com
+socialnetworking-northamerica\.com
 sodocasino\.xyz
 soldbykeyrealestate\.com
 somalilandgov\.com
@@ -1076,6 +1094,7 @@ splice\.com
 sport9s\.com
 sports\.yahoo\.com
 sppf\.co\.uk
+spray-project\.eu
 spreaker\.com
 sps\.org\.vn
 squareblogs\.net
@@ -1103,8 +1122,10 @@ sugarlandacandheating\.com
 sunrisebeautyacademy\.com
 superclubs\.org
 superedus\.pl
+superintendenciacapitoliopr\.org
 supplementcity\.com\.au
 surf\.dev
+svgboilerplate\.com
 sweetheartsbridalshop\.com
 sweetypiesbakery\.com
 swiatbombki\.pl
@@ -1116,6 +1137,7 @@ szczecin\.pl
 \b.*szkol.*\.pl
 szkol(?:nesprawdziany|niarsko)\.pl
 sztomato\.com
+szybowanie\.pl
 tahawa\.vn
 tajalmaerifa\.com
 takhareef\.com
@@ -1126,6 +1148,7 @@ tannenversand\.com
 tannersmiths\.com
 tapscape\.com
 taringa\.net
+tarotegipski\.pl
 taxihersham\.com
 taxisincarlisle\.co\.uk
 teachertraininguk\.org
@@ -1147,6 +1170,7 @@ terapeame\.net
 tesolmywifi\.com
 test\.de
 testiq3s\.com
+tharlon\.org
 thatsfurniture\.com\.au
 the-fillingstation\.com
 thebedbugcompany\.com
@@ -1178,6 +1202,7 @@ thirukkadaiyur60thmarriage\.com
 threadless\.com
 threedashesagency\.com\.au
 thucduongbaoan\.com\.vn
+tia-org\.eu
 tienluong\.com
 tilemax\.co\.nz
 timberan\.com
@@ -1193,6 +1218,7 @@ togelhongkong\.org
 topazbeauty\.vn
 topcacnhacai\.com
 topcleangloves\.com
+topfence\.pl
 topshelfuae\.com
 topthaiplay\.com
 torontovikingrepair\.ca
@@ -1216,6 +1242,8 @@ ttytcammy\.vn
 tumblr\.com
 tunmix\.com
 tuyetle\.com
+tv4studios\.com
+twoje-uslugi\.biz\.pl
 u-curate\.com
 uberant\.com
 ufa356s\.com
@@ -1353,6 +1381,7 @@ youtube-mp3-converter\.xyz
 youtube\.com
 yowinslot\.com
 yuoto\.ae
+zanfonaproyectos\.com
 zenearth\.com
 zenwriting\.net
 zionssecurity\.com
