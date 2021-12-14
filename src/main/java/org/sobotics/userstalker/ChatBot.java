@@ -42,7 +42,7 @@ import org.sobotics.chatexchange.chat.event.UserEnteredEvent;
 
 public class ChatBot implements AutoCloseable
 {
-   private static final int                 POLL_TIME_MINUTES        = 6;
+   private static final int                 POLL_TIME_MINUTES        = 8;
    private static final int                 OFFSET_TIME_MINUTES      = 4;
    private static final Map<String, long[]> CHAT_ADMIN_USERIDS;
       static
@@ -524,9 +524,9 @@ public class ChatBot implements AutoCloseable
             siteInfo.ToDate = oldTime;
          }
 
-         // Add a > 10 second delay before hitting the SE API to stalk the next site. Hopefully,
+         // Add a 2 second delay before hitting the SE API to stalk the next site. Hopefully,
          // this delay will avoid the dreaded "too many requests from this IP address" error.
-         try                              { TimeUnit.SECONDS.sleep(11); }
+         try                              { TimeUnit.SECONDS.sleep(2); }
          catch (InterruptedException ex)  { Thread.currentThread().interrupt(); }
       }
 

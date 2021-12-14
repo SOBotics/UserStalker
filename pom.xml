@@ -6,7 +6,7 @@
 
     <groupId>org.sobotics</groupId>
     <artifactId>UserStalker</artifactId>
-    <version>3.7.2</version>
+    <version>3.7.3</version>
 
     <properties>
         <project.java.version>11</project.java.version>
