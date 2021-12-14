@@ -165,6 +165,7 @@ taxi
 TeknoBuilt
 thabet
 the ?[0-9]{4}
+TreXperience
 ufc
 unlock[\W_]*land
 upbeat[\W_]*digital
