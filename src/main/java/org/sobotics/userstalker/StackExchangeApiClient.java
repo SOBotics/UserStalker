@@ -120,7 +120,13 @@ public class StackExchangeApiClient
             if (hasMore)
             {
                ++page;
+
                users.ensureCapacity(API_PAGE_SIZE_MAX * page);
+
+               // If we are about to fetch another page from the API, add a > 10 second delay
+               // to hopefully avoid the dreaded "too many requests from this IP address" error.
+               try                              { TimeUnit.SECONDS.sleep(11); }
+               catch (InterruptedException ex)  { Thread.currentThread().interrupt(); }
             }
          }
          else
@@ -197,6 +203,11 @@ public class StackExchangeApiClient
             if (hasMore)
             {
                ++page;
+
+               // If we are about to fetch another page from the API, add a > 10 second delay
+               // to hopefully avoid the dreaded "too many requests from this IP address" error.
+               try                              { TimeUnit.SECONDS.sleep(11); }
+               catch (InterruptedException ex)  { Thread.currentThread().interrupt(); }
             }
          }
          else
