@@ -12,6 +12,7 @@ amm(?:o|unitions?)
 Aravalii
 ardroid[\W_]*post
 awards
+baccarat
 Baladi[\W_]*Studio
 bank\W?of\W?america
 beaut(?:y|ies)
@@ -40,8 +41,8 @@ contest
 crack(?:s|ing)?\s?(?:taking|tools?)
 cremat(?:e|ion)
 crossfit
-s\s?cup
 damage\s?claim
+[ĐD][àa][\W_]*N[ẵa]ng V[ệe][\W_]*Sinh
 derby
 \bkentucky\s*derb
 diabet(?:es|ic)
@@ -66,6 +67,7 @@ furniture
 game\s?of\s?
 giro
 golden\s?globes?
+Gomunime
 \bgrammy
 grand\W?prix
 green\s?bay\s?packers?
@@ -98,6 +100,7 @@ march\s*madness
 mas[\W_]*tatag
 mastercard
 mayweather
+merch
 metasever
 MetroKleen
 miel[\W_]*travel
@@ -120,6 +123,7 @@ packers
 pancingangka
 [\W_]pest[\W_]
 penis
+Perk[\W_]*Pal
 playoff
 [\W_]pomodoro[\W_]
 pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
@@ -132,16 +136,19 @@ repair
 rugby
 rupiahqq
 russianpassportsandvisas
+ruthamcauquan
+s\s?cup
 sanjay[\W_]*kumarro
 save\s?money
 series
 seven[\W_]*me
-sexy?
 sex[\W_]*hiep[\W_]*dam
+sexy?
 Shree[\W_]*Tripada
 skillbee
 slot
 SpikeJams
+SPORT[\W_]*4[\W_]*EVER
 stakes
 stream
 sugar[\_W]*balance
@@ -157,6 +164,7 @@ the ?[0-9]{4}
 ufc
 unlock[\W_]*land
 upbeat[\W_]*digital
+Uzi[\W_]*Grindler
 \s+vs\s+
 vap(?:e|ing)
 ViralKida
