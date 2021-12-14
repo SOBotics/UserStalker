@@ -133,6 +133,7 @@ Printer[\W_]*Tales?
 random[\W_]*meet
 rental
 repair
+restaurant
 rugby
 rupiahqq
 russianpassportsandvisas
