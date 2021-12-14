@@ -47,6 +47,7 @@ business[\W_]*(?:hour|model|need|owner)s?
 Buy[\W_]*Service[\W_]*USA
 buying[\W_]*experience
 \bcall[\W_]*us\b
+call[\W_]*girls?
 cannabis
 (?:carpet|rug|upholstery)[\W_]*clean(?:ing)?
 cash[\W_]*transaction
