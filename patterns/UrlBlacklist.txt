@@ -17,6 +17,7 @@
 103\.3\.60\.204
 128\.199\.76\.124
 128\.199\.152\.28
+139\.59\.239\.226
 149\.129\.248\.150
 157\.230\.250\.83
 157\.245\.152\.74
@@ -691,6 +692,7 @@ jimdosite\.com
 jimenogray
 jobtody\.com
 johnsoncountychemdry\.com
+joinsessions\.com
 jpost\.com
 junkremovalalexandriapros\.com
 just6f\.com
@@ -753,6 +755,7 @@ ldlstore\.com\.vn
 learningmywaym\.org
 leatherbag
 ledlightforcars\.com
+lekcjenaszybko\.pl
 lesbian(?:babez|poses)\.net
 lessontoday\.com
 letmejerk\.it
@@ -846,6 +849,7 @@ moms-fuckers\.top
 monkeybusiness\.xyz
 monsieur-compta\.fr
 morichesdentalassociates\.com
+morningdough\.com
 moroccanoliveoils\.com
 morocco-first-gate\.com
 moroccojs\.org
@@ -1179,6 +1183,7 @@ socialnetworking-northamerica\.com
 sodocasino\.xyz
 soldbykeyrealestate\.com
 somalilandgov\.com
+sonnerief\.com
 sosparty\.io
 southendplumbingllc\.com
 southernhillshomebuyers\.com
