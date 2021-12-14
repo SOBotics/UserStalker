@@ -958,51 +958,51 @@ public class ChatBot implements AutoCloseable
       {
          if (RegexManager.AnyMatches(name, this.regexes.NameBlacklist))
          {
-            reasons.add("username on blacklist");
+            reasons.add("name on blacklist");
          }
 
          if (RegexManager.AnyMatches(name, this.regexes.NameSmokeyBlacklist))
          {
-            reasons.add("username on Smokey's blacklist");
+            reasons.add("name on Smokey's blacklist");
          }
 
          if (RegexManager.AnyMatches(name, this.regexes.OffensiveHi))
          {
-            reasons.add("username contains highly offensive pattern");
+            reasons.add("name contains highly offensive pattern");
          }
 
          if (RegexManager.AnyMatches(name, this.regexes.OffensiveMd))
          {
-            reasons.add("username contains mildly offensive pattern");
+            reasons.add("name contains mildly offensive pattern");
          }
 
          if (RegexManager.AnyMatches(name, this.regexes.OffensiveLo))
          {
-            reasons.add("username contains possibly offensive pattern");
+            reasons.add("name contains possibly offensive pattern");
          }
 
          if (RegexManager.AnyMatches(name, this.regexes.KeywordSmokeyBlacklist))
          {
-            reasons.add("username contains keyword on Smokey's blacklist");
+            reasons.add("name contains keyword on Smokey's blacklist");
          }
 
          if (RegexManager.AnyMatches(name, this.regexes.KeywordSmokeyWatchlist))
          {
-            reasons.add("username contains keyword on Smokey's watchlist");
+            reasons.add("name contains keyword on Smokey's watchlist");
          }
 
          if (name.contains(Integer.toString(Year.now().getValue())))
          {
-            reasons.add("username contains current year");
+            reasons.add("name contains current year");
          }
          if (name.contains(Integer.toString(Year.now().getValue() + 1)))
          {
-            reasons.add("username contains next year");
+            reasons.add("name contains next year");
          }
 
          if (RegexManager.AnyMatches(name, this.regexes.UrlPatterns))
          {
-            reasons.add("username contains URL");
+            reasons.add("name contains URL");
          }
 
          if (!this.nonEnglishSites.contains(site) && this.ContainsNonLatin(name))
@@ -1014,7 +1014,7 @@ public class ChatBot implements AutoCloseable
             // not sufficient information to motivate action.
             if (hasAnyContent)
             {
-               reasons.add("username contains non-Latin character");
+               reasons.add("name contains non-Latin character");
             }
          }
       }
@@ -1044,7 +1044,7 @@ public class ChatBot implements AutoCloseable
             double sdSimilarity = new SorensenDice     ().similarity(canonicalizedName,
                                                                      canonicalizedUrl);
 
-            reasons.add("URL similar to username"
+            reasons.add("URL similar to name"
                       + " [" + "J-W: " + String.format("%.2f", jwSimilarity)
                       + ", " + "R-O: " + String.format("%.2f", roSimilarity)
                       + ", " + "S-D: " + String.format("%.2f", sdSimilarity)
@@ -1106,57 +1106,57 @@ public class ChatBot implements AutoCloseable
       {
          if (RegexManager.AnyMatches(aboutMe, this.regexes.AboutBlacklist))
          {
-            reasons.add("\"About Me\" contains blacklisted pattern");
+            reasons.add("\"About\" contains blacklisted pattern");
          }
 
          if (RegexManager.AnyMatches(aboutMe, this.regexes.OffensiveHi))
          {
-            reasons.add("\"About Me\" contains highly offensive pattern");
+            reasons.add("\"About\" contains highly offensive pattern");
          }
 
          if (RegexManager.AnyMatches(aboutMe, this.regexes.OffensiveMd))
          {
-            reasons.add("\"About Me\" contains mildly offensive pattern");
+            reasons.add("\"About\" contains mildly offensive pattern");
          }
 
          if (RegexManager.AnyMatches(aboutMe, this.regexes.OffensiveLo))
          {
-            reasons.add("\"About Me\" contains possibly offensive pattern");
+            reasons.add("\"About\" contains possibly offensive pattern");
          }
 
          if (RegexManager.AnyMatches(aboutMe, this.regexes.KeywordSmokeyBlacklist))
          {
-            reasons.add("\"About Me\" contains keyword on Smokey's blacklist");
+            reasons.add("\"About\" contains keyword on Smokey's blacklist");
          }
 
          if (RegexManager.AnyMatches(aboutMe, this.regexes.KeywordSmokeyWatchlist))
          {
-            reasons.add("\"About Me\" contains keyword on Smokey's watchlist");
+            reasons.add("\"About\" contains keyword on Smokey's watchlist");
          }
 
          if (RegexManager.AnyMatches(aboutMe, this.regexes.PhonePatterns))
          {
-            reasons.add("\"About Me\" contains phone number");
+            reasons.add("\"About\" contains phone number");
          }
 
          if (RegexManager.AnyMatches(aboutMe, this.regexes.EmailPatterns))
          {
-            reasons.add("\"About Me\" contains email");
+            reasons.add("\"About\" contains email");
          }
 
          if (RegexManager.AnyMatches(aboutMe, this.regexes.UrlBlacklist))
          {
-            reasons.add("\"About Me\" contains URL on blacklist");
+            reasons.add("\"About\" contains URL on blacklist");
          }
 
          if (RegexManager.AnyMatches(aboutMe, this.regexes.UrlSmokeyBlacklist))
          {
-            reasons.add("\"About Me\" contains URL on Smokey's blacklist");
+            reasons.add("\"About\" contains URL on Smokey's blacklist");
          }
 
          if (aboutMe.toLowerCase().contains("</a>"))
          {
-            reasons.add("\"About Me\" contains a link");
+            reasons.add("\"About\" contains a link");
          }
          else
          {
@@ -1164,13 +1164,13 @@ public class ChatBot implements AutoCloseable
             // (e.g., "example.com").
             if (RegexManager.AnyMatches(aboutMe, this.regexes.UrlPatterns))
             {
-               reasons.add("\"About Me\" contains URL");
+               reasons.add("\"About\" contains URL");
             }
          }
 
          if (this.ContainsNonLatin(aboutMe))
          {
-            reasons.add("\"About Me\" contains non-Latin character");
+            reasons.add("\"About\" contains non-Latin character");
          }
       }
 
