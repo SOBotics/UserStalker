@@ -90,6 +90,8 @@ public class ChatBot implements AutoCloseable
 +                                    " (The modification will not persist across a reboot.)"
 + "\n"
 + "\u3000\u25CF \"update\": Updates the cached pattern databases that are used when checking user accounts."
++                         " (It is generally not necessary to send this command to perform a manual update,"
++                         " as the pattern databases are automatically updated during idle times.)"
 + "\n"
 + "\u3000\u25CF \"stop\": Stops the stalking service."
 +                       " (The bot will remain in the room in order to respond to commands.)"
@@ -328,6 +330,13 @@ public class ChatBot implements AutoCloseable
    }
 
 
+   private void Update()
+   {
+      this.regexes   .Reload();
+      this.homoglyphs.Reload();
+   }
+
+
    private void OnQuotaRollover(Integer oldQuota)
    {
       // Display quota rollover message.
@@ -471,6 +480,8 @@ public class ChatBot implements AutoCloseable
    {
       LOGGER.info("Starting periodic stalking (seStalkInterval: " + String.valueOf(this.seStalkInterval) + ")...");
 
+      boolean doUpdate = true;
+
       if ((this.roomSO != null) && this.sites.contains("stackoverflow"))
       {
          this.DoStalk(this.roomSO, Collections.singletonList("stackoverflow"), 100);
@@ -486,11 +497,18 @@ public class ChatBot implements AutoCloseable
             this.DoStalk(this.roomSE, seSites, (seSites.size() * 20 /* users */));
 
             this.seStalkInterval = SE_STALK_INTERVAL;
+
+            doUpdate = false;
          }
          else
          {
             this.seStalkInterval -= 1;
          }
+      }
+
+      if (doUpdate)
+      {
+         this.Update();
       }
    }
 
@@ -650,8 +668,7 @@ public class ChatBot implements AutoCloseable
          this.DoStop();
       }
 
-      this.regexes   .Reload();
-      this.homoglyphs.Reload();
+      this.Update();
 
       this.BroadcastMessage(CHAT_MSG_PREFIX + " The pattern databases have been successfully updated.");
 
