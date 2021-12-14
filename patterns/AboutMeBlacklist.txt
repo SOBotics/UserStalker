@@ -130,6 +130,7 @@ hassle[\W_]*free
 head[\W_]*lights?
 hidden[\W_]*fees
 hijab
+Hocdot
 home[\W_]*(?:loan|security)
 homework
 horny
@@ -166,6 +167,7 @@ leading[\W_]*company
 which[\W_]*light[\W_]*bulb
 lingerie
 live[\W_]*betting
+lock[\W_]*smith
 lounge[\W_]*wear
 luxur(?:y|ious)
 Luxury[\W_]*Transfers[\W_]*Zagreb
@@ -198,8 +200,9 @@ nutrition
 nymph
 oldbreweryguest
 on[\W_]*best[\W_]*deal
-online[\W_]*(?:betting|store)
+online[\W_]*(?:betting|store|pharmacy)
 opiate
+palada[\W_]*vn
 Pandit[\W_]*S[\W_]*\.[\W_]*K[\W_]*\.[\W_]*Shastri
 partner[\W_]*company
 Paula[\W_]*White
@@ -347,6 +350,7 @@ bất động sản(?# "real estate" in Vietnamese)
 카지노(?# "casino" in Korean)
 Du lịch(?# "tourism" in Vietnamese)
 Sửa(?# "repair" in Vietnamese)
+DỰ ÁN KHU(?# "project", like housing, in Vietnamese)
 
 # Middle Eastern
 کازینو(?# "casino" in Persian)
