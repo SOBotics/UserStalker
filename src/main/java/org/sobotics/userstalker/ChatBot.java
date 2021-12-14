@@ -44,6 +44,7 @@ public class ChatBot implements AutoCloseable
 {
    private static final int                 POLL_TIME_MINUTES        = 8;
    private static final int                 OFFSET_TIME_MINUTES      = 4;
+   private static final int                 SE_STALK_INTERVAL        = 2;
    private static final Map<String, long[]> CHAT_ADMIN_USERIDS;
       static
       {
@@ -120,7 +121,7 @@ public class ChatBot implements AutoCloseable
    private StackExchangeApiClient             seApi;
    private ScheduledExecutorService           executor;
    private Map<String, StackExchangeSiteInfo> siteInfoMap;
-   private boolean                            stalkSE = true;
+   private int                                seStalkInterval = 0;
 
    // HACK: This is merely to reduce the noise in the chat room logs caused by an extremely
    //       persistent wave of Chinese profile spammers on Stack Overflow, which follow an
@@ -466,7 +467,7 @@ public class ChatBot implements AutoCloseable
 
    private void OnStalk()
    {
-      LOGGER.info("Starting periodic stalking (stalkSE: " + String.valueOf(this.stalkSE) + ")...");
+      LOGGER.info("Starting periodic stalking (seStalkInterval: " + String.valueOf(this.seStalkInterval) + ")...");
 
       if ((this.roomSO != null) && this.sites.contains("stackoverflow"))
       {
@@ -475,15 +476,19 @@ public class ChatBot implements AutoCloseable
 
       if (this.roomSE != null)
       {
-         if (this.stalkSE)
+         if (this.seStalkInterval == 0)
          {
             ArrayList<String> seSites = new ArrayList<String>(this.sites);
             seSites.remove("stackoverflow");
 
-            this.DoStalk(this.roomSE, seSites, (seSites.size() * 20));
-         }
+            this.DoStalk(this.roomSE, seSites, (seSites.size() * 20 /* users */));
 
-         this.stalkSE = !this.stalkSE;
+            this.seStalkInterval = SE_STALK_INTERVAL;
+         }
+         else
+         {
+            this.seStalkInterval -= 1;
+         }
       }
    }
 
