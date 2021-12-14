@@ -523,6 +523,11 @@ public class ChatBot implements AutoCloseable
                       + "\"; skipping site this time.");
             siteInfo.ToDate = oldTime;
          }
+
+         // Add a > 10 second delay before hitting the SE API to stalk the next site. Hopefully,
+         // this delay will avoid the dreaded "too many requests from this IP address" error.
+         try                              { TimeUnit.SECONDS.sleep(11); }
+         catch (InterruptedException ex)  { Thread.currentThread().interrupt(); }
       }
 
       // If no potentially suspicious users were found, bail out now.
