@@ -194,6 +194,7 @@ movie
 moving[\W_]*service
 MUSHAHADATI
 NBA[\W_]*Draft
+near[\W_]*me
 news(?:paper)?[\W_]*writing
 news[\W_]*(?:(?:and|&)[\W_]*)?entertainment
 nguy(?:e|ễ)n[\W_]*th(?:e|ế)[\W_]*h(?:o|ò)a
