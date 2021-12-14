@@ -3,7 +3,10 @@ donald\s*trump|.*trump.*
 (card?|van|truck)\s?(insur?a?n?c?e?|repair|reimb(ursement)?|rent(al)?|accident|hire|tax|park(ed)?|finance|quotes?)
 (insur?a?n?c?e?|repair|reimb(ursement)?|rent(al)?|accident|hire|tax|rent\s?a|park(ed)?|finance|quotes?)\s?(card?|van|truck)
 ^(?:masters|wrestlemania|c(?:owboys|rack)|el ?clasico|[0-9]{4})
+^.{1,7}dl?san$
+(?-i)^[A-Z]{1}[a-z]{3,7}(19[3-9][0-9])$
 [a-z]*19
+1x[\W_]*bet
 Adu[\W_]*Joker
 advanced[\W_]*mineral[\W_]*makeup
 Ahsun[\W_]*Irfan
@@ -183,5 +186,3 @@ wwe
 xfinity
 yoga[\W_]*mat
 zohor[\W_]*fashion
-^.{1,7}dl?san$
-(?-i)^[A-Z]{1}[a-z]{3,7}(19[3-9][0-9])$
