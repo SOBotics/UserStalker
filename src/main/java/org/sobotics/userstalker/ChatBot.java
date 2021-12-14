@@ -42,8 +42,8 @@ import org.sobotics.chatexchange.chat.event.UserEnteredEvent;
 
 public class ChatBot implements AutoCloseable
 {
-   private static final int                 POLL_TIME_MINUTES        = 5;
-   private static final int                 OFFSET_TIME_MINUTES      = 2;
+   private static final int                 POLL_TIME_MINUTES        = 6;
+   private static final int                 OFFSET_TIME_MINUTES      = 4;
    private static final Map<String, long[]> CHAT_ADMIN_USERIDS;
       static
       {
