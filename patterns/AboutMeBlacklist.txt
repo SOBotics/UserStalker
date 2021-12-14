@@ -170,6 +170,7 @@ live[\W_]*betting
 lock[\W_]*smith
 lounge[\W_]*wear
 luxur(?:y|ious)
+luxury[\W_]*watch(?:es)?
 Luxury[\W_]*Transfers[\W_]*Zagreb
 M888?[\W_]*Slot[\W_]*(?:Online|Terbaik)
 (?:major)?[\W_]*brands?[\W_]*(?:names?)?
@@ -294,6 +295,7 @@ virgin
 Viro[\W_]*Valor
 visit[\W_]*(?:our[\W_]*(?:web[\W_]*)?site|us)
 (?:w|zm)88
+watch(?:es)?[\W_]*for[\W_]*(?:wo)?men
 water[\W_]*(?:purif(?:ier|y)|filt(?:er|ration))
 we[\W_]*offer
 Website[\W_]*Drona
