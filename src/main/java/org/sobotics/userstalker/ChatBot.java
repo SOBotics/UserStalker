@@ -727,7 +727,7 @@ public class ChatBot implements AutoCloseable
       {
          String stopMessage      = "Stopping the User Stalker service...";
          String stopNowMessage   = "Failed to cleanly stop User Stalker service; forcibly shutting it down...";
-         String stopFinalMessage = "Forced shutdown of User Stalker service timed out after 5 seconds; terminating anyway...";
+         String stopFinalMessage = "Forced shutdown of User Stalker service timed out; terminating anyway...";
 
          LOGGER.info(stopMessage);
          this.BroadcastMessage(CHAT_MSG_PREFIX + " " + stopMessage);
@@ -735,13 +735,13 @@ public class ChatBot implements AutoCloseable
          this.executor.shutdown();
          try
          {
-            if (!this.executor.awaitTermination(1, TimeUnit.MINUTES))
+            if (!this.executor.awaitTermination(POLL_TIME_MINUTES, TimeUnit.MINUTES))
             {
                LOGGER.info(stopNowMessage);
                this.BroadcastMessage(CHAT_MSG_PREFIX + " " + stopNowMessage);
 
                this.executor.shutdownNow();
-               if (!this.executor.awaitTermination(5, TimeUnit.SECONDS))
+               if (!this.executor.awaitTermination(POLL_TIME_MINUTES, TimeUnit.MINUTES))
                {
                   LOGGER.info(stopFinalMessage);
                   this.BroadcastMessage(CHAT_MSG_PREFIX + " " + stopFinalMessage);
