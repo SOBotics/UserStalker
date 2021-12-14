@@ -53,6 +53,7 @@ derby
 diabet(?:es|ic)
 doktors
 download
+dry[\W_]*cleaning
 Easycart
 elimination\s?chamber
 eWandzDigital
@@ -94,6 +95,7 @@ Kioko[\W_]*Center
 ku66
 kubet11
 Kundli[\W_]*Jyotish
+landscaping
 law[\W_]*firm
 league
 live
@@ -117,6 +119,7 @@ moversandmakers
 musica
 nba
 ncaa
+Neurofy
 new\s?body
 n[hf]l
 number
@@ -148,6 +151,7 @@ ruthamcauquan
 s\s?cup
 sanjay[\W_]*kumarro
 save\s?money
+^schissmantics?$
 series
 seven[\W_]*me
 sex[\W_]*hiep[\W_]*dam
@@ -170,6 +174,7 @@ TeknoBuilt
 thabet
 the ?[0-9]{4}
 TreXperience
+ufabet
 ufc
 unlock[\W_]*land
 upbeat[\W_]*digital
@@ -185,6 +190,7 @@ Website[\W_]*Drona
 WeDoLaundry
 [\W_]weed[\W_]
 wellness
+^.{0,3}wing.*ding.{0,3}$
 ^world
 wrestl(?:e|ing)
 wwe
