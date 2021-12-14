@@ -954,7 +954,7 @@ public class ChatBot implements AutoCloseable
       }
 
       // Check the display name.
-      if (hasName)
+      if (hasName && (user.getUserID() != null) && !name.equals("user" + user.getUserID()))
       {
          if (RegexManager.AnyMatches(name, this.regexes.NameBlacklist))
          {
