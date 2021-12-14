@@ -173,6 +173,7 @@ luxur(?:y|ious)
 Luxury[\W_]*Transfers[\W_]*Zagreb
 M888?[\W_]*Slot[\W_]*(?:Online|Terbaik)
 (?:major)?[\W_]*brands?[\W_]*(?:names?)?
+make[\W_]*money[\W_]*online
 male[\W_]*enhance(?:ment)?
 marijuana
 market[\W_]*(?:place|price|share)
