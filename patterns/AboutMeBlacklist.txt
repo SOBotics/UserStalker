@@ -14,6 +14,7 @@ amm(?:o|unitions?)
 apartment
 (?:appliance|bike)[\W_]*repairs?
 Aravalii
+ario[\W_]*park[\W_]*view
 assignment
 attorney
 auction
@@ -98,6 +99,7 @@ drunk[\W_]*driv(?:ing|er)
 Easycart
 electricians
 enema
+energy[\W_]*heal(?:er|ing)
 erotic
 escorts?
 eWandzDigital
@@ -149,6 +151,7 @@ ink[\W_]*cartridges?
 insurance
 interest[\W_]*rate
 international[\W_]*call
+i?phone[\W_]*cases?
 iwinapp[\W_]*link
 job[\W_]*seekers?
 Joker[\W_]*123
@@ -165,7 +168,7 @@ kubet11
 Kundli[\W_]*Jyotish
 Land[\W_]*cruiser
 Lash[\W_]*Glo
-leading[\W_]*company
+leading[\W_]*(?:chain|company|retail)
 lingerie
 live[\W_]*betting
 lock[\W_]*smith
@@ -194,12 +197,15 @@ MODAFINIL
 mortgage
 movie
 moving[\W_]*service
+[\W_]MSRP[\W_]
 MUSHAHADATI
+MyUSAddress
 NamSo[\W_]*Gen
 NBA[\W_]*Draft
 near[\W_]*me
-news(?:paper)?[\W_]*writing
+Neurofy
 news[\W_]*(?:(?:and|&)[\W_]*)?entertainment
+news(?:paper)?[\W_]*writing
 nguy(?:e|ễ)n[\W_]*th(?:e|ế)[\W_]*h(?:o|ò)a
 no[\W_]*contract
 nutrition
@@ -218,8 +224,10 @@ penis
 permit[\W_]*violat
 personal[\W_]*i(?:mmunity|njury)
 personal(?:ized)?[\W_]*(?:care|products?)
+PGA[\W_]*(?:champion|course|trip)
 pkv[\W_]*games
 poker
+plumbing[\W_]*(?:company|services?|leaks?|nightmares?)
 pool[\W_]*clean
 pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
 porn
@@ -265,6 +273,7 @@ source[\W_]*of[\W_]*news
 (?:sports?|football)[\W_]*bets?
 Squeaky[\W_]*Pete
 State[\W_]*Farm
+steroids?
 sugarr?[\W_]*(?:balance|(?:bab|dadd)(?:y|ies))
 supplement
 sustainable[\W_]*cloth(?:es|ing)
@@ -283,6 +292,7 @@ tooth[\W_]*(?:whitening|sensitivity)
 transplant
 travel[\W_]*guide
 Trust[\W_]*News
+Twitch[\W_]*Desktop[\W_]*App
 unexpected[\W_]*lover
 upbeat[\W_]*digital
 Uzi[\W_]*Grindler
@@ -310,6 +320,7 @@ Wyndham
 XOSLOTZ?
 Xtream[\W_]*Forex
 yacht
+YallaCase
 your[\W_]*skin
 yowinslot
 \.Â$
@@ -359,6 +370,8 @@ bất động sản(?# "real estate" in Vietnamese)
 Du lịch(?# "tourism" in Vietnamese)
 Sửa(?# "repair" in Vietnamese)
 DỰ ÁN KHU(?# "project", like housing, in Vietnamese)
+ 고등학교 농구(?# "high school basketball" in Korean)
+老爹褲(?# "daddy trousers" (?), from Chinese spam)
 
 # Middle Eastern
 کازینو(?# "casino" in Persian)
