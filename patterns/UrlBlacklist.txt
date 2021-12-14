@@ -8,6 +8,7 @@
 (?-i:3t6k_A7Dpz0)(?# YouTube video)
 13\.228\.233\.2
 13\.250\.159\.90
+18\.139\.141\.111
 36\.255\.141\.55
 51\.79\.242\.41
 52\.76\.232\.86
@@ -143,6 +144,7 @@ atelierdolzi\.com
 athensvipescorts\.com
 atoallinks\.com
 aucklandelectrician\.co\.nz
+aufaitux\.com
 aurafiber\.com
 aussieelectricalandsolar\.com\.au
 autocad
