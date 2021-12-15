@@ -63,13 +63,16 @@ cash[\W_]*transaction
 cheat
 chemical[\W_]*free
 chiropract(?:ic|or)s?
+clean(?:ing|er)?[\W_]*carpets?
 cleaning[\W_]*(?:product|service)s?
+cleanse[\W_]*your[\W_]*colon
 Cleod9(?:[\W_]*Voice)?
 client
 clinical[\W_]*depression
 cock
 Coffee[\W_]*(?:with[\W_]*)?Karina
 cold[\W_]*virus
+colon[\W_]*cleans(?:e|ing)
 consultant
 contact[\W_]*us
 container[\W_]*waste
@@ -89,6 +92,7 @@ denim
 dent(?:al|ist)
 detox
 diamond[\W_]*expert
+different[\W_]*variet(?:ies|y)
 digital[\W_]*market(?:ing)?
 dispensary
 DNA[\W_]*PRO[\W_]*AKADEMI
@@ -98,6 +102,7 @@ drachen(?# male enhancement product)
 dragon[\W_]*ball
 (?:driving|traffic)[\W_]*school
 drunk[\W_]*driv(?:ing|er)
+duct[\W_]*clean(?:ing|er)
 \be[\W_]?(?:store|retail(?:er)?)\b
 Easycart
 electricians
@@ -222,6 +227,7 @@ oldbreweryguest
 on[\W_]*best[\W_]*deal
 online[\W_]*(?:betting|store|pharmacy)
 opiate
+Pagal[\W_]*World
 palada[\W_]*vn
 Pandit[\W_]*S[\W_]*\.[\W_]*K[\W_]*\.[\W_]*Shastri
 partner[\W_]*company
