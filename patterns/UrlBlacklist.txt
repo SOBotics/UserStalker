@@ -232,6 +232,7 @@ bigpharmausa\.com
 bigreview\.com
 bigtitspub\.net
 bigtittybbw\.com
+bildbearbeitungsprogrammtricks\.wordpress
 billboardhomepage\.com
 binaryreviewsrace\.com
 binomo\.in\.ua
@@ -241,6 +242,7 @@ birlatisyabangalore\.org\.in
 birthdaygift\.com
 bitcoin
 bitcoin-upp\.com
+(?:www)?bitcoinup\.com
 bitcoinsrecoverytool\.com
 bizzskills\.com
 bjkmedia\.com
@@ -332,6 +334,7 @@ centurypropertiespk\.com
 cert\.edu\.au
 cervical-dysplasia-cure\.com
 cetamour\.com
+chaosmanorreports\.com
 charioteer\.in
 charliebookmarks\.win
 charlieeissa997471489\.wordpress
@@ -341,6 +344,8 @@ cheaperseeker\.com
 cheapestassignment\.com
 cheapohosting\.com
 cheatpekalonganvip\.com
+checkoutmycoolsite\.com
+chelmianie\.pl
 chesseasy\.com
 chikucab\.com
 chinapinfactory\.com
@@ -637,6 +642,7 @@ groundscape\.org
 groupbuyseotools\.net
 grydownload\.pl
 gtmowers\.com
+guideforbusiness\.net
 guideline\.com
 guilded\.gg
 gumroad\.com
