@@ -79,6 +79,7 @@ actualseomedia\.com
 acupuncturenyc\.org
 adarshsanctuary\.org\.in
 adarshsavanabangalore\.org\.in
+addx\.co
 aderibigbeogundiran\.com
 ades\.org
 advanceallied\.com
@@ -263,6 +264,7 @@ blackcannabismagazine\.com
 blancostore\.com\.ar
 blaqmax\.net
 blekon\.com
+blinkenzo\.com
 blogbright\.net
 blogfreely\.net
 bloggersdelight\.dk
@@ -287,6 +289,7 @@ bookeasyclean\.com
 bookingxml\.com
 boracina\.com
 botanyscrapmetal\.net
+bouquetsinbloom\.com
 box\.com
 brandcouponmall\.com
 brandedkitchen\.com
@@ -391,12 +394,14 @@ codenamecentrepoint\.com
 coderwall\.com
 coep\.lu
 coffee-with-karina
+coinsfera\.com
 colchoesmartini\.com\.br
 collegethink\.com
 coloradokneeandhip\.com
 coloringcool\.com
 comfortbeddings\.com
 comfykitchen\.com
+comofalarempublico\.org
 comprarcialis5mg\.org
 conexino\.com
 congbohopquy\.com
@@ -530,6 +535,7 @@ e-materialy\.pl
 easy4soft\.com
 easycartcleaning\.co\.uk
 easyfie\.com
+easymacrepair\.com
 easytodrive\.co\.uk
 eater\.com
 echonbuildingproducts\.com
@@ -561,6 +567,7 @@ empoweredconversations\.com
 empowher\.com
 enchantmentwholesales\.com
 ennasgifts\.com
+enriqueortegaburgos\.com
 enwra\.eu
 epikaporn\.top
 epnovate\.com
@@ -609,6 +616,7 @@ famousastrologerskshastri\.com
 famouskollegalastrologycentre\.com
 fanteamshop\.com
 farnsworthfirearms\.com
+fashionsblogger\.com
 fastcourse4less\.com
 faxitfast\.com
 federation-des-artisans\.lu
@@ -670,6 +678,7 @@ galeriesept\.com
 gambl(?:e|ing)
 gameauland\.com
 gamersrd\.com
+games\.lol
 games-download24\.com
 gamespot\.com
 gaminggadgets\.de
@@ -861,6 +870,7 @@ izmirbayrakci\.com
 j30strike\.org
 jaipurhotescorts\.com
 jamyeprice\.com
+janejohn-nwankwo\.com
 jayshinde\.com
 jbhnews\.com
 jdmlight\.com
@@ -896,6 +906,7 @@ kellyslocksmith\.com
 kelmatt\.com\.au
 kernelshirt\.com
 keygeninja\.com
+keytabe\.com
 keywordseo\.com
 khoeplus\.com\.vn
 kholedgiasi\.com
@@ -996,8 +1007,9 @@ magdantnes
 magecaptain\.com
 makemybusinessboom\.com
 malafaat\.com
-malosmileusa\.com
+malosmileusa(?:jerseycity)?\.com
 mamathefox\.com
+mandtbooks\.com
 mangkomik\.com
 manyataearthsong\.org\.in
 maps\.google\.com
@@ -1008,6 +1020,7 @@ markalpha\.com
 markrobinsonflooring\.co\.uk
 marsinu\.com
 martine-ammunitions\.com
+massimilianoperrone\.net
 mastatag\.com
 masteryourmortgagenow\.com\.au
 matchfinder
@@ -1042,6 +1055,7 @@ milf
 milfamatuerporn\.com
 milffox\.top
 milfrabbit\.net
+milkywaylashes\.com
 mini-bmx\.de
 miniteksty\.pl
 mintable\.app
@@ -1255,6 +1269,7 @@ postheaven\.net
 potomacdistro\.com
 powermetrics\.co\.uk
 prachurja\.com
+premiumresearchers\.com
 prestigeedenpark\.org\.in
 prestigeprimrosehills360\.org\.in
 pretty-gaming\.net
@@ -1482,6 +1497,7 @@ splice\.com
 sport9s\.com
 sports\.yahoo\.com
 sppf\.co\.uk
+sprawdzianszkola\.pl
 spray-project\.eu
 spreaker\.com
 sps\.org\.vn
@@ -1518,6 +1534,7 @@ superedus\.pl
 superintendenciacapitoliopr\.org
 supplementcity\.com\.au
 surf\.dev
+sussexresinsurfacing\.co\.uk
 svgboilerplate\.com
 sweetheartsbridalshop\.com
 sweetypiesbakery\.com
@@ -1568,7 +1585,9 @@ teksciarsko\.pl
 tekstypdf\.pl
 telegra\.ph
 telekinesistravel\.com
+tempotravellerindia\.com
 terapeame\.net
+terraterri\.com
 tesolmywifi\.com
 test\.de
 testiq3s\.com
@@ -1609,6 +1628,7 @@ thietbibeboi
 thinqueprep\.com
 thir13nthwatches\.com
 thirukkadaiyur60thmarriage\.com
+thongcongnghetbinhminh\.com
 threadless\.com
 threedashesagency\.com\.au
 thucduongbaoan\.com\.vn
@@ -1729,6 +1749,7 @@ vese\.ca
 vesinh43\.com
 vhearts\.net
 vhpmark\.com
+victoria-painters\.com
 vidporn\.top
 vienquanlyxaydung\.edu\.vn
 vietnamnet\.vn
