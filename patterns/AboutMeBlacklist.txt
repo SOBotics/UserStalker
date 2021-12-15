@@ -103,6 +103,7 @@ electricians
 enema
 energy[\W_]*heal(?:er|ing)
 erotic
+escape[\W_]*room
 escorts?
 eWandzDigital
 exam
