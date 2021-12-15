@@ -18,6 +18,7 @@ ario[\W_]*park[\W_]*view
 assignment
 attorney
 auction
+authentic[\W_]*suppl(?:ier|y)
 authorized[\W_]*dealer
 auto(?:mo(?:bile|tive)?)[\W_]*parts?
 avseo99
