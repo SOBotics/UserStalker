@@ -1,5 +1,6 @@
 \?usp=sharing
 (?:\?)?url(?:\?q)?=
+^\w+\.pl(?:\/|$)
 \.de\.tl
 @johncooleydk
 (?-i:UC2mr3saNQReiHDiaDwM0A0g)(?# YouTube channel)
@@ -8,6 +9,7 @@
 (?-i:0Tm7Dw_VbWU)(?# YouTube video)
 (?-i:3t6k_A7Dpz0)(?# YouTube video)
 (?-i:PeZo5PXKRgM)(?# YouTube video)
+(?-i:WYbApRM_Mco)(?# YouTube video)
 (?-i:yJDxTOurw0o)(?# YouTube video)
 13\.228\.233\.2
 13\.250\.159\.90
@@ -81,6 +83,7 @@ advanceallied\.com
 advanceddrivewaysolutions\.co\.uk
 advancedmineralmakeup\.com
 advancedrestorationsolutions\.com
+advantagebizmarketing\.com
 adventureclimbingframes\.com
 adventurer\.com\.pl
 advocatetusharsrivastava\.com
@@ -285,6 +288,7 @@ brizleavers\.com\.au
 bromleyaesthetics\.co\.uk
 brosistech\.com
 browsvie\.at
+bskin\.com
 buckawish\.com
 buildboard\.com
 builttolastseoagency
@@ -346,6 +350,7 @@ cheapohosting\.com
 cheatpekalonganvip\.com
 checkoutmycoolsite\.com
 chelmianie\.pl
+chelseaseniorliving\.com
 chesseasy\.com
 chikucab\.com
 chinapinfactory\.com
@@ -427,6 +432,7 @@ dalahome\.se
 dalamantransport\.com
 danatunaibandung\.com
 dantri\.com\.vn
+dart-project\.pl
 dathoaonline\.com
 davidrcoggins\.com
 dayyachtcharters\.com
@@ -446,10 +452,11 @@ deskflex\.com
 desktopgoldlinks\.com
 detik\.com
 dggaming(?:\.org|thai\.com)
-dgroupdautu\.net
+dgroupdautu\.(?:com|net)
 dienlanhanhthang\.com
 dienmaynewsun\.com
 dienmaytot\.org
+digitalburo\.eu
 digitalconvert\.co\.uk
 digitalmediavictoria\.ca
 digiuseppedesign\.com
@@ -483,6 +490,7 @@ drlhands\.com
 drzio\.com
 dsprelated\.com
 duandoirongdoson\.vn
+dudkowska\.pl
 duewriting\.com
 dumpscafe\.com
 dumpster
@@ -491,6 +499,7 @@ dunlopillo\.info
 dupitek\.com
 dutchmanshop\.us
 dvmagic\.(?:pl|team)
+e-materialy\.pl
 easy4soft\.com
 easycartcleaning\.co\.uk
 easyfie\.com
@@ -503,6 +512,7 @@ eduedukacje\.pl
 edukacjalic\.pl
 edukacjowo\.pl
 edukolandia\.pl
+egzotour\.pl
 el-kef\.blogspot
 eldoradoconcreterepairandleveling\.com
 electricexpertyyc\.ca
@@ -514,16 +524,21 @@ elitesystemsme\.com
 elly\.vn
 emailcustomersupportnumber\.com
 emailmeform\.com
+emaritime\.eu
 emekliol\.org
 emiliophzs823\.tumblr
 emirates\.estate
+emperie\.eu
 empoweredconversations\.com
 empowher\.com
 enchantmentwholesales\.com
 ennasgifts\.com
+enwra\.eu
 epikaporn\.top
 epnovate\.com
 \/eportfolios\/
+erc10yrs\.be
+esc2012-moscow\.org
 escortservicenoida\.in
 escortsinsiliguri\.co\.in
 esdigitales\.com
@@ -545,6 +560,7 @@ examstestsimulator\.com
 exness\.com
 expertelectricgroup\.com
 expostandservice\.com
+extremecleanil\.com
 eyshopp\.com
 ezeeonline\.in
 f(?:a|un)888?
@@ -584,6 +600,7 @@ fogbugz\.com
 fogghausvapes\.co\.uk
 foothealthandaesthetics\.co\.uk
 forbesblog\.org
+forenergo-trade\.ru
 forklift4u\.com\.au
 forumotion\.com
 forums\.com\.bz
@@ -611,10 +628,12 @@ gameauland\.com
 gamersrd\.com
 games-download24\.com
 gamespot\.com
+gaminggadgets\.de
 (?:gas|signal)pistole
 gddga\.com
 gematodiatrofi\.hua\.gr
 genesisautowash\.com
+genius\.com
 georgiaautolaw\.com
 gervaisrentals\.com
 getfreebiestoday\.com
@@ -839,6 +858,7 @@ lacopadisplay\.com
 ladyalba\.co\.kr
 lafato\.de
 landup\.net
+lapdatmaylanh\.edu\.vn
 laptophainam\.com
 larsondauer\.com
 lashglo\.com
@@ -974,6 +994,7 @@ mtcremovals\.com
 muasamgiatot\.net
 multi-soft\.co\.il
 multirange\.com
+multiserviciosaragon\.es
 murphybednyc\.com
 mushahadati\.com
 my9jarocks\.com
@@ -1084,6 +1105,7 @@ pathtogrow\.com
 pbase\.com
 pcv\.net\.pl
 pd12\.co
+pdfwzoryumowy\.pl
 pdxconcretecontractors\.com
 pearltrees\.com
 peatix\.com
@@ -1299,6 +1321,7 @@ skillbee\.com
 skinblog\.net
 skincell\.org
 skku\.edu
+skup-nieruchomosci\.org
 skyflytrips\.com
 skyrock\.com
 skyzone\.com
@@ -1343,6 +1366,7 @@ spray-project\.eu
 spreaker\.com
 sps\.org\.vn
 squareblogs\.net
+squeakycleanteam\.com\.au
 srmnet\.org
 ssalba\.co\.kr
 ssvcodingtuts\.ml
@@ -1417,6 +1441,7 @@ teknobuilt\.com
 teknoharian\.com
 teknologia\.co
 teksands\.ai
+teksciarsko\.pl
 tekstypdf\.pl
 telegra\.ph
 telekinesistravel\.com
@@ -1523,6 +1548,8 @@ ukcop26\.org
 ultracom\.nl
 ultrainsports\.com
 um\.edu\.sa
+umownypdf\.pl
+umowyiwzory\.pl
 unblog\.fr
 undrtone\.com
 union\.com\.vn
@@ -1583,6 +1610,8 @@ virtualseoexpert\.com
 vitquayso1\.vn
 vividresurfacing\.com
 vmobify\.com
+vn88no1\.com
+vncp\.org
 vnice\.io
 voc-certificatie\.nl
 vograce\.com
@@ -1590,7 +1619,7 @@ voirfilms\.nl
 vwin(?:top)?.*\.(?:com|one)
 w88
 w88ben\.com
-w88inlive\.com
+w88in(?:club|live)\.com
 w88od\.com
 waleedalkalash\.com
 wallnut\.co\.in
@@ -1632,7 +1661,7 @@ wpsuo\.com
 writeablog\.net
 wypiszcos\.pl
 wzoryiumowypdf\.pl
-wzorypdfy\.pl
+wzorypdf[iy]\.pl
 xedapdiencuvietcuong\.com
 xhealthinfo\.com
 xinghaoya\.net
