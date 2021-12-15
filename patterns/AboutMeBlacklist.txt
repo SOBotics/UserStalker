@@ -310,6 +310,7 @@ ViralKida
 virgin
 Viro[\W_]*Valor
 visit[\W_]*(?:our[\W_]*(?:web[\W_]*)?site|us)
+VNManbetx
 (?:w|zm)88
 watch(?:es)?[\W_]*for[\W_]*(?:wo)?men
 water[\W_]*(?:purif(?:ier|y)|filt(?:er|ration))
