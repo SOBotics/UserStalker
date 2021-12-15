@@ -294,6 +294,7 @@ supplement
 sustainable[\W_]*cloth(?:es|ing)
 Sweethearts[\W_]*Bridal[\W_]*Shop
 swimming pool
+tarot
 taxi[\W_]*(?:drivers?|service)
 Techno[\W_]*Fibre
 Teksands?
