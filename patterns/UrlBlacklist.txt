@@ -584,6 +584,7 @@ fanteamshop\.com
 farnsworthfirearms\.com
 fastcourse4less\.com
 faxitfast\.com
+federation-des-artisans\.lu
 fenonmagazine\.com
 fernandoecky004\.de\.tl
 fiestaphotobooths\.com
@@ -592,10 +593,12 @@ filsrich\.com
 financial-warrior\.com
 findmotivation\.org
 finetunedinstruments\.com
+finirai\.it
 firearmsareanetwork\.com
 firstcallairductcleaning\.com
 firstseenlocalseo\.co\.uk
 firstservecleaning\.com
+fishwomen\.org
 fita\.in
 fitmoversuae\.com
 fiverr\.com
@@ -611,9 +614,11 @@ forbesblog\.org
 forenergo-trade\.ru
 foreverchar\.com
 forklift4u\.com\.au
+fortador-usa\.com
 forumotion\.com
 forums\.com\.bz
 fotosdefrases\.com
+fotohenry\.pl
 foxporns\.top
 franchiserealme\.com
 frankievskitchen\.com
@@ -706,6 +711,7 @@ haroshee\.com
 harrysjanitorservice\.com
 haugiang\.land
 haviettrung\.com
+hbomaxwatchparty\.us
 healinghpvnaturally\.com
 healthgymbeauty\.com
 healthinfobd\.com
@@ -793,6 +799,7 @@ irc101\.org
 ireview365\.com
 irpel\.org
 irresistibleexpressions\.com
+isecprep\.com
 isovle\.net
 issuu\.com
 it-lead\.eu
@@ -849,6 +856,7 @@ kisskissbankbank\.com
 kizi-mizi\.pl
 kjandhairspray\.com
 knu\.ua
+kohen\.ca
 kolkataff\.today
 korastsherot\.com
 koreansex\.top
@@ -983,6 +991,7 @@ mocmienstone\.com
 modestfashionstylist\.com
 mohajreen-jeeda\.com
 mohammedalshawosh\.blogspot
+moldacrossamerica\.org
 moms-fuckers\.top
 monkeybusiness\.xyz
 monsieur-compta\.fr
@@ -1031,6 +1040,7 @@ namenecklaces\.co
 namsogen\.website
 nangstuff\.com\.au
 nashvilleelopementpackages\.com
+natural-houseware\.com
 naturaltransplants\.com
 naturesliving\.co\.uk
 nawazbrothers\.com
@@ -1040,6 +1050,7 @@ nehagulati\.in
 neighbors-parking\.com
 neonate\.co\.uk
 nescloud\.com
+nestvui\.com
 netstf\.com
 netvibes\.com
 newretailfx\.com
@@ -1077,6 +1088,7 @@ oltenchina\.com
 omni-pro\.net
 onbestdeal\.com
 oncarbrands\.com
+oncartx\.io
 onerehab\.com
 onfeetnation\.com
 onlinecasinonews\.ca
@@ -1226,6 +1238,7 @@ renovilla\.ca
 rental
 replelix\.co\.kr
 restorarug\.com
+restoviebelle\.com
 reviewer-rating\.de
 revivebeautysolutions\.ca
 rexporn\.vip
@@ -1243,6 +1256,7 @@ rotf\.lol
 roundrockroadside\.com
 royalmanagementconsultants\.com
 royaltyhawaii\.com
+rozprawkanie\.pl
 rtpcrepair\.com
 ruaxetudong\.org
 rubermedia\.com
@@ -1402,6 +1416,7 @@ suadieuhoa.*\.com
 suadodien\.com
 substack\.com
 subwayprofit39\.wordpress
+subzero-wolf-repair\.com
 suckhoe.*\.(?:com|net)
 sugarbalance\.org
 sugarlandacandheating\.com
@@ -1520,6 +1535,7 @@ topazbeauty\.vn
 topcacnhacai\.com
 topcleangloves\.com
 topfence\.pl
+topponudba\.com
 topshelfuae\.com
 topsprawdziany\.pl
 topthaiplay\.com
@@ -1585,6 +1601,7 @@ usatopservices\.com
 usayelp\.com
 uscarpartsdirect\.com
 userscloud\.com
+utahunited\.org
 utkarshinisoftware\.com
 utkranti\.net
 v5top\.pl
@@ -1640,6 +1657,7 @@ w88in(?:club|live)\.com
 w88od\.com
 waleedalkalash\.com
 wallnut\.co\.in
+watanserb\.com
 watchrepairuk\.com
 waterfilterdubai\.com
 watsons\.ua
