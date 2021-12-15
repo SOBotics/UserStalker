@@ -132,6 +132,7 @@ hair[\W_]*(?:clinic|loss|transplant)
 HappyLuke
 hassle[\W_]*free
 head[\W_]*lights?
+heating[\W_]*(?:&|and)[\W_]*air[\W_]*conditioning
 hidden[\W_]*fees
 hijab
 Hocdot
