@@ -200,6 +200,7 @@ bakersfieldepoxy\.com
 baladistudio\.com
 bamst\.net
 baoduongmaynenkhi\.net
+barcelona-reformas\.com
 barefootfoundation\.com
 basislink\.nl
 bathlanegarage\.co\.uk
@@ -231,6 +232,7 @@ beterhbo\.ning\.com
 betking777\.com
 bftraining\.ae
 bidvaluable\.com
+bigce\.org
 bignewsnetwork\.com
 bigpharmausa\.com
 bigreview\.com
@@ -289,6 +291,7 @@ brightwoodliving\.org
 brizleavers\.com\.au
 bromleyaesthetics\.co\.uk
 brosistech\.com
+brownbook\.net
 browsvie\.at
 bskin\.com
 buckawish\.com
@@ -387,6 +390,7 @@ comprarcialis5mg\.org
 conexino\.com
 congbohopquy\.com
 consagous\.co
+conspirolog\.org
 containerwaste\.co\.nz
 continuumrecycling\.co\.uk
 controlc\.com
@@ -424,6 +428,7 @@ customcalibration\.com
 customer-service\.com\.mx
 customfloorsdesign\.com
 customsportsspecial\.com
+customworksdaytona\.com
 cutturl\.gq
 cynanthus\.net
 d3goldgame\.com
@@ -655,6 +660,7 @@ games-download24\.com
 gamespot\.com
 gaminggadgets\.de
 (?:gas|signal)pistole
+gbguides\.com
 gddga\.com
 gematodiatrofi\.hua\.gr
 genesisautowash\.com
@@ -771,12 +777,14 @@ htw-dresden\.de
 huaysod999\.com
 huicopper\.com
 huyendo\.com
+hydro2017\.org
 hydroponika\.pl
 hyper-decor\.com
 hyperbaricpro\.com
 hywallart\.com
 hzptfe\.com
 iamarrows\.com
+ibangspacebar\.com
 ic0902\.org
 icon-plaza\.vn
 iconbazaar\.com
@@ -784,6 +792,7 @@ iderepublica\.pl
 iformsupport\.dk
 igrab\.net
 ijcrr\.com
+ikeanded\.com
 image-perth\.org
 imaginationmb\.ca
 immarketinggoddess\.com
@@ -805,7 +814,7 @@ instagram\.com\/paulamichellewhite
 instaleaf\.ca
 installgamepc\.com
 instantpromotion\.com
-instapaper\.com\/read\/1467653269
+instapaper\.com
 intellibuddies\.com
 interline-duesseldorf\.de
 intheblacknet\.com
@@ -849,6 +858,7 @@ k2print\.pl
 kaapimachines\.com
 kalsyangroup\.com
 kanadoll\.jp
+kantorjasapenerjemah\.com
 karachitutors\.com
 karenniguys\.com
 kartkowki24\.pl
@@ -856,6 +866,7 @@ kaskus\.co\.id
 kaspazar\.com
 kavitabatra\.in
 kazin0\.online
+kejarcita\.id
 kekkon1213\.net
 kellyslocksmith\.com
 kelmatt\.com\.au
@@ -960,6 +971,7 @@ maps\.google\.com
 marathoncleaning\.ca
 maria-jewel\.com
 markrobinsonflooring\.co\.uk
+marsinu\.com
 martine-ammunitions\.com
 mastatag\.com
 masteryourmortgagenow\.com\.au
@@ -1016,6 +1028,7 @@ moldacrossamerica\.org
 moms-fuckers\.top
 monkeybusiness\.xyz
 monsieur-compta\.fr
+montanafishingguides\.com
 morichesdentalassociates\.com
 morningdough\.com
 moroccanoliveoils\.com
@@ -1049,6 +1062,7 @@ myget\.org
 myin\.pl
 mymmjdoctor\.com
 mynewsdesk\.com
+myshopcoffee\.com
 mystrikingly\.com
 mythesis\.co\.in
 mytrvlclub\.com
@@ -1075,6 +1089,7 @@ nestvui\.com
 netstf\.com
 netvibes\.com
 newretailfx\.com
+newsblur\.com
 newsmagnify\.com
 newz4ward\.com
 nextcomputerworld\.com
@@ -1135,6 +1150,7 @@ oxygenhealthsystems\.com
 paarthinfra\.com
 pabnaenterprise\.com
 padlet\.com
+pagalworldl?\.com
 page\.tl
 pakrevenue\.com
 palada\.vn
@@ -1235,6 +1251,7 @@ queensclosetofficial\.com
 queenslifts\.com
 quickbooks
 quicklyn\.com
+quora\.com
 r2apackersandmovers\.com
 rajasthanholidays\.co\.in
 random-meet\.com
@@ -1592,6 +1609,7 @@ tuyetle\.com
 tv4studios\.com
 twoje-uslugi\.biz\.pl
 u-curate\.com
+u-f-l\.net
 uberant\.com
 udhhyog\.com
 ufa356s\.com
@@ -1700,6 +1718,7 @@ websitedrona\.com
 websupplies\.gr
 wedolaundry\.ca
 weebly\.com
+wellwisheraura\.in
 werite\.net
 wesoleradio\.eu
 westpointproperty\.com
