@@ -145,6 +145,7 @@ preakness
 Printer[\W_]*Tales?
 [\W_]Pvt[\W_]
 random[\W_]*meet
+real[\W_]*estate
 rental
 repair
 restaurant
