@@ -20,6 +20,7 @@ attorney
 auction
 authorized[\W_]*dealer
 auto(?:mo(?:bile|tive)?)[\W_]*parts?
+avseo99
 [\W_]B2B[\W_]
 baccarat[\W_*](?:live|online)
 background[\W_]*check
@@ -373,6 +374,7 @@ Sửa(?# "repair" in Vietnamese)
 DỰ ÁN KHU(?# "project", like housing, in Vietnamese)
  고등학교 농구(?# "high school basketball" in Korean)
 老爹褲(?# "daddy trousers" (?), from Chinese spam)
+犀利士(?# "Cialis" in Chinese)
 
 # Middle Eastern
 کازینو(?# "casino" in Persian)
