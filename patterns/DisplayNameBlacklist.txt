@@ -58,6 +58,7 @@ Easycart
 elimination\s?chamber
 eWandzDigital
 exness
+facial
 fashion
 fastlane(?:kg)?
 fight
@@ -105,6 +106,7 @@ live
 [\W_]loans?[\W_]
 logo[\W_]*design
 [\W_]Ltd[\W_]
+machine
 march\s*madness
 mas[\W_]*tatag
 mastercard
