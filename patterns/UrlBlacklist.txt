@@ -179,6 +179,7 @@ aucklandelectrician\.co\.nz
 aufaitux\.com
 aurafiber\.com
 aussieelectricalandsolar\.com\.au
+australiawidefirstaid\.com\.au
 authorscrew\.com
 autocad
 autodailypost\.com
@@ -368,6 +369,7 @@ clix\.capital
 cloudbox99\.com
 clouddevs\.com
 clovisconcreterepairandleveling\.com
+clyp\.it
 cmdrecruitment\.com
 coachhirefinder\.co\.uk
 codenamecentrepoint\.com
@@ -554,9 +556,11 @@ etinational\.org
 eugdpr\.gr
 eurotravnet\.eu
 everbuildcontractors\.com
+evercu\.be
 evernote\.com\/shard
 ewandzdigital\.com
 ewingfly\.com
+ewrcp\.eu
 examencentro\.com
 exammodern\.com
 examstestsimulator\.com
@@ -1464,6 +1468,7 @@ theburnward\.com
 theculinarygene\.com
 thedcteam\.com
 theemailhelpline\.com
+thefightdoctors\.com
 thegadgetflow\.com
 theglensecret\.com
 theglossarymagazine\.com
