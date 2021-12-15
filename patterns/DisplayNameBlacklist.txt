@@ -69,6 +69,7 @@ football
 free
 fun888
 furniture
+\bgalerie[\W_]*sept\b
 (?:classic|games)[a-z0-9 ]*?[0-9]{4}
 game\s?of\s?
 giro
@@ -91,6 +92,7 @@ intilight
 ivi[\W_]*esper(?:anto|01n)
 jess[\W_]*dolls?
 ketamine
+king2fun
 Kioko[\W_]*Center
 ku66
 kubet11
