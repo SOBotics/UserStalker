@@ -397,6 +397,7 @@ corewalking\.com
 cornishrex\.webflow\.io
 corpzo\.com
 country-home\.pl
+cprautoglassrepair\.com
 crackerjack\.app
 crackindir\.org
 crazykart\.com\.au
@@ -646,6 +647,7 @@ fun88one\.net
 fun88th1\.com
 furaka\.com
 g-casinos\.com
+galeriesept\.com
 gambl(?:e|ing)
 gameauland\.com
 gamersrd\.com
@@ -704,6 +706,7 @@ gtmowers\.com
 guideforbusiness\.net
 guideline\.com
 guilded\.gg
+guixsd\.org
 gumroad\.com
 gumstabilizer\.com
 gunasthebrand\.com
@@ -1152,6 +1155,7 @@ pearltrees\.com
 peatix\.com
 penzu\.com
 peoplemattersglobal\.com
+pestcontrolmelton\.com\.au
 periodismolatino\.com
 perkpal\.co\.uk
 personalmoneynetwork\.com
@@ -1503,6 +1507,7 @@ thebedbugcompany\.com
 theboostranking\.com
 theburnward\.com
 theculinarygene\.com
+thedailyhairstyles\.com
 thedcteam\.com
 theemailhelpline\.com
 thefightdoctors\.com
@@ -1683,6 +1688,7 @@ watsonsflowers\.com
 wawaland\.eu
 wearekindbrand\.com
 weargraphene\.com
+webarticlelist\.com
 webcam
 webdesigncoast\.com
 webhitlist\.com
