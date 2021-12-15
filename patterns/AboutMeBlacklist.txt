@@ -123,6 +123,7 @@ for[\W_]*sale
 free[\W_]*quote
 fun888?
 furniture
+galerie[\W_]*sept
 garage[\W_]*door
 Geico
 get[\W_]*in[\W_*]touch
@@ -168,6 +169,7 @@ ketamine
 keywords:
 (?:kid|pet)[\W_]*(?:friendly|safe)
 kidnap
+king2fun
 Kioko[\W_]*Center
 kitchen[\W_]*(?:design|cabinet)
 kubet11
@@ -230,6 +232,7 @@ penis
 permit[\W_]*violat
 personal[\W_]*i(?:mmunity|njury)
 personal(?:ized)?[\W_]*(?:care|products?)
+pest[\W_]*control
 PGA[\W_]*(?:champion|course|trip)
 pkv[\W_]*games
 poker
