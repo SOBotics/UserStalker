@@ -638,6 +638,7 @@ golike\.net
 gomunime\.is
 goodmenproject\.com
 goodoctor\.com\.hk
+google\.com\/maps
 grandjdm\.com
 greenlinecoffee\.net
 grelix\.com
