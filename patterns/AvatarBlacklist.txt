@@ -33,3 +33,10 @@ gravatar\.com\/avatar\/3dd174e5c020d2f0076fc4dbc2e89c42
 gravatar\.com\/avatar\/027bb3f542b40153a6ed1e1caa3c7565
 gravatar\.com\/avatar\/523f8a5ce56134739a61493a2ebd5740
 gravatar\.com\/avatar\/71af229e23786ca8cfb267acd5c0d931
+gravatar\.com\/avatar\/a79862bf9cec75605ac017252349ab86
+gravatar\.com\/avatar\/c5792d348d983126623eb14ed1c865dd
+gravatar\.com\/avatar\/5305938c9ed509c51a52311a77c40382
+gravatar\.com\/avatar\/e272b6fe41cc4eb11f1f7c236a7734a3
+gravatar\.com\/avatar\/0e7caec44273cd17b213ed04257fca66
+gravatar\.com\/avatar\/d559a0dfa2014f71af04f7e1722d944b
+gravatar\.com\/avatar\/b8491f0a0b763c791aed64f79eca39bf
