@@ -26,6 +26,7 @@ baccarat[\W_*](?:live|online)
 background[\W_]*check
 Baladi[\W_]*Studio
 bankruptcy
+beard[\W_]*care
 beauty
 bed[\W_]*bug
 bedding
@@ -134,6 +135,7 @@ HappyLuke
 hassle[\W_]*free
 head[\W_]*lights?
 heating[\W_]*(?:&|and)[\W_]*air[\W_]*conditioning
+herbalife
 hidden[\W_]*fees
 hijab
 Hocdot
@@ -375,6 +377,8 @@ DỰ ÁN KHU(?# "project", like housing, in Vietnamese)
  고등학교 농구(?# "high school basketball" in Korean)
 老爹褲(?# "daddy trousers" (?), from Chinese spam)
 犀利士(?# "Cialis" in Chinese)
+giảm cân(?# "weight loss" in Vietnamese)
+b(?:ấ|a)t (?:đ|d)(?:ộ|o)ng s(?:ả|a)n(?# "real estate" in Vietnamese)
 
 # Middle Eastern
 کازینو(?# "casino" in Persian)
