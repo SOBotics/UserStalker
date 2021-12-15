@@ -689,6 +689,7 @@ gomunime\.is
 goodmenproject\.com
 goodoctor\.com\.hk
 google\.com\/maps
+gospodarstwo\.net
 gorakuoukoku\.com
 gothamescaperoom\.com
 graph-bett\.com
@@ -947,6 +948,7 @@ mad4india\.com
 magdantnes
 magecaptain\.com
 makemybusinessboom\.com
+malafaat\.com
 malosmileusa\.com
 mamathefox\.com
 maps\.google\.com
