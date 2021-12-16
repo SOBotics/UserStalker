@@ -9,13 +9,16 @@ donald\s*trump|.*trump.*
 1x[\W_]*bet
 Adu[\W_]*Joker
 advanced[\W_]*mineral[\W_]*makeup
+agency
 Ahsun[\W_]*Irfan
 alldatmatterz
 amm(?:o|unitions?)
 Aravalii
 ardroid[\W_]*post
+assignment
 awards
 baccarat
+bail[\W_]*bond
 Baladi[\W_]*Studio
 bank\W?of\W?america
 beaut(?:y|ies)
@@ -29,10 +32,13 @@ bracket
 butt\b
 buy[\W_]*service[\W_]*usa
 capit[ao]l
+capsule
 car in
+carpet
 cash\W?rewards
 casino
 [\W_]CBD[\W_]
+\bcenter\b
 [\W_]CEO[\W_]
 champ(?:ion|ionship)?s?
 cheap
@@ -48,6 +54,8 @@ cremat(?:e|ion)
 crossfit
 damage\s?claim
 [ĐD][àa][\W_]*N[ẵa]ng V[ệe][\W_]*Sinh
+deklaracje
+dentist
 derby
 \bkentucky\s*derb
 diabet(?:es|ic)
@@ -66,6 +74,7 @@ filsrich
 finals?
 florist
 Fogg[\W_]*Haus[\W_]*Vapes
+Folks[\W_]*IT\b
 football
 free
 fun888
@@ -91,6 +100,7 @@ instagram[\W_]*army
 \binsur
 intilight
 ivi[\W_]*esper(?:anto|01n)
+Jaipur[\W_]*Basta
 jess[\W_]*dolls?
 ketamine
 king2fun
@@ -106,7 +116,9 @@ live
 [\W_]loans?[\W_]
 logo[\W_]*design
 [\W_]Ltd[\W_]
+luxury
 machine
+management
 march\s*madness
 mas[\W_]*tatag
 mastercard
@@ -115,6 +127,7 @@ Mea[\W_]*Cantik
 merch
 metasever
 MetroKleen
+midnight[\W_]*pleasure
 miel[\W_]*travel
 Mirin[\W_]*Media
 miss.?(?:universe|world|usa)
@@ -143,6 +156,7 @@ playoff
 pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
 preakness
 Printer[\W_]*Tales?
+\bproducts?\b
 [\W_]Pvt[\W_]
 random[\W_]*meet
 real[\W_]*estate
@@ -154,6 +168,8 @@ rupiahqq
 russianpassportsandvisas
 ruthamcauquan
 s\s?cup
+\bSag[\W_]*Ipl\b
+sahabet
 sanjay[\W_]*kumarro
 save\s?money
 ^schissmantics?$
@@ -199,6 +215,9 @@ wellness
 ^world
 wrestl(?:e|ing)
 wwe
+wypowiedzenia
 xfinity
 yoga[\W_]*mat
 zohor[\W_]*fashion
+
+카지노(?# "casino" in Korean)
