@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
 public class UserStalker
 {
    private static final String LOGIN_PROPERTIES_FILE = "./properties/login.properties";
-   private static final String SO_PROPERTIES_FILE    = "./properties/StackOverflow.properties";
-   private static final String SE_PROPERTIES_FILE    = "./properties/StackExchange.properties";
+   private static final String ROOMS_PROPERTIES_FILE = "./properties/rooms.properties";
+   private static final String SITES_PROPERTIES_FILE = "./properties/sites.properties";
 
    private static final Logger LOGGER = LoggerFactory.getLogger(UserStalker.class);
 
@@ -61,85 +61,114 @@ public class UserStalker
             throw ex;
          }
 
-         // Load "StackOverflow" properties file.
+         // Get chat room IDs.
+         int seRoomID = -1;
          int soRoomID = -1;
-         try (FileInputStream fis = new FileInputStream(SO_PROPERTIES_FILE))
+         try (FileInputStream fis = new FileInputStream(ROOMS_PROPERTIES_FILE))
          {
-            // Attempt to load Stack Overflow properties file.
-            Properties propSO = new Properties();
+            // Attempt to load "rooms" properties file.
+            Properties properties = new Properties();
             try
             {
-               propSO.load(fis);
+               properties.load(fis);
             }
             catch (IOException ex)
             {
-               LOGGER.warn("Failed to open \"StackOverflow\" property file: \"" + SO_PROPERTIES_FILE + "\".");
+               LOGGER.warn("Failed to open \"rooms\" property file: \"" + ROOMS_PROPERTIES_FILE + "\".");
                throw ex;
             }
 
-            // Attempt to load and parse the room number from the properties file.
-            soRoomID = Integer.parseInt(propSO.getProperty("roomID" + (testMode ? "_test" : "")));
+            // Attempt to load and parse the chat room ID numbers from the properties file.
+            String seRoomProperty = "se" + (testMode ? "_test" : "");
+            try
+            {
+               seRoomID = Integer.parseInt(properties.getProperty(seRoomProperty));
+            }
+            catch (NumberFormatException ex)
+            {
+               seRoomID = -1;
+
+               LOGGER.warn("Missing or invalid value for \"" + seRoomProperty + "\" property in \"rooms\" property file;"
+                         + " will not report in that room.");
+            }
+
+            String soRoomProperty = "so" + (testMode ? "_test" : "");
+            try
+            {
+               soRoomID = Integer.parseInt(properties.getProperty(soRoomProperty));
+            }
+            catch (NumberFormatException ex)
+            {
+               soRoomID = -1;
+
+               LOGGER.warn("Missing or invalid value for \"" + soRoomProperty + "\" property in \"rooms\" property file;"
+                         + " will not report in that room.");
+            }
          }
-         catch (Exception ex)
+         catch (IOException ex)
          {
-            soRoomID = -1;
-
-            LOGGER.warn("Something went wrong trying to set up stalking for Stack Overflow; will not stalk new users on that site.");
-            ex.printStackTrace();
+            LOGGER.error("Failed to open or parse \"rooms\" property file: \"" + ROOMS_PROPERTIES_FILE + "\".");
+            throw ex;
          }
 
-         // Load "StackExchange" properties file.
-         int             seRoomID        = -1;
-         TreeSet<String> seSites         = null;
+         // Get site information.
+         TreeSet<String> fastSites       = null;
+         TreeSet<String> slowSites       = null;
          TreeSet<String> nonEnglishSites = null;
-         try (FileInputStream fis = new FileInputStream(SE_PROPERTIES_FILE))
+         try (FileInputStream fis = new FileInputStream(SITES_PROPERTIES_FILE))
          {
-            // Attempt to load Stack Exchange properties file.
-            Properties propSE = new Properties();
+            // Attempt to load "sites" properties file.
+            Properties properties = new Properties();
             try
             {
-               propSE.load(fis);
+               properties.load(fis);
             }
             catch (IOException ex)
             {
-               LOGGER.warn("Failed to open \"StackExchange\" property file: \"" + SE_PROPERTIES_FILE + "\".");
+               LOGGER.warn("Failed to open \"sites\" property file: \"" + SITES_PROPERTIES_FILE + "\".");
                throw ex;
             }
 
-            // Attempt to load the list of sites from the properties file.
-            String sites = propSE.getProperty("sites");
-            if ((sites != null) && !sites.isBlank())
+            // Attempt to load the list of "fast" sites from the properties file.
+            String fast = properties.getProperty("sitesFast");
+            if ((fast != null) && !fast.isBlank())
             {
-               seSites = new TreeSet<String>(Arrays.asList(sites.split("\\s*,\\s*")));
+               fastSites = new TreeSet<String>(Arrays.asList(fast.split("\\s*,\\s*")));
             }
             else
             {
-               LOGGER.warn("Missing or invalid value for \"sites\" property in \"StackExchange\" property file;"
-                         + " will not monitor any sites.");
+               LOGGER.warn("Missing or invalid value for \"sitesFast\" property in \"sites\" property file;"
+                         + " will not monitor any \"fast\" sites.");
+            }
+
+            // Attempt to load the list of "slow" sites from the properties file.
+            String slow = properties.getProperty("sitesSlow");
+            if ((slow != null) && !slow.isBlank())
+            {
+               slowSites = new TreeSet<String>(Arrays.asList(slow.split("\\s*,\\s*")));
+            }
+            else
+            {
+               LOGGER.warn("Missing or invalid value for \"sitesSlow\" property in \"sites\" property file;"
+                         + " will not monitor any \"slow\" sites.");
             }
 
             // Attempt to load the list of non-English sites from the properties file.
-            String nonEnglish = propSE.getProperty("nonEnglish");
+            String nonEnglish = properties.getProperty("nonEnglish");
             if ((nonEnglish != null) && !nonEnglish.isBlank())
             {
                nonEnglishSites = new TreeSet<String>(Arrays.asList(nonEnglish.split("\\s*,\\s*")));
             }
             else
             {
-               LOGGER.warn("Missing or invalid value for \"nonEnglish\" property in \"StackExchange\" property file;"
+               LOGGER.warn("Missing or invalid value for \"nonEnglish\" property in \"sites\" property file;"
                          + " will not exclude any sites from non-Latin character checks.");
             }
-
-            // Attempt to load and parse the room number from the properties file.
-            seRoomID = Integer.parseInt(propSE.getProperty("roomID" + (testMode ? "_test" : "")));
          }
-         catch (Exception ex)
+         catch (IOException ex)
          {
-            seRoomID = -1;
-
-            LOGGER.warn("Something went wrong trying to set up stalking for Stack Exchange;"
-                      + " will not stalk new users on these sites.");
-            ex.printStackTrace();
+            LOGGER.error("Failed to open \"sites\" property file: \"" + SITES_PROPERTIES_FILE + "\".");
+            throw ex;
          }
 
          // Create an instance of the ChatBot class, which will automatically try to log in to
@@ -158,7 +187,7 @@ public class UserStalker
             }
 
             // Start stalking.
-            bot.Run(seSites, nonEnglishSites);
+            bot.Run(fastSites, slowSites, nonEnglishSites);
          }
       }
       catch (Exception ex)

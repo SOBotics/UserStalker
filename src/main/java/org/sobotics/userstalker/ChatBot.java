@@ -44,9 +44,9 @@ import org.sobotics.chatexchange.chat.event.UserEnteredEvent;
 
 public class ChatBot implements AutoCloseable
 {
-   private static final int                 POLL_TIME_MINUTES        = 8;
-   private static final int                 OFFSET_TIME_MINUTES      = 4;
-   private static final int                 SE_STALK_INTERVAL        = 2;
+   private static final int                 POLL_TIME_MINUTES        = 10;
+   private static final int                 OFFSET_TIME_MINUTES      =  5;
+   private static final int                 SE_STALK_COUNTER_RESET   =  5;
    private static final Map<String, long[]> CHAT_ADMIN_USERIDS;
       static
       {
@@ -85,11 +85,11 @@ public class ChatBot implements AutoCloseable
 + "\n"
 + "\u3000\u25CF \"list\": Equivalent to \"sites\"."
 + "\n"
-+ "\u3000\u25CF \"add <sitename>\": Temporarily adds the specified SE site (short name) to the stalking list."
-+                                 " (The modification will not persist across a reboot.)"
++ "\u3000\u25CF \"add <sitename> <fast/slow>\": Temporarily adds the specified SE site (short name) to the specified stalking list."
++                                             " (The modification will not persist across a reboot.)"
 + "\n"
-+ "\u3000\u25CF \"remove <sitename>\": Temporarily removes the specified SE site (short name) from the stalking list."
-+                                    " (The modification will not persist across a reboot.)"
++ "\u3000\u25CF \"remove <sitename> <fast/slow>\": Temporarily removes the specified SE site (short name) from the specified stalking list."
++                                                " (The modification will not persist across a reboot.)"
 + "\n"
 + "\u3000\u25CF \"update\": Updates the cached pattern databases that are used when checking user accounts."
 +                         " (It is generally not necessary to send this command to perform a manual update,"
@@ -124,14 +124,15 @@ public class ChatBot implements AutoCloseable
    private StackExchangeClient                client;
    private Room                               roomSO;
    private Room                               roomSE;
-   private TreeSet<String>                    sites;
+   private TreeSet<String>                    sitesFast;
+   private TreeSet<String>                    sitesSlow;
    private TreeSet<String>                    nonEnglishSites;
    private RegexManager                       regexes;
    private HomoglyphManager                   homoglyphs;
    private StackExchangeApiClient             seApi;
    private ScheduledExecutorService           executor;
    private Map<String, StackExchangeSiteInfo> siteInfoMap;
-   private int                                seStalkInterval = 0;
+   private int                                stalkSECounter;
 
    // HACK: This is merely to reduce the noise in the chat room logs caused by an extremely
    //       persistent wave of Chinese profile spammers on Stack Overflow, which follow an
@@ -202,7 +203,9 @@ public class ChatBot implements AutoCloseable
    }
 
 
-   public void Run(TreeSet<String> seSites, TreeSet<String> nonEnglishSites)
+   public void Run(TreeSet<String> fastSites,
+                   TreeSet<String> slowSites,
+                   TreeSet<String> nonEnglishSites)
    {
       // Load the regular expressions.
       this.regexes = new RegexManager();
@@ -214,15 +217,30 @@ public class ChatBot implements AutoCloseable
       this.seApi = new StackExchangeApiClient(this::OnQuotaRollover);
 
       // Create the site lists.
-      this.sites           = new TreeSet<String>();
+      this.sitesFast       = new TreeSet<String>();
+      this.sitesSlow       = new TreeSet<String>();
       this.nonEnglishSites = new TreeSet<String>();
-      if (this.roomSO != null)
+      if (fastSites != null)
       {
-         this.sites.add("stackoverflow");
+         this.sitesFast.addAll(fastSites);
       }
-      if (this.roomSE != null)
+      if (slowSites != null)
       {
-         this.sites.addAll(seSites);
+         // If any of the sites on the "slow" list are also on the "fast" list, do not add them to
+         // our "slow" list, as a site should not be on both lists and "fast" takes precedence.
+         for (String slowSite : slowSites)
+         {
+            if (!this.sitesFast.contains(slowSite))
+            {
+               this.sitesSlow.add(slowSite);
+            }
+            else
+            {
+               LOGGER.warn("The site \"" + slowSite + "\" was on both the \"slow\" and \"fast\" lists; "
+                         + "\"fast\" takes precedence, so it will only be added to the \"fast\" list, "
+                         + "not the \"slow\" list.");
+            }
+         }
       }
       if (nonEnglishSites != null)
       {
@@ -231,15 +249,19 @@ public class ChatBot implements AutoCloseable
 
       // Attempt to open the file into which we log the Chinese profile spammers on Stack Overflow.
       // This file is opened for appending, so that we don't overwrite its previous contents.
-      try
+      if (this.sitesFast.contains("stackoverflow") ||
+          this.sitesSlow.contains("stackoverflow"))
       {
-         fosForSOChineseSpammers = new FileOutputStream(SO_CHINESE_SPAMMERS_FILE, true);
-         oswForSOChineseSpammers = new OutputStreamWriter(fosForSOChineseSpammers,
-                                                          StandardCharsets.UTF_8);
-      }
-      catch (IOException ex)
-      {
-         LOGGER.warn("Failed to open Stack Overflow Chinese profile spammer log file: " + ex);
+         try
+         {
+            fosForSOChineseSpammers = new FileOutputStream(SO_CHINESE_SPAMMERS_FILE, true);
+            oswForSOChineseSpammers = new OutputStreamWriter(fosForSOChineseSpammers,
+                                                             StandardCharsets.UTF_8);
+         }
+         catch (IOException ex)
+         {
+            LOGGER.warn("Failed to open Stack Overflow Chinese profile spammer log file: " + ex);
+         }
       }
 
       // Start the stalking service.
@@ -376,16 +398,31 @@ public class ChatBot implements AutoCloseable
    private void Dump()
    {
       // Display per-site statistical information on users.
-      if ((this.sites != null) && !this.sites.isEmpty())
+      TreeSet<String> allSites = new TreeSet<String>();
+      allSites.addAll(this.sitesFast);
+      allSites.addAll(this.sitesSlow);
+
+      // If we are in a room on SE, post *all* statistics there.
+      if (this.roomSE != null)
       {
-         if (this.roomSO != null)
+         this.ReportStatistics(this.roomSE, allSites);
+
+         // If we are also in a room on SO, and stalking SO, post only SO's statistics there.
+         if ((this.roomSO != null) && (this.sitesFast.contains("stackoverflow") ||
+                                       this.sitesSlow.contains("stackoverflow")))
          {
             this.ReportStatistics(this.roomSO, Collections.singletonList("stackoverflow"));
          }
-         if (this.roomSE != null)
-         {
-            this.ReportStatistics(this.roomSE, this.sites);
-         }
+      }
+      else if (this.roomSO != null)
+      {
+         // If we are only in a room on SO, post *all* statistics there.
+         this.ReportStatistics(this.roomSO, allSites);
+      }
+      else
+      {
+         // Otherwise, we can't report the statistics.
+         LOGGER.warn("Not in a chat room, either on SO or SE, so cannot dump the statistics; they will be discarded.");
       }
 
       // Reset per-site user statistics.
@@ -496,29 +533,28 @@ public class ChatBot implements AutoCloseable
             return;
          }
       }
-      else if (messageParts.length == 3)
+      else if ((messageParts.length == 3) &&
+               (messageParts[1].equals("check") || messageParts[1].equals("test")))
       {
-         if (messageParts[1].equals("check") || messageParts[1].equals("test"))
+         String response;
+         String urlParts[] = messageParts[2].split("/");
+         if ((urlParts[3].equals("u") || urlParts[3].equals("users")))
          {
-            String response;
-            String urlParts[] = messageParts[2].split("/");
-            if ((urlParts[3].equals("u") || urlParts[3].equals("users")))
-            {
-               response = this.CheckUser(urlParts[2],
-                                         Integer.parseInt(urlParts[4]));
-            }
-            else
-            {
-               response = "The specified URL was not recognized as a user profile.";
-            }
-            room.replyTo(replyID, response);
-            return;
+            response = this.CheckUser(urlParts[2],
+                                      Integer.parseInt(urlParts[4]));
          }
          else
          {
-            this.DoListModify(room, replyID, messageParts[1], messageParts[2]);
-            return;
+            response = "The specified URL was not recognized as a user profile.";
          }
+         room.replyTo(replyID, response);
+         return;
+      }
+      else if ((messageParts.length == 4) &&
+               (messageParts[1].equals("add") || messageParts[1].equals("remove")))
+      {
+         this.DoListModify(room, replyID, messageParts[1], messageParts[2], messageParts[3]);
+         return;
       }
 
       this.DoUnrecognized(room, replyID);
@@ -526,33 +562,66 @@ public class ChatBot implements AutoCloseable
 
    private void OnStalk()
    {
-      LOGGER.info("Starting periodic stalking (seStalkInterval: " + String.valueOf(this.seStalkInterval) + ")...");
+      // Stalking intervals are set up like this, where SO is stalked on every "x", fast SE sites
+      // are stalked when the counter reaches an odd number ("F"), and slow SE sites are stalked
+      // when the counter reaches zero ("S"). This way, fast and slow sites are never both
+      // stalked at the same time:
+      //    5 4 3 2 1 0 5 4 3 2 1 0 5 4 3 2 1 0 5 4 3 2 1 0 5 4 3 2 1 0 5 4 3 2 1 0 5 4 3 2 1 0
+      //    x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x
+      //    F   F   F   F   F   F   F   F   F   F   F   F   F   F   F   F   F   F   F   F
+      //              S           S           S           S           S           S           S
+      LOGGER.info("Starting periodic stalking (stalkSECounter: " + String.valueOf(this.stalkSECounter) + ")...");
 
-      boolean doUpdate = true;
+      Room    roomSOPreferred = ((this.roomSO != null) ? this.roomSO :
+                                 (this.roomSE != null) ? this.roomSE : null);
+      Room    roomSEPreferred = ((this.roomSE != null) ? this.roomSE :
+                                 (this.roomSO != null) ? this.roomSO : null);
+      boolean doUpdate        = true;
 
-      if ((this.roomSO != null) && this.sites.contains("stackoverflow"))
+      if ((this.sitesFast.contains("stackoverflow")) && (roomSOPreferred != null))
       {
-         this.DoStalk(this.roomSO, Collections.singletonList("stackoverflow"), 100);
+         this.DoStalk(roomSOPreferred, Collections.singletonList("stackoverflow"), 100);
       }
 
-      if (this.roomSE != null)
+      ArrayList<String> sites = new ArrayList<String>();
+      if ((this.stalkSECounter & 1) != 0)
       {
-         if (this.seStalkInterval == 0)
+         // Stalk SO slowly.
+         if ((this.sitesSlow.contains("stackoverflow")) && (roomSOPreferred != null))
          {
-            ArrayList<String> seSites = new ArrayList<String>(this.sites);
-            seSites.remove("stackoverflow");
-
-            this.DoStalk(this.roomSE, seSites, (seSites.size() * 20 /* users */));
-
-            this.seStalkInterval = SE_STALK_INTERVAL;
-
-            doUpdate = false;
+            this.DoStalk(roomSOPreferred, Collections.singletonList("stackoverflow"), 100);
          }
-         else
+
+         // Stalk "fast" non-SO sites.
+         sites.ensureCapacity((this.sitesFast.size() * 3) / 2);
+         for (String fastSite : this.sitesFast)
          {
-            this.seStalkInterval -= 1;
+            if (!fastSite.equals("stackoverflow"))
+            {
+               sites.add(fastSite);
+            }
          }
       }
+      else if (this.stalkSECounter == 0)
+      {
+         // Stalk "slow" non-SO sites.
+         sites.ensureCapacity((this.sitesSlow.size() * 3) / 2);
+         for (String slowSite : this.sitesSlow)
+         {
+            if (!slowSite.equals("stackoverflow"))
+            {
+               sites.add(slowSite);
+            }
+         }
+
+         doUpdate            = false;
+         this.stalkSECounter = (SE_STALK_COUNTER_RESET + 1);
+      }
+      if (roomSEPreferred != null)
+      {
+         this.DoStalk(roomSEPreferred, sites, (sites.size() * 20 /* users */));
+      }
+      --this.stalkSECounter;
 
       if (doUpdate)
       {
@@ -728,45 +797,55 @@ public class ChatBot implements AutoCloseable
 
    private void DoList(Room room, long replyID)
    {
-      String siteList = sites.stream()
-                             .filter(i -> ((room != this.roomSO) | i.equals("stackoverflow")))
-                             .collect(Collectors.joining("`, `", "`", "`"));
-      room.replyTo(replyID, "Stalking sites: " + sites);
+      String siteListFast = this.sitesFast.stream()
+                                          .filter(i -> ((room != this.roomSO) | i.equals("stackoverflow")))
+                                          .collect(Collectors.joining("`, `", "`", "`"));
+      String siteListSlow = this.sitesSlow.stream()
+                                          .filter(i -> ((room != this.roomSO) | i.equals("stackoverflow")))
+                                          .collect(Collectors.joining("`, `", "`", "`"));
+      String message      = "Stalked Sites\n"
+                          + "\u3000Fast: " + siteListFast + "\n"
+                          + "\u3000Slow: " + siteListSlow;
+      room.replyTo(replyID, message);
    }
 
-   private void DoListModify(Room room, long replyID, String command, String siteName)
+   private void DoListModify(Room room, long replyID, String command, String siteName, String speed)
    {
       boolean add    = command.equals("add");
       boolean remove = command.equals("remove");
-      if (add)
-      {
-         if (this.sites.contains(siteName))
-         {
-            room.replyTo(replyID,
-                         "The site `" + siteName + "` is already on the list of sites being stalked, "
-                       + "so it makes no sense to add it.");
-            return;
-         }
-      }
-      else if (remove)
-      {
-         if (!this.sites.contains(siteName))
-         {
-            room.replyTo(replyID,
-                         "The site `" + siteName + "` is not currently on the list of sites being stalked, "
-                       + "so it makes no sense to remove it.");
-            return;
-         }
-      }
-      else
+      if (!add && !remove)
       {
          room.replyTo(replyID,
                       "The specified command (\"" + command + "\") was not recognized (must be either \"add\" or \"remove\".)");
          return;
       }
 
+      boolean fast = speed.equals("fast");
+      boolean slow = speed.equals("slow");
+      if (!fast && !slow)
+      {
+         room.replyTo(replyID,
+                      "The specified speed (\"" + speed + "\") is invalid (must be either \"fast\" or \"slow\".)");
+         return;
+      }
 
-      LOGGER.info("Beginning to modify (" + command + ") the list of sites being stalked.");
+      if (add && (this.sitesFast.contains(siteName) || this.sitesSlow.contains(siteName)))
+      {
+         room.replyTo(replyID,
+                      "The site `" + siteName + "` is already on the list of sites being stalked, "
+                    + "so it makes no sense to add it. (You might need to remove it from the other speed list first.)");
+         return;
+      }
+      else if (remove && !(fast ? this.sitesFast.contains(siteName)
+                                : this.sitesSlow.contains(siteName)))
+      {
+         room.replyTo(replyID,
+                      "The site `" + siteName + "` is not currently on the list of " + speed + " sites being stalked, "
+                    + "so it makes no sense to remove it.");
+         return;
+      }
+
+      LOGGER.info("Beginning to modify (" + command + ") the list of " + speed + " sites being stalked.");
 
       boolean wasRunning = this.IsRunning();
       if (wasRunning)
@@ -774,11 +853,15 @@ public class ChatBot implements AutoCloseable
          this.DoStop();
       }
 
-      if (add)  { this.sites.add   (siteName); }
-      else      { this.sites.remove(siteName); }
+      if (add)  { if (fast)  { this.sitesFast.add   (siteName); }
+                  else       { this.sitesSlow.add   (siteName); }
+                }
+      else      { if (fast)  { this.sitesFast.remove(siteName); }
+                  else       { this.sitesSlow.remove(siteName); }
+                }
 
-      this.BroadcastMessage(add ? CHAT_MSG_PREFIX + " Temporarily adding `"   + siteName + "` to the list of sites being stalked."
-                                : CHAT_MSG_PREFIX + " Temporarily removing `" + siteName + "` from the list of sites being stalked.");
+      this.BroadcastMessage(add ? CHAT_MSG_PREFIX + " Temporarily adding `"   + siteName + "` to the list of " + speed + " sites being stalked."
+                                : CHAT_MSG_PREFIX + " Temporarily removing `" + siteName + "` from the list of " + speed + " sites being stalked.");
 
       if (wasRunning)
       {
@@ -851,7 +934,8 @@ public class ChatBot implements AutoCloseable
          this.DoStop();
       }
 
-      boolean somethingToDo = (!this.sites.isEmpty() && ((this.roomSO != null) || (this.roomSE != null)));
+      boolean somethingToDo = (!this.sitesFast.isEmpty() &&
+                               !this.sitesSlow.isEmpty());
       if (somethingToDo)
       {
          if (this.siteInfoMap == null)
@@ -873,14 +957,22 @@ public class ChatBot implements AutoCloseable
                LOGGER.warn("Failed to load persisted state from file: " + ex + ".");
                ex.printStackTrace();
 
-               this.siteInfoMap = new HashMap<String, StackExchangeSiteInfo>((this.sites.size() * 3) / 2);
+               int cSites = (this.sitesFast.size() +
+                             this.sitesSlow.size());
+               this.siteInfoMap = new HashMap<String, StackExchangeSiteInfo>((cSites * 3) / 2);
             }
 
-            for (String site : this.sites)
+            for (String site : this.sitesFast)
+            {
+               this.siteInfoMap.putIfAbsent(site, new StackExchangeSiteInfo(startTime));
+            }
+            for (String site : this.sitesSlow)
             {
                this.siteInfoMap.putIfAbsent(site, new StackExchangeSiteInfo(startTime));
             }
          }
+
+         this.stalkSECounter = SE_STALK_COUNTER_RESET;
 
          this.executor = Executors.newSingleThreadScheduledExecutor();
          this.executor.scheduleAtFixedRate(() -> { this.OnStalk(); },
@@ -1318,7 +1410,6 @@ public class ChatBot implements AutoCloseable
       str.append(")");
 
       if ((this.oswForSOChineseSpammers != null)   &&
-          (room == this.roomSO)                    &&
           (user.getSite().equals("stackoverflow")) &&
           (user.getProfileImage() != null)         &&
           user.getProfileImage().contains("gravatar.com/avatar/573ab1b5acb73217ad973eb9efa0e026"))
