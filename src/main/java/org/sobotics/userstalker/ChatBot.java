@@ -70,18 +70,20 @@ public class ChatBot implements AutoCloseable
 + "\n\n"
 + "In addition to \"help\", I recognize some additional commands:"
 + "\n"
-+ "\u3000\u25CF \"alive\": Replies in the affirmative if the bot is up and running; silently ignores you if it is not."
++ "\u3000\u25CF \"alive\": Replies in the affirmative if the bot is up and running;"
++                        " silently ignores you if it is not."
 + "\n"
-+ "\u3000\u25CF \"check <user URL>\": Runs the pattern checks on the specified user account as if it were a newly-created account,"
-+                                   " and then replies with the results."
++ "\u3000\u25CF \"quota\": Replies with the currently remaining size of the Stack Exchange API quota"
++                        " available to the bot."
 + "\n"
-+ "\u3000\u25CF \"test <user URL>\": Same as \"check <user URL>\"."
++ "\u3000\u25CF \"check <user URL>\": Runs the pattern checks on the specified user account as if it"
++                                   " were a newly-created account, and then replies with the results."
 + "\n"
-+ "\u3000\u25CF \"quota\": Replies with the currently remaining size of the API quota for the stalking service."
++ "\u3000\u25CF \"test <user URL>\": Equivalent to \"check <user URL>\"."
 + "\n"
 + "\u3000\u25CF \"sites\": Replies with the list of Stack Exchange sites that are currently being stalked."
 + "\n"
-+ "\u3000\u25CF \"list\": Same as \"sites\"."
++ "\u3000\u25CF \"list\": Equivalent to \"sites\"."
 + "\n"
 + "\u3000\u25CF \"add <sitename>\": Temporarily adds the specified SE site (short name) to the stalking list."
 +                                 " (The modification will not persist across a reboot.)"
@@ -102,13 +104,17 @@ public class ChatBot implements AutoCloseable
 + "\u3000\u25CF \"reboot\": Turns it off and back on again by rebooting the entire bot."
 +                         " (All temporary changes to the stalking lists will be lost.)"
 + "\n"
++ "\u3000\u25CF \"dump\": Dumps the current statistics and resets them, forcibly starting"
++                       " a new \"day\", as if the bot's API quota had rolled over."
++                       " (Usage of this command is limited to users with admin privileges.)"
++ "\n"
 + "\u3000\u25CF \"upgrade\": Like \"reboot\", but pulls latest code from GitHub, performs a build, and"
 +                         " replaces the current binary with the resulting new version before rebooting."
 +                         " (All temporary changes to the stalking lists will be lost."
 +                         "  Usage of this command is limited to users with admin privileges.)"
 + "\n"
 + "\u3000\u25CF \"die\": Like \"stop\", but also leaves the room and kills the bot without rebooting it."
-+                         " (Usage of this command is limited to users with admin privileges.)"
++                      " (Usage of this command is limited to users with admin privileges.)"
 + "\n\n"
 + "If you're still confused or need more help, you can ping Cody Gray (but he may not be as nice as me!)."
 ;
@@ -262,6 +268,37 @@ public class ChatBot implements AutoCloseable
    }
 
 
+   private void ReplyToCommandFromUnprivilegedUser(Room                                room,
+                                                   long                                replyID,
+                                                   org.sobotics.chatexchange.chat.User sendingUser,
+                                                   String                              command)
+   {
+      String logMessage = "Unprivileged attempt to "
+                        + command
+                        + " (Room: " + room.getRoomId()
+                        + " on " + room.getHost().getName();
+      if (sendingUser != null)
+      {
+         logMessage += "; User: " + sendingUser.getId();
+      }
+      logMessage += ").";
+      LOGGER.warn(logMessage);
+
+      String userName = "Dave";
+      if (sendingUser != null)
+      {
+         userName   = sendingUser.getName().trim();
+         int iSpace = userName.indexOf(" ");
+         if (iSpace > 0)
+         {
+            userName = userName.substring(0, iSpace);
+         }
+      }
+
+      room.replyTo(replyID, "I'm sorry, " + userName + ". I'm afraid I can't do that.");
+   }
+
+
    // TODO(low): Review the async code below for both correctness and efficiency!
 
    private CompletableFuture<Long> SendMessage_Retry(Room      room,
@@ -336,18 +373,8 @@ public class ChatBot implements AutoCloseable
       this.homoglyphs.Reload();
    }
 
-
-   private void OnQuotaRollover(Integer oldQuota)
+   private void Dump()
    {
-      // Display quota rollover message.
-      String message = "Stack Exchange API quota rolled over, leaving "
-                     + String.valueOf(oldQuota)
-                     + " requests remaining. New quota has "
-                     + String.valueOf(seApi.GetQuota())
-                     + " requests remaining.";
-      LOGGER.info(message);
-      this.BroadcastMessage(CHAT_MSG_PREFIX + " " + message);
-
       // Display per-site statistical information on users.
       if ((this.sites != null) && !this.sites.isEmpty())
       {
@@ -366,6 +393,22 @@ public class ChatBot implements AutoCloseable
       {
          siteInfo.ResetUsers();
       }
+   }
+
+
+   private void OnQuotaRollover(Integer oldQuota)
+   {
+      // Display quota rollover message.
+      String message = "Stack Exchange API quota rolled over, leaving "
+                     + String.valueOf(oldQuota)
+                     + " requests remaining. New quota has "
+                     + String.valueOf(seApi.GetQuota())
+                     + " requests remaining.";
+      LOGGER.info(message);
+      this.BroadcastMessage(CHAT_MSG_PREFIX + " " + message);
+
+      // Dump and then reset per-site statistical information.
+      this.Dump();
    }
 
    private void OnUserEntered(Room room, UserEnteredEvent event)
@@ -435,6 +478,11 @@ public class ChatBot implements AutoCloseable
          else if (messageParts[1].equals("reboot"))
          {
             this.DoReboot();
+            return;
+         }
+         else if (messageParts[1].equals("dump"))
+         {
+            this.DoDump(room, replyID, message.getUser());
             return;
          }
          else if (messageParts[1].equals("upgrade"))
@@ -873,6 +921,33 @@ public class ChatBot implements AutoCloseable
       System.exit(0);
    }
 
+   private void DoDump(Room room, long replyID, org.sobotics.chatexchange.chat.User sendingUser)
+   {
+      // Require that the message comes from a user whose chat user ID indicates that
+      // they have admin privileges.
+      if (this.IsAdmin(room, sendingUser))
+      {
+         LOGGER.info("Beginning forced dump and reset of site-specific user statistics...");
+
+         boolean wasRunning = this.IsRunning();
+         if (wasRunning)
+         {
+            this.DoStop();
+         }
+
+         this.Dump();
+
+         if (wasRunning)
+         {
+            this.DoStart();
+         }
+      }
+      else
+      {
+         this.ReplyToCommandFromUnprivilegedUser(room, replyID, sendingUser, "dump");
+      }
+   }
+
    private void DoUpgrade(Room room, long replyID, org.sobotics.chatexchange.chat.User sendingUser)
    {
       // Require that the message comes from a user whose chat user ID indicates that
@@ -891,17 +966,7 @@ public class ChatBot implements AutoCloseable
       }
       else
       {
-         String logMessage = "Unprivileged attempt to upgrade"
-                           + " (Room: " + room.getRoomId()
-                           + " on " + room.getHost().getName();
-         if (sendingUser != null)
-         {
-            logMessage += "; User: " + sendingUser.getId();
-         }
-         logMessage += ").";
-         LOGGER.warn(logMessage);
-
-         room.replyTo(replyID, "I'm sorry, Dave. I'm afraid I can't do that.");
+         this.ReplyToCommandFromUnprivilegedUser(room, replyID, sendingUser, "upgrade");
       }
    }
 
@@ -923,17 +988,7 @@ public class ChatBot implements AutoCloseable
       }
       else
       {
-         String logMessage = "Unprivileged attempt to kill"
-                           + " (Room: " + room.getRoomId()
-                           + " on " + room.getHost().getName();
-         if (sendingUser != null)
-         {
-            logMessage += "; User: " + sendingUser.getId();
-         }
-         logMessage += ").";
-         LOGGER.warn(logMessage);
-
-         room.replyTo(replyID, "I'm sorry, Dave. I'm afraid I can't do that.");
+         this.ReplyToCommandFromUnprivilegedUser(room, replyID, sendingUser, "kill");
       }
    }
 
