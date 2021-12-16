@@ -164,6 +164,8 @@ gravatar\.com\/avatar\/906bbdec10d3c3fb5d4a982bde25beab
 gravatar\.com\/avatar\/cf7f98dd46af355a1256af36ae551908
 gravatar\.com\/avatar\/9d3818854a2df8f9154cf3e23af9dbc0
 gravatar\.com\/avatar\/aae6fe3e2c85bd97d9d12647afd58388
+gravatar\.com\/avatar\/59b013a34cb8f170bf4dd9b1d91d2673
+gravatar\.com\/avatar\/
 
 # Other (currently experimental)
 gravatar\.com\/avatar\/81e46dda8e46b937257e701d70e0ac59
