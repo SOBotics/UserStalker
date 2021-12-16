@@ -1194,6 +1194,7 @@ medicaldeviceregistration\.com
 medium\.com
 mednowlabs\.com
 mein-bitcoinautomat\.de
+mejadokter\.com
 melbournetrailerhire\.com\.au
 memoriesbysylvan\.com
 mercedes-vietnam\.com(?:\.vn)?
@@ -1634,6 +1635,7 @@ seedonline\.org
 selfishlymine\.com
 selfstorage\.ua
 sellbitbuy\.net
+semestamakmurbersama\.com
 senseireview\.com
 seofreelancer\.dk
 seohero\.uk
@@ -1799,7 +1801,7 @@ swiftmovesllc\.com
 swingerwife\.win
 sydneychiropractorcbd\.com\.au
 sydneypearllimousines\.com\.au
-sym-info.\com
+sym-info\.com
 syntellicore\.com
 szczecin\.pl
 \b.*szkol.*\.pl
