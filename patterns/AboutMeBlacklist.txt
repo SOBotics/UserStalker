@@ -347,6 +347,7 @@ Website[\W_]*Drona
 wedding
 WeDoLaundry
 (?:weight|fat)[\W_]*(?:loss|reduc(?:e|tion))
+wellness[\W_]*coach
 which[\W_]*light[\W_]*bulb
 window[\W_]*tint
 Wyndham
