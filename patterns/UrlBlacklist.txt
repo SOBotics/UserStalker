@@ -3,6 +3,7 @@
 ^\w+\.pl(?:\/|$)
 \.de\.tl
 @johncooleydk
+\b#spam\b
 (?-i:UC2mr3saNQReiHDiaDwM0A0g)(?# YouTube channel)
 (?-i:UCIorliJ58U9Eb-QqP0UlXgA)(?# YouTube channel)
 (?-i:UCXRP1VE7iQR-74pBAzdJaOg)(?# YouTube channel)
@@ -196,6 +197,7 @@ aroundhendrickscounty\.com
 arquitectoszaragoza\.net
 arrowfactory\.org
 asean2021\.bn
+ashikasoni\.com(?# escorts)
 asianageonline\.com
 asieno\.com
 assistme360\.com
@@ -211,6 +213,7 @@ athensvipescorts\.com
 atlasautotx\.com
 atoallinks\.com
 aucklandelectrician\.co\.nz
+audiovideomag\.com
 aufaitux\.com
 aurafiber\.com
 aussieelectricalandsolar\.com\.au
@@ -260,6 +263,7 @@ beegara\.com
 beegsex\.it
 begroup\.com\.sg
 belaprimavera\.com\.br
+belfastdigitalagency\.com
 bellbroshvac\.com
 bellvaadventureindonesia\.com
 bengkelmotorbekasi\.com
@@ -351,6 +355,7 @@ business\.google\.com\/dashboard\/
 busmedia\.vn
 butchersblocktv\.com
 buy-hoodia\.info
+buygabapentin800\.com
 buyketamineonlineusa\.com
 buyoltram\.com
 buyplaya\.com
@@ -772,6 +777,7 @@ galeriesept\.com
 gambl(?:e|ing)
 gameauland\.com
 gamebet123\.com
+gambling\.coach
 gameover\.im
 gamersrd\.com
 games-download24\.com
@@ -876,6 +882,7 @@ haugiang\.land
 haviettrung\.com
 hbomaxcom-tvsignin\.com
 hbomaxwatchparty\.us
+hci\.org\.uk
 hdenturo\.com
 headrun\.com
 healinghpvnaturally\.com
@@ -1010,6 +1017,8 @@ jaipurhotescorts\.com
 jakszybkochudnac\.pl
 jamyeprice\.com
 janejohn-nwankwo\.com
+jasmine-e\.net
+jasmine-miyagi\.net
 jayshinde\.com
 jbhnews\.com
 jdmlight\.com
@@ -1018,6 +1027,7 @@ jess-doll\.com
 jetski-dubai\.com
 jetskidubai\.ae
 jeux-pc-telechargement\.fr
+jewelneverbroken\.com
 jigsy\.com
 jimdosite\.com
 jimenogray
@@ -1225,6 +1235,7 @@ midnightpleasure\.in
 midwestcoastflooring\.com
 miel\.travel
 migratedata\.co\.uk
+miisoo\.com
 mikotech\.vn
 milf
 milfamatuerporn\.com
@@ -1295,6 +1306,7 @@ myin\.pl
 myketocoach\.com
 mymmjdoctor\.com
 mynewsdesk\.com
+myorganicsleep\.com
 myshopcoffee\.com
 myshoptastic\.com
 mystrikingly\.com
@@ -1438,6 +1450,7 @@ perkpal\.co\.uk
 personalmoneynetwork\.com
 pestcontrolmelton\.com\.au
 petesultimatemovers\.com
+petlandwestwichita\.com
 petpalsvietnam\.vn
 pgslot-game\.cc
 pharmbalkan\.com
@@ -1506,6 +1519,7 @@ propkartonline\.com
 proplumberaurorailco\.com
 proposal-to-mary\.com
 protectionchat\.ch
+projector-enclosures\.co\.uk
 przybysz\.pl
 przykladowepdfy\.pl
 przykladoweteksty\.pl
@@ -1545,6 +1559,7 @@ random-meet\.com
 rapidtest\.nyc
 rapplimited\.com
 raskik\.com
+rasibet88f\.live
 rattsakuten\.com
 rb\.gy
 rbc\.com
@@ -1641,6 +1656,7 @@ scholarshipstudio\.com
 scholarsight\.com
 schroniskogorskie\.pl
 schwab-entruempelung\.de
+schweizerkredit-ohneschufa\.de
 scientificvastu\.in
 scopeaid\.com
 scribd\.com
@@ -1908,6 +1924,7 @@ theporn\.cam
 thepulplist\.com
 thequchange\.com
 therawtarian\.com
+therecruitforce\.com
 theservicemart\.in
 theshelf\.com
 thesoftroots\.com
@@ -1981,6 +1998,7 @@ truxgo\.net
 trytoonbw\.com
 tshirtsfever\.com
 ttytcammy\.vn
+tulipanna\.pl
 tumblr\.com
 tunmix\.com
 turkachat\.com
@@ -1989,6 +2007,7 @@ tuyetle\.com
 tv4studios\.com
 twitch-activate\.com
 twoje-uslugi\.biz\.pl
+tyjakotata\.pl
 u-curate\.com
 u-f-l\.net
 uberant\.com
