@@ -165,6 +165,18 @@ gravatar\.com\/avatar\/cf7f98dd46af355a1256af36ae551908
 gravatar\.com\/avatar\/9d3818854a2df8f9154cf3e23af9dbc0
 gravatar\.com\/avatar\/aae6fe3e2c85bd97d9d12647afd58388
 gravatar\.com\/avatar\/59b013a34cb8f170bf4dd9b1d91d2673
+gravatar\.com\/avatar\/09f340ca3cc7adeabce8e9c13fc60829
+gravatar\.com\/avatar\/66531e09e2f840345b78ca49a65e9d7f
+gravatar\.com\/avatar\/38411af505d45f599d0a52c10a136e6e
+gravatar\.com\/avatar\/2b2855706fa8148144c7bcaa37839672
+gravatar\.com\/avatar\/9438cf332a0ca4ca09c43ad1c970a7ee
+gravatar\.com\/avatar\/5202214b69a21d7fea80bd5a5e1d5b46
+gravatar\.com\/avatar\/6c10dd691d0f441f071f5cff0cc37b66
+gravatar\.com\/avatar\/c9144f420f06303ed7d3b58efba63b88
+gravatar\.com\/avatar\/35cea951732c90a7f643b711a3972167
+gravatar\.com\/avatar\/c4341564f9a6a4e2692acafc1c8bcf75
+gravatar\.com\/avatar\/b74bb5944a281cde23822a9fddbc1d42
+gravatar\.com\/avatar\/16957a04e274fa5617b6080d6620f466
 
 # Other (currently experimental)
 gravatar\.com\/avatar\/81e46dda8e46b937257e701d70e0ac59
