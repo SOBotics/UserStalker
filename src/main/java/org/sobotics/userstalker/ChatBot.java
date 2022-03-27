@@ -1409,15 +1409,15 @@ public class ChatBot implements AutoCloseable
       str.append(reason);
       str.append(")");
 
-      if ((this.oswForSOChineseSpammers != null)   &&
-          (user.getSite().equals("stackoverflow")) &&
-          (user.getProfileImage() != null)         &&
+      boolean isStackOverflow = (user.getSite().equals("stackoverflow"));
+      if (isStackOverflow                        &&
+          (this.oswForSOChineseSpammers != null) &&
+          (user.getProfileImage()       != null) &&
           user.getProfileImage().contains("gravatar.com/avatar/573ab1b5acb73217ad973eb9efa0e026"))
       {
-         str.append("\n");
-
          try
          {
+            str.append("\n");
             this.oswForSOChineseSpammers.write(str.toString());
          }
          catch (IOException ex)
@@ -1427,6 +1427,11 @@ public class ChatBot implements AutoCloseable
       }
       else
       {
+         if (isStackOverflow && (reason.contains("name on Smokey's blacklist") ||
+                                 reason.contains("URL on Smokey's blacklist")))
+         {
+            str.append(" [cc @CodyGray]");
+         }
          this.SendMessage(room, str.toString());
       }
    }
