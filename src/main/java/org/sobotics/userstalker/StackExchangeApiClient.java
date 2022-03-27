@@ -146,24 +146,43 @@ public class StackExchangeApiClient
          return null;
       }
 
-      int           approximateCount  = users.size();
-      StringBuilder networkAccountIDs = new StringBuilder(approximateCount * 10);
+      int                      approximateCount        = users.size();
+      int                      actualCount             = 0;
+      ArrayList<StringBuilder> networkAccountIDStrings = new ArrayList<StringBuilder>();
       for (SuspiciousUser suspiciousUser : users)
       {
+         if (actualCount == 0)
+         {
+            networkAccountIDStrings.add(new StringBuilder(Math.min(API_PAGE_SIZE_MAX, (approximateCount * 10))));
+         }
+
          // If the user has a network account ID, add it to the semicolon-delimited list
          // of network account IDs that we need to retrive information about.
          Integer networkAccountID = suspiciousUser.user.getNetworkAccountID();
          if (networkAccountID != null)
          {
-            if (networkAccountIDs.length() > 0)
+            StringBuilder sb = networkAccountIDStrings.get(networkAccountIDStrings.size() - 1);
+            if (sb.length() > 0)
             {
-               networkAccountIDs.append(";");
+               sb.append(";");
             }
-            networkAccountIDs.append(String.valueOf(networkAccountID));
+            sb.append(String.valueOf(networkAccountID));
+            ++actualCount;
+         }
+
+         if (actualCount == 100)
+         {
+            actualCount = 0;
          }
       }
 
-      return this.GetAllNetworkAccounts(networkAccountIDs.toString(), approximateCount);
+      HashMap<Integer, ArrayList<NetworkAccount>> result = new HashMap<Integer, ArrayList<NetworkAccount>>((API_PAGE_SIZE_MAX * approximateCount) / 2);
+      for (StringBuilder sb : networkAccountIDStrings)
+      {
+         result.putAll(this.GetAllNetworkAccounts(sb.toString(),
+                                                  Math.min(API_PAGE_SIZE_MAX, approximateCount)));
+      }
+      return result;
    }
 
    public HashMap<Integer, ArrayList<NetworkAccount>> GetAllNetworkAccounts(String networkAccountIDs,
