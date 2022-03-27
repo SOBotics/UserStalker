@@ -1548,6 +1548,7 @@ removaloxford\.co\.uk
 renovilla\.ca
 rent-event\.nl
 rental
+rentandrelaxus\.com
 replelix\.co\.kr
 restorarug\.com
 restoviebelle\.com
@@ -1798,6 +1799,7 @@ swiftmovesllc\.com
 swingerwife\.win
 sydneychiropractorcbd\.com\.au
 sydneypearllimousines\.com\.au
+sym-info.\com
 syntellicore\.com
 szczecin\.pl
 \b.*szkol.*\.pl
