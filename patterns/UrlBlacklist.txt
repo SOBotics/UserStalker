@@ -14,6 +14,7 @@
 (?-i:yJDxTOurw0o)(?# YouTube video)
 (?-i:dvwWWiMapKU)(?# YouTube video)
 (?-i:6s3Q0EykIY4)(?# YouTube video)
+3\.0\.11\.134
 13\.228\.233\.2
 13\.250\.159\.90
 18\.139\.141\.111
