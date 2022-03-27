@@ -1810,7 +1810,7 @@ szkolaiteksty\.pl
 szkolann\.pl
 szkolnaedukacja\.pl
 szkolniarsko\.pl
-sztachety\.de
+sztachety\.(?:de|org|pl)
 sztomato\.com
 szybowanie\.pl
 tagoverflow\.stream
