@@ -1808,6 +1808,7 @@ szkolaiteksty\.pl
 szkolann\.pl
 szkolnaedukacja\.pl
 szkolniarsko\.pl
+sztachety\.de
 sztomato\.com
 szybowanie\.pl
 tagoverflow\.stream
