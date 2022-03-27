@@ -151,6 +151,7 @@ pancingangka
 [\W_]pest[\W_]
 penis
 Perk[\W_]*Pal
+\bpisma\b
 playoff
 [\W_]pomodoro[\W_]
 pop[\W_]*smoke[\W_]*merch(?:[\W_]*shop)
