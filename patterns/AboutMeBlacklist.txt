@@ -63,6 +63,7 @@ cash[\W_]*transaction
 [\W_]CBD[\W_]
 [\W_]CCTV[\W_]?install
 [\W_]CEO[\W_]
+Change Your Spotify
 cheat
 chemical[\W_]*free
 chiropract(?:ic|or)s?
@@ -141,6 +142,7 @@ get[\W_]*in[\W_*]touch
 GFA[\W_]*Trust
 gi8\.info
 Globaltroni(?:cs|x)
+gogoanime
 gumm(?:y|ies)
 GUNAS
 gutters?[\W_]*clean(?:ing|ed)?
@@ -301,6 +303,7 @@ situsqqalfa
 skillbee
 SLOT[\W_]*(?:888?|XO)
 slotenmaker
+sought[\W_]*after audio conversion
 source[\W_]*of[\W_]*news
 (?:sports?|football)[\W_]*bets?
 Squeaky[\W_]*Pete
@@ -317,6 +320,7 @@ Techno[\W_]*Fibre
 Teksands?
 thabet
 [\W_]THC[\W_]
+the[\W_]*pirate[\W_]*bay
 thesis[\W_]*writ(?:er|ing)
 thirukadaiyur
 time[\W_]*share
