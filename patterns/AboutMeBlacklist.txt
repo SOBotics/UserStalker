@@ -13,6 +13,7 @@ American[\W_]*Samoa[\W_]*LLC
 amm(?:o|unitions?)
 apartment
 (?:appliance|bike)[\W_]*repairs?
+APTRON(?:[\W_]*Noida)?
 Aravalii
 ario[\W_]*park[\W_]*view
 assignment
@@ -49,6 +50,7 @@ brides
 build(?:ing)?[\W_]*permit
 built[\W_]*to[\W_]*last[\W_]*seo[\W_]*agency
 business[\W_]*(?:hour|model|need|owner)s?
+buy[\W_]*(?:a[\W_]*)?franchise
 Buy[\W_]*Service[\W_]*USA
 buying[\W_]*experience
 \bcall[\W_]*us\b
@@ -77,6 +79,7 @@ consultant
 contact[\W_]*us
 container[\W_]*waste
 cooking[\W_]*utensil
+corporate[\W_]*market
 cost[\W_]*efficient
 coupon
 creampie
@@ -87,6 +90,7 @@ crypto
 cutting[\W_]*edge
 dating
 deal
+debt[\W_]*free
 defensive[\W_]*driv(?:er|ing)
 denim
 dent(?:al|ist)
@@ -108,6 +112,7 @@ Easycart
 electricians
 enema
 energy[\W_]*heal(?:er|ing)
+enroll?[\W_]*now
 erotic
 escape[\W_]*room
 escorts?
@@ -115,7 +120,7 @@ eWandzDigital
 exam
 exness
 experienced[\W_]*professional
-fake[\W_]*(?:id|driver|license)
+fake[\W_]*(?:id|driver|license|eye[\W_]*lash)
 fashion[\W_]*brand
 favou?rite (?:T[\W_]*V|television) shows?(?# a specific type of profile spammer)
 [\W_]FDA[\W_]
@@ -141,6 +146,7 @@ gutters?[\W_]*clean(?:ing|ed)?
 hair[\W_]*(?:clinic|loss|transplant)
 HappyLuke
 hassle[\W_]*free
+[\W_]HBO(?:[\W_]*Max)?[\W_]
 head[\W_]*lights?
 heating[\W_]*(?:&|and)[\W_]*air[\W_]*conditioning
 herbalife
@@ -164,7 +170,9 @@ insurance
 interest[\W_]*rate
 international[\W_]*call
 i?phone[\W_]*cases?
+[\W_]IT[\W_]*(?:cert|train)
 iwinapp[\W_]*link
+Jaipur[\W_]*Basta
 job[\W_]*seekers?
 Joker[\W_]*123
 junk[\W_]*remov(?:e|al)
@@ -182,9 +190,11 @@ Kundli[\W_]*Jyotish
 Land[\W_]*cruiser
 Lash[\W_]*Glo
 leading[\W_]*(?:chain|company|retail)
+lifestyle[\W_]*blog
 lingerie
 live[\W_]*betting
 lock[\W_]*smith
+looking to convert audio
 lounge[\W_]*wear
 luxur(?:y|ious)
 luxury[\W_]*watch(?:es)?
@@ -222,10 +232,11 @@ news(?:paper)?[\W_]*writing
 nguy(?:e|ễ)n[\W_]*th(?:e|ế)[\W_]*h(?:o|ò)a
 no[\W_]*contract
 nutrition
+nursing[\W_]*staff
 nymph
 oldbreweryguest
 on[\W_]*best[\W_]*deal
-online[\W_]*(?:betting|store|pharmacy)
+online[\W_]*(?:betting|store|pharmacy|it[\W_]*train)
 opiate
 Pagal[\W_]*World
 palada[\W_]*vn
@@ -257,19 +268,23 @@ products
 real(?:ty|tor|[\W_]*estate)
 reallyfacts
 refinanc(?:e|ing)
+register[\W_]*your[\W_]*device
 relax[\W_]*your
 relocat(?:e|ing)
 renowned
 repair
 residen(?:tial|ce)
 retail
+reward[\W_]*you
 risk[\W_]*free
 roof[\W_]*repair
 rupiahqq
 Safety(?:Docs|Culture)
+\bSag[\W_]*Ipl\b
 same[\W_]*day
 satisfaction[\W_]*guaranteed?
 Satta[\W_]*King
+save[\W_]*on[\W_]*airfare
 scented[\W_]*candle
 security[\W_]*cameras?
 [\W_]SEO[\W_]
@@ -308,7 +323,7 @@ tooth[\W_]*(?:whitening|sensitivity)
 transplant
 travel[\W_]*guide
 Trust[\W_]*News
-Twitch[\W_]*Desktop[\W_]*App
+Twitch[\W_]*(?:(?:(?:TV[\W_]*)?activ)|Desktop[\W_]*App)
 unexpected[\W_]*lover
 upbeat[\W_]*digital
 Uzi[\W_]*Grindler
@@ -321,9 +336,10 @@ vending[\W_]*machine
 ViralKida
 virgin
 Viro[\W_]*Valor
-visit[\W_]*(?:our[\W_]*(?:web[\W_]*)?site|us)
+visit[\W_]*(?:to[\W_]*)?(?:our[\W_]*(?:web[\W_]*)?site|us)
 VNManbetx
 (?:w|zm)88
+Watan[\W_]*News
 watch(?:es)?[\W_]*for[\W_]*(?:wo)?men
 water[\W_]*(?:purif(?:ier|y)|filt(?:er|ration))
 we[\W_]*offer
@@ -392,6 +408,9 @@ DỰ ÁN KHU(?# "project", like housing, in Vietnamese)
 犀利士(?# "Cialis" in Chinese)
 giảm cân(?# "weight loss" in Vietnamese)
 b(?:ấ|a)t (?:đ|d)(?:ộ|o)ng s(?:ả|a)n(?# "real estate" in Vietnamese)
+(?:減|减)肥(?# "lose weight" in Chinese)
+小米(?# "Xiaomi" Chinese spam)
+토토사이트(?# "toto site|consultants" spam in Korean)
 
 # Middle Eastern
 کازینو(?# "casino" in Persian)
