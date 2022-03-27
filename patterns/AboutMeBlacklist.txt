@@ -16,6 +16,7 @@ apartment
 APTRON(?:[\W_]*Noida)?
 Aravalii
 ario[\W_]*park[\W_]*view
+Ashika[\W_]*Soni(?# escorts)
 assignment
 attorney
 auction
@@ -265,6 +266,7 @@ Printer[\W_]*Tales?
 private[\W_]*luxury
 products
 [\W_]PTFE[\W_]
+real[\W_]*skin
 real(?:ty|tor|[\W_]*estate)
 reallyfacts
 refinanc(?:e|ing)
@@ -289,7 +291,7 @@ scented[\W_]*candle
 security[\W_]*cameras?
 [\W_]SEO[\W_]
 service
-sex
+sex(?:[\W_]*dolls?)?
 sex[\W_]*hiep[\W_]*dam
 shared[\W_]*hosting
 Sharina[\W_]*World
