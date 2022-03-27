@@ -14,6 +14,7 @@
 (?-i:yJDxTOurw0o)(?# YouTube video)
 (?-i:dvwWWiMapKU)(?# YouTube video)
 (?-i:6s3Q0EykIY4)(?# YouTube video)
+(?-i:B0AlyPjcBNE)(?# YouTube video)
 3\.0\.11\.134
 13\.228\.233\.2
 13\.250\.159\.90
@@ -76,6 +77,7 @@
 a4demo\.com
 aalimoservices\.com
 aamas2008\.org
+abconsolidate\.com
 abcszkolne\.pl
 abcteksty\.pl
 abcxon\.com
@@ -529,6 +531,7 @@ dearairseparation\.com
 deazy\.com
 decoview\.com\.au
 dedoses\.blogspot
+delhiescortsagencyonline\.com
 delshlanguageconsultancy\.com
 dentalwebsitetemplates\.com
 depression-treatment-singapore\.blogspot
@@ -723,6 +726,7 @@ flashfibres\.com
 flashforge3dp\.com
 fleetsafeparts\.com
 fluidaudio\.com
+focusholiday\.co\.uk
 fogbugz\.com
 fogghausvapes\.co\.uk
 folksit\.com
@@ -752,6 +756,7 @@ fresh2daflows\.blogspot
 frontierdevelopments\.co\.uk
 frontiersassociation\.org
 fruitfulloffices\.ca
+fruitsandvegetablesbenefits\.com
 fullsoftwaregratis\.com
 fun888?
 fun888ben55
@@ -907,6 +912,7 @@ homemotivate\.com
 homesmakeover\.net
 homify\.in
 hommold\.com
+honganhcamera\.com
 hoower\.net
 hopstack\.io
 hotsexvideo\.vip
@@ -1094,6 +1100,7 @@ larsondauer\.com
 lasertagfranchise\.com
 lashglo\.com
 last\.fm\/user\/
+lastikcim\.com\.tr
 lavabet123\.com
 law[\W_]*firm
 lawyer
@@ -1632,6 +1639,7 @@ scholarsight\.com
 schroniskogorskie\.pl
 schwab-entruempelung\.de
 scientificvastu\.in
+scopeaid\.com
 scribd\.com
 scriling\.com
 sealyhome\.com
@@ -1839,6 +1847,7 @@ tarotegipski\.pl
 tawkgirls\.in
 taxihersham\.com
 taxisincarlisle\.co\.uk
+tbmpl\.pl
 tcellis\.com
 teachertraininguk\.org
 teamfs\.ca
