@@ -1443,9 +1443,13 @@ public class ChatBot implements AutoCloseable
       for (String site : sites)
       {
          StackExchangeSiteInfo siteInfo    = this.siteInfoMap.get(site);
-         double                percentage  = (((double)siteInfo.SuspiciousUsers /
-                                               (double)siteInfo.TotalUsers)
-                                               * 100.0);
+         double                percentage  = 0;
+         
+         if (siteInfo.TotalUsers != 0) {
+           percentage = (((double)siteInfo.SuspiciousUsers /
+                          (double)siteInfo.TotalUsers)
+                          * 100.0);
+         }
          if (message.isEmpty())
          {
             if (hasMultiple)
